@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
+import {HttpClientModule} from '@angular/common/http';
+import {VaccinationHistoryRoutingModule} from './vaccination-history/vaccination-history-routing.module';
+import {VaccinationHistoryModule} from './vaccination-history/vaccination-history.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import { FooterComponent } from './component/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
+    VaccinationHistoryModule
   ],
   providers: [],
   bootstrap: [AppComponent]
