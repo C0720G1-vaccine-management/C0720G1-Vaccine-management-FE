@@ -1,0 +1,155 @@
+<div class="container">
+  <div>
+    <h2 style="text-align: center">Quản Lý Kho Vắc-Xin</h2>
+  </div>
+  <div class="container-fluid">
+    <form action="">
+      <div class="search row d-flex justify-content-md-end mb-4 text-right float-right">
+        <!--                <div class="col-xl-2 col-12">-->
+        <!--                </div>-->
+        <div class="col-xl-2 col-md-3" style="text-align: center">
+          <label for="nameVaccine">Tên vắc-xin</label>
+          <input id="nameVaccine" class="form-control" type="text" placeholder="Nhập tên vắc-xin">
+        </div>
+        <div class="col-xl-2 col-md-3" style="text-align: right">
+          <div style="text-align: center">
+            <label for="typeVaccine">Loại Vắc-xin</label>
+          </div>
+          <div>
+            <input type="text" id="typeVaccine" class="form-control" placeholder="Loại Vắc-Xin">
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-3" style="text-align: right">
+          <div style="text-align: center">
+            <label for="provider">Nước Sản Xuất</label>
+          </div>
+          <div>
+            <input type="text" id="provider" class="form-control" placeholder="Nước Sản Xuất">
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-3" style="text-align: right">
+          <label for="status">Tình trạng vắc-xin</label>
+          <select id="status" class="form-control" name="">
+            <option value="">Lựa chọn...</option>
+          </select>
+        </div>
+        <div class="col-xl-2 col-4" style="text-align: right">
+          <br>
+          <button class="btn btn-success mt-xl-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="container mt-0">
+    <button  [routerLink]="['/vaccine-create']" class="btn btn-success mt-2 mb-md-3"><i class="fa fa-plus"></i> Nhập Vắc-Xin</button>
+  </div>
+
+
+  <div class="container tab">
+    <div class="container" style="text-align: center">
+      <h2>Danh Sách Vắc-Xin</h2>
+    </div>
+
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+      <tr class="bg-table-header">
+        <th scope="col">STT</th>
+        <th scope="col">Mã Vắc-Xin</th>
+        <th scope="col">Tên Vắc-Xin</th>
+        <th scope="col">Loại Vắc-Xin</th>
+        <th scope="col">Ngày Nhận</th>
+        <th scope="col">Số Giấy Phép</th>
+        <th scope="col">Nước SX</th>
+        <th scope="col">Hàm Lượng</th>
+        <th scope="col">Số Lô</th>
+        <th scope="col">Hạn Sử Dụng</th>
+        <th scope="col">ĐK Bảo Quản</th>
+        <th scope="col">Tuổi Tiêm Chủng</th>
+        <th scope="col">Tình Trạng</th>
+        <th scope="col">Chức Năng</th>
+      </tr>
+      </thead>
+      <tbody style="font-size: 16px;text-align: center">
+      <tr>
+        <td>1</td>
+        <td>MVX-0001</td>
+        <td>Phòng Bệnh Lao</td>
+        <td>BCG</td>
+        <td>1/1/2015</td>
+        <td>1</td>
+        <td>Việt Nam</td>
+        <td>0.01ml</td>
+        <td>500</td>
+        <td>1 năm</td>
+        <td>2-8 độ c</td>
+        <td>Trẻ em</td>
+        <td>Còn</td>
+        <td>
+          <button class="btn btn-success">Xuất Kho</button>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>MVX-0002</td>
+        <td>Phòng Viêm Gan B</td>
+        <td>ENGERIX B</td>
+        <td>1/1/2015</td>
+        <td>2</td>
+        <td>Bỉ</td>
+        <td>1ml</td>
+        <td>0</td>
+        <td>1 năm</td>
+        <td>2-8 độ c</td>
+        <td>Lớn Hơn 20</td>
+        <td>Hết</td>
+        <td>
+          <button class="btn btn-success">Xuất Kho</button>
+        </td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>MVX-0003</td>
+        <td>Phòng Bệnh Uống Ván</td>
+        <td>TETTAVAX</td>
+        <td>1/1/2015</td>
+        <td>4</td>
+        <td>Pháp</td>
+        <td>0.5ml</td>
+        <td>500</td>
+        <td>1 năm</td>
+        <td>2-8 độ c</td>
+        <td>Trẻ em</td>
+        <td>Còn</td>
+        <td>
+          <button class="btn btn-success">Xuất Kho</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--    phân trang-->
+  <div class="mt-3">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination d-flex justify-content-md-end justify-content-center">
+        <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
+        <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+        <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+        <li class="page-item col-md-1 col-2  px-0">
+          <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
+          <div class="input-group">
+            <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username" aria-describedby="basic-addon1">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">/5</span>
+            </div>
+          </div>
+        </li>
+        <li class="page-item">
+          <button class="btn btn-primary rounded-0">Đi</button>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
+        <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

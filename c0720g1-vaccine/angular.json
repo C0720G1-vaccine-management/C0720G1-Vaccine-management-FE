@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "c0720g1-vaccine"
+    }
+  },
+  "defaultProject": "c0720g1-vaccine",
+  "cli": {
+    "analytics": false
+  }
 }
