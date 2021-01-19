@@ -1,0 +1,133 @@
+<div class="content">
+  <div class="container">
+    <h1 class="text-center mt-4 mb-4">Bảng thông tin vắc-xin của trung tâm</h1>
+
+    <div class="search row d-flex justify-content-xl-end justify-content-center mb-4 text-center">
+      <!--            <div class="col-xl-2 col-12">-->
+      <!--                <br>-->
+      <!--                <button class="btn btn-success mt-2 mb-md-3"><i class="fa fa-plus"></i> Thêm mới</button>-->
+      <!--            </div>-->
+      <div class="col-xl-2 col-md-3">
+        <label for="nameVaccine">Tên vắc-xin</label>
+        <input id="nameVaccine" class="form-control" type="text" placeholder="Nhập tên vắc-xin">
+      </div>
+      <div class="col-xl-2 col-md-3">
+        <label for="vaccineType">Loại vắc-xin</label>
+        <input id="vaccineType" class="form-control" type="text" placeholder="Nhập loại vắc-xin">
+      </div>
+      <div class="col-xl-2 col-md-3">
+        <label for="provider">Nhà sản xuất</label>
+        <input id="provider" class="form-control" type="text" placeholder="Nhập nhà sản xuất">
+
+      </div>
+      <div class="col-xl-2 col-md-3">
+        <label for="status">Tình trạng vắc-xin</label>
+        <select id="status" class="form-control" name="">
+          <option value="">Lựa chọn...</option>
+        </select>
+      </div>
+      <div class="col-xl-2 col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
+        <button class="btn btn-success mt-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+      </div>
+    </div>
+
+    <div class="">
+      <table class="table table-hover table-bordered ">
+        <thead>
+        <tr class="">
+          <th>STT</th>
+          <th>Tên vắc-xin</th>
+          <th>Loại vắc-xin</th>
+          <th>Nước sản xuất</th>
+          <th>Độ tuổi tiêm chủng</th>
+          <th>Tình trạng vắc-xin</th>
+          <th>Đăng ký tiêm</th>
+          <!--                    <th class="text-center">Chức năng</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>Phòng bệnh lao</td>
+          <td>BCG</td>
+          <td>Việt Nam</td>
+          <td>Trẻ em dưới 6 tuổi</td>
+          <td>Còn</td>
+          <td class="text-center">
+            <a href="dang_ky_tiem_vac_xin.html" class="btn btn-success">Đăng ký</a>
+          </td>
+          <!--                    <td class="text-center"><button class="btn btn-primary"><i class="fa fa-edit"></i></button><button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button></td>-->
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Phòng viêm gan B</td>
+          <td>ENGERIX B</td>
+          <td>Bỉ</td>
+          <td>Trên 20 tuổi</td>
+          <td>Hết</td>
+          <td class="text-center">
+            <button disabled href="dang_ky_tiem_vac_xin.html" class="btn btn-success">Đăng ký</button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Phòng viêm gan B</td>
+          <td>ENGERIX B</td>
+          <td>Bỉ</td>
+          <td>Từ 6 đến 18 tuổi</td>
+          <td>Còn</td>
+          <td class="text-center">
+            <a href="dang_ky_tiem_vac_xin.html" class="btn btn-success">Đăng ký</a>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Phòng bệnh uốn ván</td>
+          <td>TETTAVAX</td>
+          <td>Pháp</td>
+          <td>Trẻ em dưới 10 tuổi</td>
+          <td>Còn</td>
+          <td class="text-center">
+            <a href="dang_ky_tiem_vac_xin.html" class="btn btn-success">Đăng ký</a>
+          </td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Phòng bệnh sởi</td>
+          <td>TRIMOVAC</td>
+          <td>Pháp</td>
+          <td>Trẻ em dưới 6 tuổi</td>
+          <td>Hết</td>
+          <td class="text-center">
+            <button disabled href="dang_ky_tiem_vac_xin.html" class="btn btn-success">Đăng ký</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-md-end justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
+          <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+          <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+          <li class="page-item col-md-1 col-2  px-0">
+            <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
+            <div class="input-group">
+              <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username" aria-describedby="basic-addon1">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">/5</span>
+              </div>
+            </div>
+          </li>
+          <li class="page-item">
+            <button class="btn btn-primary rounded-0">Đi</button>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
+          <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
