@@ -1,0 +1,115 @@
+<div class="content">
+  <div class="container col-10">
+    <h1 class="text-center mt-4 mb-4">Thông tin lịch tiêm chủng định kỳ của trung tâm</h1>
+
+    <div class="search row d-flex justify-content-end mb-4 text-center">
+      <div class="col-auto">
+        <label for="vaccinationDate">Ngày tiêm</label>
+        <input id="vaccinationDate" class="form-control" type="date" placeholder="Nhập ngày tiêm">
+      </div>
+      <div class="col-auto">
+        <label for="vaccinationTime">Giờ tiêm</label>
+        <select id="vaccinationTime" class="form-control" name="">
+          <option value="">Lựa chọn...</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <label for="vaccineName">Tên Vắc xin</label>
+        <input id="vaccineName" class="form-control" type="text" placeholder="Nhập tên Vắc xin">
+      </div>
+      <div class="col-auto">
+        <label for="status">Đối tượng tiêm</label>
+        <select id="status" class="form-control" name="">
+          <option value="">Lựa chọn...</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <br>
+        <button class="btn btn-success mt-xl-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+      </div>
+    </div>
+
+    <div class="">
+      <table class="table table-hover table-bordered ">
+        <thead>
+        <tr class="bg-table-header">
+          <th>STT</th>
+          <th>Thời gian</th>
+          <th>Ngày tiêm</th>
+          <th>Địa điểm</th>
+          <th>Tên Vắc-xin</th>
+          <th>Loại Vắc-xin</th>
+          <th>Đối tượng được tiêm</th>
+          <th>Ghi chú</th>
+          <th>Đăng ký tiêm</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>07h00 - 11h20</td>
+          <td>12/02/2015</td>
+          <td>TTYT Hòa Khánh - Liên Chiểu</td>
+          <td>Viêm não Nhật Bản</td>
+          <td>Viêm não Nhật Bản</td>
+          <td>< 2 tuổi</td>
+          <td>Miễn Phí</td>
+          <td class="text-center">
+            <a routerLink="/periodical-vaccination/register" class="btn btn-success">Đăng ký</a>
+          </td>
+        </tr><tr>
+          <td>2</td>
+          <td>07h00 - 11h20</td>
+          <td>19/02/2015</td>
+          <td>TTYT Hải Châu</td>
+          <td>Viêm gan B</td>
+          <td>Viêm gan B</td>
+          <td>< 25 tuổi</td>
+          <td>Miễn Phí</td>
+          <td class="text-center">
+            <a routerLink="/periodical-vaccination/register" class="btn btn-success">Đăng ký</a>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>07h00 - 11h20</td>
+          <td>21/02/2015</td>
+          <td>TTYT Sơn Trà</td>
+          <td>Sởi - Quai Bị - Rubela</td>
+          <td>Sởi - Quai Bị - Rubela</td>
+          <td>< 2 tuổi</td>
+          <td>Miễn Phí</td>
+          <td class="text-center">
+            <a routerLink="/periodical-vaccination/register" class="btn btn-success">Đăng ký</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-md-end justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
+          <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+          <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+          <li class="page-item col-md-1 col-2  px-0">
+            <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
+            <div class="input-group">
+              <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username" aria-describedby="basic-addon1">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">/5</span>
+              </div>
+            </div>
+          </li>
+          <li class="page-item">
+            <button class="btn btn-primary rounded-0">Đi</button>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
+          <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+        </ul>
+      </nav>
+    </div>
+
+  </div>
+</div>
