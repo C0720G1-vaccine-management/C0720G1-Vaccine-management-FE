@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {VaccineListComponent} from "./vaccine-list/vaccine-list.component";
-import {VaccineCreateComponent} from "./vaccine-create/vaccine-create.component";
+import {VaccineListComponent} from './vaccine-list/vaccine-list.component';
+import {VaccineCreateComponent} from './vaccine-create/vaccine-create.component';
 
 
 const routes: Routes = [
