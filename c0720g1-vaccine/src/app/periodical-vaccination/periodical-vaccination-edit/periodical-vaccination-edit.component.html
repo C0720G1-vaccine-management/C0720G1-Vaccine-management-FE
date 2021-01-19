@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <h1 class="mt-4">CẬP NHẬT LỊCH TIÊM CHỦNG</h1>
+
+  <div class="container col-9 mt-5">
+    <form>
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Thời gian<span>*</span>:</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Từ</div>
+                </div>
+                <input type="text" class="form-control" value="6:30:00">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Đến</div>
+                </div>
+                <input type="text" class="form-control" value="17:30:00">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Ngày tiêm<span>*</span>:</label>
+            <div class="col-sm-9">
+              <input value="2015-02-12" type="date" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Ghi chú<span>*</span>:</label>
+            <div class="col-sm-9">
+              <input type="text" value="Miễn phí" class="form-control" >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Tên Vắc-xin<span>*</span>:</label>
+            <div class="col-sm-9">
+              <select class="form-control" required>
+                <option value="1">Vắc xin phòng Lao</option>
+                <option value="2">Vắc xin phòng Viêm gan B</option>
+                <option value="3">Vắc xin phòng viêm gan A</option>
+                <option value="4">Vắc xin phòng 3 bệnh: Sởi, quai bị, rubella</option>
+                <option value="5">Vắc xin phòng sởi</option>
+                <option value="6">Vắc xin phòng thủy đậu</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Loại Vắc-xin<span>*</span>:</label>
+            <div class="col-sm-9">
+              <select class="form-control" required>
+
+                <option value="1">BCG</option>
+                <option value="2">ENGERIX B</option>
+                <option value="3">PENTAXIM</option>
+                <option value="4">INFANRIX HEXA</option>
+                <option value="5">MVVac</option>
+                <option value="6">MMR II</option>
+                <option value="7">AVAXIM 80U</option>
+                <option value="8">TWINRIX</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Địa điểm<span>*</span>:</label>
+            <div class="col-sm-9">
+              <select class="form-control" required>
+
+                <option value="1">TTYT Hòa Khánh - Liên Chiểu</option>
+                <option value="2">TTYT Thạch Thang - Hải Châu</option>
+                <option value="3">TTYT Hòa Khê - Thanh Khê</option>
+                <option value="4">TTYT An Hải Bắc - Sơn Trà</option>
+                <option value="5">TTYT Hòa Thọ Đông - Cẩm Lệ</option>
+                <option value="6">TTYT Hòa Quý - Ngũ Hành Sơn</option>
+                <option value="7">TTYT Hoà Ninh - Hòa Vang</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Độ tuổi tiêm<span>*</span>:</label>
+            <div class="col-sm-9">
+              <select class="form-control" required>
+
+                <option value="1">6 tháng</option>
+                <option value="2">12 tháng</option>
+                <option value="2">18 tháng</option>
+                <option value="2">24 tháng</option>
+                <option value="2">36 tháng</option>
+                <option value="2">Dưới 6 tuổi</option>
+                <option value="2">Dưới 12 tuổi</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Trạng thái<span>*</span>:</label>
+            <div class="col-sm-9">
+              <select class="form-control" required>
+                <option value="1">Chưa thực hiện</option>
+                <option value="2">Đã thực hiện</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm" style="text-align: right">
+          <button type="submit" class="btn btn-success">Cập nhập lịch tiêm</button>
+        </div>
+        <div class="col-sm">
+          <a routerLink="/periodical-vaccination/list">
+            <button class="btn btn-secondary" type="button">Hủy</button>
+          </a>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
