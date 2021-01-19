@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.header {
+  height: 80px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+  background-color:rgb(158,207,251) !important;
+}
+
+.navbar .logo {
+  margin-right: 30px;
+}
+
+
+/*@media (min-width: 768px) {*/
+/*    .user {*/
+/*     position: relative;*/
+/*        left: 40%;*/
+/*    }*/
+/*}*/
+
+
+@media (min-width: 992px) {
+  .user {
+    position: relative;
+    left: 45%;
+    padding-left: 5%;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .user {
+    position: relative;
+    left: 48%;
+    padding-left: 7%;
+  }
+}
+
+
+@media (min-width: 1400px) {
+  .user {
+    position: relative;
+    left: 55%;
+    padding-left: 7%;
+  }
+}
+

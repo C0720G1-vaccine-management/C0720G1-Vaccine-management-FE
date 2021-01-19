@@ -1,5 +1,6 @@
 import {IVaccination} from './IVaccination';
 import {IPatient} from './IPatient';
+import {IVaccinationTransaction} from './IVaccinationTransaction';
 
 export interface IVaccinationHistory {
   vaccinationHistoryId: number;
@@ -10,4 +11,5 @@ export interface IVaccinationHistory {
 
   vaccination: IVaccination;
   patient: IPatient;
+  vaccinationTransaction: IVaccinationTransaction;
 }
