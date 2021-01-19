@@ -3,18 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {VaccinePriceManagementModule} from './vaccine-price-management/vaccine-price-management.module';
-import {VaccineTransactionManagementModule} from './vaccine-transaction-management/vaccine-transaction-management.module';
+import { HeaderComponent } from './component/header/header.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    VaccinePriceManagementModule,
-    VaccineTransactionManagementModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

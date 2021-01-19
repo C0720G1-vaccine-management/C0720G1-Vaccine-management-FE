@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+
 .header {
   height: 80px;
 }
@@ -8,7 +10,7 @@
   top: 0;
   width: 100%;
   z-index: 9;
-  background-color: rgb(158, 207, 251) !important;
+  background-color:rgb(158,207,251) !important;
 }
 
 .navbar .logo {
@@ -49,3 +51,4 @@
     padding-left: 7%;
   }
 }
+
