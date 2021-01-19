@@ -1,0 +1,151 @@
+<div class="content">
+  <div class="container">
+    <h1 class="text-center mt-4 mb-4">Danh Sách Bệnh Nhân</h1>
+
+    <div class="search row d-flex justify-content-xl-end justify-content-center mb-4 text-center">
+
+      <div class="col-xl-2 col-md-3">
+        <label for="vaccineType">Mã Bệnh Nhân</label>
+        <input id="vaccineType" class="form-control" type="text" placeholder="Mã Bệnh Nhân">
+      </div>
+      <div class="col-xl-2 col-md-3">
+        <label for="provider">Họ Và Tên</label>
+        <input id="provider" class="form-control" type="text" placeholder="Họ Và Tên">
+
+      </div>
+
+      <div class="col-xl-2 col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
+        <button class="btn btn-success mt-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+      </div>
+    </div>
+
+
+
+    <div class="col-xl-2 col-12 px-0">
+      <!--            <br>-->
+      <button class="btn btn-success mt-2 mb-md-3"><i class="fa fa-plus"></i> Thêm mới</button>
+    </div>
+    <div class="">
+      <table class="table table-hover table-bordered ">
+        <thead>
+        <tr class="bg-table-header">
+          <th>STT</th>
+          <th>Mã Bệnh Nhân</th>
+          <th>Họ Và Tên</th>
+          <th>Ngày Sinh</th>
+          <th>Giới Tính</th>
+          <th>Người Giám Hộ</th>
+          <th>Số Điện Thoại</th>
+          <th>Địa Chỉ</th>
+          <th>Email</th>
+          <th class="text-center">Chức năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>BN-001</td>
+          <td>Lê Văn A</td>
+          <td>12/12/2018</td>
+          <td>Nam</td>
+          <td>Lê Văn B(Cha)</td>
+          <td>0901234567</td>
+          <td>Đà Nẵng</td>
+          <td>a@gmail.com</td>
+          <td class="text-center">
+             <button class="btn btn-success" routerLink="/patient/edit"><i class="fa fa-edit" ></i></button>
+
+
+            <button class="btn btn-danger ml-2" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>BN-002</td>
+          <td>Lê Văn C</td>
+          <td>12/12/2018</td>
+          <td>Nam</td>
+          <td>Lê Văn D(Cha)</td>
+          <td>0901234567</td>
+          <td>Đà Nẵng</td>
+          <td>a@gmail.com</td>
+          <td class="text-center">
+            <a href="update-patient.html"><button class="btn btn-success"><i class="fa fa-edit"></i></button></a>
+            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>BN-003</td>
+          <td>Lê Văn K</td>
+          <td>12/12/2018</td>
+          <td>Nam</td>
+          <td>Lê Văn L(Cha)</td>
+          <td>0901234567</td>
+          <td>Đà Nẵng</td>
+          <td>a@gmail.com</td>
+          <td class="text-center">
+            <a href="update-patient.html"><button class="btn btn-success"><i class="fa fa-edit"></i></button></a>
+            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>BN-004</td>
+          <td>Lê Văn U</td>
+          <td>12/12/2018</td>
+          <td>Nam</td>
+          <td>Lê Văn O(Cha)</td>
+          <td>0901234567</td>
+          <td>Đà Nẵng</td>
+          <td>a@gmail.com</td>
+          <td class="text-center">
+            <a href="update-patient.html"><button class="btn btn-success"><i class="fa fa-edit"></i></button></a>
+            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-md-end justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
+          <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+          <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+          <li class="page-item col-md-1 col-2  px-0">
+            <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
+            <div class="input-group">
+              <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username" aria-describedby="basic-addon1">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">/5</span>
+              </div>
+            </div>
+          </li>
+          <li class="page-item">
+            <button class="btn btn-primary rounded-0">Đi</button>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
+          <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+Bạn Có Muốn Xóa  Bệnh Nhân Này ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-primary">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
