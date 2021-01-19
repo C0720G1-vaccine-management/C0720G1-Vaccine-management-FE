@@ -3,14 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {VaccinePriceManagementModule} from './vaccine-price-management/vaccine-price-management.module';
+import {VaccineTransactionManagementModule} from './vaccine-transaction-management/vaccine-transaction-management.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    VaccinePriceManagementModule,
+    VaccineTransactionManagementModule
   ],
   providers: [],
   bootstrap: [AppComponent]

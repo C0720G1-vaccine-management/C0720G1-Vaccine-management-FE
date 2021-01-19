@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản Lý Giao Dịch Với Khách Hàng</title>
+
+
+</head>
+<body>
+
+
+
+<!------------------------------------------------------------Header----------------------------------------------------->
+<div class="header">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="logo" href=""><img src="assets/image/medical-logo.jpg" alt="" width="50px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Trang Chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Tin tức</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Đăng ký tiêm</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Thiết bị y tế</a>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarManager" role="button"
+               data-toggle="dropdown" aria-expanded="false">
+              Quản lí
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarManager">
+              <li><a class="dropdown-item" href="#">Nhân viên</a></li>
+              <li><a class="dropdown-item" href="#">Khách hàng</a></li>
+              <li><a class="dropdown-item" href="#">Vaccine</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Khác</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="dropdown user">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarUser" role="button"
+             data-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-user"></i>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarUser">
+            <li><a class="dropdown-item" href="#">Đăng ký</a></li>
+            <li><a class="dropdown-item" href="#">Đăng nhập</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+
+<!---------------------------------------------------------Body-------------------------------------------------------->
+<div class="content">
+  <div class="container-fluid ">
+    <h1 class="text-center mt-4 mb-4">Danh Sách Các Giao Dịch Với Khách Hàng (Bệnh Nhân)</h1>
+
+    <div class="search row d-flex justify-content-center mb-4 text-center">
+      <div class="col-lg-4 col-md-3">
+      </div>
+      <div class="col-xl-2 col-md-3">
+        <label for="">Tên Khách Hàng</label>
+        <input class="form-control" type="text" placeholder="Nhập Tên khách hàng">
+      </div>
+      <div class="col-xl-2 col-md-3">
+        <label for="">Loại vắc-xin</label>
+        <select class="form-control" name="">
+          <option value="">Lựa chọn...</option>
+        </select>
+      </div>
+      <div class="col-md-2 mt-2">
+        <br>
+        <button class="btn btn-success"><i class="fa fa-search"> </i>Tìm kiếm</button>
+      </div>
+    </div>
+
+    <div class="">
+      <table style="" class="table table-hover table-striped table-bordered">
+        <thead>
+        <tr class="text-center bg-table-header">
+          <th>STT</th>
+          <th>Mã giao dịch<br>khách hàng</th>
+          <th>Mã vắc-xin</th>
+          <th>Loại vắc-xin</th>
+          <th>Số lượng<br>vắc xin (ml)</th>
+          <th>Mã bệnh nhân<br>(khách hàng)</th>
+          <th>Tên khách hàng<br>(bệnh nhân)</th>
+          <th>Ngày giao dịch</th>
+          <th>Giá<br>(VNĐ/ml)</th>
+          <th>Thành tiền<br>(VNĐ/ml) </th>
+          <th>Chức năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>GDK-0001</td>
+          <td>MVX-0001</td>
+          <td>BCG</td>
+          <td style="text-align: right">10</td>
+          <td>BN-001</td>
+          <td>Nguyễn Văn A</td>
+          <td style="text-align: center">11/11/2017</td>
+          <td style="text-align: right">50,000</td>
+          <td style="text-align: right">500,000</td>
+          <td style="text-align: center">
+            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>GDK-0002</td>
+          <td>MVX-0002</td>
+          <td>ENGERIX B</td>
+          <td style="text-align: right">10</td>
+          <td>BN-002</td>
+          <td>Nguyễn Văn B</td>
+          <td style="text-align: center">11/11/2017</td>
+          <td style="text-align: right">50,000</td>
+          <td style="text-align: right">500,000</td>
+          <td style="text-align: center" >
+            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>GDK-0003</td>
+          <td>MVX-0003</td>
+          <td>TETTAVAX</td>
+          <td style="text-align: right">10</td>
+          <td>BN-003</td>
+          <td>Nguyễn Văn C</td>
+          <td style="text-align: center">11/11/2017</td>
+          <td style="text-align: right">50,000</td>
+          <td style="text-align: right">500,000</td>
+          <td style="text-align: center">
+            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>GDK-0004</td>
+          <td>MVX-0004</td>
+          <td>TETTAVAX</td>
+          <td style="text-align: right">10</td>
+          <td>BN-004</td>
+          <td>Nguyễn Văn D</td>
+          <td style="text-align: center">11/11/2017</td>
+          <td style="text-align: right">50,000</td>
+          <td style="text-align: right">500,000</td>
+          <td style="text-align: center">
+            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>GDK-0005</td>
+          <td>MVX-0005</td>
+          <td>TRIMOVAC</td>
+          <td style="text-align: right">10</td>
+          <td>BN-005</td>
+          <td>Nguyễn Văn E</td>
+          <td style="text-align: center">11/11/2017</td>
+          <td style="text-align: right" >50,000</td>
+          <td style="text-align: right">500,000</td>
+          <td style="text-align: center">
+            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-md-end justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
+          <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+          <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+          <li class="page-item col-md-1 col-2  px-0">
+            <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
+            <div class="input-group">
+              <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username" aria-describedby="basic-addon1">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">/5</span>
+              </div>
+            </div>
+          </li>
+          <li class="page-item">
+            <button class="btn btn-primary rounded-0">Đi</button>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
+          <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+        </ul>
+      </nav>
+    </div>    </div>
+</div>
+<!-----------------------------------------------------------------------Footer-------------------------------------------------------------->
+<footer class="text-left " style="background-color:rgb(158,207,251)">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!--Grid row-->
+    <div class="row">
+      <!--Grid column-->
+      <div class="col-lg-6 col-md-12 mb-8 mb-md-0">
+        <h5 class="text-uppercase mb-0">Trung tâm y tế dự phòng Đà Nẵng</h5>
+        <ul class="list-unstyled">
+          <li>
+            <p><i class="fas fa-map-marker-alt"></i>  103 Hùng Vương, Hải Châu 1, Hải Châu, Đà Nẵng 550000, Việt Nam</p>
+          </li>
+          <li>
+            <p><i class="far fa-clock"></i>  Giờ mở cửa Sáng: 07:30–11:00, Chiều: 13:30–16:30</p>
+          </li>
+          <li>
+            <a href=""><i class="fas fa-phone"></i> Hotline: +842363573828</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+      <!--Grid column-->
+      <div class="col-lg-6 col-md-12 mb-8 mb-md-0">
+        <h5 class="text-uppercase">Bản đồ</h5>
+        <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61340.4113070111!2d108.17591343831853!3d16.077124818262583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421834447b8df7%3A0x6c438d251f3ad7c5!2zVHJ1bmcgVMOibSBZIFThur8gROG7sSBQaMOybmcgxJDDoCBO4bq1bmcgLSBDxqEgc-G7nyB0acOqbSBjaOG7p25n!5e0!3m2!1svi!2s!4v1610430016844!5m2!1svi!2s"
+                width="700" height="350" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      </div>
+      <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </div>
+  <!-- Grid container -->
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgb(129,174,207)">
+    © 2020 Copyright:
+    <a class="text-dark" href="https://mdbootstrap.com/">Trung tâm y tế dự phòng Thành phố Đà Nẵng</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+</body>
+</html>
