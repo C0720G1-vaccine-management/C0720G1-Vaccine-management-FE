@@ -1,0 +1,161 @@
+<!-- content -->
+<div class="container">
+  <div class="container-fluid" id="custom-font">
+    <div class="row">
+      <div class="col-12 ">
+        <h1 class="text-center mt-4 mb-4 ">Lịch sử tiêm chủng</h1>
+        <div class="search row d-flex justify-content-end mb-4 float-right ">
+          <div class="col-xl-3 col-md-3 ">
+            <label for="nameVaccine">Tên vắc-xin</label>
+            <input id="nameVaccine" class="form-control" type="text" placeholder="Nhập tên vắc-xin">
+          </div>
+          <div class="col-xl-3 col-md-3 ">
+            <label for="vaccinationDate">Ngày tiêm</label>
+            <input id="vaccinationDate" class="form-control " type="text" placeholder="Nhập ngày tiêm">
+          </div>
+          <div class="col-xl-2 col-4 width-search">
+            <br>
+            <button class="btn btn-success mt-xl-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row tab">
+      <div class="col-12">
+        <table class="table table-hover table-bordered ">
+          <thead>
+          <tr class="bg-table-header">
+            <th scope="col">Stt</th>
+            <th scope="col">Họ và tên</th>
+            <th scope="col">Ngày sinh</th>
+            <th scope="col">Giới tính</th>
+            <th scope="col">Địa chỉ</th>
+            <th scope="col">Tên vắc xin</th>
+            <th scope="col">Loại vắc xin</th>
+            <th scope="col">Ngày tiêm</th>
+            <th scope="col">Tình trạng sau khi tiêm</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col">Phản hồi</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td scope="row">1</td>
+            <td>Nguyễn Hoàng Tứ</td>
+            <td>24-06-1999</td>
+            <td>Nam</td>
+            <td>Đà nẵng</td>
+            <td>Phòng bệnh lao</td>
+            <td>PBG</td>
+            <td>12-01-2021</td>
+            <td>Thông minh hơn</td>
+            <td class="text-center">
+              <span class="badge badge-primary">Đã phản hồi</span>
+            </td>
+            <td class="text-center">
+              <button type="button" class="btn btn-success with-button">Sửa</button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">2</td>
+            <td>Nguyễn Hoàng Tứ</td>
+            <td>24-06-1999</td>
+            <td>Nam</td>
+            <td>Đà nẵng</td>
+            <td>Phòng bệnh lao</td>
+            <td>PBG</td>
+            <td>12-01-2021</td>
+            <td>Thông minh hơn</td>
+            <td class="text-center">
+              <span class="badge badge-danger">Chưa phản hồi</span>
+            </td>
+            <td class="text-center">
+              <button type="button" class="btn btn-info with-button">Phản hồi</button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">3</td>
+            <td>Nguyễn Hoàng Tứ</td>
+            <td>24-06-1999</td>
+            <td>Nam</td>
+            <td>Đà nẵng</td>
+            <td>Phòng bệnh lao</td>
+            <td>PBG</td>
+            <td>12-01-2021</td>
+            <td>Thông minh hơn</td>
+            <td class="text-center">
+              <span class="badge badge-primary">Đã phản hồi</span>
+            </td>
+            <td class="text-center">
+              <button type="button" class="btn btn-success with-button">Sửa</button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">4</td>
+            <td>Nguyễn Hoàng Tứ</td>
+            <td>24-06-1999</td>
+            <td>Nam</td>
+            <td>Đà nẵng</td>
+            <td>Phòng bệnh lao</td>
+            <td>PBG</td>
+            <td>12-01-2021</td>
+            <td>Thông minh hơn</td>
+            <td class="text-center">
+              <span class="badge badge-primary">Đã phản hồi</span>
+            </td>
+            <td class="text-center">
+              <button type="button" class="btn btn-success with-button">Sửa</button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">5</td>
+            <td>Nguyễn Hoàng Tứ</td>
+            <td>24-06-1999</td>
+            <td>Nam</td>
+            <td>Đà nẵng</td>
+            <td>Phòng bệnh lao</td>
+            <td>PBG</td>
+            <td>12-01-2021</td>
+            <td>Thông minh hơn</td>
+            <td class="text-center">
+              <span class="badge badge-danger">Chưa phản hồi</span>
+            </td>
+            <td class="text-center">
+              <button type="button" class="btn btn-info with-button" routerLink="/immunization-history/feedback">Phản
+                hồi
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination d-flex justify-content-md-end justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
+            <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+            <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+            <li class="page-item col-md-1 col-2  px-0">
+              <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
+              <div class="input-group">
+                <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username"
+                       aria-describedby="basic-addon1">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">/5</span>
+                </div>
+              </div>
+            </li>
+            <li class="page-item">
+              <button class="btn btn-primary rounded-0">Đi</button>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
+            <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

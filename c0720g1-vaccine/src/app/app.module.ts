@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import {VaccineModule} from "./vaccine/vaccine.module";
+import {SecurityModule} from "./security/security.module";
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import {VaccineModule} from "./vaccine/vaccine.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    VaccineModule
+    VaccineModule,
+    SecurityModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
