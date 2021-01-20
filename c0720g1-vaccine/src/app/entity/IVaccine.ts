@@ -12,7 +12,8 @@ export interface IVaccine {
   maintenance: string;
   dosage: number;
   deleteFlag: boolean;
-
+  expired:String;
+  quantity:number,
   invoiceList: IInvoice[];
   vaccineType: IVaccineType;
   vaccinationList: IVaccination[];
