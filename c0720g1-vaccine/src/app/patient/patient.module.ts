@@ -7,11 +7,12 @@ import {PatientRoutingModule} from './patient-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DeletePatientComponent } from './delete-patient/delete-patient.component';
 import { PatientCreateComponent } from './patient-create/patient-create.component';
+import { PatientPeriodicalVaccinationComponent } from './patient-periodical-vaccination/patient-periodical-vaccination.component';
 
 
 
 @NgModule({
-  declarations: [ListPatientComponent, EditPatientComponent, DeletePatientComponent, PatientCreateComponent],
+  declarations: [ListPatientComponent, EditPatientComponent, DeletePatientComponent, PatientCreateComponent, PatientPeriodicalVaccinationComponent],
   imports: [
     CommonModule,
     PatientRoutingModule, 
