@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {VaccinationHistoryRoutingModule} from './vaccination-history-routing.module';
-import { ImmunizationHistoryComponent } from './immunization-history/immunization-history.component';
-import { ImmunizationHistoryFeedbackComponent } from './immunization-history-feedback/immunization-history-feedback.component';
+import { VaccinationHistoryComponent } from './vaccination-history/vaccination-history.component';
+import { VaccinationHistoryFeedbackComponent } from './vaccination-history-feedback/vaccination-history-feedback.component';
 
 
 
 @NgModule({
-  declarations: [ImmunizationHistoryComponent, ImmunizationHistoryFeedbackComponent],
+  declarations: [ VaccinationHistoryComponent, VaccinationHistoryFeedbackComponent],
   imports: [
     CommonModule,
     VaccinationHistoryRoutingModule
