@@ -5,16 +5,15 @@ import { EditPatientComponent } from './edit-patient/edit-patient.component';
 import {PatientRoutingModule} from './patient-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DeletePatientComponent } from './delete-patient/delete-patient.component';
-
-
+import { PatientCreateComponent } from './patient-create/patient-create.component';
 
 @NgModule({
-  declarations: [ListPatientComponent, EditPatientComponent, DeletePatientComponent],
+  declarations: [ListPatientComponent, EditPatientComponent, DeletePatientComponent, PatientCreateComponent],
   imports: [
     CommonModule,
+    PatientRoutingModule, 
     FormsModule,
     ReactiveFormsModule,
-    PatientRoutingModule
   ]
 })
 export class PatientModule { }
