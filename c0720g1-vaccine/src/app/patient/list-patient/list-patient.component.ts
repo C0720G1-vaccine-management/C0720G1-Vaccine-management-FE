@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PatientDTO} from '../../entity/PatientDTO';
+import {PatientService} from '../patient.service';
+import {IPatient} from '../../entity/IPatient';
 
 @Component({
   selector: 'app-list-patient',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListPatientComponent implements OnInit {
 
-  constructor() { }
+  deleteId: number;
+  deleteName: string;
+  listPatient: IPatient[];
+  public page = 0;
+  public pageable: any;
 
-  ngOnInit(): void {
+  constructor(private patientService: PatientService) {
   }
 
+  ngOnInit(): void {
+    this.getListPeriodicPatient()
+  }
+
+  getListPeriodicPatient() {
+    this.patientService.getAllPatient(this.page).subscribe(data=>{
+      this.listPatient = data.content;
+      this.pageable=data;
+    },error => console.log(error))
+
+  }
 }

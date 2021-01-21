@@ -1,10 +1,10 @@
-<!--<h3 style="color: red">Confirm delete !</h3>-->
-<!--<hr>-->
-<!--<h5 class="my-3">Are you sure you want to delete ID is-->
-<!--  <span class="text-danger font-weight-bold">{{product.idFormat}}</span> ?</h5>-->
-<!--<p style="color: deeppink">This action cannot be undone !</p>-->
-<!--<div class="row d-flex justify-content-end">-->
-<!--  &lt;!&ndash;  <input type="hidden" [value]="product.id" #id>&ndash;&gt;-->
-<!--  <button mat-dialog-close class="btn btn-warning mr-3" style="width: 100px">Cancel</button>-->
-<!--  <button class="btn btn-danger mr-3" style="width: 100px" (click)="deleteCustomer()">Delete</button>-->
-<!--</div>-->
+<h3 style="color: red">Xác Nhận Xóa !</h3>
+<hr>
+<!--<h5 class="my-3">Are you sure you want to delete the patient ID: {{deleteId}}</h5>-->
+<h5>Bạn Có Chắc Muốn Xóa Bệnh Nhân <label style="color: red"> {{deleteName}}</label> Không ?</h5>
+<p style="color: red">Hành động này không thể được hoàn tác !</p>
+<div class="row d-flex justify-content-end">
+  <!--  <input type="hidden" [value]="product.id" #id>-->
+  <button mat-dialog-close class="btn btn-warning mr-3" style="width: 100px" data-bs-dismiss="modal">Cancel</button>
+  <button class="btn btn-danger mr-3" style="width: 100px" (click)="deletePatient()" data-bs-dismiss="modal">Delete</button>
+</div>

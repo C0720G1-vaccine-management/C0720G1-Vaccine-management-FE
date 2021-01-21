@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {PatientService} from '../patient.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-delete-patient',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeletePatientComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  deleteId: number;
+  @Input()
+  deleteName: string;
+  constructor(
+    public patientService : PatientService,
+    public router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
+  deletePatient() {
+this.patientService.deletePatient(this.deleteId).subscribe(data=>{
+  this.router.navigateByUrl('patient')
+})
+  }
 }
