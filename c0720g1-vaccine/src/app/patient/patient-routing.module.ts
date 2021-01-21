@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'patient/edit', component: EditPatientComponent},
   {path: 'patient/list/delete', component: DeletePatientComponent},
   {path: 'patient/create', component: PatientCreateComponent}
-];
+
 @NgModule({
     declarations: [],
     imports: [
@@ -21,5 +21,6 @@ const routes: Routes = [
     ]
   exports: [RouterModule]
 })
+  
 export class PatientRoutingModule {
 }

@@ -6,6 +6,8 @@ import {PeriodicalVaccinationManagerCreateComponent} from './periodical-vaccinat
 import {PeriodicalVaccinationManagerEditComponent} from './periodical-vaccination-manager-edit/periodical-vaccination-manager-edit.component';
 import { PeriodicalVaccinationManagerListComponent } from './periodical-vaccination-manager-list/periodical-vaccination-manager-list.component';
 import {HttpClientModule} from '@angular/common/http';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import {HttpClientModule} from '@angular/common/http';
     PeriodicalVaccinationManagerRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ]
 })
 export class PeriodicalVaccinationManagerModule {

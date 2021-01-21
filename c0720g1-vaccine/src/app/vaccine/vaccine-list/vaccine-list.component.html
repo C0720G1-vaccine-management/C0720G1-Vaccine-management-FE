@@ -46,7 +46,9 @@
 
 
   <div class="container tab">
-    <div style="text-align: center">Danh Sách Vắc-Xin</div>
+    <div style="text-align: center">
+      <h2>Danh Sách Vắc-Xin</h2>
+    </div>
     <table class="table table-hover table-bordered">
       <thead>
       <tr class="bg-table-header">
@@ -67,56 +69,20 @@
       </tr>
       </thead>
       <tbody style="font-size: 16px;text-align: center">
-      <tr>
+      <tr *ngFor="let vaccine of vaccines">
         <td>1</td>
-        <td>MVX-0001</td>
-        <td>Phòng Bệnh Lao</td>
-        <td>BCG</td>
-        <td>1/1/2015</td>
-        <td>1</td>
-        <td>Việt Nam</td>
-        <td>0.01ml</td>
-        <td>500</td>
-        <td>1 năm</td>
-        <td>2-8 độ c</td>
-        <td>Trẻ em</td>
-        <td>Còn</td>
-        <td>
-          <button class="btn btn-success">Xuất Kho</button>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>MVX-0002</td>
-        <td>Phòng Viêm Gan B</td>
-        <td>ENGERIX B</td>
-        <td>1/1/2015</td>
-        <td>2</td>
-        <td>Bỉ</td>
-        <td>1ml</td>
-        <td>0</td>
-        <td>1 năm</td>
-        <td>2-8 độ c</td>
-        <td>Lớn Hơn 20</td>
-        <td>Hết</td>
-        <td>
-          <button class="btn btn-success">Xuất Kho</button>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>MVX-0003</td>
-        <td>Phòng Bệnh Uống Ván</td>
-        <td>TETTAVAX</td>
-        <td>1/1/2015</td>
-        <td>4</td>
-        <td>Pháp</td>
-        <td>0.5ml</td>
-        <td>500</td>
-        <td>1 năm</td>
-        <td>2-8 độ c</td>
-        <td>Trẻ em</td>
-        <td>Còn</td>
+        <td>{{vaccine.vaccineId}}</td>
+        <td>{{vaccine.name}}</td>
+        <td>{{vaccine.vaccineType}}</td>
+        <td>{{vaccine.expired}}</td>
+        <td>{{vaccine.licenseCode}}</td>
+        <td>{{vaccine.origin}}</td>
+        <td>{{vaccine.dosage}}</td>
+        <td>{{vaccine.quantity}}</td>
+        <td>{{vaccine.expired}}</td>
+        <td>{{vaccine.maintenance}}</td>
+        <td>{{vaccine.age}}</td>
+        <td>Tình Trạng</td>
         <td>
           <button class="btn btn-success">Xuất Kho</button>
         </td>
@@ -135,7 +101,8 @@
         <li class="page-item col-md-1 col-2  px-0">
           <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
           <div class="input-group">
-            <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username"
+                   aria-describedby="basic-addon1">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">/5</span>
             </div>
