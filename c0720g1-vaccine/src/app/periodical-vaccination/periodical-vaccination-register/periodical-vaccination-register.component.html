@@ -1,0 +1,141 @@
+<div class="content">
+  <div class="container">
+    <h1 class="text-center mt-4 mb-4">Đăng ký tiêm phòng định kỳ theo lịch của trung tâm</h1>
+    <br><br>
+    <hr>
+    <div class="row justify-content-center">
+      <div class="col-xl-6">
+        <div class="container">
+          <h3 class="mb-4">Thông tin bệnh nhân</h3>
+          <div class="row mb-3 ">
+            <div class="col-4">
+              <label for="name" class="col-form-label">Họ và tên <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-8">
+              <input id="name" class="form-control" type="text" placeholder="Nhập họ và tên bệnh nhân">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-4">
+              <label class="col-form-label">Giới tính <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-8 row">
+              <div class="col-4 align-bottom" >
+                <input name="gender" id="nam" type="radio" value="nam">
+                <label for="nam" class="content-checkbox">Nam</label>
+              </div>
+              <div class="col-4 align-bottom">
+                <input name="gender" id="nu" type="radio" value="nu">
+                <label for="nu">Nữ</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-4">
+              <label for="dateOfBirth" class="col-form-label">Ngày sinh <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-8">
+              <input id="dateOfBirth" class="form-control" type="date">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-4">
+              <label for="guardian" class="col-form-label">Người giám hộ <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-8">
+              <input id="guardian" class="form-control" type="text" placeholder="Nhập họ và tên người giám hộ">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-4">
+              <label for="address" class="col-form-label">Địa chỉ <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-8">
+              <input id="address" class="form-control" type="text" placeholder="Nhập địa chỉ">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-4">
+              <label for="phoneNumber" class="col-form-label">Số điện thoại <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-8">
+              <input id="phoneNumber" class="form-control" type="text" placeholder="Nhập số điện thoại">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <label for="email" class="col-form-label">Email <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-8">
+              <input id="email" class="form-control" type="email" placeholder="Nhập email">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 border-left" >
+        <div class="container">
+          <h3 class="mb-4">Thông tin tiêm chủng định kỳ</h3>
+
+          <div class="row mb-3 ">
+            <div class="col-4">
+              <label class="col-form-label">Tên vắc xin</label>
+            </div>
+            <div class="col-8">
+              <input value="Phòng bệnh lao" class="form-control" type="text" readonly>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-4">
+              <label class="col-form-label">Loại vắc-xin</label>
+            </div>
+            <div class="col-8">
+              <input value="BCG" class="form-control" type="text" readonly>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-4">
+              <label class="col-form-label">Nước sản xuất</label>
+            </div>
+            <div class="col-8">
+              <input value="Việt Nam" class="form-control" type="text" readonly>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <label class="col-form-label">Thời gian tiêm</label>
+            </div>
+            <div class="col-8">
+              <input value="8:00 - 11:30 ngày 12/02/2015" class="form-control" type="text" readonly>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-4">
+              <label class="col-form-label">Địa điểm</label>
+            </div>
+            <div class="col-8">
+              <input value="TTYT Hòa Khánh - Liên Chiểu" class="form-control" type="text" readonly>
+            </div>
+          </div>
+          <!--                    <div class="row mb-3">-->
+          <!--                        <div class="col-4">-->
+          <!--                            <label for="dateStart" class="col-form-label">Ngày thực hiện tiêm<span class="text-danger">*</span></label>-->
+          <!--                        </div>-->
+          <!--                        <div class="col-8">-->
+          <!--                            <input id="dateStart" class="form-control" type="date">-->
+          <!--                        </div>-->
+          <!--                    </div>-->
+
+        </div>
+      </div>
+      <div class="d-flex mt-4 col-xl-2 col-lg-3 col-sm-4">
+        <div>
+          <button class="btn btn-primary mr-3">Đăng ký</button>
+          <a routerLink="/periodical-vaccination-list" class="btn btn-dark">Hủy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
