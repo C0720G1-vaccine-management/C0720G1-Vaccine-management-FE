@@ -7,6 +7,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PatientCreateComponent } from './patient-create/patient-create.component';
 import { DeletePatientComponent } from './delete-patient/delete-patient.component';
 import {HttpClientModule} from '@angular/common/http';
+
+
 @NgModule({
   declarations: [ListPatientComponent, EditPatientComponent, PatientCreateComponent, DeletePatientComponent],
   imports: [
