@@ -3,45 +3,46 @@
     <h2 style="text-align: center">Quản Lý Kho Vắc-Xin</h2>
   </div>
   <div class="container-fluid">
-    <form action="">
-      <div class="search row d-flex justify-content-md-end mb-4 text-right float-right">
+    <form [formGroup]="searchVaccine" (ngSubmit)="search()">
+      <div class=" search row d-flex justify-content-md-end mb-4 text-right float-right">
         <!--                <div class="col-xl-2 col-12">-->
         <!--                </div>-->
-        <div class="col-xl-2 col-md-3" style="text-align: center">
+        <div class="col-xl-2 col-md-3 form-group" style="text-align: center">
           <label for="nameVaccine">Tên vắc-xin</label>
-          <input id="nameVaccine" class="form-control" type="text" placeholder="Nhập tên vắc-xin">
+          <input id="nameVaccine" class="form-control" type="text" formControlName="nameVaccine">
         </div>
-        <div class="col-xl-2 col-md-3" style="text-align: right">
+        <div class="col-xl-2 col-md-3 form-group" style="text-align: right">
           <div style="text-align: center">
             <label for="typeVaccine">Loại Vắc-xin</label>
           </div>
           <div>
-            <input type="text" id="typeVaccine" class="form-control" placeholder="Loại Vắc-Xin">
+            <input type="text" id="typeVaccine" class="form-control" formControlName="typeVaccine">
           </div>
         </div>
-        <div class="col-xl-2 col-md-3" style="text-align: right">
+        <div class="col-xl-2 col-md-3 form-group" style="text-align: right">
           <div style="text-align: center">
             <label for="provider">Nước Sản Xuất</label>
           </div>
           <div>
-            <input type="text" id="provider" class="form-control" placeholder="Nước Sản Xuất">
+            <input type="text" id="provider" class="form-control" formControlName="originVaccine">
           </div>
         </div>
-        <div class="col-xl-2 col-md-3" style="text-align: right">
+        <div class="col-xl-2 col-md-3 form-group" style="text-align: right">
           <label for="status">Tình trạng vắc-xin</label>
-          <select id="status" class="form-control" name="">
-            <option value="">Lựa chọn...</option>
+          <select id="status" class="form-control" formControlName="statusVaccine">
+            <option [value]="'con'">Còn</option>
+            <option [value]="'het'">Hết</option>
           </select>
         </div>
         <div class="col-xl-2 col-4" style="text-align: right">
           <br>
-          <button class="btn btn-success mt-xl-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+          <button class="btn btn-success mt-xl-2"><i class="fa fa-search"></i>Tìm Kiếm</button>
         </div>
       </div>
     </form>
   </div>
   <div class="container mt-0">
-    <button class="btn btn-success mt-2 mb-md-3"><i class="fa fa-plus"></i> Nhập Vắc-Xin</button>
+    <button class="btn btn-success mt-2 mb-md-3" [routerLink]="['/vaccine-create']"><i class="fa fa-plus"></i> Nhập Vắc-Xin</button>
   </div>
 
 
@@ -69,22 +70,33 @@
       </tr>
       </thead>
       <tbody style="font-size: 16px;text-align: center">
-      <tr *ngFor="let vaccine of vaccines">
-        <td>1</td>
-        <td>{{vaccine.vaccineId}}</td>
+      <tr *ngFor="let vaccine of vaccines,index as i">
+        <td>{{i+1}}</td>
+        <td>{{vaccine.id}}</td>
         <td>{{vaccine.name}}</td>
         <td>{{vaccine.vaccineType}}</td>
-        <td>{{vaccine.expired}}</td>
+        <td>{{vaccine.dateRecive}}</td>
         <td>{{vaccine.licenseCode}}</td>
         <td>{{vaccine.origin}}</td>
         <td>{{vaccine.dosage}}</td>
-        <td>{{vaccine.quantity}}</td>
+        <td>{{vaccine.shipmentNumber}}</td>
         <td>{{vaccine.expired}}</td>
-        <td>{{vaccine.maintenance}}</td>
+        <td>{{vaccine.mantenance}}</td>
         <td>{{vaccine.age}}</td>
-        <td>Tình Trạng</td>
+        <td class="text-center">
+          <div *ngIf="vaccine.quantity === 0; else elseBlock">
+            <div style="color: red">
+              <label>Hết</label>
+            </div>
+          </div>
+          <ng-template #elseBlock>
+            <div style="color: green">
+              <label>Còn</label>
+            </div>
+          </ng-template>
+        </td>
         <td>
-          <button class="btn btn-success">Xuất Kho</button>
+          <button class="btn btn-success"[disabled]="vaccine.quantity === 0" >Xuất Kho</button>
         </td>
       </tr>
       </tbody>

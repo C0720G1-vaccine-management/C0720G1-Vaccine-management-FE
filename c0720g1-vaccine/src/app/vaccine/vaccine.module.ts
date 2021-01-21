@@ -4,6 +4,8 @@ import { VaccineListComponent } from './vaccine-list/vaccine-list.component';
 import { VaccineCreateComponent } from './vaccine-create/vaccine-create.component';
 import {HttpClientModule} from "@angular/common/http";
 import {VaccineRoutingModule} from "./vaccine-routing.module";
+import {RouterModule} from "@angular/router";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -12,7 +14,9 @@ import {VaccineRoutingModule} from "./vaccine-routing.module";
   imports: [
     CommonModule,
     HttpClientModule,
-    VaccineRoutingModule
+    VaccineRoutingModule,
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class VaccineModule { }
