@@ -39,92 +39,37 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td scope="row">1</td>
-            <td>Nguyễn Hoàng Tứ</td>
-            <td>24-06-1999</td>
-            <td>Nam</td>
-            <td>Đà nẵng</td>
-            <td>Phòng bệnh lao</td>
-            <td>PBG</td>
-            <td>12-01-2021</td>
-            <td>Thông minh hơn</td>
+          <tr *ngFor="let vaccinationHistory of vaccinationHistoryList, index as i">
+            <td scope="row">{{i+1}}</td>
+            <td>{{vaccinationHistory.patientName}}</td>
+            <td>{{vaccinationHistory.patientDateOfBirth}}</td>
+            <td>{{vaccinationHistory.patientGender}}</td>
+            <td>{{vaccinationHistory.patientAddress}}</td>
+            <td style="width: 200px">{{vaccinationHistory.vaccineName}}</td>
+            <td>{{vaccinationHistory.vaccineTypeName}}</td>
+            <td>{{vaccinationHistory.vaccinationDate}}</td>
+            <td>{{vaccinationHistory.vaccinationHistoryAfterStatus}}</td>
             <td class="text-center">
-              <span class="badge badge-primary">Đã phản hồi</span>
+              <div *ngIf="vaccinationHistory.vaccinationHistoryAfterStatus === ''; else elseBlock ">
+                <span class="badge badge-danger">Chưa phản hồi<br> sau khi tiêm</span>
+              </div>
+              <ng-template #elseBlock>
+                <div>
+                  <span class="badge badge-primary" routerLink="">Đã phản hồi</span>
+                </div>
+              </ng-template>
             </td>
             <td class="text-center">
-              <button type="button" class="btn btn-success with-button">Sửa</button>
+              <div *ngIf="vaccinationHistory.vaccinationHistoryAfterStatus !== '' ; else elseBlock1 ">
+                <button type="button" class="btn btn-success with-button" [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Sửa</button>
+              </div>
+              <ng-template #elseBlock1>
+                <div>
+                  <button type="button" class="btn btn-info with-button" [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Phản hồi</button>
+                </div>
+              </ng-template>
             </td>
-          </tr>
-          <tr>
-            <td scope="row">2</td>
-            <td>Nguyễn Hoàng Tứ</td>
-            <td>24-06-1999</td>
-            <td>Nam</td>
-            <td>Đà nẵng</td>
-            <td>Phòng bệnh lao</td>
-            <td>PBG</td>
-            <td>12-01-2021</td>
-            <td>Thông minh hơn</td>
-            <td class="text-center">
-              <span class="badge badge-danger">Chưa phản hồi</span>
-            </td>
-            <td class="text-center">
-              <button type="button" class="btn btn-info with-button">Phản hồi</button>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row">3</td>
-            <td>Nguyễn Hoàng Tứ</td>
-            <td>24-06-1999</td>
-            <td>Nam</td>
-            <td>Đà nẵng</td>
-            <td>Phòng bệnh lao</td>
-            <td>PBG</td>
-            <td>12-01-2021</td>
-            <td>Thông minh hơn</td>
-            <td class="text-center">
-              <span class="badge badge-primary">Đã phản hồi</span>
-            </td>
-            <td class="text-center">
-              <button type="button" class="btn btn-success with-button">Sửa</button>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row">4</td>
-            <td>Nguyễn Hoàng Tứ</td>
-            <td>24-06-1999</td>
-            <td>Nam</td>
-            <td>Đà nẵng</td>
-            <td>Phòng bệnh lao</td>
-            <td>PBG</td>
-            <td>12-01-2021</td>
-            <td>Thông minh hơn</td>
-            <td class="text-center">
-              <span class="badge badge-primary">Đã phản hồi</span>
-            </td>
-            <td class="text-center">
-              <button type="button" class="btn btn-success with-button">Sửa</button>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row">5</td>
-            <td>Nguyễn Hoàng Tứ</td>
-            <td>24-06-1999</td>
-            <td>Nam</td>
-            <td>Đà nẵng</td>
-            <td>Phòng bệnh lao</td>
-            <td>PBG</td>
-            <td>12-01-2021</td>
-            <td>Thông minh hơn</td>
-            <td class="text-center">
-              <span class="badge badge-danger">Chưa phản hồi</span>
-            </td>
-            <td class="text-center">
-              <button type="button" class="btn btn-info with-button" routerLink="/immunization-history/feedback">Phản
-                hồi
-              </button>
-            </td>
+
           </tr>
           </tbody>
         </table>

@@ -19,13 +19,13 @@
           </div>
 
           <div class="col-8">
-            <p>BN-001</p>
-            <p>Nguyễn Hoàng Tứ</p>
-            <p>Nam</p>
-            <p>21</p>
-            <p>Nguyễn thị Thanh Thảo(mẹ)</p>
-            <p>Quảng nam</p>
-            <p>0857886264</p>
+            <p>{{vaccinationHistoryFeedback.patientId}}</p>
+            <p>{{vaccinationHistoryFeedback.patientName}}</p>
+            <p>{{vaccinationHistoryFeedback.patientGender}}</p>
+            <p>{{vaccinationHistoryFeedback.patientAge}}</p>
+            <p>{{vaccinationHistoryFeedback.patientGuardian}}</p>
+            <p>{{vaccinationHistoryFeedback.patientAddress}}</p>
+            <p>{{vaccinationHistoryFeedback.patientPhone}}</p>
           </div>
         </div>
         <div class="col-6 row">
@@ -35,18 +35,20 @@
             <p>Ngày tiêm:</p>
           </div>
           <div class="col-8">
-            <p>PBD</p>
-            <p>12/12/2020</p>
+            <p>{{vaccinationHistoryFeedback.vaccineTypeName}}</p>
+            <p>{{vaccinationHistoryFeedback.vaccinationDate}}</p>
           </div>
           <div class="col-10">
             <p>Tình trạng sau khi tiêm(Sốt cao,sốt nhẹ,dị ứng,...)</p>
-            <textarea class="form-control" rows="4" id="comment"></textarea>
+            <textarea class="form-control" rows="4" id="comment">
+              {{vaccinationHistoryFeedback.vaccineHistoryPreStatus}}
+            </textarea>
           </div>
         </div>
       </div>
       <div class="text-center with-submit">
-        <button type="button" class="btn btn-warning with-button">Phản hồi lại</button>
-        <button type="button" class="btn btn-secondary with-button">Hủy</button>
+        <button type="submit" class="btn btn-warning with-button">Phản hồi lại</button>
+        <button type="button" class="btn btn-secondary with-button" routerLink="/vaccination-history">Hủy</button>
       </div>
     </div>
   </div>

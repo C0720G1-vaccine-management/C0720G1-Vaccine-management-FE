@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'vaccination-history', component: VaccinationHistoryComponent,
   },
   {
-    path: 'vaccination-history/feedback', component: VaccinationHistoryFeedbackComponent,
+    path: 'vaccination-history/feedback/:id', component: VaccinationHistoryFeedbackComponent,
   },
 
 ];
