@@ -67,8 +67,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let vaccinationManager of vaccinations">
-      <td></td>
+    <tr *ngFor="let vaccinationManager of vaccinations, index as i">
+      <td>{{i+1}}</td>
       <td> {{getCode(vaccinationManager.vaccinationId, 3)}}</td>
       <td>{{vaccinationManager.startTime}} - {{vaccinationManager.endTime}}</td>
       <td>{{vaccinationManager.date | date: 'dd/MM/yyyy'}}</td>
