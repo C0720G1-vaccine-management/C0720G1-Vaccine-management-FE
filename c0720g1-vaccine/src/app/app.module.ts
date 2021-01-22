@@ -7,6 +7,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import {VaccineModule} from "./vaccine/vaccine.module";
 import {SecurityModule} from "./security/security.module";
+import {VaccinePriceManagementModule} from './vaccine-price-management/vaccine-price-management.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {SecurityModule} from "./security/security.module";
     BrowserModule,
     AppRoutingModule,
     VaccineModule,
-    SecurityModule
+    SecurityModule,
+    VaccinePriceManagementModule
 
   ],
   providers: [],
