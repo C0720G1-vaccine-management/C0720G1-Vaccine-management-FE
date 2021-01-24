@@ -123,7 +123,7 @@
                   class="text-danger">*</span></label>
               </div>
               <div class="col-8">
-                <input
+                <input (change)="checkPhoneDuplicate = false"
                   [class]="formRegister.get('phone').invalid && (formRegister.get('phone').touched || check )? 'border-danger' : ''"
                   formControlName="phone" id="phoneNumber" class="form-control" type="text"
                   placeholder="Nhập số điện thoại">
@@ -132,6 +132,14 @@
                    *ngIf="formRegister.get('phone').hasError('required') &&( formRegister.get('phone').touched || check)"
                    class="text-danger">
                  Số điện thoại không được để trống
+                </span>
+                  <span
+                    *ngIf="formRegister.get('phone').hasError('pattern') &&( formRegister.get('phone').touched || check)"
+                    class="text-danger">
+                 Số điện thoại không đúng định dạng
+                </span>
+                  <span *ngIf="checkPhoneDuplicate" class="text-danger">
+                 Số điện thoại đã tồn tại
                 </span>
                 </div>
               </div>
@@ -142,7 +150,7 @@
                   class="text-danger">*</span></label>
               </div>
               <div class="col-8">
-                <input (change)="check = false"
+                <input (change)="checkEmailDuplicate = false"
                   [class]="formRegister.get('email').invalid && (formRegister.get('email').touched || check )? 'border-danger' : ''"
                   formControlName="email" id="email" class="form-control" type="text" placeholder="abc@abc.abc">
                 <div style="height: 10px; font-size: 15px">
@@ -151,8 +159,13 @@
                    class="text-danger">
                  Email không được để trống
                 </span>
-                  <span *ngIf="check" class="text-danger">
+                  <span *ngIf="checkEmailDuplicate" class="text-danger">
                  Email đã tồn tại
+                </span>
+                  <span
+                    *ngIf="formRegister.get('email').hasError('pattern') &&( formRegister.get('email').touched || check)"
+                    class="text-danger">
+                 Email không đúng định dạng
                 </span>
                 </div>
               </div>
