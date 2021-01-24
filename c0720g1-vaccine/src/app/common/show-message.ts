@@ -14,7 +14,15 @@ export class ShowMessage {
   }
 
 
+  showMessageCreateError() {
+    this.toastr.error('Thêm mới thất bại', 'Thêm mới');
+  }
+
+
   showMessageNotFound() {
     this.toastr.warning('Không tìm thấy', 'Tìm kiếm');
   }
+
+
+
 }
