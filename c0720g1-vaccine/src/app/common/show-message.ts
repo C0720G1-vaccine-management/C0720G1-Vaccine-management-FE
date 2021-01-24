@@ -12,4 +12,9 @@ export class ShowMessage {
   showMessageCreateSuccessfully() {
     this.toastr.success('Thêm mới thành công', 'Thêm mới');
   }
+
+
+  showMessageNotFound() {
+    this.toastr.warning('Không tìm thấy', 'Tìm kiếm');
+  }
 }
