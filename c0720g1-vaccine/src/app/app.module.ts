@@ -8,6 +8,10 @@ import { FooterComponent } from './component/footer/footer.component';
 import {VaccineModule} from "./vaccine/vaccine.module";
 import {SecurityModule} from "./security/security.module";
 import {VaccinePriceManagementModule} from './vaccine-price-management/vaccine-price-management.module';
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {VaccinationByRequestModule} from "./vaccination-by-request/vaccination-by-request.module";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -18,10 +22,14 @@ import {VaccinePriceManagementModule} from './vaccine-price-management/vaccine-p
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     VaccineModule,
     SecurityModule,
-    VaccinePriceManagementModule
+    VaccinePriceManagementModule,
+    ToastrModule.forRoot(),
+    VaccinationByRequestModule,
+    HttpClientModule
 
   ],
   providers: [],

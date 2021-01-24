@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {VaccineService} from "../../service/vaccine.service";
+import {IVaccine} from "../../entity/IVaccine";
+import {ShowMessage} from "../../common/show-message";
 
 @Component({
   selector: 'app-vaccination-by-request-list',
@@ -7,9 +10,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VaccinationByRequestListComponent implements OnInit {
 
-  constructor() { }
+  public vaccineList: IVaccine[];
+
+  public name = '';
+
+  public vaccineTypename = '';
+
+  public origin = '';
+
+  public page = 0;
+
+  public pageable: any;
+
+  public status = "";
+
+  constructor(private vaccineService: VaccineService,
+              private showMessage: ShowMessage) {}
 
   ngOnInit(): void {
+    this.getListVaccine();
+  }
+
+
+  getListVaccine() {
+
+    if (!Number(this.page)) {
+      this.page = 0;
+    }
+
+    this.vaccineService.getListVaccine(this.page,this.name,this.vaccineTypename,this.origin, this.status).subscribe(data => {
+      console.log(data.length);
+      this.vaccineList = data.content;
+      this.pageable = data;
+      console.log(data);
+    }, error => {
+      this.showMessage.showMessageNotFound();
+      this.vaccineList = [];
+    });
   }
 
 }
