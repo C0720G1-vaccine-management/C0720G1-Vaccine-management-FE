@@ -4,7 +4,7 @@ import {VaccinePriceManagementComponent} from './vaccine-price-management/vaccin
 
 
 const routes: Routes = [
-  {path: 'storage', component: VaccinePriceManagementComponent}
+  {path: 'api/list-vaccine-price', component: VaccinePriceManagementComponent}
 ];
 
 @NgModule({
