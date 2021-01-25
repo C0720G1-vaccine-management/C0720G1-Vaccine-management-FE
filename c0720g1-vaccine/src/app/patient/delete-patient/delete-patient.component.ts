@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PatientService} from '../patient.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {PatientService} from "../../service/patient.service";
 
 @Component({
   selector: 'app-delete-patient',
@@ -13,17 +14,27 @@ export class DeletePatientComponent implements OnInit {
   deleteId: number;
   @Input()
   deleteName: string;
+
+  @Output()
+  deleteComplete = new EventEmitter<boolean>();
+
   constructor(
-    public patientService : PatientService,
-    public router: Router
-  ) { }
+    public patientService: PatientService,
+    public router: Router,
+    private toastr: ToastrService
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
   deletePatient() {
-this.patientService.deletePatient(this.deleteId).subscribe(data=>{
-  this.router.navigateByUrl('patient')
-})
+    this.patientService.deletePatient(this.deleteId).subscribe(data => {
+      console.log(this.deleteId);
+      console.log(data);
+      document.getElementById('closeModal').click();
+      this.deleteComplete.emit(true);
+    });
+    this.toastr.success('Xóa Thành Công !', 'Bệnh Nhân !');
   }
 }

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
+import {PatientModule} from './patient/patient.module';
 import {VaccineModule} from "./vaccine/vaccine.module";
 import {SecurityModule} from "./security/security.module";
 import {VaccinePriceManagementModule} from './vaccine-price-management/vaccine-price-management.module';
@@ -21,12 +22,12 @@ import {RegisteredForVaccinationModule} from "./registered-for-vaccination/regis
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
+    PatientModule,
     VaccineModule,
     SecurityModule,
     VaccinePriceManagementModule,
