@@ -1,62 +1,93 @@
-
 <div class="container mt-4">
-  <h2 align="center">CHỈNH SỬA THÔNG TIN NHÂN VIÊN</h2>
-  <form>
+  <h2 align="center">Chỉnh sửa thông tin nhân viên</h2>
+  <form [formGroup]="employeeFormEdit" (ngSubmit)="editEmployee()">
     <div class="form-row">
       <div class="form-group col-sm-6 col-md-6 col-lg-6">
         <label>Mã Nhân Viên:</label>
-        <input type="text" class="form-control" value="NV-001">
+        <input type="text" class="form-control" formControlName="employeeId" readonly>
       </div>
       <div class="form-group col-sm-6 col-md-6 col-lg-6">
         <label>Họ và tên:</label>
-        <input type="text" class="form-control" value="Nguyễn Văn A">
+        <div>
+          <input type="text" class="form-control" formControlName="name">
+        </div>
+        <small class="text-danger" *ngIf="employeeFormEdit.controls.name.errors?.required && employeeFormEdit.controls.name.touched">
+          Không được để trống!
+        </small>
+        <small class="text-danger"
+               *ngIf="employeeFormEdit.controls.name.errors?.pattern && employeeFormEdit.controls.name.touched"
+               class="text-danger">
+          Tên không được là số hoặc ký tự đặc biệt!
+        </small>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-sm-6 col-md-6 col-lg-6">
-        <label>Ngày tháng năm sinh:</label>
-        <input type="date" class="form-control" value="1995-12-12">
+        <label>Ngày sinh:</label>
+        <input
+          formControlName="dateOfBirth"
+          type="date" class="form-control">
+        <small class="text-danger" *ngIf="employeeFormEdit.get('dateOfBirth').hasError('ageNotEnough')
+      && employeeFormEdit.controls.dateOfBirth.touched">
+          Ngày sinh phải lớn hơn 18 và nhỏ hơn 100!
+        </small>
       </div>
       <div class="form-group col-sm-6 col-md-6 col-lg-6">
         <label>CMND:</label>
-        <input type="text" class="form-control" value="233092166">
+        <div>
+          <input type="text" class="form-control" formControlName="idCard">
+        </div>
+        <small class="text-danger" style="clear: both" *ngIf="employeeFormEdit.controls.idCard.errors?.required && employeeFormEdit.controls.idCard.touched" class="text-danger">
+          Không được để trống!
+        </small>
+        <small class="text-danger" style="clear: both" *ngIf="employeeFormEdit.controls.idCard.errors?.pattern && employeeFormEdit.controls.idCard.touched" class="text-danger">
+          CMND phải là 9 số!
+        </small>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-sm-6 col-md-6 col-lg-6">
         <label>Chức vụ:</label>
-        <select class="form-control">
-          <option>Trưởng phòng</option>
-          <option>Thủ kho</option>
-          <option>Bác sĩ</option>
-          <option>Điều dưỡng</option>
-          <option>Thu ngân</option>
+        <select class="form-control"
+                formControlName="position">
+          <option *ngFor="let position of positionList" [selected]="position.positionId == employee.position"
+                  [value]="position.positionId">{{position.name}}</option>
         </select>
       </div>
       <div class="form-group col-sm-6 col-md-6 col-lg-6">
         <label>Số điện thoại:</label>
-        <input type="text" class="form-control" value="0905973164">
+        <div>
+          <input type="text" class="form-control" formControlName="phone">
+        </div>
+        <small class="text-danger" *ngIf="employeeFormEdit.controls.phone.errors?.required && employeeFormEdit.controls.phone.touched" class="text-danger">
+          Không được để trống!
+        </small>
+        <small class="text-danger" *ngIf="employeeFormEdit.controls.phone.errors?.pattern && employeeFormEdit.controls.phone.touched" class="text-danger">
+          Không đúng định dạng!
+        </small>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-sm-6 col-md-6 col-lg-6">
         <label>Địa chỉ:</label>
-        <input type="text" class="form-control" value="Đà Nẵng">
+        <input type="text" class="form-control" formControlName="address">
+        <small class="text-danger" *ngIf="employeeFormEdit.controls.address.errors?.required && employeeFormEdit.controls.address.touched">
+          Không được để trống!
+        </small>
       </div>
       <div class="form-group col-sm-6 col-md-6 col-lg-6">
         <label>Quyền truy cập:</label>
-        <select class="form-control">
-          <option>Quản trị viên</option>
-          <option>Thủ kho</option>
-          <option>Bác sĩ</option>
-          <option>Điều DƯỡng</option>
-          <option>Thu ngân</option>
+        <select class="form-control"
+                formControlName="role">
+          <option *ngFor="let role of roleList" [selected]="role.roleId == employee.role"
+                  [value]="role.roleId">{{role.name}}</option>
         </select>
       </div>
     </div>
-    <div class="form-row d-flex justify-content-center">
-      <a href="#" class="btn btn-primary mr-2">Lưu</a>
-      <a href="show_employee.html" class="btn btn-secondary">Quay lại</a>
+    <div class="form-row d-flex justify-content-center mt-3">
+      <button type="submit" class="btn btn-primary mr-2"
+              [disabled]="employeeFormEdit.invalid">Lưu</button>
+      <a routerLink="/employee" class="btn btn-secondary">Quay lại</a>
     </div>
 
   </form>
