@@ -7,15 +7,19 @@
         <div class="search row d-flex justify-content-end mb-4 float-right ">
           <div class="col-xl-3 col-md-3 ">
             <label for="nameVaccine">Tên vắc-xin</label>
-            <input id="nameVaccine" class="form-control" type="text" placeholder="Nhập tên vắc-xin">
+            <input (change)="vaccineName = $event.target.value" id="nameVaccine" class="form-control" type="text"
+                   placeholder="Nhập tên vắc-xin">
           </div>
           <div class="col-xl-3 col-md-3 ">
             <label for="vaccinationDate">Ngày tiêm</label>
-            <input id="vaccinationDate" class="form-control " type="text" placeholder="Nhập ngày tiêm">
+            <input (change)="vaccinationDate = $event.target.value" id="vaccinationDate" class="form-control "
+                   type="date">
           </div>
           <div class="col-xl-2 col-4 width-search">
             <br>
-            <button class="btn btn-success mt-xl-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+            <button (click)="page = 0; getListVaccine()" class="btn btn-success mt-xl-2"><i class="fa fa-search"></i>
+              Tìm kiếm
+            </button>
           </div>
         </div>
       </div>
@@ -40,17 +44,17 @@
           </thead>
           <tbody>
           <tr *ngFor="let vaccinationHistory of vaccinationHistoryList, index as i">
-            <td scope="row">{{i+1}}</td>
-            <td>{{vaccinationHistory.patientName}}</td>
-            <td>{{vaccinationHistory.patientDateOfBirth}}</td>
-            <td>{{vaccinationHistory.patientGender}}</td>
-            <td>{{vaccinationHistory.patientAddress}}</td>
-            <td style="width: 200px">{{vaccinationHistory.vaccineName}}</td>
-            <td>{{vaccinationHistory.vaccineTypeName}}</td>
-            <td>{{vaccinationHistory.vaccinationDate}}</td>
-            <td>{{vaccinationHistory.vaccinationHistoryAfterStatus}}</td>
+            <td scope="row">{{i + 1}}</td>
+            <td>{{vaccinationHistory.patient.name}}</td>
+            <td>{{vaccinationHistory.patient.dateOfBirth}}</td>
+            <td>{{vaccinationHistory.patient.gender}}</td>
+            <td>{{vaccinationHistory.patient.address}}</td>
+            <td style="width: 200px">{{vaccinationHistory.vaccination.vaccine.name}}</td>
+            <td>{{vaccinationHistory.vaccination.vaccine.vaccineType.name}}</td>
+            <td>{{vaccinationHistory.vaccination.date}}</td>
+            <td>{{vaccinationHistory.preStatus}}</td>
             <td class="text-center">
-              <div *ngIf="vaccinationHistory.vaccinationHistoryAfterStatus === ''; else elseBlock ">
+              <div *ngIf="vaccinationHistory.preStatus === ''; else elseBlock ">
                 <span class="badge badge-danger">Chưa phản hồi<br> sau khi tiêm</span>
               </div>
               <ng-template #elseBlock>
@@ -60,12 +64,18 @@
               </ng-template>
             </td>
             <td class="text-center">
-              <div *ngIf="vaccinationHistory.vaccinationHistoryAfterStatus !== '' ; else elseBlock1 ">
-                <button type="button" class="btn btn-success with-button" [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Sửa</button>
+              <div *ngIf="vaccinationHistory.preStatus !== '' ; else elseBlock1 ">
+                <button type="button" class="btn btn-success with-button"
+                        [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Thêm
+                  phản hồi
+                </button>
               </div>
               <ng-template #elseBlock1>
                 <div>
-                  <button type="button" class="btn btn-info with-button" [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Phản hồi</button>
+                  <button type="button" class="btn btn-info with-button"
+                          [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Phản
+                    hồi
+                  </button>
                 </div>
               </ng-template>
             </td>
@@ -80,24 +90,36 @@
       <div class="col-12">
         <nav aria-label="Page navigation example">
           <ul class="pagination d-flex justify-content-md-end justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
-            <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
-            <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+            <li class="page-item">
+              <button class="page-link" [hidden]="page == 0" (click)="page = 0; getListVaccine()">Đầu</button>
+            </li>
+            <li class="page-item">
+              <button class="page-link" [hidden]="page == 0" (click)="page = page - 1; getListVaccine()">Trang sau
+              </button>
+            </li>
             <li class="page-item col-md-1 col-2  px-0">
-              <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
               <div class="input-group">
-                <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username"
+                <input #pageInput (change)="page = $event.target.value - 1" type="text"
+                       class="form-control text-right rounded-0" [placeholder]="page + 1" aria-label="Username"
                        aria-describedby="basic-addon1">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">/5</span>
+                  <span class="input-group-text" id="basic-addon1"> /{{pageable.totalPages}}</span>
                 </div>
               </div>
             </li>
             <li class="page-item">
-              <button class="btn btn-primary rounded-0">Đi</button>
+              <button (click)="getListVaccine()" class="btn btn-primary rounded-0">Đi</button>
             </li>
-            <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
-            <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+            <li class="page-item">
+              <button class="page-link" [hidden]="page >=  pageable.totalPages - 1"
+                      (click)="page = page + 1; getListVaccine()">Trang kế
+              </button>
+            </li>
+            <li class="page-item">
+              <button class="page-link" [hidden]="page >=  pageable.totalPages - 1 && page < pageable.totalPages"
+                      (click)="page = pageable.totalPages - 1; getListVaccine()">Cuối
+              </button>
+            </li>
           </ul>
         </nav>
       </div>
