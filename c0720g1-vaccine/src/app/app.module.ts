@@ -13,6 +13,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {VaccinationByRequestModule} from "./vaccination-by-request/vaccination-by-request.module";
 import {HttpClientModule} from "@angular/common/http";
 import {PeriodicalVaccinationModule} from "./periodical-vaccination/periodical-vaccination.module";
+import {RegisteredForVaccinationRoutingModule} from "./registered-for-vaccination/registered-for-vaccination-routing.module";
+import {RegisteredForVaccinationModule} from "./registered-for-vaccination/registered-for-vaccination.module";
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import {PeriodicalVaccinationModule} from "./periodical-vaccination/periodical-v
     VaccinationByRequestModule,
     HttpClientModule,
     PeriodicalVaccinationModule,
+    RegisteredForVaccinationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
