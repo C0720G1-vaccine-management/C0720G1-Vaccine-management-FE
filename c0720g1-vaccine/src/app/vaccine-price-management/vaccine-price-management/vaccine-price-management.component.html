@@ -9,19 +9,19 @@
       <div class="col-lg-2 col-md-3">
       </div>
       <div class="col-lg-2 col-md-3">
-        <label for="">Mã Vắc Xin</label>
+        <label>Mã Vắc Xin</label>
         <input class="form-control" type="text" placeholder="Nhập mã vắc-xin">
       </div>
       <div class="col-lg-2 col-md-3">
-        <label for="">Loại vắc-xin</label>
-        <select class="form-control" name="">
-          <option value="">Lựa chọn...</option>
+        <label>Loại vắc-xin</label>
+        <select  class="form-control" name="">
+          <option *ngFor="let vaccine of exports">{{vaccine.storage.vaccine.vaccineType.name}}</option>
         </select>
       </div>
       <div class="col-lg-2 col-md-3">
-        <label for="">Nước sản xuất</label>
-        <select class="form-control" name="">
-          <option value="">Lựa chọn...</option>
+        <label>Nước sản xuất</label>
+        <select  class="form-control" name="">
+          <option *ngFor="let vaccine of exports">{{vaccine.storage.vaccine.origin}}</option>
         </select>
       </div>
       <div class="col-md-2 mt-2">
@@ -37,6 +37,7 @@
         <thead>
         <tr class="text-center bg-table-header">
           <th>STT</th>
+          <th>Mã vắc-xin</th>
           <th>Tên vắc-xin</th>
           <th>Loại vắc-xin</th>
           <th>Nước sản xuất</th>
@@ -47,14 +48,15 @@
         </thead>
         <tbody *ngFor="let vaccine of exports ,index as i">
         <tr>
-          <td >{{i+1}}</td>
+          <td>{{i+1}}</td>
+          <td>MVC-{{vaccine.storage.vaccine.vaccineId}}</td>
           <td>{{vaccine.storage.vaccine.name}}</td>
           <td>{{vaccine.storage.vaccine.vaccineType.name}}</td>
           <td>{{vaccine.storage.vaccine.origin}}</td>
           <td>{{vaccine.storage.vaccine.age}}</td>
           <td style="text-align: right">{{vaccine.price}}</td>
           <td style="text-align: center">
-            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+            <button [routerLink]="['/vaccine-price-edit/'+vaccine.importAndExportId]" class="btn btn-primary"><i class="fa fa-edit"></i></button>
           </td>
         </tr>
         </tbody>
