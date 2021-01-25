@@ -49,10 +49,15 @@
             <i class="fa fa-user"></i>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarUser">
-            <li><a class="dropdown-item" href="#">Đăng ký</a></li>
-            <li><a class="dropdown-item" href="#">Đăng nhập</a></li>
+            <div *ngIf="isLoggedIn then logged else notLogged"></div>
+            <ng-template #logged>
+              <li><a class="dropdown-item" (click)="logOut()" >Đăng xuất</a></li>
+            </ng-template>
+            <ng-template #notLogged>
+              <li><a class="dropdown-item" routerLink="register">Đăng ký</a></li>
+              <li><a class="dropdown-item" routerLink="login">Đăng nhập</a></li>
+            </ng-template>
             <li>
-              <hr class="dropdown-divider">
             </li>
           </ul>
         </div>
