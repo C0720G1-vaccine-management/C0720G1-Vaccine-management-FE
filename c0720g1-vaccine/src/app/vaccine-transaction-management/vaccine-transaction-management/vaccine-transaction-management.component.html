@@ -7,13 +7,13 @@
       <div class="col-lg-4 col-md-3">
       </div>
       <div class="col-xl-2 col-md-3">
-        <label for="">Tên Khách Hàng</label>
+        <label>Tên Khách Hàng</label>
         <input class="form-control" type="text" placeholder="Nhập Tên khách hàng">
       </div>
       <div class="col-xl-2 col-md-3">
-        <label for="">Loại vắc-xin</label>
+        <label >Loại vắc-xin</label>
         <select class="form-control" name="">
-          <option value="">Lựa chọn...</option>
+          <option value=""></option>
         </select>
       </div>
       <div class="col-md-2 mt-2">
@@ -40,81 +40,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>1</td>
-          <td>GDK-0001</td>
-          <td>MVX-0001</td>
-          <td>BCG</td>
-          <td style="text-align: right">10</td>
-          <td>BN-001</td>
-          <td>Nguyễn Văn A</td>
-          <td style="text-align: center">11/11/2017</td>
-          <td style="text-align: right">50,000</td>
-          <td style="text-align: right">500,000</td>
-          <td style="text-align: center">
-            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>GDK-0002</td>
-          <td>MVX-0002</td>
-          <td>ENGERIX B</td>
-          <td style="text-align: right">10</td>
-          <td>BN-002</td>
-          <td>Nguyễn Văn B</td>
-          <td style="text-align: center">11/11/2017</td>
-          <td style="text-align: right">50,000</td>
-          <td style="text-align: right">500,000</td>
-          <td style="text-align: center" >
-            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>GDK-0003</td>
-          <td>MVX-0003</td>
-          <td>TETTAVAX</td>
-          <td style="text-align: right">10</td>
-          <td>BN-003</td>
-          <td>Nguyễn Văn C</td>
-          <td style="text-align: center">11/11/2017</td>
-          <td style="text-align: right">50,000</td>
-          <td style="text-align: right">500,000</td>
-          <td style="text-align: center">
-            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>GDK-0004</td>
-          <td>MVX-0004</td>
-          <td>TETTAVAX</td>
-          <td style="text-align: right">10</td>
-          <td>BN-004</td>
-          <td>Nguyễn Văn D</td>
-          <td style="text-align: center">11/11/2017</td>
-          <td style="text-align: right">50,000</td>
-          <td style="text-align: right">500,000</td>
-          <td style="text-align: center">
-            <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-            <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>GDK-0005</td>
-          <td>MVX-0005</td>
-          <td>TRIMOVAC</td>
-          <td style="text-align: right">10</td>
-          <td>BN-005</td>
-          <td>Nguyễn Văn E</td>
-          <td style="text-align: center">11/11/2017</td>
-          <td style="text-align: right" >50,000</td>
-          <td style="text-align: right">500,000</td>
+        <tr *ngFor="let item of vaccineTransaction,index as i">
+          <td>{{i+1}}</td>
+          <td>{{vaccineTransaction.vaccinationTransactionId}}</td>
+          <td>{{vaccineTransaction.vaccinationHistory.vaccination.vaccine.vaccineId}}</td>
+          <td>{{vaccineTransaction.vaccinationHistory.vaccination.vaccine.vaccineType.name}}</td>
+          <td style="text-align: right">{{vaccineTransaction.quantity}}</td>
+          <td>{{vaccineTransaction.vaccinationHistory.patient.patientId}}</td>
+          <td>{{vaccineTransaction.vaccinationHistory.patient.name}}</td>
+          <td style="text-align: center">{{vaccineTransaction.vaccinationHistory.vaccination.date}}</td>
+          <td style="text-align: right">{{vaccineTransaction.price}}</td>
+          <td style="text-align: right">{{vaccineTransaction.price}}</td>
           <td style="text-align: center">
             <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
             <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>

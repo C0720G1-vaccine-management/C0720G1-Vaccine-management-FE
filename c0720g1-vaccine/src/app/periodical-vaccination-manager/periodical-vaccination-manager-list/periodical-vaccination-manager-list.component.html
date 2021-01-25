@@ -1,46 +1,59 @@
 <div class="container col-11">
   <h1 class="text-center mt-4 mb-4">XEM LỊCH TIÊM CHỦNG ĐỊNH KỲ</h1>
-  <div class="search row d-flex justify-content-end mb-4 text-center">
+  <form [formGroup]="formGroup" >
+    <div class="search row d-flex justify-content-end mb-4 text-center">
 
-    <div class="col-auto">
-      <label>Ngày Tiêm: </label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">Từ</div>
+      <div class="form-group col-auto">
+        <label>Ngày Tiêm:<span class="search">*</span></label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="start">Từ</span>
+          </div>
+          <input formControlName="startDateInput" type="date" class="form-control" (change)="startDate = $event.target.value" aria-describedby="start">
         </div>
-        <input type="date" class="form-control">
-      </div>
-    </div>
-    <div class="col-auto">
-      <br>
-      <div class="input-group mt-xl-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text">Đến</div>
+        <div class="error-place">
+          <small *ngIf="formGroup.errors?.dateSearchValid" class="text-danger">Ngày bắt đầu nhỏ hơn ngày kết thúc</small>
         </div>
-        <input type="date" class="form-control">
       </div>
-    </div>
-    <div class="col-auto">
-      <label>Tên vắc-xin</label>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Nhập tên vắc-xin">
+      <div class="form-group col-auto">
+        <label></label>
+        <div class="input-group mb-3 mt-xl-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="end">Đến</span>
+          </div>
+          <input formControlName="endDateInput" type="date" class="form-control" (change)="endDate = $event.target.value" aria-describedby="end">
+        </div>
+        <div class="error-place">
+          <small *ngIf="formGroup.errors?.dateSearchValid" class="text-danger">Ngày bắt đầu nhỏ hơn ngày kết thúc</small>
+        </div>
       </div>
+
+      <div class="form-group col-auto">
+        <label>Tên vắc-xin</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Nhập tên vắc-xin" (change)="name = $event.target.value">
+        </div>
+      </div>
+      <div class="form-group col-auto">
+        <label>Trạng thái</label>
+        <select class="custom-select" (change)="status = $event.target.value">
+          <option selected>Chọn trạng thái...</option>
+          <option value="1">Đã thực hiện</option>
+          <option value="0">Chưa thực hiện</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <br>
+        <button type="submit" class="btn btn-success mt-xl-2 mr-2" [disabled]="formGroup.invalid" (click)="searchDateAndNameOrStatus(0, 1)">
+          <i class="bi bi-search"></i> Tìm kiếm
+        </button>
+        <button type="reset" class="btn btn-success mt-xl-2" (click)="getAllVaccinationManager(0,1)">
+          <i class="bi bi-backspace"></i>Quay lại danh sách
+        </button>
+      </div>
+
     </div>
-    <div class="col-auto">
-      <label>Trạng thái</label>
-      <select class="custom-select">
-        <option selected>Chọn trạng thái...</option>
-        <option value="1">Đã thực hiện</option>
-        <option value="2">Chưa thực hiện</option>
-      </select>
-    </div>
-    <div class="col-auto">
-      <br>
-      <button type="submit" class="btn btn-success mt-xl-2">
-        <i class="bi bi-search"></i> Tìm kiếm
-      </button>
-    </div>
-  </div>
+  </form>
 </div>
 
 <div class="container col-11 mt-5 ">
@@ -66,95 +79,109 @@
       <th>DS tiêm</th>
     </tr>
     </thead>
-    <tbody>
-    <tr *ngFor="let vaccinationManager of vaccinations, index as i">
-      <td>{{i+1}}</td>
-      <td> {{getCode(vaccinationManager.vaccinationId, 3)}}</td>
-      <td>{{vaccinationManager.startTime}} - {{vaccinationManager.endTime}}</td>
-      <td>{{vaccinationManager.date | date: 'dd/MM/yyyy'}}</td>
-      <td>{{vaccinationManager.location.name }}</td>
-      <td>{{vaccinationManager.vaccine.name | slice: 0: 30}}</td>
-      <td>{{vaccinationManager.vaccine.vaccineType.name}}</td>
-      <td>{{vaccinationManager.vaccine.age}}</td>
-      <td>
+    <tbody *ngIf="listVaccination.content.length > 0">
+    <tr *ngFor="let vaccinationManager of listVaccination.content, index as i">
+      <td  >{{i + 1}}</td>
+      <td  > {{getCode(vaccinationManager.vaccinationId, 3)}}</td>
+      <td >{{vaccinationManager.startTime | slice: 0: 5}} - {{vaccinationManager.endTime | slice: 0: 5}}</td>
+      <td >{{vaccinationManager.date | date: 'dd/MM/yyyy'}}</td>
+      <td >{{vaccinationManager.location.name }}</td>
+      <td ><a data-toggle="tooltip" data-placement="right"
+             title="{{vaccinationManager.vaccine.name }}">{{getShortNameVaccine(vaccinationManager.vaccine.name, 20) }}</a>
+      </td>
+      <td >{{vaccinationManager.vaccine.vaccineType.name}}</td>
+      <td >{{vaccinationManager.vaccine.age}}</td>
+      <td  >
         <div *ngIf="vaccinationManager.status; else noStatus">
           Đã thực hiện.
         </div>
         <ng-template #noStatus>Chưa thực hiện</ng-template>
       </td>
-      <td>{{vaccinationManager.description}}</td>
+      <td >{{vaccinationManager.description | titlecase}}</td>
       <td class="action">
-        <a routerLink="/periodical-vaccination-manager/:idPeriodicalVaccinationManager/edit">
-          <button class="btn btn-warning mr-3">
+        <a data-toggle="tooltip" data-placement="right"
+           title="Cập nhập lịch tiêm ngày {{vaccinationManager.date | date: 'dd/MM/yyyy'}}">
+          <button type="button" class="btn btn-warning mr-3" [disabled]="vaccinationManager.status"
+                  [routerLink]="['/periodical-vaccination-manager/',vaccinationManager.vaccinationId, 'edit']">
             <i class="fa fa-edit"></i>
           </button>
         </a>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-          <i class="fa fa-trash"></i>
-        </button>
+
+        <a data-toggle="tooltip" data-placement="right"
+           title="Cập nhập trạng thái lịch tiêm ngày {{vaccinationManager.date | date: 'dd/MM/yyyy'}}">
+          <button type="button" class="btn btn-success mr-3" [disabled]="vaccinationManager.status"
+                  data-toggle="modal" data-target="#updateModal"
+                  (click)="getContentVaccination(vaccinationManager.vaccinationId, vaccinationManager.date,
+                  vaccinationManager.location.name, vaccinationManager.vaccine.name, vaccinationManager.vaccine.vaccineType.name)">
+            <i class="far fa-check-square"></i>
+          </button>
+        </a>
+        <a data-toggle="tooltip" data-placement="right"
+           title="Xóa lịch tiêm ngày {{vaccinationManager.date | date: 'dd/MM/yyyy'}}">
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                  (click)="getContentVaccination(vaccinationManager.vaccinationId, vaccinationManager.date,
+                  vaccinationManager.location.name, vaccinationManager.vaccine.name, vaccinationManager.vaccine.vaccineType.name)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </a>
       </td>
       <td class="action">
-        <button class="btn btn-primary">
-          <i class="fa fa-list"></i>
-        </button>
+        <a data-toggle="tooltip" data-placement="right"
+           title="Danh sách ngày {{vaccinationManager.date | date: 'dd/MM/yyyy'}}">
+          <button class="btn btn-primary">
+            <i class="fa fa-list"></i>
+          </button>
+        </a>
       </td>
     </tr>
-
-<!--    <tr>-->
-<!--      <td>1</td>-->
-<!--      <td>LTC-0001</td>-->
-<!--      <td>07:00 - 11:20</td>-->
-<!--      <td>12/02/2015</td>-->
-<!--      <td>TTYT Hòa Quý - Ngũ Hành Sơn</td>-->
-<!--      <td>Viêm não Nhật Bản</td>-->
-<!--      <td>Viêm não Nhật Bản</td>-->
-<!--      <td>< 2 tuổi</td>-->
-<!--      <td>Đã Thực Hiện</td>-->
-<!--      <td>Miễn Phí</td>-->
-<!--      <td class="action">-->
-<!--        <a routerLink="/periodical-vaccination-manager/:idPeriodicalVaccinationManager/edit">-->
-<!--          <button class="btn btn-warning mr-3">-->
-<!--            <i class="fa fa-edit"></i>-->
-<!--          </button>-->
-<!--        </a>-->
-<!--        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">-->
-<!--          <i class="fa fa-trash"></i>-->
-<!--        </button>-->
-<!--      </td>-->
-<!--      <td class="action">-->
-<!--        <button class="btn btn-primary">-->
-<!--          <i class="fa fa-list"></i>-->
-<!--        </button>-->
-<!--      </td>-->
-<!--    </tr>-->
     </tbody>
   </table>
+
+
   <nav aria-label="Page navigation example">
     <ul class="pagination d-flex justify-content-md-end justify-content-center">
-      <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
-      <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
-      <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+      <li class="page-item">
+        <button class="page-link" [hidden]="listVaccination.pageable.pageNumber === 0"
+                (click)="searchDateAndNameOrStatus(0,1)">
+          Đầu
+        </button>
+      </li>
+      <li class="page-item">
+        <button class="page-link" [hidden]="listVaccination.pageable.pageNumber == 0"
+                (click)="searchDateAndNameOrStatus(listVaccination.pageable.pageNumber - 1,1)">Trang
+          sau
+        </button>
+      </li>
       <li class="page-item col-md-1 col-2  px-0">
-        <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
         <div class="input-group">
-          <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username"
-                 aria-describedby="basic-addon1">
+          <input #ok type="number" min="1" max="{{listVaccination.totalPages}}"
+                 class="form-control text-right rounded-0" [value]="listVaccination.pageable.pageNumber + 1">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">/5</span>
+            <span class="input-group-text" id="basic-addon1"> /{{listVaccination.totalPages}}</span>
           </div>
         </div>
       </li>
       <li class="page-item">
-        <button class="btn btn-primary rounded-0">Đi</button>
+        <button (click)="searchDateAndNameOrStatus(ok.value - 1,1)" class="btn btn-primary rounded-0">Đi</button>
       </li>
-      <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
-      <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+      <li class="page-item">
+        <button class="page-link" [hidden]="listVaccination.pageable.pageNumber >=  listVaccination.totalPages - 1"
+                (click)="searchDateAndNameOrStatus(listVaccination.pageable.pageNumber + 1,1)">Trang kế
+        </button>
+      </li>
+      <li class="page-item">
+        <button class="page-link"
+                [hidden]="listVaccination.pageable.pageNumber >=  listVaccination.totalPages - 1 && listVaccination.pageable.pageNumber < listVaccination.totalPages"
+                (click)="listVaccination.pageable.pageNumber = listVaccination.totalPages - 1; searchDateAndNameOrStatus(listVaccination.totalPages -1,1)">
+          Cuối
+        </button>
+      </li>
     </ul>
   </nav>
-
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -164,13 +191,75 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Bạn đang muốn xóa thông tin về lịch tiêm chủng định kỳ</p>
-        <p>Thông tin này khi bị xóa thì sẽ không thể quay lại</p>
+        <p>Bạn có muốn xóa thông tin về lịch tiêm chủng định kỳ này không?</p>
+        <p>Thông tin này khi bị xóa thì sẽ không thể hoàn lại ban đầu!!!</p>
+        <hr>
+        <p>Thông tin lịch tiêm chủng muốn xóa:</p>
+        <table class="table table-hover table-bordered">
+          <tr>
+            <th>Ngày tiêm:</th>
+            <td>{{dateVaccination}}</td>
+          </tr>
+          <tr>
+            <th>Địa điểm:</th>
+            <td>{{locationName}}</td>
+          </tr>
+          <tr>
+            <th>Loại vắc-xin:</th>
+            <td>{{vaccineTypeName}}</td>
+          </tr>
+          <tr>
+            <th>Tên vắc-xin:</th>
+            <td>{{vaccineName}}</td>
+          </tr>
+        </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Đồng ý</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="getMessageDelete()">Hủy</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteVaccinationManager()">Đồng ý
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Cập nhật lịch tiêm chủng định kỳ đã hoàn thành</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có muốn cập thông tin về lịch tiêm chủng định kỳ này không?</p>
+        <hr>
+        <p>Thông tin lịch tiêm chủng muốn cập nhập:</p>
+        <table class="table table-hover table-bordered">
+          <tr>
+            <th>Ngày tiêm:</th>
+            <td>{{dateVaccination}}</td>
+          </tr>
+          <tr>
+            <th>Địa điểm:</th>
+            <td>{{locationName}}</td>
+          </tr>
+          <tr>
+            <th>Loại vắc-xin:</th>
+            <td>{{vaccineTypeName}}</td>
+          </tr>
+          <tr>
+            <th>Tên vắc-xin:</th>
+            <td>{{vaccineName}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="getMessageUpdate()">Hủy</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="updateVaccinationStatusManager()">Đồng ý
+        </button>
       </div>
     </div>
   </div>

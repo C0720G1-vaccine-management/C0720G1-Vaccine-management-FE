@@ -34,9 +34,12 @@ export class VaccinationByRequestListComponent implements OnInit {
 
   getListVaccine() {
 
-    if (!Number(this.page)) {
+    if (!Number(this.page) || Number(this.page) < 0) {
       this.page = 0;
     }
+
+
+
 
     this.vaccineService.getListVaccine(this.page,this.name,this.vaccineTypename,this.origin, this.status).subscribe(data => {
       console.log(data.length);
