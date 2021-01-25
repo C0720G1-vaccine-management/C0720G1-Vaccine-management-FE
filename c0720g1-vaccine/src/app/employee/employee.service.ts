@@ -24,6 +24,9 @@ export class EmployeeService {
   getAllEmployee(): Observable<IEmployeeDTO[]>{
     return this.http.get<IEmployeeDTO[]>(this.API_EMPLOYEE + '/list-employee');
   }
+  searchEmployeeByName(name: string): Observable<any> {
+    return this.http.get<any>(this.API_EMPLOYEE + '/list-employee?nameSearch=' + name );
+  }
   editEmployee(employee): Observable<IEmployeeRoleDTO>{
     return this.http.put<IEmployeeRoleDTO>(this.API_EMPLOYEE + '/edit-employee/' , employee);
   }

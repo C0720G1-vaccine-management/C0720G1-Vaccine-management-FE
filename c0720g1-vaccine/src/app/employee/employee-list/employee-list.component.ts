@@ -17,6 +17,10 @@ export class EmployeeListComponent implements OnInit {
   roleList: IRole[];
   private sub: Subscription;
 
+
+
+  public name = '';
+
   constructor(
     private employeeService : EmployeeService,
     private alertService: AlertService
@@ -51,4 +55,10 @@ export class EmployeeListComponent implements OnInit {
       });
   }
 
+  search() {
+    this.employeeService.searchEmployeeByName(this.name).toPromise().then(r => {
+      this.employeeList = r;
+      console.log(this.employeeList);
+    });
+  }
 }
