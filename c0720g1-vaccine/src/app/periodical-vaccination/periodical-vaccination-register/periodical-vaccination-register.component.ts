@@ -39,6 +39,8 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
       const id = paraMap.get('id');
       this.vaccinationService.getById(id).subscribe( (data: IPeriodicalVaccinationDTO) => {
         this.periodicalVaccination = data;
+        console.log(data);
+        console.log(this.periodicalVaccination)
       })
     })
   }
@@ -50,7 +52,7 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
     },() => {
       this.errorMessage = 'Đăng ký thất bại, vui lòng xem lại các thông tin'
     }, () => {
-      this.showMessage.showMessageRegisterSuccessfully()
+      this.showMessage.showMessageRegisterSuccessfully();
       this.router.navigateByUrl('periodical-vaccination/list')
     });
   }
