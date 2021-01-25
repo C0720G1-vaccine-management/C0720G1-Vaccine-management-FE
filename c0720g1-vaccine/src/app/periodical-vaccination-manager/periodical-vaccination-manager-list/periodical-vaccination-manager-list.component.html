@@ -1,0 +1,177 @@
+<div class="container col-11">
+  <h1 class="text-center mt-4 mb-4">XEM LỊCH TIÊM CHỦNG ĐỊNH KỲ</h1>
+  <div class="search row d-flex justify-content-end mb-4 text-center">
+
+    <div class="col-auto">
+      <label>Ngày Tiêm: </label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Từ</div>
+        </div>
+        <input type="date" class="form-control">
+      </div>
+    </div>
+    <div class="col-auto">
+      <br>
+      <div class="input-group mt-xl-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Đến</div>
+        </div>
+        <input type="date" class="form-control">
+      </div>
+    </div>
+    <div class="col-auto">
+      <label>Tên vắc-xin</label>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Nhập tên vắc-xin">
+      </div>
+    </div>
+    <div class="col-auto">
+      <label>Trạng thái</label>
+      <select class="custom-select">
+        <option selected>Chọn trạng thái...</option>
+        <option value="1">Đã thực hiện</option>
+        <option value="2">Chưa thực hiện</option>
+      </select>
+    </div>
+    <div class="col-auto">
+      <br>
+      <button type="submit" class="btn btn-success mt-xl-2">
+        <i class="bi bi-search"></i> Tìm kiếm
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container col-11 mt-5 ">
+  <div style="text-align: left">
+    <a routerLink="/periodical-vaccination-manager/create">
+      <button class="btn btn-success mt-2 mb-md-3"><i class="fa fa-plus"></i> Thêm mới</button>
+    </a>
+  </div>
+  <table class="table table-hover table-bordered">
+    <thead>
+    <tr class="table-primary" style="text-align: center">
+      <th>STT</th>
+      <th>Mã Lịch Tiêm</th>
+      <th>Thời Gian</th>
+      <th>Ngày Tiêm</th>
+      <th>Địa điểm</th>
+      <th>Tên Vắc-xin</th>
+      <th>Loại Vắc-xin</th>
+      <th>Đối tượng được tiêm</th>
+      <th>Trạng Thái</th>
+      <th>Ghi Chú</th>
+      <th>Chức năng</th>
+      <th>DS tiêm</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let vaccinationManager of vaccinations, index as i">
+      <td>{{i+1}}</td>
+      <td> {{getCode(vaccinationManager.vaccinationId, 3)}}</td>
+      <td>{{vaccinationManager.startTime}} - {{vaccinationManager.endTime}}</td>
+      <td>{{vaccinationManager.date | date: 'dd/MM/yyyy'}}</td>
+      <td>{{vaccinationManager.location.name }}</td>
+      <td>{{vaccinationManager.vaccine.name | slice: 0: 30}}</td>
+      <td>{{vaccinationManager.vaccine.vaccineType.name}}</td>
+      <td>{{vaccinationManager.vaccine.age}}</td>
+      <td>
+        <div *ngIf="vaccinationManager.status; else noStatus">
+          Đã thực hiện.
+        </div>
+        <ng-template #noStatus>Chưa thực hiện</ng-template>
+      </td>
+      <td>{{vaccinationManager.description}}</td>
+      <td class="action">
+        <a routerLink="/periodical-vaccination-manager/:idPeriodicalVaccinationManager/edit">
+          <button class="btn btn-warning mr-3">
+            <i class="fa fa-edit"></i>
+          </button>
+        </a>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+      <td class="action">
+        <button class="btn btn-primary">
+          <i class="fa fa-list"></i>
+        </button>
+      </td>
+    </tr>
+
+<!--    <tr>-->
+<!--      <td>1</td>-->
+<!--      <td>LTC-0001</td>-->
+<!--      <td>07:00 - 11:20</td>-->
+<!--      <td>12/02/2015</td>-->
+<!--      <td>TTYT Hòa Quý - Ngũ Hành Sơn</td>-->
+<!--      <td>Viêm não Nhật Bản</td>-->
+<!--      <td>Viêm não Nhật Bản</td>-->
+<!--      <td>< 2 tuổi</td>-->
+<!--      <td>Đã Thực Hiện</td>-->
+<!--      <td>Miễn Phí</td>-->
+<!--      <td class="action">-->
+<!--        <a routerLink="/periodical-vaccination-manager/:idPeriodicalVaccinationManager/edit">-->
+<!--          <button class="btn btn-warning mr-3">-->
+<!--            <i class="fa fa-edit"></i>-->
+<!--          </button>-->
+<!--        </a>-->
+<!--        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">-->
+<!--          <i class="fa fa-trash"></i>-->
+<!--        </button>-->
+<!--      </td>-->
+<!--      <td class="action">-->
+<!--        <button class="btn btn-primary">-->
+<!--          <i class="fa fa-list"></i>-->
+<!--        </button>-->
+<!--      </td>-->
+<!--    </tr>-->
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination d-flex justify-content-md-end justify-content-center">
+      <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
+      <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+      <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+      <li class="page-item col-md-1 col-2  px-0">
+        <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
+        <div class="input-group">
+          <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username"
+                 aria-describedby="basic-addon1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">/5</span>
+          </div>
+        </div>
+      </li>
+      <li class="page-item">
+        <button class="btn btn-primary rounded-0">Đi</button>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
+      <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+    </ul>
+  </nav>
+
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Xóa lịch tiêm chủng định kỳ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn đang muốn xóa thông tin về lịch tiêm chủng định kỳ</p>
+        <p>Thông tin này khi bị xóa thì sẽ không thể quay lại</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Đồng ý</button>
+
+      </div>
+    </div>
+  </div>
+</div>

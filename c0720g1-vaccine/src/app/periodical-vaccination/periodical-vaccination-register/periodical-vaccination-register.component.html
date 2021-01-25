@@ -1,0 +1,154 @@
+<div class="content">
+  <div class="container">
+    <h1 class="text-center mt-4 mb-4">Đăng ký tiêm phòng định kỳ theo lịch của trung tâm</h1>
+    <H2 class="text-danger text-center" *ngIf="errorMessage">{{errorMessage}}</H2>
+    <br><br>
+    <hr>
+    <form [formGroup]="patientForm" (ngSubmit)="submitVaccinationRegister()" novalidate>
+      <div class="row justify-content-center">
+
+        <div class="col-xl-6">
+          <div class="container">
+            <h3 class="mb-4">Thông tin bệnh nhân</h3>
+            <div class="row mb-3 ">
+              <div class="col-4">
+                <label for="name" class="col-form-label">Họ và tên <span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input id="name" formControlName="name" class="form-control" type="text" placeholder="Nhập họ và tên bệnh nhân">
+                <small class="text-danger" *ngIf="patientForm.get('name').hasError('required') && patientForm.get('name').touched">Vui lòng nhập tên</small>
+                <small class="text-danger" *ngIf="patientForm.get('name').hasError('pattern') && patientForm.get('name').touched">Tên không đúng định dạng</small>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label class="col-form-label">Giới tính <span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8 row">
+                <div class="col-4 align-bottom" >
+                  <input name="gender" id="nam" formControlName="gender" type="radio" value="Nam">
+                  <label for="nam" class="content-checkbox">Nam</label>
+                </div>
+                <div class="col-4 align-bottom">
+                  <input name="gender" id="nu" formControlName="gender" type="radio" value="Nữ">
+                  <label for="nu">Nữ</label>
+                </div>
+                <small class="text-danger" *ngIf="patientForm.get('gender').hasError('required') && patientForm.get('gender').touched">Vui lòng chọn giới tính</small>
+                <small class="text-danger" *ngIf="patientForm.get('gender').hasError('pattern') && patientForm.get('gender').touched">Giới tính phải là nam hoặc nữ</small>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label for="dateOfBirth" class="col-form-label">Ngày sinh <span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input id="dateOfBirth" formControlName="dateOfBirth" class="form-control" type="date">
+                <small class="text-danger" *ngIf="patientForm.get('dateOfBirth').hasError('required') && patientForm.get('dateOfBirth').touched">Vui lòng chọn ngày sinh</small>
+                <small class="text-danger" *ngIf="patientForm.get('dateOfBirth').hasError('pattern') && patientForm.get('dateOfBirth').touched">Ngày sinh không đúng định dạng</small>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label for="guardian" class="col-form-label">Người giám hộ <span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input id="guardian" formControlName="guardian" class="form-control" type="text" placeholder="Nhập họ và tên người giám hộ">
+                <small class="text-danger" *ngIf="patientForm.get('guardian').hasError('required') && patientForm.get('guardian').touched">Vui lòng nhập tên người giám hộ</small>
+                <small class="text-danger" *ngIf="patientForm.get('guardian').hasError('pattern') && patientForm.get('guardian').touched">Tên người giám hộ không đúng định dạng</small>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label for="address" class="col-form-label">Địa chỉ <span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input id="address" class="form-control" formControlName="address" type="text" placeholder="Nhập địa chỉ">
+                <small class="text-danger" *ngIf="patientForm.get('address').hasError('required') && patientForm.get('address').touched">Vui lòng nhập địa chỉ</small>
+                <small class="text-danger" *ngIf="patientForm.get('address').hasError('maxLength') && patientForm.get('address').touched">Địa chỉ quá dài</small>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label for="phoneNumber" class="col-form-label">Số điện thoại <span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input id="phoneNumber" formControlName="phone" class="form-control" type="text" placeholder="Nhập số điện thoại">
+                <small class="text-danger" *ngIf="patientForm.get('phone').hasError('required') && patientForm.get('phone').touched">Vui lòng nhập số điện thoại</small>
+                <small class="text-danger" *ngIf="patientForm.get('phone').hasError('pattern') && patientForm.get('phone').touched">
+                  Số điện thoại ko đúng (vd: 012345678 hoặc (+84)12345678)</small>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-4">
+                <label for="email" class="col-form-label">Email <span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input id="email" class="form-control" formControlName="email" type="email" placeholder="Nhập email">
+                <small class="text-danger" *ngIf="patientForm.get('email').hasError('required') && patientForm.get('email').touched">
+                  Vui lòng nhập email</small>
+                <small class="text-danger" *ngIf="patientForm.get('email').hasError('email') && patientForm.get('email').touched">
+                  Email không đúng định dạng</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 border-left" >
+          <div class="container">
+            <h3 class="mb-4">Thông tin tiêm chủng định kỳ</h3>
+
+            <div class="row mb-3 ">
+              <div class="col-4">
+                <label class="col-form-label">Tên vắc xin</label>
+              </div>
+              <div class="col-8">
+                <input [value]='this.periodicalVaccination.vaccineName' class="form-control" type="text" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label class="col-form-label">Loại vắc-xin</label>
+              </div>
+              <div class="col-8">
+                <input [value]='this.periodicalVaccination.vaccineTypeName' class="form-control" type="text" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label class="col-form-label">Nước sản xuất</label>
+              </div>
+              <div class="col-8">
+                <input [value]='this.periodicalVaccination.country' class="form-control" type="text" readonly>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-4">
+                <label class="col-form-label">Thời gian tiêm</label>
+              </div>
+              <div class="col-8">
+                <input [value]="[this.periodicalVaccination.startTime + ' - ' + this.periodicalVaccination.endTime + ' ngày ' + this.periodicalVaccination.date]" class="form-control" type="text" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label class="col-form-label">Địa điểm</label>
+              </div>
+              <div class="col-8">
+                <input [value]="this.periodicalVaccination.location" class="form-control" type="text" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex mt-4 col-xl-2 col-lg-3 col-sm-4">
+          <div>
+            <button type="submit" class="btn btn-primary mr-3" [disabled]="!patientForm.touched || patientForm.invalid">Đăng ký</button>
+            <button routerLink="/periodical-vaccination/list" class="btn btn-dark">Hủy</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+</div>

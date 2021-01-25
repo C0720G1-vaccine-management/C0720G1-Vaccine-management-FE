@@ -1,0 +1,126 @@
+<div class="content" (click)="pageInput.value=''">
+  <div class="container col-10">
+    <h1 class="text-center mt-4 mb-4">Danh Sách Bệnh Nhân</h1>
+
+    <div class="search row d-flex justify-content-xl-end justify-content-center mb-4 text-center">
+
+      <div class="col-xl-2 col-md-3">
+        <label for="vaccineType">Mã Bệnh Nhân</label>
+        <input id="vaccineType" class="form-control" type="text" placeholder="Mã Bệnh Nhân">
+      </div>
+      <div class="col-xl-2 col-md-3">
+        <label for="provider">Họ Và Tên</label>
+        <input id="provider" class="form-control" type="text" placeholder="Họ Và Tên">
+
+      </div>
+
+      <div class="col-xl-2 col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
+        <button class="btn btn-success mt-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+      </div>
+    </div>
+
+
+    <div class="col-xl-2 col-12 px-0">
+      <!--            <br>-->
+      <button class="btn btn-success mt-2 mb-md-3" routerLink="/patient/create"><i class="fa fa-plus"></i> Thêm mới
+      </button>
+    </div>
+    <div class="">
+      <table class="table table-hover table-bordered ">
+        <thead>
+        <tr class="bg-table-header">
+          <th>STT</th>
+          <th>Mã Bệnh Nhân</th>
+          <th>Họ Và Tên</th>
+          <th>Ngày Sinh</th>
+          <th>Giới Tính</th>
+          <th>Người Giám Hộ</th>
+          <th>Số Điện Thoại</th>
+          <th>Địa Chỉ</th>
+          <th>Email</th>
+          <th class="text-center">Chức năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let element of listPatient,index as i">
+          <td>{{i + 1}}</td>
+          <td>BN-{{element.patientId}}</td>
+          <td>{{element.name}}</td>
+          <td>{{element.dateOfBirth}}</td>
+          <td>{{element.gender}}</td>
+          <td>{{element.guardian}}</td>
+          <td>{{element.phone}}</td>
+          <td>{{element.address}}</td>
+          <td>{{element.email}}</td>
+          <td class="text-center">
+            <button class="btn btn-success" [routerLink]="['/patient/edit', element.patientId]"><i
+              class="fa fa-edit"></i></button>
+
+
+            <button class="btn btn-danger ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    (click)="deleteId = element.patientId; deleteName = element.name"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+    <div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-md-end justify-content-center">
+          <li class="page-item">
+            <button class="page-link" [hidden]="page == 0" (click)="page = 0; getListPeriodicPatient()">Đầu</button>
+          </li>
+          <li class="page-item">
+            <button class="page-link" [hidden]="page == 0" (click)="page = page - 1; getListPeriodicPatient()">Trang
+              sau
+            </button>
+          </li>
+          <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+          <li class="page-item col-md-1 col-2  px-0">
+            <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
+            <div class="input-group">
+              <input #pageInput (change)="page = $event.target.value - 1" type="text"
+                     class="form-control text-right rounded-0" [placeholder]="page + 1" aria-label="Username"
+                     aria-describedby="basic-addon1">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"> /{{pageable.totalPages}}</span>
+              </div>
+            </div>
+          </li>
+          <li class="page-item">
+            <button (click)="getListPeriodicPatient()" class="btn btn-primary rounded-0">Đi</button>
+          </li>
+          <li class="page-item">
+            <button class="page-link" [hidden]="page >=  pageable.totalPages - 1"
+                    (click)="page = page + 1; getListPeriodicPatient()">Trang kế
+            </button>
+          </li>
+          <li class="page-item">
+            <button class="page-link" [hidden]="page >=  pageable.totalPages - 1 && page < pageable.totalPages"
+                    (click)="page = pageable.totalPages - 1; getListPeriodicPatient()">Cuối
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+<!--          <div class="modal-header">-->
+<!--            <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>-->
+<!--          </div>-->
+          <div class="modal-body">
+            <app-delete-patient [deleteId]="deleteId" [deleteName]="deleteName" ></app-delete-patient>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
