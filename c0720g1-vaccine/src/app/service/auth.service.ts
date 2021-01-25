@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+const AUTH_API = 'http://localhost:8080/api/public/';
 
 
 @Injectable({
@@ -16,21 +16,30 @@ export class AuthService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
-      'Access-Control-Allow-Origin': 'http://localhost:4200', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
     };
   }
 
   login(obj): Observable<any> {
-    return this.http.post(AUTH_API + 'signin', {
+    return this.http.post(AUTH_API + 'login', {
       username: obj.username,
       password: obj.password
     }, this.httpOptions);
   }
 
-  register(user): Observable<any> {
+  register(obj): Observable<any> {
     return this.http.post(AUTH_API + 'signup', {
-      username: user.username,
-      password: user.password
+      username: obj.username,
+      password: obj.password,
+      email: obj.email
+    }, this.httpOptions);
+  }
+
+  verify(code:string): Observable<any> {
+    console.log(code)
+    return this.http.post(AUTH_API + 'verify', {
+      code: code
     }, this.httpOptions);
   }
 }
