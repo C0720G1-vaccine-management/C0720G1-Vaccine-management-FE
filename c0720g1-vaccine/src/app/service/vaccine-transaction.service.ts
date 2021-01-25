@@ -6,8 +6,8 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ImportAndExportService {
-  public API = 'http://localhost:8080/api/public/';
+export class VaccineTransactionService {
+  public API = 'http://localhost:8080/api/public';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -21,15 +21,6 @@ export class ImportAndExportService {
   ) {
   }
 
-  getListExport(): Observable<any> {
-    return this.http.get(this.API + 'vaccine-price-list');
-  }
-
-  editPrice(id,price): Observable<any> {
-    return this.http.put(this.API + 'vaccine-price-edit/'+id+'/'+price,price);
-  }
-
-  getExportId(id): Observable<any> {
-    return this.http.get(this.API + 'getExportId/' + id)
-  }
-}
+  getListTransaction(): Observable<any> {
+    return this.http.get(this.API + '/list-vaccine-transaction');
+  }}

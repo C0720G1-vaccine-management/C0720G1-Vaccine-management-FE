@@ -17,7 +17,7 @@ export class VaccinePriceManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.exportService.getListExport().subscribe(data => {
-      this.exports = data;
+      this.exports = data.content;
     });
   }
 
