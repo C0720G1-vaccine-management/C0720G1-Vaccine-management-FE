@@ -23,16 +23,18 @@
           <div class="col-xl-4 col-md-3">
             <label>Họ Và Tên</label>
             <input (change)="name = $event.target.value" class="form-control" type="text" placeholder="Họ Và Tên">
+
           </div>
           <div class="col-xl-4 col-md-3">
             <label>Tình trạng</label>
-            <select (change)="status = $event.target.value" class="form-control" name="">
+            <select (change)="status = $event.target.value" class="form-control">
+              <option value="">Chọn Tình Trạng</option>
               <option value=false>Chưa tiêm</option>
               <option value=true>Đã tiêm</option>
             </select>
           </div>
           <div class="col-xl-auto col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
-            <button class="btn btn-success mt-2" (click)="page = 0;getListPeriodicVaccination()"><i
+            <button class="btn btn-success mt-2"  (click)="page = 0;searchPeriodicVaccination()"><i
               class="fa fa-search"></i> Tìm kiếm
             </button>
           </div>
