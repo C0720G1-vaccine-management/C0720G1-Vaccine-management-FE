@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {PatientDTO} from '../../entity/PatientDTO';
-import {PatientService} from '../patient.service';
 import {IPatient} from '../../entity/IPatient';
+import {PatientService} from "../../service/patient.service";
 
 @Component({
   selector: 'app-list-patient',

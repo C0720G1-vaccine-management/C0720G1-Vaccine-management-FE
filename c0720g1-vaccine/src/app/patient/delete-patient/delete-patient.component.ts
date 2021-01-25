@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PatientService} from '../patient.service';
+
 import {Router} from '@angular/router';
+import {PatientService} from "../../service/patient.service";
 
 @Component({
   selector: 'app-delete-patient',

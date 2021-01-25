@@ -7,6 +7,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PatientCreateComponent } from './patient-create/patient-create.component';
 import { DeletePatientComponent } from './delete-patient/delete-patient.component';
 import {HttpClientModule} from '@angular/common/http';
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import {HttpClientModule} from '@angular/common/http';
     PatientRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    ToastrModule.forRoot(),
   ]
 })
 export class PatientModule { }

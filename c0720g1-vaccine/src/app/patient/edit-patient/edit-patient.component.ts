@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {PatientService} from '../patient.service';
+
 import {ActivatedRoute, Route, Router} from '@angular/router';
+import {PatientService} from "../../service/patient.service";
 
 @Component({
   selector: 'app-edit-patient',
