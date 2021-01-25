@@ -6,7 +6,7 @@ import {VaccinationByRequestCreateComponent} from './vaccination-by-request-crea
 
 const routes: Routes = [
   {path: 'vaccination-by-request/list', component: VaccinationByRequestListComponent},
-  {path: 'vaccination-by-request/create', component: VaccinationByRequestCreateComponent}
+  {path: 'vaccination-by-request/create/:id', component: VaccinationByRequestCreateComponent}
 ];
 
 @NgModule({

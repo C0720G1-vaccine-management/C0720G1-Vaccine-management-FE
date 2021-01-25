@@ -2,33 +2,39 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="logo" href=""><img src="assets/image/medical-logo.jpg" alt="" width="50px"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
               aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+            <a class="nav-link active" aria-current="page" routerLink="/periodical-vaccination/list">Trang chủ</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Tin tức</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Đăng ký tiêm</a>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="vaccinationRegister" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Đăng ký tiêm chủng
+            </a>
+            <div class="dropdown-menu" aria-labelledby="vaccinationRegister">
+              <a class="dropdown-item" routerLink="/periodical-vaccination/list">Lịch tiêm chủng định kỳ</a>
+              <a class="dropdown-item" href="#">Đăng ký tiêm yêu cầu</a>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Thiết bị y tế</a>
           </li>
           <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle" href="#" id="navbarManager" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
+               data-toggle="dropdown" aria-expanded="false">
               Quản lí
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarManager">
               <li><a class="dropdown-item" href="#">Nhân viên</a></li>
-              <li><a class="dropdown-item" href="#">Khách hàng</a></li>
+              <li><a class="dropdown-item" routerLink="patient/list">Khách hàng</a></li>
               <li><a class="dropdown-item" href="#">Vaccine</a></li>
               <li>
                 <hr class="dropdown-divider">
@@ -39,7 +45,7 @@
         </ul>
         <div class="dropdown user">
           <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarUser" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
+             data-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-user"></i>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarUser">

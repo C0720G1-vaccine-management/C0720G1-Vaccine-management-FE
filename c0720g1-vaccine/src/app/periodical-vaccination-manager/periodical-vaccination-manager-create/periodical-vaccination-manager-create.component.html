@@ -1,0 +1,107 @@
+<div class="container-fluid">
+  <h1 class="mt-4">TẠO MỚI LỊCH TIÊM CHỦNG</h1>
+
+  <div class="container col-9 mt-5">
+    <form [formGroup]="formGroup" (ngSubmit)="submitForm()" novalidate>
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Thời gian<span>*</span>:</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Từ</div>
+                </div>
+                <input formControlName="startTime" type="time" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Đến</div>
+                </div>
+                <input formControlName="endTime" type="time" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Ngày tiêm<span>*</span>:</label>
+            <div class="col-sm-9">
+              <input formControlName="date" type="date" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Ghi chú<span>*</span>:</label>
+            <div class="col-sm-9">
+              <textarea formControlName="description" class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Tên Vắc-xin<span>*</span>:</label>
+            <div class="col-sm-9">
+              <select formControlName="vaccineId" class="form-control" (change)="getValue()">
+                <option *ngFor="let vaccine of vaccineList" [value]="vaccine.vaccineId">
+                  {{vaccine.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Loại Vắc-xin<span>*</span>:</label>
+            <div class="col-sm-9">
+<!--              <select class="form-control" required>-->
+<!--                <option selected>Chọn loại vắc - xin...</option>-->
+<!--                <option value="1">BCG</option>-->
+<!--                <option value="2">ENGERIX B</option>-->
+<!--                <option value="3">PENTAXIM</option>-->
+<!--                <option value="4">INFANRIX HEXA</option>-->
+<!--                <option value="5">MVVac</option>-->
+<!--                <option value="6">MMR II</option>-->
+<!--                <option value="7">AVAXIM 80U</option>-->
+<!--                <option value="8">TWINRIX</option>-->
+<!--              </select>-->
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Địa điểm<span>*</span>:</label>
+            <div class="col-sm-9">
+              <select formControlName="locationId" class="form-control" required>
+                <option *ngFor="let location of locationList" [value]="location.locationId">
+                  {{location.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Độ tuổi tiêm<span>*</span>:</label>
+            <div class="col-sm-9">
+              <input class="form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Trạng thái<span>*</span>:</label>
+            <div class="col-sm-9">
+              <input formControlName="status" type="text" class="form-control" value="Chưa thực hiện" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm" style="text-align: right">
+          <button type="submit" class="btn btn-success" (click)="showMessage()">Tạo mới lịch tiêm</button>
+        </div>
+        <div class="col-sm">
+          <a routerLink="/periodical-vaccination-manager/list">
+            <button class="btn btn-secondary" type="button">Hủy</button>
+          </a>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

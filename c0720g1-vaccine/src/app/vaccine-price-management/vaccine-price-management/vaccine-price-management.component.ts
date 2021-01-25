@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {IImportAndExport} from '../../entity/IImportAndExport';
+import {ImportAndExportService} from '../../service/import-and-export.service';
 
 @Component({
   selector: 'app-vaccine-price-management',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vaccine-price-management.component.scss']
 })
 export class VaccinePriceManagementComponent implements OnInit {
+  public exports: IImportAndExport[];
 
-  constructor() { }
+  constructor(
+    public exportService: ImportAndExportService
+  ) {
+  }
 
   ngOnInit(): void {
+    this.exportService.getListExport().subscribe(data => {
+      this.exports = data;
+    });
   }
 
 }
