@@ -23,6 +23,8 @@ export class ShowMessage {
     this.toastr.warning('Không tìm thấy', 'Tìm kiếm');
   }
 
-
+  showMessageRegisterSuccessfully() {
+    this.toastr.success('Đăng ký thành công', 'Thêm mới');
+  }
 
 }

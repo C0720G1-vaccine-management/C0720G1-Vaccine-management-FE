@@ -4,10 +4,12 @@ import {PeriodicalVaccinationListComponent} from './periodical-vaccination-list/
 import {CommonModule} from '@angular/common';
 import {PeriodicalVaccinationRegisterComponent} from './periodical-vaccination-register/periodical-vaccination-register.component';
 
-
+/* KhoaTA
+ *
+ */
 const routes: Routes = [
   {path: 'periodical-vaccination/list', component: PeriodicalVaccinationListComponent},
-  {path: 'periodical-vaccination/register', component: PeriodicalVaccinationRegisterComponent}
+  {path: 'periodical-vaccination/register/:id', component: PeriodicalVaccinationRegisterComponent}
 ];
 
 @NgModule({
