@@ -97,13 +97,14 @@ export class EmployeeCreateComponent implements OnInit {
     } else {
       this.employeeService.createEmployee(this.employeeForm.value).subscribe(data => {
         if (data != null) {
+          console.log(data[0]);
           this.error = data[0].defaultMessage;
-          this.showMessage.showMessageCreateError();
           this.toastrService.error(this.error, 'Message');
-
         } else {
-          this.router.navigateByUrl('employee');
+          console.log("thành côbng");
           this.toastrService.success('Thêm thành công!', 'Message');
+          this.router.navigateByUrl('employee');
+
         }
 
       }, error => console.log(error));
