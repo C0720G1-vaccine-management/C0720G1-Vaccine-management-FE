@@ -7,12 +7,17 @@ import {EmployeeEditComponent} from "./employee-edit/employee-edit.component";
 
 const routes: Routes = [
   {path: 'employee', component: EmployeeListComponent},
+
+  {path: 'employee/edit-employee/:id', component: EmployeeEditComponent},
+
   {path: 'employee/edit', component: EmployeeEditComponent},
   {path: 'employee/create', component: EmployeeCreateComponent}
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)
+  imports: [
+    RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
 })

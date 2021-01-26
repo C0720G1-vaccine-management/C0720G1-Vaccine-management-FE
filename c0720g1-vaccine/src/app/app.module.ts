@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
+import {EmployeeModule} from "./employee/employee.module";
 import {VaccinationHistoryModule} from "./vaccination-history/vaccination-history.module";
 import {PatientModule} from './patient/patient.module';
 import {VaccineModule} from "./vaccine/vaccine.module";
@@ -18,6 +19,7 @@ import {RegisteredForVaccinationRoutingModule} from "./registered-for-vaccinatio
 import {RegisteredForVaccinationModule} from "./registered-for-vaccination/registered-for-vaccination.module";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +27,8 @@ import {RegisteredForVaccinationModule} from "./registered-for-vaccination/regis
     FooterComponent,
   ],
   imports: [
+
+    EmployeeModule,
     BrowserModule,
     AppRoutingModule,
     VaccinationHistoryModule,
@@ -36,11 +40,10 @@ import {RegisteredForVaccinationModule} from "./registered-for-vaccination/regis
     VaccineModule,
     SecurityModule,
     VaccinePriceManagementModule,
-    ToastrModule.forRoot(),
     VaccinationByRequestModule,
-    HttpClientModule,
     PeriodicalVaccinationModule,
     RegisteredForVaccinationModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
