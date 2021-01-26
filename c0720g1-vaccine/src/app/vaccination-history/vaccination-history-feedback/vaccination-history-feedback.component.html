@@ -40,11 +40,11 @@
             </div>
             <div class="col-10">
               <p>Tình trạng sau khi tiêm(Sốt cao,sốt nhẹ,dị ứng,...)</p>
-              <textarea formControlName="preStatus" class="form-control" rows="4" id="comment">
+              <textarea formControlName="afterStatus" class="form-control" rows="4" id="comment">
             </textarea>
-              <div class="error-place" *ngFor="let validation of validation_messages.preStatus">
+              <div class="error-place" *ngFor="let validation of validation_messages.afterStatus">
                 <small class="text-danger"
-                       *ngIf="formGroup.get('preStatus').hasError(validation.type) && (formGroup.get('preStatus').touched || formGroup.get('preStatus').pristine)">
+                       *ngIf="formGroup.get('afterStatus').hasError(validation.type) && (formGroup.get('afterStatus').touched || formGroup.get('afterStatus').pristine)">
                   {{validation.message}}</small>
               </div>
             </div>

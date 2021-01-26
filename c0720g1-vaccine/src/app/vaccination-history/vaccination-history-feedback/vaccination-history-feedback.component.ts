@@ -27,14 +27,14 @@ export class VaccinationHistoryFeedbackComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
-      preStatus: ['', Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ,;-]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ,;-]+)*$')]
+      afterStatus: ['', Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ,;-]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ,;-]+)*$')]
     });
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.vaccinationHistoryService.findByIdVaccinationHistory(paramMap.get('id')).subscribe((data: IVaccinationHistoryFeedbackDTO) => {
         this.vaccinationHistoryId = paramMap.get('id');
         this.vaccinationHistoryFeedback = data;
       });
-      this.vaccinationHistoryService.findByPreStatus(paramMap.get('id')).subscribe((data: IVaccinationHistorySendFeedbackDTO) => {
+      this.vaccinationHistoryService.findByAfterStatus(paramMap.get('id')).subscribe((data: IVaccinationHistorySendFeedbackDTO) => {
         this.formGroup.patchValue(data);
 
       });
@@ -42,13 +42,15 @@ export class VaccinationHistoryFeedbackComponent implements OnInit {
   }
 
   update() {
+    console.log(this.vaccinationHistoryId);
+    console.log(this.formGroup.value);
     this.vaccinationHistoryService.updateFeedback(this.vaccinationHistoryId, this.formGroup.value).subscribe(
-      () => this.router.navigateByUrl('vaccination-history').then(r => this.toast.success("Cảm ơn bạn đã gửi phản hồi đến chúng tôi!"))
-    );
+      () => this.router.navigateByUrl('vaccination-history').then(r => this.toast.success("Cảm ơn bạn đã gửi phản hồi đến chúng tôi!")));
+
   }
 
   validation_messages = {
-    'preStatus': [
+    'afterStatus': [
       {type: 'pattern', message: 'Phản hồi không được chứa kí tự đặc biệt!'}
     ],
   }

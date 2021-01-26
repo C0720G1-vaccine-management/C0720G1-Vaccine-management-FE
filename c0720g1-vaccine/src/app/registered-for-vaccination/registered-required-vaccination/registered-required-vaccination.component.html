@@ -26,28 +26,28 @@
       <table class="table-hover table-bordered">
         <thead>
         <tr class="bg-table-header text-center">
-          <th>STT</th>
-          <th>Mã bệnh nhân</th>
-          <th>Họ và tên</th>
-          <th>Ngày sinh</th>
-          <th>Giới tính</th>
-          <th>Người giám hộ</th>
-          <th>Số điện thoại</th>
-          <th>Địa chỉ</th>
-          <th>Tên Vaccine</th>
-          <th>Loại Vaccine</th>
-          <th>Tình trạng</th>
-          <th>Kiểm tra trước khi khám</th>
+          <th style="width: 50px">STT</th>
+          <th style="width: 150px">Mã bệnh nhân</th>
+          <th style="width: 200px">Họ và tên</th>
+          <th style="width: 150px">Ngày sinh</th>
+          <th style="width: 100px">Giới tính</th>
+          <th style="width: 200px">Người giám hộ</th>
+          <th style="width: 150px">Số điện thoại</th>
+          <th style="width: 200px">Địa chỉ</th>
+          <th style="width: 200px">Tên Vaccine</th>
+          <th style="width: 130px">Loại Vaccine</th>
+          <th style="width: 130px">Tình trạng</th>
+          <th style="width: 230px">Kiểm tra trước khi khám</th>
         </tr>
         </thead>
         <tr *ngFor="let vac of vaccinationHistoryList, index as i">
-          <td>{{i + 1}}</td>
-          <td>BN-{{vac.patient.patientId}}</td>
+          <td style="text-align: center">{{i + 1}}</td>
+          <td style="text-align: center">BN-{{vac.patient.patientId}}</td>
           <td>{{vac.patient.name}}</td>
-          <td>{{vac.patient.dateOfBirth}}</td>
-          <td>{{vac.patient.gender}}</td>
+          <td style="text-align: center">{{vac.patient.dateOfBirth}}</td>
+          <td style="text-align: center">{{vac.patient.gender}}</td>
           <td>{{vac.patient.guardian}}</td>
-          <td>{{vac.patient.phone}}</td>
+          <td style="text-align: center">{{vac.patient.phone}}</td>
           <td>{{vac.patient.address}}</td>
           <td>{{vac.vaccination.vaccine.name}}</td>
           <td>{{vac.vaccination.vaccine.vaccineType.name}}</td>
