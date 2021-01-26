@@ -50,6 +50,11 @@
           </div>
           <div class="col-8">
             <input id="price" class="form-control" formControlName="price" type="text" placeholder="Nhập Giá">
+            <div class="error-place" *ngFor="let validation of validate_message.price">
+              <small class="text-danger"
+                *ngIf="formGroup.get('price').hasError(validation.type) && (formGroup.get('price').touched || formGroup.get('price').pristine)">
+                {{validation.message}}</small>
+            </div>
           </div>
         </div>
         <div class="d-flex justify-content-end">

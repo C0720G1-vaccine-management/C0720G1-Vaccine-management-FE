@@ -12,6 +12,7 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {VaccinationByRequestModule} from "./vaccination-by-request/vaccination-by-request.module";
 import {HttpClientModule} from "@angular/common/http";
+import {VaccineTransactionManagementModule} from "./vaccine-transaction-management/vaccine-transaction-management.module";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {HttpClientModule} from "@angular/common/http";
     VaccinePriceManagementModule,
     ToastrModule.forRoot(),
     VaccinationByRequestModule,
-    HttpClientModule
+    HttpClientModule,
+    VaccineTransactionManagementModule
 
   ],
   providers: [],

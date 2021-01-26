@@ -16,6 +16,13 @@ export class EditVaccinePriceComponent implements OnInit {
   public exports: IImportAndExport;
   defvalue = false;
 
+  validate_message = {
+    'price': [
+      {type: 'required' , message: "Trường này không đc để trống"},
+      {type: 'pattern' , message: "Phải là số"}
+    ]
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private importAndExportService: ImportAndExportService,
@@ -40,7 +47,7 @@ export class EditVaccinePriceComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.formGroup.value.price)
+
     this.importAndExportService.editPrice(this.exports.importAndExportId,this.formGroup.value.price).subscribe(data => {
       this.router.navigateByUrl('/vaccine-price-list')
     })

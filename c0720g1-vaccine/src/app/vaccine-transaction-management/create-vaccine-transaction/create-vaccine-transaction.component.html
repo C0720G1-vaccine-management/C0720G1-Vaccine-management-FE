@@ -1,1 +1,67 @@
-<p>create-vaccine-transaction works!</p>
+<div class="row justify-content-center">
+  <div class="col-xl-6">
+    <div class="container">
+      <form [formGroup]="formRegister" (ngSubmit)="submit()">
+        <h3 class="mb-4">Cập nhật giá vắc xin</h3>
+
+        <div class="row mb-3 ">
+          <div class="col-4">
+            <label class="col-form-label">Tên khách hàng: </label>
+          </div>
+          <div class="col-8 mt-2">
+<!--            <select name="" #id (change)="searchName(id)">-->
+<!--              <option *ngFor="let item of vaccineHistoryList">{{item.patient.name}}</option>-->
+<!--            </select>-->
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <label class="col-form-label">Loại vắc xin: </label>
+          </div>
+          <div class="col-8 mt-2">
+<!--            <input type="text" formControlName="id" readonly value="{{}}">-->
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <label class="col-form-label">Loại vắc xin: </label>
+          </div>
+          <div class="col-8 mt-2">
+<!--            <p>{{}}</p>-->
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <label class="col-form-label">Ngày giao dịch: </label>
+          </div>
+          <div class="col-8 mt-2">
+<!--            <p>{{}}</p>-->
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <label for="price" class="col-form-label">Giá (VNĐ/mũi): <span class="text-danger">*</span></label>
+          </div>
+          <div class="col-8">
+            <input id="price" class="form-control" formControlName="price" type="text" placeholder="Nhập Giá">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <label for="money" class="col-form-label">Thành tiền: </label>
+          </div>
+          <div class="col-8">
+            <input id="money" class="form-control" type="text" disabled>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <div>
+            <button class="btn btn-primary">Tạo giao dịch</button>
+
+            <a class="btn btn-dark" routerLink="">Hủy</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

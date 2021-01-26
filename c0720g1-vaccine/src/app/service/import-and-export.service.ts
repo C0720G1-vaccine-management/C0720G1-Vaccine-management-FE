@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class ImportAndExportService {
   public API = 'http://localhost:8080/api/public/';
+  API_SEARCH = 'http://localhost:8080/api/public/vaccine-price-search';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -21,15 +22,25 @@ export class ImportAndExportService {
   ) {
   }
 
-  getListExport(): Observable<any> {
-    return this.http.get(this.API + 'vaccine-price-list');
+  getListExport(page: number): Observable<any> {
+    return this.http.post<any>(this.API + 'vaccine-price-list?page=' + page, this.httpOptions);
   }
 
-  editPrice(id,price): Observable<any> {
-    return this.http.put(this.API + 'vaccine-price-edit/'+id+'/'+price,price);
+  editPrice(id: number, price: number): Observable<any> {
+    return this.http.put(this.API + 'vaccine-price-edit/' + id + '/' + price, this.httpOptions);
   }
 
   getExportId(id): Observable<any> {
     return this.http.get(this.API + 'getExportId/' + id)
+  }
+
+  search(search): Observable<any> {
+    return this.http.post(this.API_SEARCH, search);
+  }
+  getListVaccineType(): Observable<any>{
+    return this.http.get(this.API + "getVaccineType")
+  }
+  getListOrigin(): Observable<any>{
+    return this.http.get(this.API + "getOriginVaccine")
   }
 }

@@ -5,6 +5,7 @@ import { VaccineTransactionManagementComponent } from './vaccine-transaction-man
 import { CreateVaccineTransactionComponent } from './create-vaccine-transaction/create-vaccine-transaction.component';
 import { EditVaccineTransactionComponent } from './edit-vaccine-transaction/edit-vaccine-transaction.component';
 import { DeleteVaccineTransactionComponent } from './delete-vaccine-transaction/delete-vaccine-transaction.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -15,7 +16,9 @@ import { DeleteVaccineTransactionComponent } from './delete-vaccine-transaction/
   ],
   imports: [
     CommonModule,
-    VaccineTransactionManagementRoutingModule
+    VaccineTransactionManagementRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class VaccineTransactionManagementModule { }
