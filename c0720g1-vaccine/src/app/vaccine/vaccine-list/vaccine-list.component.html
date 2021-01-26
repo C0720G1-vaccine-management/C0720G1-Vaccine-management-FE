@@ -96,7 +96,7 @@
           </ng-template>
         </td>
         <td>
-          <button class="btn btn-success"[disabled]="vaccine.quantity === 0" >Xuất Kho</button>
+          <button class="btn btn-success"[disabled]="vaccine.quantity === 0" [routerLink]="['/import-and-export/' + vaccine.id ]">Xuất Kho</button>
         </td>
       </tr>
       </tbody>
