@@ -3,9 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {VaccineService} from "../vaccine.service";
 import {Router} from "@angular/router";
 import {AlertService} from "../alert.service";
-import {checkDayExpired} from "../../validator/tinCheckDay";
 import {IVaccineDTO} from "../../entity/IVaccineDTO";
-import {element} from "protractor";
 
 @Component({
   selector: 'app-vaccine-create',
@@ -16,11 +14,12 @@ export class VaccineCreateComponent implements OnInit {
   formCreateVaccine: FormGroup;
   listVaccine: IVaccineDTO[] = [];
   flag: boolean = false;
-  checkName:string = "Tên Trùng Lặp";
-  constructor(private vaccineService:VaccineService,
+
+  constructor(private vaccineService: VaccineService,
               private router: Router,
               private alertService: AlertService) {
   }
+
   validation_messages = {
     nameVaccine: [
       {type: 'required', message: 'Vui lòng nhập tên'},
@@ -32,91 +31,93 @@ export class VaccineCreateComponent implements OnInit {
       {type: 'minlength', message: 'Vui lòng nhập tên có ít nhất 4 kí tự'},
       {type: 'pattern', message: 'Vui lòng nhập loại vắc-xin đúng'}
     ],
-    dayReceive:[
+    dayReceive: [
       {type: 'required', message: 'Vui lòng nhập thời gian giao'},
     ],
-    licenseCode:[
+    licenseCode: [
       {type: 'required', message: 'Vui lòng nhập loại số giấy phép'},
       {type: 'pattern', message: 'Vui lòng nhập số giấy phép lớn hơn 0'}
     ],
-    origin:[
+    origin: [
       {type: 'required', message: 'Vui lòng nhập nước sản xuất'},
       {type: 'pattern', message: 'Vui lòng nhập nước sản xuất đúng'},
       {type: 'minlength', message: 'Vui lòng nhập tên có ít nhất 4 kí tự'},
     ],
-    provider:[
+    provider: [
       {type: 'required', message: 'Vui lòng nhập nhà cung cấp'},
       {type: 'pattern', message: 'Vui lòng nhập nhà cung cấp đúng'},
       {type: 'minlength', message: 'Vui lòng nhập tên có ít nhất 4 kí tự'},
     ],
-    unitPrice:[
+    unitPrice: [
       {type: 'required', message: 'Vui lòng nhập giá'},
       {type: 'min', message: 'Vui lòng nhập giá lớn hơn hoặc bằng 0'},
     ],
-    dosage:[
+    dosage: [
       {type: 'required', message: 'Vui lòng nhập liều lượng'},
       {type: 'min', message: 'Vui lòng nhập liều lượng lớn hơn hoặc bằng 0'},
     ],
-    quantity:[
+    quantity: [
       {type: 'required', message: 'Vui lòng nhập số lượng'},
       {type: 'min', message: 'Vui lòng nhập số lượng lớn hơn hoặc bằng 0'},
     ],
-    maintenance:[
+    maintenance: [
       {type: 'required', message: 'Vui lòng nhập điều kiện bảo quản'},
     ],
-    age:[
+    age: [
       {type: 'required', message: 'Vui lòng nhập độ tuổi tiêm chủng'},
     ],
-    expired:[
+    expired: [
       {type: 'required', message: 'Vui lòng nhập thời gian hết hạn'},
     ],
   };
 
   ngOnInit(): void {
     this.formCreateVaccine = new FormGroup({
-      nameVaccine: new FormControl('',[Validators.required,
+      nameVaccine: new FormControl('', [Validators.required,
         Validators.minLength(4),
         Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
-      typeVaccine: new FormControl('',[Validators.required,
+      typeVaccine: new FormControl('', [Validators.required,
         Validators.minLength(4),
         Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
-      dayReceive: new FormControl('',[Validators.required]),
-      licenseCode: new FormControl('',[Validators.required,Validators.min(1)]),
-      origin: new FormControl('',[Validators.required,
+      dayReceive: new FormControl('', [Validators.required]),
+      licenseCode: new FormControl('', [Validators.required, Validators.min(1)]),
+      origin: new FormControl('', [Validators.required,
         Validators.minLength(4),
         Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
-      provider: new FormControl('',[Validators.required,
+      provider: new FormControl('', [Validators.required,
         Validators.minLength(4),
         Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
-      unitPrice: new FormControl('',[Validators.required,
+      unitPrice: new FormControl('', [Validators.required,
         Validators.min(0)]),
-      dosage: new FormControl('',[Validators.required,
+      dosage: new FormControl('', [Validators.required,
         Validators.min(0)]),
-      quantity: new FormControl('',[Validators.required,
+      quantity: new FormControl('', [Validators.required,
         Validators.min(0)]),
-      expired: new FormControl('',[Validators.required]),
-      maintenance : new FormControl('',[Validators.required]),
-      age : new FormControl('',[Validators.required]),
+      expired: new FormControl('', [Validators.required]),
+      maintenance: new FormControl('', [Validators.required]),
+      age: new FormControl('', [Validators.required]),
     });
-    this.vaccineService.getAllVaccineNotPagination().subscribe((data:IVaccineDTO[])=>{
-      this.listVaccine = data;
-    })
   }
 
+
   save() {
-    for (let vaccine of this.listVaccine){
-      if(vaccine.name === this.formCreateVaccine.value.nameVaccine){
+    this.vaccineService.getAllVaccineNotPagination().subscribe((data: IVaccineDTO[]) => {
+      this.listVaccine = data;
+      console.log(this.listVaccine);
+    });
+    for (let vaccine of this.listVaccine) {
+      if (vaccine.name == this.formCreateVaccine.value.nameVaccine) {
         this.flag = true;
+        break;
       }
     }
-
-    if(this.flag == false) {
+    if (this.flag == false) {
       console.log(this.formCreateVaccine.value);
       this.vaccineService.createVaccineDTO(this.formCreateVaccine.value).subscribe(() => {
         this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
       })
-    }else {
-      this.router.navigateByUrl('vaccine-create').then(r => this.alertService.showMessageErrors("Trùng lặp tên vắc-xin"))
+    } else {
+       this.alertService.showMessageErrors("Trùng lặp vắc-xin");
     }
   }
 }

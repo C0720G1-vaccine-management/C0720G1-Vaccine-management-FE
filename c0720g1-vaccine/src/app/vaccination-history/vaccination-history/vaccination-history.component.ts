@@ -11,8 +11,8 @@ import {TokenStorageService} from "../../service/token-storage.service";
 })
 
 export class VaccinationHistoryComponent implements OnInit {
-  accountId: number;
-  patientId: number;
+  accountEmail = 'anhkhoa@gmail.com';
+  // accountEmail: string;
   vaccinationHistoryList: IVaccinationHistory[];
   page = 0;
   pageable: any;
@@ -26,29 +26,24 @@ export class VaccinationHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAccountId();
-    this.getPatientId();
+    // this.getAccountEmail();
     this.getListVaccine();
   }
 
-  getAccountId() {
+  getAccountEmail() {
     if (this.tokenStorageService.getToken()) {
       const user = this.tokenStorageService.getUser();
-      this.accountId = this.tokenStorageService.getUser().id;
+      this.accountEmail = this.tokenStorageService.getUser().email;
     }
   }
 
   getListVaccine() {
-    this.vaccinationHistoryService.findAllVaccinationHistory(this.page, this.vaccineName, this.vaccinationDate, this.patientId).subscribe(data => {
+    console.log(this.accountEmail);
+    this.vaccinationHistoryService.findAllVaccinationHistory(this.page, this.vaccineName, this.vaccinationDate, this.accountEmail).subscribe(data => {
         this.vaccinationHistoryList = data.content;
         this.pageable = data;
       }
     )
   }
 
-  getPatientId() {
-    this.vaccinationHistoryService.getPatientId(this.accountId).subscribe(data => {
-      this.patientId = data;
-    })
-  }
 }

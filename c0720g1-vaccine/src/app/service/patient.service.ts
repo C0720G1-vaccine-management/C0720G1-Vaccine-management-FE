@@ -80,8 +80,8 @@ export class PatientService {
   /**
    * NhiTTY
    **/
-  create(patientDTO): Observable<any> {
-    return this.http.post<any>(this.url + '/patient/create', JSON.stringify(patientDTO), this.httpOptions)
+  create(patientDTO): Observable<PatientDTO> {
+    return this.http.post<PatientDTO>(this.url + '/patient/create', JSON.stringify(patientDTO), this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       )

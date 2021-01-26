@@ -27,7 +27,7 @@ export class EditPatientComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       patientId:[''],
-      name: new FormControl('', [Validators.required,Validators.maxLength(255),Validators.minLength(5),Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
+      name: new FormControl('', [Validators.required,Validators.maxLength(255),Validators.minLength(6),Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
       dateOfBirth: new FormControl('',[Validators.required,checkDateOfBirth ]),
       gender: new FormControl('',[Validators.required]),
       guardian: new FormControl('',[Validators.maxLength(40),Validators.minLength(5),Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
@@ -48,15 +48,15 @@ export class EditPatientComponent implements OnInit {
       this.router.navigateByUrl('/patient/list');
 
     });
-    // this.toastr.success('Sửa Thông Tin Thành Công !', 'Thông Báo!');
-
+    console.log(1);
+    this.toastr.success('Sửa Thông Tin Thành Công !', 'Thông Báo!');
   }
 
   validation_messages = {
     name: [
       { type: 'required', message: 'Vui lòng nhập tên' },
       { type: 'maxlength', message: 'Vui lòng nhập tên không quá 40 kí tự.' },
-      {type: 'minlength', message: 'Vui lòng nhập tên có ít nhất 5 kí tự' },
+      {type: 'minlength', message: 'Vui lòng nhập tên có ít nhất 6 kí tự' },
       {type: 'pattern', message: 'Vui lòng nhập tên đúng'}
     ],
     dateOfBirth: [
@@ -67,7 +67,7 @@ export class EditPatientComponent implements OnInit {
     ],
     guardian: [
       { type: 'maxlength', message: 'Vui lòng nhập người giám hộ không quá 40 kí tự' },
-      {type: 'minlength', message: 'Vui lòng nhập tên có ít nhất 5 kí tự' },
+      {type: 'minlength', message: 'Vui lòng nhập tên có ít nhất 6 kí tự' },
       {type: 'pattern', message: 'Vui lòng nhập tên người giám hộ đúng'}
     ],
     phone: [
