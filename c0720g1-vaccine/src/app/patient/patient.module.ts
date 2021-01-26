@@ -10,7 +10,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
-
 @NgModule({
   declarations: [ListPatientComponent, EditPatientComponent, PatientCreateComponent, DeletePatientComponent],
   imports: [
@@ -18,8 +17,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     PatientRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ]
 })

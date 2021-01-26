@@ -1,0 +1,103 @@
+<div class="container-fluid">
+  <div class="container">
+    <h1 class="text-center mt-4 mb-4">KIỂM TRA LÂM SÀNG<br>TƯ VẤN VÀ KÊ ĐƠN TRƯỚC KHI TIÊM</h1>
+
+    <div class="row">
+      <div class="row col-5">
+        <h3 class="text-center">Thông tin bệnh nhân</h3>
+        <table class="table border-less">
+          <tbody>
+          <tr>
+            <td class="title-info-patient">ID:</td>
+            <td>{{infoPatient.patientId}}</td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Tên bệnh nhân:</td>
+            <td>{{infoPatient.patientName}}</td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Giới tính:</td>
+            <td>{{infoPatient.patientGender}}</td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Năm sinh:</td>
+            <td>{{infoPatient.patientDob}}</td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Người giám hộ:</td>
+            <td>{{infoPatient.patientGuardian}}</td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Địa chỉ:</td>
+            <td>{{infoPatient.patientAddress}}</td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Số điện thoại:</td>
+            <td>{{infoPatient.patientPhone}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-7 row">
+        <h3 class="text-center">Lịch sử tiêm chủng của bệnh nhân</h3>
+        <table class="table border-less">
+          <tbody>
+          <tr>
+            <td class="title-info-patient">Vắc xin đã tiêm:</td>
+            <td>
+              <div *ngIf="infoPatient.vaccinationHistoryStatus === true then logged else notLogged"></div>
+              <ng-template #logged>
+                <span>{{infoPatient.vaccineName}}</span>
+              </ng-template>
+              <ng-template #notLogged>
+                <span class="badge badge-danger">Chưa tiêm</span>
+              </ng-template>
+            </td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Thời gian tiêm:</td>
+            <td>{{infoPatient.endTime}}</td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Tình trạng trước khi tiêm:</td>
+            <td>{{infoPatient.preStatus}}</td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Phản ứng sau khi tiêm:</td>
+            <td>{{infoPatient.afterStatus}}</td>
+          </tr>
+
+          <tr>
+            <td class="title-info-patient">Loại Vaccine:</td>
+            <td>{{infoPatient.vaccineTypeName}}</td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Liều lượng:</td>
+            <td>{{infoPatient.dosage}}ml</td>
+          </tr>
+          <tr>
+            <td class="title-info-patient">Mũi tiêm: </td>
+            <td>
+              <div *ngIf="infoPatient.vaccinationHistoryStatus === true then block else elseBlock"></div>
+              <ng-template #block>
+                <span class="badge badge-primary">Thứ 2</span>
+              </ng-template>
+              <ng-template #elseBlock>
+                <span class="badge badge-primary">Đầu tiên</span>
+              </ng-template>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="text-center">
+      <button type="button" class="btn btn-primary">Xong/Cho tiêm</button>
+      <button type="button" class="btn btn-secondary" [routerLink]="['/registered-required-vaccination']">Huỷ</button>
+    </div>
+  </div>
+</div>
+
+
+

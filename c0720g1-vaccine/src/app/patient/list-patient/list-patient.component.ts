@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IPatient} from '../../entity/IPatient';
 import {PatientService} from "../../service/patient.service";
 
+
 @Component({
   selector: 'app-list-patient',
   templateUrl: './list-patient.component.html',
@@ -11,22 +12,47 @@ export class ListPatientComponent implements OnInit {
 
   deleteId: number;
   deleteName: string;
-  listPatient: IPatient[];
-  public page = 0;
-  public pageable: any;
+  listPatient;
+  public patientId = '';
+  public name = '';
 
   constructor(private patientService: PatientService) {
   }
 
   ngOnInit(): void {
-    this.getListPeriodicPatient()
+    this.searchPatient(0);
   }
 
-  getListPeriodicPatient() {
-    this.patientService.getAllPatient(this.page).subscribe(data=>{
-      this.listPatient = data.content;
-      this.pageable=data;
+  getListPeriodicPatient(pageable) {
+    this.patientService.getAllPatient(pageable).subscribe(data=>{
+      this.listPatient = data;
+      console.log(data);
     },error => console.log(error))
+  }
 
+  searchPatient(pageable){
+    this.patientId = this.patientId.replace('BN-','');
+    this.patientId = this.patientId.replace('BN','');
+    this.patientId = this.patientId.replace('B','');
+    this.patientId = this.patientId.replace('N-','');
+    this.patientId = this.patientId.replace('N','');
+    console.log(this.patientId);
+    if (this.patientId === '' && this.name === ''){
+      this.getListPeriodicPatient(pageable);
+    }
+    this.patientService.getAllPatientByPatientIdAndName(this.patientId, this.name , pageable).subscribe(data => {
+      this.listPatient = data;
+    });
+  }
+  getCode(id: number, size: number): string {
+    let num = id.toString();
+    while (num.length < size) {
+      num = '0' + num;
+    }
+    return 'BN-' + num;
+  }
+
+  deleteSuccess() {
+    this.ngOnInit();
   }
 }

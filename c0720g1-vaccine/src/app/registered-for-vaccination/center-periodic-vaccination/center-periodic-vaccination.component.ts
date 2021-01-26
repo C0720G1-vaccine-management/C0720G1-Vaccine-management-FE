@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {VaccinationService} from "../../service/vaccination.service";
-import {PeriodicVaccinationDto} from "../../dto/PeriodicVaccinationDto";
 import {IVaccinationHistory} from "../../entity/IVaccinationHistory";
 import {VaccinationHistoryService} from "../../service/vaccination-history.service";
 
@@ -9,6 +7,8 @@ import {VaccinationHistoryService} from "../../service/vaccination-history.servi
   templateUrl: './center-periodic-vaccination.component.html',
   styleUrls: ['./center-periodic-vaccination.component.scss']
 })
+/** LuyenNT code
+ */
 export class CenterPeriodicVaccinationComponent implements OnInit {
 
   public vaccinationHistoryList: IVaccinationHistory[];
@@ -20,13 +20,18 @@ export class CenterPeriodicVaccinationComponent implements OnInit {
   constructor(private vaccinationHistoryService: VaccinationHistoryService ) { }
 
   getListPeriodicVaccination(){
-    this.vaccinationHistoryService.getListPeriodicVaccination(this.page,this.name,this.status).subscribe(data => {
+    this.vaccinationHistoryService.getListPeriodicVaccination(this.page,this.name).subscribe(data => {
       this.vaccinationHistoryList = data.content;
       this.pageable = data;
       console.log(data);
     }, error => console.log(error));
-
-
+  }
+  searchPeriodicVaccination(){
+    this.vaccinationHistoryService.searchPeriodicVaccination(this.page,this.name,this.status).subscribe(data => {
+      this.vaccinationHistoryList = data.content;
+      this.pageable = data;
+      console.log(data);
+    }, error => console.log(error));
   }
   ngOnInit(): void {
     this.getListPeriodicVaccination();

@@ -1,23 +1,24 @@
-<div class="content">
+<div class="content" (click)="pageInput.value = ''">
   <div class="container">
-
     <h1 class="text-center mt-4 mb-4">Danh sách bệnh nhân<br>đã đăng kí tiêm chủng theo yêu cầu</h1>
     <div class="search row d-flex justify-content-end mb-4 text-center">
       <div class="col-xl-2 col-md-3">
-        <label for="">Họ và Tên</label>
-        <input class="form-control" type="text" placeholder="Nhập Họ và Tên" id="">
+        <label>Họ và Tên</label>
+        <input (change)="name = $event.target.value" class="form-control" type="text" placeholder="Họ Và Tên">
       </div>
       <div class="col-xl-2 col-md-3">
-        <label for="">Tình trạng</label>
-        <select class="form-control" name="">
-          <option value="">Chưa tiêm</option>
-          <option value="">Đã tiêm</option>
+        <label>Tình trạng</label>
+        <select (change)="status = $event.target.value" class="form-control">
+          <option value="">Lựa chọn</option>
+          <option value=false>Chưa tiêm</option>
+          <option value=true>Đã tiêm</option>
         </select>
       </div>
 
       <div class="col-auto">
         <br>
-        <button class="btn btn-success mt-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+        <button class="btn btn-success mt-2" (click)="page = 0;search()"><i class="fa fa-search"></i> Tìm kiếm
+        </button>
       </div>
     </div>
 
@@ -33,82 +34,34 @@
           <th>Người giám hộ</th>
           <th>Số điện thoại</th>
           <th>Địa chỉ</th>
-          <th>Tên Vắc-xin</th>
-          <th>Loại Vắc-xin</th>
+          <th>Tên Vaccine</th>
+          <th>Loại Vaccine</th>
           <th>Tình trạng</th>
           <th>Kiểm tra trước khi khám</th>
         </tr>
         </thead>
-        <tr>
-          <td>1</td>
-          <td>BN-007</td>
-          <td>Võ Văn A</td>
-          <td>12/12/2018</td>
-          <td>Nam</td>
-          <td>Võ Văn Ha (cha)</td>
-          <td>0938305977</td>
-          <td>Đà Nẵng</td>
-          <td>Phòng bệnh lao</td>
-          <td>BCG</td>
+        <tr *ngFor="let vac of vaccinationHistoryList, index as i">
+          <td>{{i + 1}}</td>
+          <td>BN-{{vac.patient.patientId}}</td>
+          <td>{{vac.patient.name}}</td>
+          <td>{{vac.patient.dateOfBirth}}</td>
+          <td>{{vac.patient.gender}}</td>
+          <td>{{vac.patient.guardian}}</td>
+          <td>{{vac.patient.phone}}</td>
+          <td>{{vac.patient.address}}</td>
+          <td>{{vac.vaccination.vaccine.name}}</td>
+          <td>{{vac.vaccination.vaccine.vaccineType.name}}</td>
           <td class="text-center">
-            <span class="badge badge-danger">Chưa tiêm</span>
+            <div *ngIf="vac.status === true then logged else notLogged"></div>
+            <ng-template #logged>
+              <span class="badge badge-primary">Đã tiêm</span>
+            </ng-template>
+            <ng-template #notLogged>
+              <span class="badge badge-danger">Chưa tiêm</span>
+            </ng-template>
           </td>
           <td class="text-center">
-            <button class="btn btn-success">Kiểm tra</button>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>BN-008</td>
-          <td>Võ Văn B</td>
-          <td>12/12/2018</td>
-          <td>Nam</td>
-          <td>Võ Văn Hb (cha)</td>
-          <td>0938305978</td>
-          <td>Đà Nẵng</td>
-          <td>Phòng bệnh viêm gan B</td>
-          <td>ENGERIX B</td>
-          <td class="text-center">
-            <span class="badge badge-primary">Đã Tiêm</span>
-          </td>
-          <td class="text-center">
-            <button class="btn btn-success">Kiểm tra</button>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>BN-009</td>
-          <td>Võ Văn C</td>
-          <td>12/12/2018</td>
-          <td>Nam</td>
-          <td>Võ Văn Hc (cha)</td>
-          <td>0938305979</td>
-          <td>Đà Nẵng</td>
-          <td>Phòng bệnh uốn ván</td>
-          <td>TETTAVAX</td>
-          <td class="text-center">
-            <span class="badge badge-danger">Chưa tiêm</span>
-          </td>
-          <td class="text-center">
-            <button class="btn btn-success">Kiểm tra</button>
-          </td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>BN-010</td>
-          <td>Võ Văn D</td>
-          <td>12/12/2018</td>
-          <td>Nam</td>
-          <td>Võ Văn Hc (cha)</td>
-          <td>0938305979</td>
-          <td>Đà Nẵng</td>
-          <td>Phòng bệnh uốn ván</td>
-          <td>TETTAVAX</td>
-          <td class="text-center">
-            <span class="badge badge-danger">Chưa tiêm</span>
-          </td>
-          <td class="text-center">
-            <button class="btn btn-success">Kiểm tra</button>
+            <button class="btn btn-success" [routerLink]="['view',vac.patient.patientId]">Kiểm tra</button>
           </td>
         </tr>
       </table>
@@ -116,30 +69,41 @@
 
     <div>
       <nav aria-label="Page navigation example">
-        <ul class="pagination d-flex justify-content-md-end">
+        <ul class="pagination d-flex justify-content-md-end justify-content-center">
           <li class="page-item">
-            <a class="page-link" href="#">Đầu</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">Trang sau</a>
-          </li>
-          <li class="page-item active">
-            <a class="page-link" href="#">1</a>
-          </li>
-          <li class="page-item col-md-1 col-2 px-0">
-            <input style="border-radius: 0" class="form-control" type="text" placeholder="1/5">
+            <button class="page-link" [hidden]="page == 0" (click)="page = 0; getAll()">Đầu</button>
           </li>
           <li class="page-item">
-            <button class="btn btn-primary" style="border-radius: 0">Đi</button>
+            <button class="page-link" [hidden]="page == 0" (click)="page = page - 1; getAll()">Trang
+              sau
+            </button>
+          </li>
+          <li class="page-item col-md-1 col-2  px-0">
+            <div class="input-group">
+              <input #pageInput (change)="page = $event.target.value - 1" type="text"
+                     class="form-control text-right rounded-0" [placeholder]="page + 1" aria-label="Username"
+                     aria-describedby="basic-addon1">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> /{{pageable.totalPages}}</span>
+              </div>
+            </div>
           </li>
           <li class="page-item">
-            <a class="page-link" href="#">Trang kế</a>
+            <button (click)="getAll()" class="btn btn-primary rounded-0">Đi</button>
           </li>
           <li class="page-item">
-            <a class="page-link" href="#">Cuối</a>
+            <button class="page-link" [hidden]="page >=  pageable.totalPages - 1"
+                    (click)="page = page + 1; getAll()">Trang kế
+            </button>
+          </li>
+          <li class="page-item">
+            <button class="page-link" [hidden]="page >=  pageable.totalPages - 1 && page < pageable.totalPages"
+                    (click)="page = pageable.totalPages - 1; getAll()">Cuối
+            </button>
           </li>
         </ul>
       </nav>
     </div>
+
   </div>
 </div>
