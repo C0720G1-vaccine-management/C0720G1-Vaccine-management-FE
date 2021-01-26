@@ -17,12 +17,10 @@
           </div>
           <div class="col-8">
             <input type="text" id="tenvac-xin" class="form-control" formControlName="nameVaccine">
-            <div *ngIf="formCreateVaccine.get('nameVaccine').invalid && formCreateVaccine.get('nameVaccine').touched">
-              <div *ngIf="formCreateVaccine.get('nameVaccine').hasError('required')">
-                <small class="text-danger">
-                  Name is not Empty !
-                </small>
-              </div>
+            <div class="text-danger" *ngFor="let validation of validation_messages.nameVaccine">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('nameVaccine').hasError(validation.type) && (formCreateVaccine.get('nameVaccine').dirty || formCreateVaccine.get('nameVaccine').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -32,12 +30,10 @@
           </div>
           <div class="col-8">
             <input type="text" id="loaivac-xin" class="form-control" formControlName="typeVaccine">
-            <div *ngIf="formCreateVaccine.get('typeVaccine').invalid && formCreateVaccine.get('typeVaccine').touched">
-              <div *ngIf="formCreateVaccine.get('typeVaccine').hasError('required')">
-                <small class="text-danger">
-                  TypeVaccine is not Empty !
-                </small>
-              </div>
+            <div class="text-danger" *ngFor="let validation of validation_messages.typeVaccine">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('typeVaccine').hasError(validation.type) && (formCreateVaccine.get('typeVaccine').dirty || formCreateVaccine.get('typeVaccine').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -46,13 +42,11 @@
             <label for="ngaynhap" class="mr-3">Ngày Nhập <span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="date" id="ngaynhap" class="form-control" formControlName="dateRecieve">
-            <div *ngIf="formCreateVaccine.get('dateRecieve').invalid && formCreateVaccine.get('dateRecieve').touched">
-              <div *ngIf="formCreateVaccine.get('dateRecieve').hasError('required')">
-                <small class="text-danger">
-                  DateRecieve is not Empty !
-                </small>
-              </div>
+            <input type="date" id="ngaynhap" class="form-control" formControlName="dayReceive">
+            <div class="text-danger" *ngFor="let validation of validation_messages.dayReceive">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('dayReceive').hasError(validation.type) && (formCreateVaccine.get('dayReceive').dirty || formCreateVaccine.get('dayReceive').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -62,12 +56,10 @@
           </div>
           <div class="col-8">
             <input type="number" min="0" id="sogiayphep" class="form-control" formControlName="licenseCode">
-            <div *ngIf="formCreateVaccine.get('licenseCode').invalid && formCreateVaccine.get('licenseCode').touched">
-              <div *ngIf="formCreateVaccine.get('licenseCode').hasError('required')">
-                <small class="text-danger">
-                  LicenseCode is not Empty !
-                </small>
-              </div>
+            <div class="text-danger" *ngFor="let validation of validation_messages.licenseCode">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('licenseCode').hasError(validation.type) && (formCreateVaccine.get('licenseCode').dirty || formCreateVaccine.get('licenseCode').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -76,13 +68,11 @@
             <label for="nuocsx" class="mr-3">Nước Sản Xuất <span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="text" id="nuocsx" class="form-control"formControlName="orrigin">
-            <div *ngIf="formCreateVaccine.get('orrigin').invalid && formCreateVaccine.get('orrigin').touched">
-              <div *ngIf="formCreateVaccine.get('orrigin').hasError('required')">
-                <small class="text-danger">
-                  Orrigin is not Empty !
-                </small>
-              </div>
+            <input type="text" id="nuocsx" class="form-control" formControlName="origin">
+            <div class="text-danger" *ngFor="let validation of validation_messages.origin">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('origin').hasError(validation.type) && (formCreateVaccine.get('origin').dirty || formCreateVaccine.get('origin').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -92,12 +82,10 @@
           </div>
           <div class="col-8">
             <input type="text" id="nhacc" class="form-control" formControlName="provider">
-            <div *ngIf="formCreateVaccine.get('provider').invalid && formCreateVaccine.get('provider').touched">
-              <div *ngIf="formCreateVaccine.get('provider').hasError('required')">
-                <small class="text-danger">
-                  Provider is not Empty !
-                </small>
-              </div>
+            <div class="text-danger" *ngFor="let validation of validation_messages.provider">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('provider').hasError(validation.type) && (formCreateVaccine.get('provider').dirty || formCreateVaccine.get('provider').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -109,12 +97,10 @@
           </div>
           <div class="col-8">
             <input type="number" min="0" id="dongia" class="form-control" formControlName="unitPrice">
-            <div *ngIf="formCreateVaccine.get('unitPrice').invalid && formCreateVaccine.get('unitPrice').touched">
-              <div *ngIf="formCreateVaccine.get('unitPrice').hasError('required')">
-                <small class="text-danger">
-                  UnitPrice is not Empty !
-                </small>
-              </div>
+            <div class="text-danger" *ngFor="let validation of validation_messages.unitPrice">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('unitPrice').hasError(validation.type) && (formCreateVaccine.get('unitPrice').dirty || formCreateVaccine.get('unitPrice').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -124,12 +110,10 @@
           </div>
           <div class="col-8">
             <input type="text" id="hamluong" class="form-control" formControlName="dosage">
-            <div *ngIf="formCreateVaccine.get('dosage').invalid && formCreateVaccine.get('dosage').touched">
-              <div *ngIf="formCreateVaccine.get('dosage').hasError('required')">
-                <small class="text-danger">
-                  Dosage is not Empty !
-                </small>
-              </div>
+            <div class="text-danger" *ngFor="let validation of validation_messages.dosage">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('dosage').hasError(validation.type) && (formCreateVaccine.get('dosage').dirty || formCreateVaccine.get('dosage').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -139,12 +123,10 @@
           </div>
           <div class="col-8">
             <input type="number" min="0" id="solo" class="form-control" formControlName="quantity">
-            <div *ngIf="formCreateVaccine.get('quantity').invalid && formCreateVaccine.get('quantity').touched">
-              <div *ngIf="formCreateVaccine.get('quantity').hasError('required')">
-                <small class="text-danger">
-                  Quantity is not Empty !
-                </small>
-              </div>
+            <div class="text-danger" *ngFor="let validation of validation_messages.quantity">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('quantity').hasError(validation.type) && (formCreateVaccine.get('quantity').dirty || formCreateVaccine.get('quantity').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -154,12 +136,10 @@
           </div>
           <div class="col-8">
             <input type="date" id="hansudung" class="form-control" formControlName="expired">
-            <div *ngIf="formCreateVaccine.get('expired').invalid && formCreateVaccine.get('expired').touched">
-              <div *ngIf="formCreateVaccine.get('expired').hasError('required')">
-                <small class="text-danger">
-                  Expired is not Empty !
-                </small>
-              </div>
+            <div class="text-danger" *ngFor="let validation of validation_messages.expired">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('expired').hasError(validation.type) && (formCreateVaccine.get('expired').dirty || formCreateVaccine.get('expired').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -169,12 +149,10 @@
           </div>
           <div class="col-8">
             <input type="text" id="dkbaoquan" class="form-control" formControlName="maintenance">
-            <div *ngIf="formCreateVaccine.get('maintenance').invalid && formCreateVaccine.get('maintenance').touched">
-              <div *ngIf="formCreateVaccine.get('maintenance').hasError('required')">
-                <small class="text-danger">
-                  Maintenance is not Empty!
-                </small>
-              </div>
+            <div class="text-danger" *ngFor="let validation of validation_messages.maintenance">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('maintenance').hasError(validation.type) && (formCreateVaccine.get('maintenance').dirty || formCreateVaccine.get('maintenance').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>
@@ -184,12 +162,10 @@
           </div>
           <div class="col-8">
             <input type="text" id="dotuoi" class="form-control" formControlName="age">
-            <div *ngIf="formCreateVaccine.get('age').invalid && formCreateVaccine.get('age').touched">
-              <div *ngIf="formCreateVaccine.get('age').hasError('required')">
-                <small class="text-danger">
-                  Age is not Empty !
-                </small>
-              </div>
+            <div class="text-danger" *ngFor="let validation of validation_messages.age">
+              <div class="error-message"
+                   *ngIf="formCreateVaccine.get('age').hasError(validation.type) && (formCreateVaccine.get('age').dirty || formCreateVaccine.get('age').touched)">
+                {{validation.message}}</div>
             </div>
           </div>
         </div>

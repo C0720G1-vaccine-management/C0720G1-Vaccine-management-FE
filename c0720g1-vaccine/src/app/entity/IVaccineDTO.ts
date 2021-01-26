@@ -2,13 +2,13 @@ export interface IVaccineDTO {
   id: string;
   name: string;
   vaccineType: string;
-  dateRecive: string;
+  dateReceive: string;
   licenseCode: string;
   origin: string;
   dosage: number;
   shipmentNumber: number;
   expired: string;
-  mantenance: string;
+  maintenance: string;
   age: string;
   quantity: number;
 }
