@@ -4,7 +4,7 @@ import {ImportAndExportComponent} from './import-and-export/import-and-export.co
 
 
 const routes: Routes = [
-  {path: 'import-and-export', component: ImportAndExportComponent}
+  {path: 'import-and-export/:vaccineId', component: ImportAndExportComponent}
 ];
 
 @NgModule({

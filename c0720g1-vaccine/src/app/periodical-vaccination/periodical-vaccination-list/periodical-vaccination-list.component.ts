@@ -36,7 +36,7 @@ export class PeriodicalVaccinationListComponent implements OnInit {
 
   searchData: ISearchAndPage = new ISearchAndPage();
   ageList: string[];
-  time: string = "Lựa chọn";
+  time: string = "";
   timeListString: string[] = [];
   registrableVaccinationList: IPeriodicalVaccinationDTO[] ;
   constructor(private vaccinationService : PeriodicalVaccinationKhoaService,) {
