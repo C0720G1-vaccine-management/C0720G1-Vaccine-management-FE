@@ -4,7 +4,6 @@ import {Observable, throwError} from 'rxjs';
 import {IVaccination} from '../entity/IVaccination';
 import {catchError} from 'rxjs/operators';
 import {ILocation} from '../entity/ILocation';
-import {IVaccinationType} from '../entity/IVaccinationType';
 import {IVaccine} from '../entity/IVaccine';
 
 @Injectable({
@@ -12,18 +11,28 @@ import {IVaccine} from '../entity/IVaccine';
 })
 export class VaccinationManagerService {
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    }),
+    'Access-Control-Allow-Origin': 'http://localhost:4200', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
   };
-  private apiVaccinationManagerUrl = 'http://localhost:8080/api/vaccination-manager/vaccinations';
-  private apiLocationUrl = 'http://localhost:8080/api/vaccination-manager/locations';
-  private apiVaccinationTypeUrl = 'http://localhost:8080/api/vaccination-manager/vaccination-type';
-  private apiVaccineUrl = 'http://localhost:8080/api/vaccines';
+  private apiVaccinationManagerUrl = 'http://localhost:8080/api/public/vaccination-manager';
+  private apiLocationUrl = 'http://localhost:8080/api/public/vaccination-manager/locations';
+  private apiVaccineUrl = 'http://localhost:8080/api/public/vaccines';
 
   constructor(private httpClient: HttpClient) {
   }
 
-  getAllVaccinationManager(): Observable<IVaccination[]> {
-    return this.httpClient.get<IVaccination[]>(this.apiVaccinationManagerUrl + '/')
+  getAllVaccination(page: number, type: number): Observable<any> {
+    return this.httpClient.get<any>(this.apiVaccinationManagerUrl + '/list?page=' + page + '&type=' + type)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  searchNameAndStatus(startDate: any, endDate: any, name: any, status: any, pageable, type): Observable<any> {
+    return this.httpClient.get<any>(this.apiVaccinationManagerUrl + '/search?startDate=' + startDate + '&endDate=' + endDate
+      + '&name=' + name + '&status=' + status + '&pageable=' + pageable + '&type=' + type)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -36,13 +45,6 @@ export class VaccinationManagerService {
       );
   }
 
-  getAllVaccinationType(): Observable<IVaccinationType[]> {
-    return this.httpClient.get<IVaccinationType[]>(this.apiVaccinationTypeUrl + '/')
-      .pipe(
-        catchError(this.errorHandler)
-      );
-  }
-
   getAllVaccine(): Observable<IVaccine[]> {
     return this.httpClient.get<IVaccine[]>(this.apiVaccineUrl + '/')
       .pipe(
@@ -50,13 +52,41 @@ export class VaccinationManagerService {
       );
   }
 
-  createVaccinationManager(vaccinationManager): Observable<IVaccination> {
-    return this.httpClient.post<IVaccination>(this.apiVaccinationManagerUrl, vaccinationManager)
+  findByIdVaccination(idVaccinationManager): Observable<IVaccination> {
+    return this.httpClient.get<IVaccination>(this.apiVaccinationManagerUrl + '/findById/' + idVaccinationManager)
       .pipe(
         catchError(this.errorHandler)
       );
   }
 
+  createVaccinationManager(vaccinationManager): Observable<IVaccination> {
+    return this.httpClient.post<IVaccination>(this.apiVaccinationManagerUrl + '/create', vaccinationManager)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  updateVaccinationManagerStatus(idVaccinationManager) {
+    return this.httpClient.patch<IVaccination>(this.apiVaccinationManagerUrl + '/status/' + idVaccinationManager, this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  updateVaccinationManager(idVaccinationManager, vaccinationManager): Observable<IVaccination> {
+    return this.httpClient.put<IVaccination>(this.apiVaccinationManagerUrl + '/update/' + idVaccinationManager, vaccinationManager)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+
+  deleteVaccinationManager(idVaccinationManager) {
+    return this.httpClient.patch<IVaccination>(this.apiVaccinationManagerUrl + '/delete/' + idVaccinationManager, this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
 
   errorHandler(error) {
     let errorMessage = '';

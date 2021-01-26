@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'periodical-vaccination-manager', redirectTo: 'periodical-vaccination-manager/list', pathMatch: 'full'},
   {path: 'periodical-vaccination-manager/list', component: PeriodicalVaccinationManagerListComponent},
   {path: 'periodical-vaccination-manager/create', component: PeriodicalVaccinationManagerCreateComponent},
-  {path: 'periodical-vaccination-manager/:idPeriodicalVaccinationManager/edit', component: PeriodicalVaccinationManagerEditComponent},
+  {path: 'periodical-vaccination-manager/:idVaccinationManager/edit', component: PeriodicalVaccinationManagerEditComponent},
 ];
 
 @NgModule({
