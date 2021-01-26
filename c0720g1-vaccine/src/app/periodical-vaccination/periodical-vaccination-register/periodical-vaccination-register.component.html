@@ -45,6 +45,7 @@
                 <input id="dateOfBirth" formControlName="dateOfBirth" class="form-control" type="date">
                 <small class="text-danger" *ngIf="patientForm.get('dateOfBirth').hasError('required') && patientForm.get('dateOfBirth').touched">Vui lòng chọn ngày sinh</small>
                 <small class="text-danger" *ngIf="patientForm.get('dateOfBirth').hasError('pattern') && patientForm.get('dateOfBirth').touched">Ngày sinh không đúng định dạng</small>
+                <small class="text-danger" *ngIf="patientForm.get('dateOfBirth').hasError('checkAge') && patientForm.get('dateOfBirth').touched">Tuổi phải từ 3 tháng tuổi đến 100</small>
               </div>
             </div>
             <div class="row mb-3">

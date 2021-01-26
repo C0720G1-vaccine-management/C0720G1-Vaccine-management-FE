@@ -128,6 +128,10 @@
   },
   "defaultProject": "c0720g1-vaccine",
   "cli": {
+
+    "analytics": false,
+
     "analytics": "0670c6b0-c295-4ece-a4fd-728c9fd9d3f5"
+
   }
 }
