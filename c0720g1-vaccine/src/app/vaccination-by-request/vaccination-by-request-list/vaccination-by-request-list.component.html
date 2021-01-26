@@ -34,7 +34,7 @@
     </div>
 
     <div class="">
-      <table style="height: 400px" class="table table-hover table-bordered ">
+      <table class="table table-hover table-bordered ">
         <thead>
         <tr>
           <th>STT</th>
@@ -55,7 +55,7 @@
           <td>{{v.age}}</td>
           <td>{{v.quantity > 0 ? 'Còn' : 'Hết'}}</td>
           <td class="text-center">
-            <button [routerLink]="'/vaccination-by-request/create/' + v.vaccineId"  class="btn btn-success">Đăng ký</button>
+            <button [disabled]="v.quantity < 1"  [routerLink]="v.quantity > 1 ?'/vaccination-by-request/create/' + v.vaccineId : '/vaccination-by-request/list'"  class="btn btn-success">Đăng ký</button>
           </td>
         </tr>
         </tbody>
@@ -65,11 +65,11 @@
     <div>
       <nav aria-label="Page navigation example">
         <ul class="pagination d-flex justify-content-md-end justify-content-center">
-          <li class="page-item"><button class="page-link" [hidden]="page == 0" (click)="page = 0; getListVaccine()">Đầu</button></li>
-          <li class="page-item"><button class="page-link" [hidden]="page == 0" (click)="page = page - 1; getListVaccine()">Trang sau</button></li>
+          <li class="page-item"><button class="page-link" [hidden]="page < 1" (click)="page = 0; getListVaccine()">Đầu</button></li>
+          <li class="page-item"><button class="page-link" [hidden]="page < 1" (click)="page = page - 1; getListVaccine()">Trang sau</button></li>
           <li class="page-item col-md-1 col-2  px-0">
             <div class="input-group">
-              <input #pageInput (change)="page = $event.target.value - 1" type="text" class="form-control text-right rounded-0" [placeholder]="page + 1" aria-label="Username" aria-describedby="basic-addon1">
+              <input  #pageInput (change)="page = $event.target.value - 1" type="text" class="form-control text-right rounded-0" [placeholder]="page + 1" aria-label="Username" aria-describedby="basic-addon1">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"> /{{pageable.totalPages}}</span>
               </div>

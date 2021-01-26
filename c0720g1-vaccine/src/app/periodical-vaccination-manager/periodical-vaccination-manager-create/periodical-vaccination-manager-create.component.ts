@@ -1,14 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {IVaccination} from '../../entity/IVaccination';
 import {IVaccine} from '../../entity/IVaccine';
-import {IVaccineType} from '../../entity/IVaccineType';
 import {ILocation} from '../../entity/ILocation';
 import {VaccinationManagerService} from '../vaccination-manager.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {IVaccinationType} from '../../entity/IVaccinationType';
-import {IVaccinationHistory} from '../../entity/IVaccinationHistory';
+import {DateValidator} from '../commons/validatorDate.validator';
+import {TimeValidator} from '../commons/validatorTime.validator';
 
 @Component({
   selector: 'app-periodical-vaccination-manager-create',
@@ -19,8 +17,34 @@ export class PeriodicalVaccinationManagerCreateComponent implements OnInit {
 
   formGroup: FormGroup;
   vaccineList: IVaccine[] = [];
-  vaccinationTypeList: IVaccinationType[] = [];
   locationList: ILocation[] = [];
+  valueAge: string;
+  valueNameVaccine: string;
+
+  /**TrungTQ Code: Thông báo validate*/
+  statusString: string = 'Chưa thực hiện';
+  messageTime: string = 'Thời gian kết thúc phải sau thời gian bắt đầu!';
+  validate_message = {
+    'startTime': [
+      {type: 'required', message: 'Trường này không được để trống!'},
+    ],
+    'endTime': [
+      {type: 'required', message: 'Trường này không được để trống!'},
+    ],
+    'date': [
+      {type: 'required', message: 'Trường này không được để trống!'},
+      {type: 'dateValid', message: 'Ngày làm lịch tiêm chủng định kỳ không được trước ngày hiện tại!'}
+    ],
+    'vaccineId': [
+      {type: 'required', message: 'Trường này không được để trống!'}
+    ],
+    'locationId': [
+      {type: 'required', message: 'Trường này không được để trống!'}
+    ],
+    'description': [
+      {type: 'required', message: 'Trường này không được để trống!'},
+    ]
+  };
 
   constructor(public formBuilder: FormBuilder,
               public toastrService: ToastrService,
@@ -30,53 +54,53 @@ export class PeriodicalVaccinationManagerCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllLocation();
-    this.getAllVaccinationType();
     this.getAllVaccine();
     this.formGroup = this.formBuilder.group({
-      vaccinationId: ['', [Validators.required]],
+      vaccinationId: [''],
       startTime: ['', [Validators.required]],
       endTime: ['', [Validators.required]],
-      date: ['', [Validators.required]],
-      status: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      date: ['', [Validators.required, DateValidator]],
       vaccineId: ['', [Validators.required]],
-      locationId: ['', [Validators.required]]
-    });
+      locationId: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+    }, {validators: TimeValidator});
   }
 
+  /**TrungTQ Code: Lấy danh sách địa điểm*/
   getAllLocation() {
     this.vaccinationManagerService.getAllLocation().subscribe((data: ILocation[]) => {
       this.locationList = data;
     });
   };
 
-  getAllVaccinationType() {
-    this.vaccinationManagerService.getAllVaccinationType().subscribe((data: IVaccinationType[]) => {
-      this.vaccinationTypeList = data;
-    });
-  };
-
+  /**TrungTQ Code: Lấy danh sách vaccine*/
   getAllVaccine() {
     this.vaccinationManagerService.getAllVaccine().subscribe((data: IVaccine[]) => {
       this.vaccineList = data;
     });
   };
 
-  get errorEmp() {
-    return this.formGroup.controls;
-  }
-
+  /**TrungTQ Code: quay lại trang chủ*/
   submitForm() {
     this.vaccinationManagerService.createVaccinationManager(this.formGroup.value).subscribe(data => {
       this.router.navigateByUrl('/periodical-vaccination-manager/list');
-    })
+    });
   }
 
+  /**TrungTQ Code: Hiện thông báo*/
   showMessage() {
     this.toastrService.success('Thêm mới lịch tiêm chủng định kỳ thành công!', 'Thông báo!');
   }
 
-  getValue() {
-    this.formGroup.value.vaccineId
+  /**
+   * TrungTQ code: lấy dữ liệu của đối tượng khi có sự kiện
+   * */
+  getValue(vaccineId: any) {
+    for (let i = 0; i < this.vaccineList.length; i++) {
+      if (this.vaccineList[i].vaccineId == parseInt(vaccineId)) {
+        this.valueAge = this.vaccineList[i].age;
+        this.valueNameVaccine = this.vaccineList[i].vaccineType.name;
+      }
+    }
   }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 
@@ -42,5 +42,23 @@ export class ImportAndExportService {
   }
   getListOrigin(): Observable<any>{
     return this.http.get(this.API + "getOriginVaccine")
+  }
+  /**
+   * Phuc NB
+   * @param id
+   * @param input
+   */
+  exportVaccine(id, input): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('input', input);
+    return this.http.get(this.API + id + '/exportVaccine' , {params})
+  }
+
+  /**
+   * Phuc NB
+   * @param idVaccine
+   */
+  findVaccineById(idVaccine :number):Observable<any>{
+    return this.http.get(this.API + 'getVaccine/' + idVaccine)
   }
 }

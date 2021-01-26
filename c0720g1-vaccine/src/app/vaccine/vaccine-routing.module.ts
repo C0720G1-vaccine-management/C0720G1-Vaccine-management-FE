@@ -7,7 +7,7 @@ import {VaccineCreateComponent} from "./vaccine-create/vaccine-create.component"
 
 const routes:Routes=[
   {path:'vaccine-list',component: VaccineListComponent},
-  {path: 'vaccine-create',component: VaccineCreateComponent}
+  {path:'vaccine-create',component: VaccineCreateComponent},
 ];
 @NgModule({
   declarations: [],

@@ -1,87 +1,104 @@
 <div class="container-fluid">
 
+  <form [formGroup]="formExportVaccine" (submit)="onSubmit()">
+    <div role="alert">
+      <h2 class="text-center">Thông Tin Vắc-Xin Cần Xuất Kho</h2>
+    </div>
 
-  <div role="alert">
-    <h2 class="text-center">Thông Tin Vắc-Xin Cần Xuất Kho</h2>
-  </div>
-
-  <div class="
+    <div class="
     container-fluid row g-3" style="padding-left: 140px; padding-right: 100px">
 
-    <div class="col-md-6 mt-3">
-      <p>Tên Văc-xin:</p>
-      <input type="text" class="form-control" placeholder="Tên Vắc-xin" aria-label="Tên Vắc-Xin"
-             value="Chống Bệnh Lao" disabled>
+      <div class="col-md-6 mt-3">
+        <p>Tên Văc-xin:</p>
+        <input type="text" class="form-control" placeholder="Tên Vắc-xin" aria-label="Tên Vắc-Xin"
+               value="{{name}}" disabled>
+      </div>
+
+      <div class="col-md-6 mt-3">
+        <p>Số Lô:</p>
+        <input type="text" class="form-control" placeholder="Số Lô" aria-label="Số Lô" [value]="quantity" disabled>
+      </div>
+
+      <div class="col-md-6 mt-3">
+        <p>Loại Vắc-xin:</p>
+        <input type="text" class="form-control" placeholder="Loại Vắc-xin" aria-label="Loại Vắc-xin" [value]="nameType"
+               disabled>
+      </div>
+
+      <div class="col-md-6 mt-3">
+        <p>Hạn Sử Dụng:</p>
+        <input type="text" class="form-control" placeholder="Hạn Sử Dụng" aria-label="Hạn Sử Dụng" [value]="expired"
+               disabled
+               readonly>
+      </div>
+
+      <div class="col-md-6 mt-3">
+        <p>Ngày Nhập:</p>
+        <input type="text" class="form-control" placeholder="Ngày Nhập" aria-label="Ngày Nhập" value="2020/25/1"
+               disabled>
+      </div>
+
+      <div class="col-md-6 mt-3">
+        <p>Điều Kiện Bảo Quản:</p>
+        <input type="text" class="form-control" placeholder="Điều Kiện Bảo Quản" aria-label="Điều Kiện Bảo Quản"
+               [value]="maintenance" disabled>
+      </div>
+
+      <div class="col-md-6 mt-3">
+        <p>Số Giấy Phép:</p>
+        <input type="text" class="form-control" placeholder="Số Giấy Phép" aria-label="Số Giấy Phép"
+               [value]="licenseCode"
+               disabled>
+      </div>
+
+
+      <div class="col-md-6 mt-3">
+        <p>Độ Tuổi Tiêm Chủng:</p>
+        <input type="text" class="form-control" placeholder="Độ Tuổi Tiêm Chủng" aria-label="Độ Tuổi Tiêm Chủng"
+               [value]="age" disabled>
+      </div>
+
+      <div class="col-md-6 mt-3">
+        <p>Nước Sản Xuất:</p>
+        <input type="text" class="form-control" placeholder="Nước Sản Xuất" aria-label="Nước Sản Xuất" [value]="origin"
+               disabled>
+      </div>
+
+      <div class="col-md-6 mt-3">
+        <p>Hàm Lượng Cần Xuất<sup  style="color: red">*</sup>:</p>
+        <input type="text" formControlName="quantityExport" class="form-control"
+               aria-label="Hàm Lượng Cần Xuất" #MyValue/>
+<!--        <p-->
+<!--          *ngIf="formExportVaccine.get('quantityExport').hasError('required') && ( formExportVaccine.get('quantityExport').dirty ||formExportVaccine.get('quantity').pristine) "-->
+<!--          class="text-danger">Yêu cầu nhập số</p>-->
+        <div class="text-danger" *ngFor="let validation of validation_messages.quantityExport">
+          <div class="error-message"
+               *ngIf="formExportVaccine.get('quantityExport').hasError(validation.type) && (formExportVaccine.get('quantityExport').dirty || formExportVaccine.get('quantityExport').pristine)">
+            {{validation.message}}</div>
+        </div>
+
+      </div>
+
+
+      <div class="col-md-3" style="margin-top: 20px;margin-left: 880px">
+        <button [disabled]="formExportVaccine.invalid" type="button" class="btn btn-warning mr-4 " data-toggle="modal"
+                data-target="#exampleModal">Xuất Kho
+        </button>
+        <button type="button" class="btn btn-secondary mr-3" routerLink="/vaccine-list">Huỷ</button>
+
+
+      </div>
+
+
     </div>
-
-    <div class="col-md-6 mt-3">
-      <p>Số Lô:</p>
-      <input type="text" class="form-control" placeholder="Số Lô" aria-label="Số Lô" value="500" disabled>
-    </div>
-
-    <div class="col-md-6 mt-3">
-      <p>Loại Vắc-xin:</p>
-      <input type="text" class="form-control" placeholder="Loại Vắc-xin" aria-label="Loại Vắc-xin" value="BCG"
-             disabled>
-    </div>
-
-    <div class="col-md-6 mt-3">
-      <p>Hạn Sử Dụng:</p>
-      <input type="text" class="form-control" placeholder="Hạn Sử Dụng" aria-label="Hạn Sử Dụng" value="1 năm"
-             disabled>
-    </div>
-
-    <div class="col-md-6 mt-3">
-      <p>Ngày Nhập:</p>
-      <input type="date" class="form-control" placeholder="Ngày Nhập" aria-label="Ngày Nhập">
-    </div>
-
-    <div class="col-md-6 mt-3">
-      <p>Điều Kiện Bảo Quản:</p>
-      <input type="text" class="form-control" placeholder="Điều Kiện Bảo Quản" aria-label="Điều Kiện Bảo Quản"
-             value="2-8 độ C" disabled>
-    </div>
-
-    <div class="col-md-6 mt-3">
-      <p>Số Giấy Phép:</p>
-      <input type="text" class="form-control" placeholder="Số Giấy Phép" aria-label="Số Giấy Phép" value="1"
-             disabled>
-    </div>
-
-
-    <div class="col-md-6 mt-3">
-      <p>Độ Tuổi Tiêm Chủng:</p>
-      <input type="text" class="form-control" placeholder="Độ Tuổi Tiêm Chủng" aria-label="Độ Tuổi Tiêm Chủng"
-             value="Trẻ em" disabled>
-    </div>
-
-    <div class="col-md-6 mt-3">
-      <p>Nước Sản Xuất:</p>
-      <input type="text" class="form-control" placeholder="Nước Sản Xuất" aria-label="Nước Sản Xuất"
-             value="Việt Nam"
-             disabled>
-    </div>
-
-    <div class="col-md-6 mt-3">
-      <p>Hàm Lượng Cần Xuất:</p>
-      <input type="text" class="form-control" placeholder="Hàm Lượng Cần Xuất" aria-label="Hàm Lượng Cần Xuất"
-             value="30">
-    </div>
-
-    <div class="col-md-3" style="margin-top: 20px;margin-left: 880px">
-      <button type="button" class="btn btn-warning mr-4 " data-toggle="modal" data-target="#exampleModal">Xuất Kho
-      </button>
-      <button type="button" class="btn btn-secondary mr-3">Huỷ</button>
-
-
-    </div>
-
-
-  </div>
-
+  </form>
   <!-- footer -->
 
 </div>
+
+  <!-- footer -->
+
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -92,19 +109,17 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <h5><b><i>Bạn đang thao tác xuất vắc-xin Chống Bệnh Lao với số lượng là: 30.</i></b></h5>
-          <h6><i>Hãy kiểm tra lại lần cuối trước khi xuất!!!</i></h6>
-          <div>
-            <input type="hidden" id="idToDelete" name="deleteId">
-            <h4>Bạn Có Muốn Xuất Kho Không?</h4>
-          </div>
-
-        </form>
+        <h5><b><i>Bạn đang thao tác xuất vắc-xin.</i></b></h5>
+        <h6><i>Hãy kiểm tra lại lần cuối trước khi xuất!!!</i></h6>
+        <div>
+          <input type="hidden" id="idToDelete" name="deleteId">
+          <h4>Bạn Có Muốn Xuất Kho Không?</h4>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-        <button type="button" class="btn btn-warning">Xuất Kho</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="export(MyValue.value)">Xuất Kho
+        </button>
       </div>
     </div>
   </div>
@@ -112,8 +127,3 @@
 </div>
 
 
-<script>
-  function getId(id) {
-    document.getElementById("idToDelete").value = id;
-  }
-</script>
