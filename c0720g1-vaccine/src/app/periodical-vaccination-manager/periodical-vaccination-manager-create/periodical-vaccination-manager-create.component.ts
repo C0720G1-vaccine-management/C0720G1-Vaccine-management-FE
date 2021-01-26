@@ -88,7 +88,7 @@ export class PeriodicalVaccinationManagerCreateComponent implements OnInit {
   }
 
   /**TrungTQ Code: Hiện thông báo*/
-  showMessage() {
+  showMessageSuccess() {
     this.toastrService.success('Thêm mới lịch tiêm chủng định kỳ thành công!', 'Thông báo!');
   }
 
