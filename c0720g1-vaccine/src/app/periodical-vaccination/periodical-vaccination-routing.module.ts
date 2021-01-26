@@ -8,7 +8,7 @@ import {PeriodicalVaccinationRegisterComponent} from './periodical-vaccination-r
  *
  */
 const routes: Routes = [
-  {path: 'periodical-vaccination/list', component: PeriodicalVaccinationListComponent},
+  {path: '', component: PeriodicalVaccinationListComponent},
   {path: 'periodical-vaccination/register/:id', component: PeriodicalVaccinationRegisterComponent}
 ];
 
