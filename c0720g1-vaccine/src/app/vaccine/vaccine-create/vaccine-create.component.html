@@ -1,120 +1,204 @@
 <div class="container">
   <h2 style="text-align: center;font-weight: bold">Thông Tin Vắc-Xin Nhập Kho</h2>
-  <form action="">
+  <form [formGroup]="formCreateVaccine" (ngSubmit)="save()">
     <div class="mt-5 row">
       <div class="col-6" style="font-weight: bold;font-size: 17px">
-        <div class="row">
-          <div class="col-4">
-            <label for="mavac-xin" class="mr-3">Mã Vắc-Xin <span style="color: red">*</span></label>
-          </div>
-          <div class="col-8">
-            <input type="text" id="mavac-xin" class="form-control">
-          </div>
-        </div>
-        <div class="row mt-3">
+        <!--        <div class="row">-->
+        <!--          <div class="col-4">-->
+        <!--            <label for="mavac-xin" class="mr-3">Mã Vắc-Xin <span style="color: red">*</span></label>-->
+        <!--          </div>-->
+        <!--          <div class="col-8">-->
+        <!--            <input type="text" id="mavac-xin" class="form-control">-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="tenvac-xin" class="mr-3">Tên Vắc-Xin <span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="text" id="tenvac-xin" class="form-control">
+            <input type="text" id="tenvac-xin" class="form-control" formControlName="nameVaccine">
+            <div *ngIf="formCreateVaccine.get('nameVaccine').invalid && formCreateVaccine.get('nameVaccine').touched">
+              <div *ngIf="formCreateVaccine.get('nameVaccine').hasError('required')">
+                <small class="text-danger">
+                  Name is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="loaivac-xin" class="mr-3">Loại Vắc-Xin <span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="text" id="loaivac-xin" class="form-control">
+            <input type="text" id="loaivac-xin" class="form-control" formControlName="typeVaccine">
+            <div *ngIf="formCreateVaccine.get('typeVaccine').invalid && formCreateVaccine.get('typeVaccine').touched">
+              <div *ngIf="formCreateVaccine.get('typeVaccine').hasError('required')">
+                <small class="text-danger">
+                  TypeVaccine is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="ngaynhap" class="mr-3">Ngày Nhập <span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="date" id="ngaynhap" class="form-control">
+            <input type="date" id="ngaynhap" class="form-control" formControlName="dateRecieve">
+            <div *ngIf="formCreateVaccine.get('dateRecieve').invalid && formCreateVaccine.get('dateRecieve').touched">
+              <div *ngIf="formCreateVaccine.get('dateRecieve').hasError('required')">
+                <small class="text-danger">
+                  DateRecieve is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="sogiayphep" class="mr-3">Số Giấy Phép</label>
           </div>
           <div class="col-8">
-            <input type="number" id="sogiayphep" class="form-control">
+            <input type="number" min="0" id="sogiayphep" class="form-control" formControlName="licenseCode">
+            <div *ngIf="formCreateVaccine.get('licenseCode').invalid && formCreateVaccine.get('licenseCode').touched">
+              <div *ngIf="formCreateVaccine.get('licenseCode').hasError('required')">
+                <small class="text-danger">
+                  LicenseCode is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="nuocsx" class="mr-3">Nước Sản Xuất <span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="text" id="nuocsx" class="form-control">
+            <input type="text" id="nuocsx" class="form-control"formControlName="orrigin">
+            <div *ngIf="formCreateVaccine.get('orrigin').invalid && formCreateVaccine.get('orrigin').touched">
+              <div *ngIf="formCreateVaccine.get('orrigin').hasError('required')">
+                <small class="text-danger">
+                  Orrigin is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="nhacc" class="mr-3">Nhà Cung Cấp <span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="text" id="nhacc" class="form-control">
+            <input type="text" id="nhacc" class="form-control" formControlName="provider">
+            <div *ngIf="formCreateVaccine.get('provider').invalid && formCreateVaccine.get('provider').touched">
+              <div *ngIf="formCreateVaccine.get('provider').hasError('required')">
+                <small class="text-danger">
+                  Provider is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="col-6" style="font-weight: bold;font-size: 16px">
-        <div class="row">
+        <div class="form-group row">
           <div class="col-4">
             <label for="dongia" class="mr-3">Đơn Giá <span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="number" id="dongia" class="form-control">
+            <input type="number" min="0" id="dongia" class="form-control" formControlName="unitPrice">
+            <div *ngIf="formCreateVaccine.get('unitPrice').invalid && formCreateVaccine.get('unitPrice').touched">
+              <div *ngIf="formCreateVaccine.get('unitPrice').hasError('required')">
+                <small class="text-danger">
+                  UnitPrice is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="hamluong" class="mr-3">Hàm Lượng (ml)<span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="text" id="hamluong" class="form-control">
+            <input type="text" id="hamluong" class="form-control" formControlName="dosage">
+            <div *ngIf="formCreateVaccine.get('dosage').invalid && formCreateVaccine.get('dosage').touched">
+              <div *ngIf="formCreateVaccine.get('dosage').hasError('required')">
+                <small class="text-danger">
+                  Dosage is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="solo" class="mr-3">Số Lô</label>
           </div>
           <div class="col-8">
-            <input type="text" id="solo" class="form-control">
+            <input type="number" min="0" id="solo" class="form-control" formControlName="quantity">
+            <div *ngIf="formCreateVaccine.get('quantity').invalid && formCreateVaccine.get('quantity').touched">
+              <div *ngIf="formCreateVaccine.get('quantity').hasError('required')">
+                <small class="text-danger">
+                  Quantity is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="hansudung" class="mr-3">Hạn Sử Dụng <span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="text" id="hansudung" class="form-control">
+            <input type="date" id="hansudung" class="form-control" formControlName="expired">
+            <div *ngIf="formCreateVaccine.get('expired').invalid && formCreateVaccine.get('expired').touched">
+              <div *ngIf="formCreateVaccine.get('expired').hasError('required')">
+                <small class="text-danger">
+                  Expired is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="dkbaoquan">Điều Kiện Bảo Quản<span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="text" id="dkbaoquan" class="form-control">
+            <input type="text" id="dkbaoquan" class="form-control" formControlName="maintenance">
+            <div *ngIf="formCreateVaccine.get('maintenance').invalid && formCreateVaccine.get('maintenance').touched">
+              <div *ngIf="formCreateVaccine.get('maintenance').hasError('required')">
+                <small class="text-danger">
+                  Maintenance is not Empty!
+                </small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="form-group row mt-3">
           <div class="col-4">
             <label for="dotuoi" class="mr-3">Độ Tuổi Tiêm Chủng<span style="color: red">*</span></label>
           </div>
           <div class="col-8">
-            <input type="text" id="dotuoi" class="form-control">
+            <input type="text" id="dotuoi" class="form-control" formControlName="age">
+            <div *ngIf="formCreateVaccine.get('age').invalid && formCreateVaccine.get('age').touched">
+              <div *ngIf="formCreateVaccine.get('age').hasError('required')">
+                <small class="text-danger">
+                  Age is not Empty !
+                </small>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="d-flex justify-content-end mt-3">
-      <button class="btn btn-primary mr-5">Lưu Kho</button>
-      <button class="btn btn-dark" type="reset">Hủy</button>
+      <button [disabled]="formCreateVaccine.invalid" class="btn btn-primary mr-5" type="submit">Lưu Kho</button>
+      <button class="btn btn-dark" [routerLink]="['/vaccine-list']">Hủy</button>
     </div>
   </form>
-
 </div>
+
