@@ -8,29 +8,88 @@ import {FormControl, FormGroup} from "@angular/forms";
   templateUrl: './vaccine-list.component.html',
   styleUrls: ['./vaccine-list.component.scss']
 })
+/**
+ * TinVT
+ * @return
+ */
 export class VaccineListComponent implements OnInit {
+  indexPagination : number = 1;
+  totalPagination:number;
   public searchVaccine :FormGroup;
   vaccines: IVaccineDTO[] = [];
+  listVaccineNotPagination: IVaccineDTO[] = [];
   constructor(private vaccineService:VaccineService) { }
 
   ngOnInit(): void {
-    this.vaccineService.getAllVaccine().subscribe((data:IVaccineDTO[])=>{
+    this.vaccineService.getAllVaccine(0).subscribe((data:IVaccineDTO[])=>{
       this.vaccines = data;
       console.log(data);
-      this.searchVaccine = new FormGroup({
-        nameVaccine : new FormControl(''),
-        typeVaccine : new FormControl(''),
-        originVaccine : new FormControl(''),
-        statusVaccine : new FormControl('')
-      })
+    });
+    this.searchVaccine = new FormGroup({
+      nameVaccine : new FormControl(''),
+      typeVaccine : new FormControl(''),
+      originVaccine : new FormControl(''),
+      statusVaccine : new FormControl('')
+    });
+    this.vaccineService.getAllVaccineNotPagination().subscribe((data : IVaccineDTO[])=>{
+      this.listVaccineNotPagination = data;
+      console.log(data);
+      if((this.listVaccineNotPagination.length % 5) != 0){
+        this.totalPagination = (Math.round(this.listVaccineNotPagination.length /5)) + 1;
+      }
     })
   }
 
   search() {
     this.vaccineService.search(this.searchVaccine.value.nameVaccine,this.searchVaccine.value.typeVaccine,this.searchVaccine.value.originVaccine,
-    this.searchVaccine.value.statusVaccine).subscribe((data:IVaccineDTO[])=>{
-        return this.vaccines = data
+      this.searchVaccine.value.statusVaccine).subscribe((data:IVaccineDTO[])=>{
+      return this.vaccines = data
     });
     console.log(this.searchVaccine.value)
+  }
+
+  findPaginnation() {
+    this.vaccineService.getAllVaccine((this.indexPagination *5) - 5).subscribe((data:IVaccineDTO[])=>{
+      this.vaccines = data;
+    })
+  }
+
+  indexPaginationChage(value: number) {
+    this.indexPagination = value;
+  }
+
+  firtPage() {
+    this.indexPagination = 1;
+    this.ngOnInit();
+  }
+
+  nextPage() {
+    this.indexPagination = this.indexPagination + 1;
+    if(this.indexPagination > this.totalPagination){
+      this.indexPagination = this.indexPagination -1;
+    }
+    this.vaccineService.getAllVaccine((this.indexPagination *5) - 5).subscribe((data:IVaccineDTO[])=>{
+      this.vaccines = data;
+    })
+  }
+
+  prviousPage() {
+    this.indexPagination = this.indexPagination - 1;
+    if(this.indexPagination == 0 ){
+      this.indexPagination = 1;
+      this.ngOnInit();
+    }else {
+      this.vaccineService.getAllVaccine((this.indexPagination *5) - 5).subscribe((data:IVaccineDTO[])=>{
+        this.vaccines = data;
+      })
+    }
+  }
+
+  lastPage() {
+    this.indexPagination = this.listVaccineNotPagination.length / 5 ;
+    console.log(this.indexPagination);
+    this.vaccineService.getAllVaccine((this.indexPagination *5) - 5).subscribe((data:IVaccineDTO[])=>{
+      this.vaccines = data;
+    })
   }
 }
