@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Route, Router} from '@angular/router';
+import {PatientService} from "../../service/patient.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-
 import {ActivatedRoute, Route, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-
 import {checkDateOfBirth} from "../../validator/checkDateOfBirth";
-import {PatientService} from "../../service/patient.service";
 
 
 @Component({

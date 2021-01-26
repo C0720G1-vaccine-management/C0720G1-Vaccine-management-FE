@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {IPatient} from '../../entity/IPatient';
 import {PatientService} from "../../service/patient.service";
 
 
