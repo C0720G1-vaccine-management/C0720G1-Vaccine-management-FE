@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
+import {VaccinationHistoryModule} from "./vaccination-history/vaccination-history.module";
 import {PatientModule} from './patient/patient.module';
 import {VaccineModule} from "./vaccine/vaccine.module";
 import {SecurityModule} from "./security/security.module";
@@ -26,6 +27,11 @@ import {RegisteredForVaccinationModule} from "./registered-for-vaccination/regis
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
+    VaccinationHistoryModule,
+    VaccineModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     PatientModule,
     VaccineModule,

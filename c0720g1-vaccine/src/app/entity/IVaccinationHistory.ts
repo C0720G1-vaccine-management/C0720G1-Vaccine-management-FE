@@ -8,7 +8,6 @@ export interface IVaccinationHistory {
   dosage: number;
   preStatus: string;
   afterStatus: string;
-
   vaccination: IVaccination;
   patient: IPatient;
   vaccinationTransaction: IVaccinationTransaction;
