@@ -23,16 +23,18 @@
           <div class="col-xl-4 col-md-3">
             <label>Họ Và Tên</label>
             <input (change)="name = $event.target.value" class="form-control" type="text" placeholder="Họ Và Tên">
+
           </div>
           <div class="col-xl-4 col-md-3">
             <label>Tình trạng</label>
-            <select (change)="status = $event.target.value" class="form-control" name="">
+            <select (change)="status = $event.target.value" class="form-control">
+              <option value="">Chọn Tình Trạng</option>
               <option value=false>Chưa tiêm</option>
               <option value=true>Đã tiêm</option>
             </select>
           </div>
           <div class="col-xl-auto col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
-            <button class="btn btn-success mt-2" (click)="page = 0;getListPeriodicVaccination()"><i
+            <button class="btn btn-success mt-2"  (click)="page = 0;searchPeriodicVaccination()"><i
               class="fa fa-search"></i> Tìm kiếm
             </button>
           </div>
@@ -80,10 +82,10 @@
     <nav aria-label="Page navigation example">
       <ul class="pagination d-flex justify-content-md-end justify-content-center">
         <li class="page-item">
-          <button class="page-link" [hidden]="page == 0" (click)="page = 0; getListPeriodicVaccination()">Đầu</button>
+          <button class="page-link" [hidden]="page == 0" (click)="page = 0; searchPeriodicVaccination()">Đầu</button>
         </li>
         <li class="page-item">
-          <button class="page-link" [hidden]="page == 0" (click)="page = page - 1; getListPeriodicVaccination()">Trang
+          <button class="page-link" [hidden]="page == 0" (click)="page = page - 1; searchPeriodicVaccination()">Trang
             sau
           </button>
         </li>
@@ -100,16 +102,16 @@
           </div>
         </li>
         <li class="page-item">
-          <button (click)="getListPeriodicVaccination()" class="btn btn-primary rounded-0">Đi</button>
+          <button (click)="searchPeriodicVaccination()" class="btn btn-primary rounded-0">Đi</button>
         </li>
         <li class="page-item">
           <button class="page-link" [hidden]="page >=  pageable.totalPages - 1"
-                  (click)="page = page + 1; getListPeriodicVaccination()">Trang kế
+                  (click)="page = page + 1; searchPeriodicVaccination()">Trang kế
           </button>
         </li>
         <li class="page-item">
           <button class="page-link" [hidden]="page >=  pageable.totalPages - 1 && page < pageable.totalPages"
-                  (click)="page = pageable.totalPages - 1; getListPeriodicVaccination()">Cuối
+                  (click)="page = pageable.totalPages - 1; searchPeriodicVaccination()">Cuối
           </button>
         </li>
       </ul>

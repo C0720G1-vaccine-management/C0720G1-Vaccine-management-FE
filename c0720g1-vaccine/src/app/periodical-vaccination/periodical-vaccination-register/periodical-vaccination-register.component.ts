@@ -5,6 +5,7 @@ import {PeriodicalVaccinationKhoaService} from "../../service/periodical-vaccina
 import {IPeriodicalVaccinationDTO} from "../../entity/IPeriodicalVaccinationDTO";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ShowMessage} from "../../common/show-message";
+import {checkDateOfBirth} from "../../validator/check-date-of-birth";
 
 @Component({
   selector: 'app-periodical-vaccination-register',
@@ -23,10 +24,10 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
               private router: Router,
               private showMessage: ShowMessage) {
     this.patientForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Zàáạảãâầầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$')]),
-      dateOfBirth: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-ZàáạảãâầầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổơờớợởỡùúụủũưừứựửữỳýỵỷỹỗđĐÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
+      dateOfBirth: new FormControl('', [Validators.required, checkDateOfBirth]),
       gender: new FormControl('', [Validators.required, Validators.pattern('^(Nam|Nữ)$')]),
-      guardian: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Zàáạảãâầầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$')]),
+      guardian: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-ZàáạảãâầầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
       phone: new FormControl('', [Validators.required, Validators.pattern('^(0|\\(\\+84\\))[1-9]{1}\\d{7}$')]),
       address: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -50,9 +51,9 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
     console.log(this.patientForm.value);
     this.vaccinationService.saveRegister(this.patientForm.value).subscribe( (response) => {
     },() => {
-      this.errorMessage = 'Đăng ký thất bại, vui lòng xem lại các thông tin'
+      this.showMessage.showMessageRegisterError();
     }, () => {
-      this.showMessage.showMessageRegisterSuccessfully()
+      this.showMessage.showMessageRegisterSuccessfully();
       this.router.navigateByUrl('periodical-vaccination/list')
     });
   }
