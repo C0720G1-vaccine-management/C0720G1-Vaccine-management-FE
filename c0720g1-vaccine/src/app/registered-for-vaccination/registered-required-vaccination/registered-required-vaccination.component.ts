@@ -20,6 +20,10 @@ export class RegisteredRequiredVaccinationComponent implements OnInit {
   public pageable : any;
   constructor(private vaccinationHistoryService: VaccinationHistoryService ) { }
 
+  ngOnInit(): void {
+    this.getAll();
+  }
+
   getAll(){
     this.vaccinationHistoryService.getAllRegisteredRequired(this.page,this.name).subscribe(data => {
       this.vaccinationHistoryList = data.content;
@@ -38,9 +42,4 @@ export class RegisteredRequiredVaccinationComponent implements OnInit {
       this.vaccinationHistoryList = [];
     });
   }
-
-  ngOnInit(): void {
-    this.getAll();
-  }
-
 }
