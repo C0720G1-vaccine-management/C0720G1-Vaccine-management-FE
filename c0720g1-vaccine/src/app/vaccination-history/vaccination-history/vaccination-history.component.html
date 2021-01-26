@@ -52,9 +52,9 @@
             <td style="width: 200px">{{vaccinationHistory.vaccination.vaccine.name}}</td>
             <td>{{vaccinationHistory.vaccination.vaccine.vaccineType.name}}</td>
             <td>{{vaccinationHistory.vaccination.date}}</td>
-            <td>{{vaccinationHistory.preStatus}}</td>
+            <td>{{vaccinationHistory.afterStatus}}</td>
             <td class="text-center">
-              <div *ngIf="vaccinationHistory.preStatus === ''; else elseBlock ">
+              <div *ngIf="vaccinationHistory.afterStatus === null; else elseBlock ">
                 <span class="badge badge-danger">Chưa phản hồi<br> sau khi tiêm</span>
               </div>
               <ng-template #elseBlock>
@@ -64,7 +64,7 @@
               </ng-template>
             </td>
             <td class="text-center">
-              <div *ngIf="vaccinationHistory.preStatus !== '' ; else elseBlock1 ">
+              <div *ngIf="vaccinationHistory.afterStatus !== null ; else elseBlock1 ">
                 <button type="button" class="btn btn-success with-button"
                         [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Thêm
                   phản hồi
