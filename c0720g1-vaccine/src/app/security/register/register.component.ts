@@ -2,7 +2,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
-import {AuthService} from "../../../service/auth.service";
+import {AuthService} from "../../service/auth.service";
 
 
 @Component({
@@ -28,28 +28,22 @@ export class RegisterComponent implements OnInit {
   validation_messages = {
     'username': [
       {type: 'required', message: 'Trường này không được để trống!'},
+      {type: 'minlength', message: 'Tên đăng nhập nhiều hơn 6 ký tự'},
    ],
     'password':[
-      {type: 'required',message: 'Trường này không được để trống!'}
-    ],
-    'name':[
-      {type: 'required',message: 'Trường này không được để trống!'}
+      {type: 'required',message: 'Trường này không được để trống!'},
+      {type: 'minlength', message: 'Tên đăng nhập nhiều hơn 8 ký tự'},
     ],
     'email':[
       {type: 'required',message: 'Trường này không được để trống!'}
     ],
-    'address':[
-      {type: 'required',message: 'Trường này không được để trống!'}
-    ]
   };
   ngOnInit(): void {
     //  declare form group by Linh
     this.formGroup = this.formBuild.group({
-        username: ['',[Validators.required]],
-        password: ['',[Validators.required]],
-        name:['',[Validators.required]],
+        username: ['',[Validators.required,Validators.minLength(6)]],
+        password: ['',[Validators.required,Validators.minLength(8)]],
         email:['',[Validators.required]],
-        address:['',[Validators.required]]
       }
     );
 
