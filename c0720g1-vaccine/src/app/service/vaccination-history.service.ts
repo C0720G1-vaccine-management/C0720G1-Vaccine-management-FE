@@ -32,34 +32,23 @@ export class VaccinationHistoryService {
     return this.http.get<IVaccinationHistoryFeedbackDTO>(this.baseURL + '/vaccination-history/feedback/' + vaccinationHistoryId, this.httpOptions);
   }
 
-  findByPreStatus(vaccinationHistoryId): Observable<IVaccinationHistorySendFeedbackDTO> {
-    return this.http.get<IVaccinationHistorySendFeedbackDTO>(this.baseURL + '/vaccination-history/feedback/getPreStatus/' + vaccinationHistoryId, this.httpOptions);
+  findByAfterStatus(vaccinationHistoryId): Observable<IVaccinationHistorySendFeedbackDTO> {
+    return this.http.get<IVaccinationHistorySendFeedbackDTO>(this.baseURL + '/vaccination-history/feedback/getAfterStatus/' + vaccinationHistoryId, this.httpOptions);
 
   }
 
   updateFeedback(vaccinationHistoryId, vaccinationHistory): Observable<IVaccinationHistorySendFeedbackDTO> {
-    return this.http.put<IVaccinationHistorySendFeedbackDTO>(this.baseURL + '/vaccination-history/feedback/sendFeedback/' + vaccinationHistoryId, JSON.stringify(vaccinationHistory), this.httpOptions)
+    return this.http.put<IVaccinationHistorySendFeedbackDTO>(this.baseURL + '/vaccination-history/feedback/sendFeedback/' + vaccinationHistoryId, vaccinationHistory, this.httpOptions);
   }
 
   findAllVaccinationHistory(page: number ,vaccineName: string, vaccinationDate: string, patientId: number): Observable<any> {
     return this.http.get<any>(this.baseURL + '/vaccination-history/?page=' + page + '&vaccineName=' + vaccineName + '&vaccinationDate='+ vaccinationDate + "&patientId="+ patientId, this.httpOptions);
   }
 
-  errorHandler(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
+
+  getPatientId(accountId): Observable<number> {
+    return this.http.get<number>(this.baseURL + '/gePatientVaccinationHistoryId/' + accountId , this.httpOptions);
   }
-
-
-
 }
 
 
