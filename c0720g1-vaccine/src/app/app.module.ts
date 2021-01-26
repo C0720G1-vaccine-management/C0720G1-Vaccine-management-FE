@@ -14,10 +14,10 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {VaccinationByRequestModule} from "./vaccination-by-request/vaccination-by-request.module";
 import {HttpClientModule} from "@angular/common/http";
+import {VaccineTransactionManagementModule} from "./vaccine-transaction-management/vaccine-transaction-management.module";
 import {PeriodicalVaccinationModule} from "./periodical-vaccination/periodical-vaccination.module";
 import {RegisteredForVaccinationRoutingModule} from "./registered-for-vaccination/registered-for-vaccination-routing.module";
 import {RegisteredForVaccinationModule} from "./registered-for-vaccination/registered-for-vaccination.module";
-
 
 
 @NgModule({
@@ -41,9 +41,10 @@ import {RegisteredForVaccinationModule} from "./registered-for-vaccination/regis
     SecurityModule,
     VaccinePriceManagementModule,
     VaccinationByRequestModule,
+    HttpClientModule,
+    VaccineTransactionManagementModule
     PeriodicalVaccinationModule,
     RegisteredForVaccinationModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
