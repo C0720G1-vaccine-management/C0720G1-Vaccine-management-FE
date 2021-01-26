@@ -71,10 +71,10 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination d-flex justify-content-md-end justify-content-center">
           <li class="page-item">
-            <button class="page-link" [hidden]="page == 0" (click)="page = 0; getAll()">Đầu</button>
+            <button class="page-link" [hidden]="page == 0" (click)="page = 0; search()">Đầu</button>
           </li>
           <li class="page-item">
-            <button class="page-link" [hidden]="page == 0" (click)="page = page - 1; getAll()">Trang
+            <button class="page-link" [hidden]="page == 0" (click)="page = page - 1; search()">Trang
               sau
             </button>
           </li>
@@ -89,16 +89,16 @@
             </div>
           </li>
           <li class="page-item">
-            <button (click)="getAll()" class="btn btn-primary rounded-0">Đi</button>
+            <button (click)="search()" class="btn btn-primary rounded-0">Đi</button>
           </li>
           <li class="page-item">
             <button class="page-link" [hidden]="page >=  pageable.totalPages - 1"
-                    (click)="page = page + 1; getAll()">Trang kế
+                    (click)="page = page + 1; search()">Trang kế
             </button>
           </li>
           <li class="page-item">
             <button class="page-link" [hidden]="page >=  pageable.totalPages - 1 && page < pageable.totalPages"
-                    (click)="page = pageable.totalPages - 1; getAll()">Cuối
+                    (click)="page = pageable.totalPages - 1; search()">Cuối
             </button>
           </li>
         </ul>
