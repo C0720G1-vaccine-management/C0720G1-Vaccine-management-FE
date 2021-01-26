@@ -7,7 +7,7 @@
 
         <div class="col-xl-3 col-md-3">
           <label for="nameVaccine">Mã nhân viên:</label>
-          <input id="nameVaccine" class="form-control" type="text" placeholder="Nhập mã NV">
+          <input id="nameVaccine" (change)="idEmpSearch = $event.target.value" class="form-control" type="text" placeholder="Nhập mã NV">
         </div>
         <div class="col-xl-3 col-md-3">
           <label>Họ và tên:</label>
@@ -15,13 +15,9 @@
         </div>
         <div class="form-group col-sm-3 col-md-3 col-lg-3">
           <label>Chức vụ:</label>
-          <select class="form-control">
+          <select (change)="positionSearch = $event.target.value" class="form-control">
             <option>Chọn chức vụ</option>
-            <option>Trưởng phòng</option>
-            <option>Thủ kho</option>
-            <option>Bác sĩ</option>
-            <option>Điều dưỡng</option>
-            <option>Thu ngân</option>
+            <option *ngFor="let position of positionList" [value]="position.positionId">{{position.name}}</option>
           </select>
         </div>
         <div class="col-xl-2 col-lg-2 width-search">

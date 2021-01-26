@@ -20,6 +20,8 @@ export class EmployeeListComponent implements OnInit {
 
 
   public name = '';
+  public idEmpSearch = '';
+  public positionSearch = '';
 
   constructor(
     private employeeService : EmployeeService,
@@ -56,9 +58,8 @@ export class EmployeeListComponent implements OnInit {
   }
 
   search() {
-    this.employeeService.searchEmployeeByName(this.name).toPromise().then(r => {
-      this.employeeList = r;
-      console.log(this.employeeList);
+    this.employeeService.searchEmployeeByName(this.name, this.idEmpSearch, this.positionSearch).toPromise().then(data => {
+      this.employeeList = data;
     });
   }
 }
