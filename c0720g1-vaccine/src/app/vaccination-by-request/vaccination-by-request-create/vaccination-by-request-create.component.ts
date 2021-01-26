@@ -42,8 +42,8 @@ export class VaccinationByRequestCreateComponent implements OnInit {
       name: ['', [Validators.required, Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]],
       gender: ['', [Validators.required]],
       dateOfBirth: ['', [Validators.required, checkDateOfBirth]],
-      guardian: ['', [Validators.required, Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]],
-      address: ['', [Validators.required]],
+      guardian: [''],
+      address: [''],
       phone: ['', [Validators.required, Validators.pattern('^(090|091|094|\\(\\+84\\)90|\\(\\+84\\)91)\\d{7}$')]],
       email: ['', [Validators.required, Validators.pattern('^\\w{5,}.?\\w+(@\\w{3,8})(.\\w{3,8})+$')]],
       dateVaccination: ['', [Validators.required, checkDateVaccination]],
@@ -72,15 +72,18 @@ export class VaccinationByRequestCreateComponent implements OnInit {
 
     this.patientService.registerVaccination(this.formRegister.value).subscribe(data => {
 
-
-      for (let i of data) {
-        if (i.field === 'email') {
-          this.checkEmailDuplicate = true;
-        }
-        if (i.field === 'phone') {
-          this.checkPhoneDuplicate = true;
+      console.log(data);
+      if (data != null) {
+        for (let i of data) {
+          if (i.field === 'email') {
+            this.checkEmailDuplicate = true;
+          }
+          if (i.field === 'phone') {
+            this.checkPhoneDuplicate = true;
+          }
         }
       }
+
 
       if (!this.checkPhoneDuplicate && !this.checkEmailDuplicate) {
         this.router.navigateByUrl('vaccination-by-request/list');
@@ -89,6 +92,8 @@ export class VaccinationByRequestCreateComponent implements OnInit {
         this.showMessage.showMessageCreateError();
       }
 
-    }, error => console.log(error));
+    }, error => {
+      console.log(error);
+    });
   }
 }

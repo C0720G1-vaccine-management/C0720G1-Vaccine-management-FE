@@ -9,7 +9,7 @@ import {catchError} from "rxjs/operators";
 })
 export class EmployeeService {
 
-  private api: string = 'http://localhost:8080/api';
+  private API_EMPLOYEE: string = 'http://localhost:8080/api/public';
   constructor(private httpClient: HttpClient) {
   }
   httpOptions = {
@@ -20,22 +20,32 @@ export class EmployeeService {
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
   };
 
+  /** LuyenNT code
+   * @param error
+   */
   errorHandler(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // Get client-side error
       errorMessage = error.error.message;
     } else {
-      // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     console.log(errorMessage);
     return throwError(errorMessage);
   };
+
+  /** LuyenNT code
+   * @param employeeDto
+   */
   createEmployee(employeeDto): Observable<EmployeeDto> {
-    return this.httpClient.post<EmployeeDto>(this.api + '/employee/create', JSON.stringify(employeeDto), this.httpOptions)
+    return this.httpClient.post<EmployeeDto>(this.API_EMPLOYEE + '/employee/create', JSON.stringify(employeeDto), this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       )
+  }
+  /** LuyenNT
+   */
+  getListPositionAndRole(){
+    return this.httpClient.get<any>(this.API_EMPLOYEE + '/employee/create');
   }
 }

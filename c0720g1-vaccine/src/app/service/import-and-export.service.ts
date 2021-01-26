@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 
@@ -7,12 +7,29 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ImportAndExportService {
-  public API = 'http://localhost:8080/api/';
+  public API = 'http://localhost:8080/api/public/';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    }),
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+  };
 
   constructor(
     public http: HttpClient
-  ) {}
-  getListExport(): Observable<any>{
-    return this.http.get(this.API+ 'list-vaccine-price');
+  ) {
+  }
+
+  getListExport(): Observable<any> {
+    return this.http.get(this.API + 'vaccine-price-list');
+  }
+
+  editPrice(id,price): Observable<any> {
+    return this.http.put(this.API + 'vaccine-price-edit/'+id+'/'+price,price);
+  }
+
+  getExportId(id): Observable<any> {
+    return this.http.get(this.API + 'getExportId/' + id)
   }
 }

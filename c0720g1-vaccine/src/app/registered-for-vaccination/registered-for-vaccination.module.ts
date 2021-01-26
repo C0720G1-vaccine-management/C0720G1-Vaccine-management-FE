@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisteredRequiredVaccinationComponent } from './registered-required-vaccination/registered-required-vaccination.component';
 import {RegisteredForVaccinationRoutingModule} from "./registered-for-vaccination-routing.module";
-import {CenterPeriodicVaccinationComponent} from "./center-periodic-vaccination/center-periodic-vaccination.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ViewRegisteredRequiredVaccinationComponent } from './view-registered-required-vaccination/view-registered-required-vaccination.component';
+import {RegisteredRequiredVaccinationComponent} from "./registered-required-vaccination/registered-required-vaccination.component";
 
 
 @NgModule({
@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule
-  ]
+  ],
+  declarations: [ViewRegisteredRequiredVaccinationComponent, RegisteredRequiredVaccinationComponent]
 })
 export class RegisteredForVaccinationModule { }
