@@ -25,36 +25,32 @@ export class VaccinationHistoryService {
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
   };
 
-
+  /**
+   * TuNH
+   */
   findByIdVaccinationHistory(vaccinationHistoryId): Observable<IVaccinationHistoryFeedbackDTO> {
     return this.http.get<IVaccinationHistoryFeedbackDTO>(this.baseURL + '/vaccination-history/feedback/' + vaccinationHistoryId, this.httpOptions);
   }
-
-  findByPreStatus(vaccinationHistoryId): Observable<IVaccinationHistorySendFeedbackDTO> {
-    return this.http.get<IVaccinationHistorySendFeedbackDTO>(this.baseURL + '/vaccination-history/feedback/getPreStatus/' + vaccinationHistoryId, this.httpOptions);
+  /**
+   * TuNH
+   */
+  findByAfterStatus(vaccinationHistoryId): Observable<IVaccinationHistorySendFeedbackDTO> {
+    return this.http.get<IVaccinationHistorySendFeedbackDTO>(this.baseURL + '/vaccination-history/feedback/getAfterStatus/' + vaccinationHistoryId, this.httpOptions);
 
   }
-
+  /**
+   * TuNH
+   */
   updateFeedback(vaccinationHistoryId, vaccinationHistory): Observable<IVaccinationHistorySendFeedbackDTO> {
-    return this.http.put<IVaccinationHistorySendFeedbackDTO>(this.baseURL + '/vaccination-history/feedback/sendFeedback/' + vaccinationHistoryId, JSON.stringify(vaccinationHistory), this.httpOptions)
+    return this.http.put<IVaccinationHistorySendFeedbackDTO>(this.baseURL + '/vaccination-history/feedback/sendFeedback/' + vaccinationHistoryId, vaccinationHistory, this.httpOptions);
+  }
+  /**
+   * TuNH
+   */
+  findAllVaccinationHistory(page: number ,vaccineName: string, vaccinationDate: string, accountEmail: string): Observable<any> {
+    return this.http.get<any>(this.baseURL + '/vaccination-history/?page=' + page + '&vaccineName=' + vaccineName + '&vaccinationDate='+ vaccinationDate + "&accountEmail="+ accountEmail, this.httpOptions);
   }
 
-  findAllVaccinationHistory(page: number ,vaccineName: string, vaccinationDate: string, patientId: number): Observable<any> {
-    return this.http.get<any>(this.baseURL + '/vaccination-history/?page=' + page + '&vaccineName=' + vaccineName + '&vaccinationDate='+ vaccinationDate + "&patientId="+ patientId, this.httpOptions);
-  }
-
-  errorHandler(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
-  }
   /** LuyenNT code
    * @param page
    * @param name
@@ -94,7 +90,10 @@ export class VaccinationHistoryService {
   }
 
 
-
+  /**
+   * TuNH
+   */
+  getPatientId(accountId): Observable<number> {
+    return this.http.get<number>(this.baseURL + '/gePatientVaccinationHistoryId/' + accountId , this.httpOptions);
+  }
 }
-
-

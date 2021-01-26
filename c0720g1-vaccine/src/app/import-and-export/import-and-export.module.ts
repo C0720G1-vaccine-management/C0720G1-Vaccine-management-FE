@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImportAndExportComponent } from './import-and-export/import-and-export.component';
 import {ImportAndExportRoutingModule} from './import-and-export-routing.module';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserModule} from "@angular/platform-browser";
 
 
 
@@ -9,7 +11,10 @@ import {ImportAndExportRoutingModule} from './import-and-export-routing.module';
   declarations: [ImportAndExportComponent],
   imports: [
     CommonModule,
-    ImportAndExportRoutingModule
+    ImportAndExportRoutingModule,
+    FormsModule,
+    BrowserModule,
+    ReactiveFormsModule
   ]
 })
 export class ImportAndExportModule { }

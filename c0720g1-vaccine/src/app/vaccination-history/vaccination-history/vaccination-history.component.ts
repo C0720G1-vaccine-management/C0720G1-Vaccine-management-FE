@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {VaccinationHistoryService} from "../../service/vaccination-history.service";
 import {IVaccinationHistory} from "../../entity/IVaccinationHistory";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 
 @Component({
@@ -10,7 +11,8 @@ import {IVaccinationHistory} from "../../entity/IVaccinationHistory";
 })
 
 export class VaccinationHistoryComponent implements OnInit {
-  patientId = 1;
+  accountEmail = 'anhkhoa@gmail.com';
+  // accountEmail: string;
   vaccinationHistoryList: IVaccinationHistory[];
   page = 0;
   pageable: any;
@@ -18,20 +20,30 @@ export class VaccinationHistoryComponent implements OnInit {
   vaccinationDate = '';
 
   constructor(
-    public vaccinationHistoryService: VaccinationHistoryService
+    public vaccinationHistoryService: VaccinationHistoryService,
+    public tokenStorageService: TokenStorageService
   ) {
   }
 
   ngOnInit(): void {
+    // this.getAccountEmail();
     this.getListVaccine();
+  }
 
+  getAccountEmail() {
+    if (this.tokenStorageService.getToken()) {
+      const user = this.tokenStorageService.getUser();
+      this.accountEmail = this.tokenStorageService.getUser().email;
+    }
   }
 
   getListVaccine() {
-    this.vaccinationHistoryService.findAllVaccinationHistory(this.page, this.vaccineName, this.vaccinationDate, this.patientId).subscribe(data => {
+    console.log(this.accountEmail);
+    this.vaccinationHistoryService.findAllVaccinationHistory(this.page, this.vaccineName, this.vaccinationDate, this.accountEmail).subscribe(data => {
         this.vaccinationHistoryList = data.content;
         this.pageable = data;
       }
     )
   }
+
 }

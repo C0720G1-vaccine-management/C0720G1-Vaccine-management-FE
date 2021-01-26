@@ -27,4 +27,7 @@ export class ShowMessage {
     this.toastr.success('Đăng ký thành công', 'Thêm mới');
   }
 
+  showMessageRegisterError() {
+    this.toastr.error('Đăng ký thất bại', 'Đăng ký');
+  }
 }
