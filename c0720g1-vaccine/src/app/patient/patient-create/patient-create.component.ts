@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {PatientService} from "../../service/patient.service";
 import {ToastrService} from "ngx-toastr";
-import {ShowMessage} from "../../common/show-message";
 import {checkDateOfBirth} from "../../validator/check-date-of-birth";
 
 /**
@@ -16,14 +15,10 @@ import {checkDateOfBirth} from "../../validator/check-date-of-birth";
 })
 export class PatientCreateComponent implements OnInit {
   public patientForm: FormGroup;
-  public check = false;
-  public checkEmailDuplicate = false;
-  public checkPhoneDuplicate = false;
 
   constructor(private router: Router,
               private patientService: PatientService,
-              private toastrService: ToastrService,
-              private showMessage: ShowMessage) {
+              private toastrService: ToastrService) {
   }
 
   validation_messages = {
@@ -74,33 +69,17 @@ export class PatientCreateComponent implements OnInit {
 
   create() {
     if (this.patientForm.invalid) {
-      this.check = true;
-      this.showMessage.showMessageCreateError();
-      return;
-    }
-    this.patientService.create(this.patientForm.value).subscribe(data => {
+      alert('lỗi');
+    } else {
+      this.patientService.create(this.patientForm.value).subscribe(data => {
+        this.router.navigateByUrl('patient/list').then(data => {
 
-      if (data !== null) {
-        for (let i of data) {
-          if (i.field === 'email') {
-            this.checkEmailDuplicate = true;
-          }
-          if (i.field === 'phone') {
-            this.checkPhoneDuplicate = true;
-          }
-        }
-        this.router.navigateByUrl('patient/list')
-      }
-
-      if (!this.checkPhoneDuplicate && !this.checkEmailDuplicate) {
-        this.patientService.create(this.patientForm.value).subscribe(data => {
-          this.router.navigateByUrl('patient/list').then(data => {
-            this.showMessage.showMessageCreateSuccessfully();
-          });
         });
-      } else {
-        this.showMessage.showMessageCreateError();
-      }
-    }, error => console.log(error));
+      });
+    }
+  }
+
+  message() {
+    this.toastrService.success('Thêm mới thành công!', 'Thêm mới')
   }
 }
