@@ -38,7 +38,7 @@ export class EmployeeService {
    * @param employeeDto
    */
   createEmployee(employeeDto): Observable<EmployeeDto> {
-    return this.httpClient.post<EmployeeDto>(this.API_EMPLOYEE + '/employee/create', JSON.stringify(employeeDto), this.httpOptions)
+    return this.httpClient.post<EmployeeDto>(this.API_EMPLOYEE + '/create', JSON.stringify(employeeDto), this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       )
@@ -46,6 +46,6 @@ export class EmployeeService {
   /** LuyenNT
    */
   getListPositionAndRole(){
-    return this.httpClient.get<any>(this.API_EMPLOYEE + '/employee/create');
+    return this.httpClient.get<any>(this.API_EMPLOYEE + '/create');
   }
 }
