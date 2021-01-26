@@ -1,4 +1,3 @@
-import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';

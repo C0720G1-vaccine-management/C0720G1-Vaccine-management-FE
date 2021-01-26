@@ -3,9 +3,6 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {IVaccinationHistoryFeedbackDTO} from '../dto/IVaccinationHistoryFeedbackDTO';
 import {IVaccinationHistorySendFeedbackDTO} from "../dto/IVaccinationHistorySendFeedbackDTO";
-import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
 import {IVaccinationHistoryRegisteredDTO} from "../dto/IVaccinationHistoryRegisteredDTO";
 
 
@@ -57,7 +54,7 @@ export class VaccinationHistoryService {
     }
     console.log(errorMessage);
     return throwError(errorMessage);
-    
+  }
   /** LuyenNT code
    * @param page
    * @param name

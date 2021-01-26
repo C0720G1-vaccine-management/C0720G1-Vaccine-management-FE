@@ -27,13 +27,7 @@ export class PatientService {
     this.header = new Headers( {'Content-Type' : 'application/context'})
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    }),
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-  };
+
 
   /**
    * Duy NP
@@ -46,6 +40,7 @@ export class PatientService {
    * Duy NP
    **/
 
+
   getPatientById(id): Observable<PatientDTO> {
     return this.http.get<PatientDTO>(this.url + '/patient/' + id);
   }
@@ -53,6 +48,9 @@ export class PatientService {
   editPatient(patient, idNeedEdit): Observable<any> {
     return this.http.put(this.url + '/editPatient/' + idNeedEdit, patient);
   }
+
+
+
   /**
    * Duy NP
    **/
@@ -60,6 +58,9 @@ export class PatientService {
   deletePatient(idNeedDelete: any): Observable<any> {
     return this.http.get(this.url + '/delete/' + idNeedDelete, this.httpOptions);
   }
+
+
+
   /**
    * Duy NP
    **/
@@ -74,34 +75,6 @@ export class PatientService {
     return this.http.post<any>(this.url+ '/vaccination/create' , patient, this.header);
   }
 
-  /**
-   * Duy NP
-   **/
-  getAllPatient(page:number): Observable<any> {
-    return this.http.get<any>(this.url + '/list?page='+page);
-  }
-  /**
-   * Duy NP
-   **/
-  getPatientById(id): Observable<PatientDTO> {
-    return this.http.get<PatientDTO>(this.url + '/patient/' + id);
-  }
-  editPatient(patient, idNeedEdit): Observable<any> {
-    return this.http.put(this.url + '/editPatient/' + idNeedEdit, patient);
-  }
-  /**
-   * Duy NP
-   **/
-  deletePatient(idNeedDelete: any): Observable<any> {
-    return this.http.get(this.url + '/delete/' + idNeedDelete, this.httpOptions);
-  }
-  /**
-   * Duy NP
-   **/
-  getAllPatientByPatientIdAndName(patientId: any, name: any, pageable): Observable<any> {
-    return this.http.get<any>(this.url + '/searchFullName?name=' + name + '&patientId=' + patientId +
-      '&pageable=' + pageable);
-  }
 
 
   /**
