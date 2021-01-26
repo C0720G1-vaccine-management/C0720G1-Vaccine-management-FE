@@ -11,8 +11,6 @@ import {HttpClientModule} from "@angular/common/http";
 import { EmployeeCreateComponent } from './employee-create/employee-create.component';
 import {EmployeeRoutingModule} from './employee-routing.module';
 import {ReactiveFormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ToastrModule} from "ngx-toastr";
 
 
 
