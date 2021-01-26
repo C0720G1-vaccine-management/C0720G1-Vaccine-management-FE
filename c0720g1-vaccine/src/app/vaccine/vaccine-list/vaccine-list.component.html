@@ -74,13 +74,13 @@
         <td>{{i + 1}}</td>
         <td style="text-align: left">{{vaccine.name}}</td>
         <td>{{vaccine.vaccineType}}</td>
-        <td>{{vaccine.dateRecive}}</td>
+        <td>{{vaccine.dayReceive}}</td>
         <td>{{vaccine.licenseCode}}</td>
         <td>{{vaccine.origin}}</td>
         <td>{{vaccine.dosage}}</td>
         <td>{{vaccine.shipmentNumber}}</td>
         <td>{{vaccine.expired}}</td>
-        <td>{{vaccine.mantenance}}</td>
+        <td>{{vaccine.maintenance}}</td>
         <td>{{vaccine.age}}</td>
         <td class="text-center">
           <div *ngIf="vaccine.quantity === 0; else elseBlock">
@@ -95,9 +95,9 @@
           </ng-template>
         </td>
         <td>
-
-          <button class="btn btn-success"[disabled]="vaccine.quantity === 0" [routerLink]="['/import-and-export/' + vaccine.id ]">Xuất Kho</button>
-
+          <button class="btn btn-success" [disabled]="vaccine.quantity === 0"
+                  [routerLink]="['/import-and-export/' + vaccine.id ]">Xuất Kho
+          </button>
         </td>
       </tr>
       </tbody>
@@ -114,8 +114,10 @@
         <li class="page-item col-md-1 col-2  px-0">
           <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
           <div class="input-group">
-            <input type="number" min="1" [max]="totalPagination"   class="form-control text-right rounded-0" placeholder="2" aria-label="Username"
-                   aria-describedby="basic-addon1" [value]="indexPagination" (change)="indexPaginationChage($event.target.value)">
+            <input type="number" min="1" [max]="totalPagination" class="form-control text-right rounded-0"
+                   placeholder="2" aria-label="Username"
+                   aria-describedby="basic-addon1" [value]="indexPagination"
+                   (change)="indexPaginationChage($event.target.value)">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">{{totalPagination}}</span>
             </div>

@@ -40,7 +40,7 @@ export class PeriodicalVaccinationManagerListComponent implements OnInit {
       endDateInput: ['', [Validators.required]],
       nameInput: [''],
       statusInput: [''],
-    }, {validators: DateSearchValidator});
+    }, {validators : DateSearchValidator});
   }
 
   /**TrungTQ Code: Hiện danh sách và phân trang*/
