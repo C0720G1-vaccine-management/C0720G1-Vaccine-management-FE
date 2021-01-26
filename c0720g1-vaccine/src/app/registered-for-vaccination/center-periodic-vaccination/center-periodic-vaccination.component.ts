@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IVaccinationHistory} from "../../entity/IVaccinationHistory";
 import {VaccinationHistoryService} from "../../service/vaccination-history.service";
+import {ToastrModule, ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-center-periodic-vaccination',
@@ -17,11 +18,14 @@ export class CenterPeriodicVaccinationComponent implements OnInit {
   public page = 0;
   public pageable : any;
 
-  constructor(private vaccinationHistoryService: VaccinationHistoryService ) { }
-
+  constructor(private vaccinationHistoryService: VaccinationHistoryService,
+              private toastrService : ToastrService) { }
   getListPeriodicVaccination(){
     this.vaccinationHistoryService.getListPeriodicVaccination(this.page,this.name).subscribe(data => {
       this.vaccinationHistoryList = data.content;
+      if (this.vaccinationHistoryList == null){
+        this.toastrService.error("Không có dữ liệu đễ hiển thị")
+      }
       this.pageable = data;
       console.log(data);
     }, error => console.log(error));
@@ -29,6 +33,9 @@ export class CenterPeriodicVaccinationComponent implements OnInit {
   searchPeriodicVaccination(){
     this.vaccinationHistoryService.searchPeriodicVaccination(this.page,this.name,this.status).subscribe(data => {
       this.vaccinationHistoryList = data.content;
+      if (this.vaccinationHistoryList == null){
+        this.toastrService.error("Không có dữ liệu đễ hiển thị")
+      }
       this.pageable = data;
       console.log(data);
     }, error => console.log(error));
