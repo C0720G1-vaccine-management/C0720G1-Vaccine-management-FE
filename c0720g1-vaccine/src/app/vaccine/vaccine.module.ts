@@ -6,6 +6,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {VaccineRoutingModule} from "./vaccine-routing.module";
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 
 
@@ -16,7 +18,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     HttpClientModule,
     VaccineRoutingModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ]
 })
 export class VaccineModule { }

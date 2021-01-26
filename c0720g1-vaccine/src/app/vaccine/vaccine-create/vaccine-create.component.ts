@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {VaccineService} from "../vaccine.service";
-import {ICreateDTO} from "../../entity/ICreateDTO";
 import {Router} from "@angular/router";
-import {IVaccineDTO} from "../../entity/IVaccineDTO";
+import {AlertService} from "../alert.service";
 
 @Component({
   selector: 'app-vaccine-create',
@@ -12,10 +11,11 @@ import {IVaccineDTO} from "../../entity/IVaccineDTO";
 })
 export class VaccineCreateComponent implements OnInit {
   formCreateVaccine: FormGroup;
-  // createVaccine:IVaccineDTO;
+
 
   constructor(private vaccineService:VaccineService,
-              private router: Router) {
+              private router: Router,
+              private alertService: AlertService) {
   }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class VaccineCreateComponent implements OnInit {
   save() {
     console.log(this.formCreateVaccine.value);
     this.vaccineService.createVaccineDTO(this.formCreateVaccine.value).subscribe(()=>{
-      this.router.navigateByUrl('vaccine-list');
+      this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
     })
   }
 
