@@ -66,7 +66,7 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination d-flex justify-content-md-end justify-content-center">
           <li class="page-item"><button class="page-link" [hidden]="page < 1" (click)="page = 0; getListVaccine()">Đầu</button></li>
-          <li class="page-item"><button class="page-link" [hidden]="page < 1" (click)="page = page - 1; getListVaccine()">Trang sau</button></li>
+          <li class="page-item"><button class="page-link" [hidden]="page < 1" (click)="page = page - 1; getListVaccine()">Trang trước</button></li>
           <li class="page-item col-md-1 col-2  px-0">
             <div class="input-group">
               <input  #pageInput (change)="page = $event.target.value - 1" type="text" class="form-control text-right rounded-0" [placeholder]="page + 1" aria-label="Username" aria-describedby="basic-addon1">
