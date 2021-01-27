@@ -8,7 +8,7 @@ import {EditVaccineTransactionComponent} from "./edit-vaccine-transaction/edit-v
 const routes: Routes = [
   {path: 'vaccine-transaction-list', component: VaccineTransactionManagementComponent},
   {path: 'vaccine-transaction-create', component: CreateVaccineTransactionComponent},
-  {path: 'vaccine-transaction-edit', component: EditVaccineTransactionComponent},
+  {path: 'vaccine-transaction-edit/:id', component: EditVaccineTransactionComponent},
 
 ];
 
