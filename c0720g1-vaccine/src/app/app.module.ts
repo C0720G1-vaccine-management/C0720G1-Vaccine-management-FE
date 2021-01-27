@@ -16,8 +16,10 @@ import {HttpClientModule} from "@angular/common/http";
 import {VaccineTransactionManagementModule} from "./vaccine-transaction-management/vaccine-transaction-management.module";
 import {PeriodicalVaccinationModule} from "./periodical-vaccination/periodical-vaccination.module";
 import {RegisteredForVaccinationModule} from "./registered-for-vaccination/registered-for-vaccination.module";
+import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import {PeriodicalVaccinationManagerModule} from "./periodical-vaccination-manager/periodical-vaccination-manager.module";
+
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import {PeriodicalVaccinationManagerModule} from "./periodical-vaccination-manag
     VaccineTransactionManagementModule,
     PeriodicalVaccinationManagerModule,
     PeriodicalVaccinationModule,
-    RegisteredForVaccinationModule
+    RegisteredForVaccinationModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

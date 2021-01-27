@@ -30,6 +30,12 @@ export class PeriodicalVaccinationManagerListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ngSubmit();
+    this.searchDateAndNameOrStatus(0, 1);
+
+  }
+
+  ngSubmit() {
     this.formGroup = this.formBuilder.group({
       startDateInput: ['', [Validators.required]],
       endDateInput: ['', [Validators.required]],

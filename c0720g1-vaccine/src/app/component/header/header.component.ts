@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   currentUser: string;
-  roles: string[] = [];
+  role: string;
   token: string;
 
 
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
     if (this.tokenStorageService.getToken()) {
       this.currentUser = this.tokenStorageService.getUser().username;
       this.isLoggedIn = true;
-      this.roles = this.tokenStorageService.getUser().roles;
+      this.role = this.tokenStorageService.getUser().roles[0];
       this.username = this.tokenStorageService.getUser().username;
     } else {
       this.isLoggedIn = false;
@@ -50,4 +50,5 @@ export class HeaderComponent implements OnInit {
     this.tokenStorageService.signOut();
     this.ngOnInit();
   }
+
 }
