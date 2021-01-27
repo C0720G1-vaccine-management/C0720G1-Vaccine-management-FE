@@ -1,94 +1,110 @@
 <!-- content -->
 <div class="container">
-  <div class="container-fluid" id="custom-font">
+  <div class="container-fluid" id="custom-font" *ngIf="flag">
     <div class="row">
       <div class="col-12 ">
         <h1 class="text-center mt-4 mb-4 ">Lịch sử tiêm chủng</h1>
         <div class="search row d-flex justify-content-end mb-4 float-right ">
           <div class="col-xl-3 col-md-3 ">
             <label for="nameVaccine">Tên vắc-xin</label>
-            <input (change)="vaccineName = $event.target.value" id="nameVaccine" class="form-control" type="text"
+            <input (keydown.enter)="page = 0; getListVaccine()"  [(ngModel)]="vaccineName" id="nameVaccine" class="form-control" type="text"
                    placeholder="Nhập tên vắc-xin">
           </div>
           <div class="col-xl-3 col-md-3 ">
             <label for="vaccinationDate">Ngày tiêm</label>
-            <input (change)="vaccinationDate = $event.target.value" id="vaccinationDate" class="form-control "
+            <input (keydown.enter)="page = 0; getListVaccine()"  [(ngModel)]="vaccinationDate" id="vaccinationDate" class="form-control "
                    type="date">
+          </div>
+          <div class="col-xl-1 col-md-1 ">
+            <br>
+            <button class="btn btn-warning mt-xl-2" (keydown.enter)="resetSearch()" (click)="resetSearch()">
+              <i class="fas fa-sync-alt"></i>
+            </button>
           </div>
           <div class="col-xl-2 col-4 width-search">
             <br>
-            <button (click)="page = 0; getListVaccine()" class="btn btn-success mt-xl-2"><i class="fa fa-search"></i>
+            <button (keydown.enter)="page = 0; getListVaccine()" (click)="page = 0; getListVaccine()" class="btn btn-success mt-xl-2"><i class="fa fa-search"></i>
               Tìm kiếm
             </button>
           </div>
+
         </div>
       </div>
     </div>
     <div class="row tab">
-      <div class="col-12">
-        <table class="table table-hover table-bordered ">
-          <thead>
-          <tr class="bg-table-header">
-            <th scope="col">Stt</th>
-            <th scope="col">Họ và tên</th>
-            <th scope="col">Ngày sinh</th>
-            <th scope="col">Giới tính</th>
-            <th scope="col">Địa chỉ</th>
-            <th scope="col">Tên vắc xin</th>
-            <th scope="col">Loại vắc xin</th>
-            <th scope="col">Ngày tiêm</th>
-            <th scope="col">Tình trạng sau khi tiêm</th>
-            <th scope="col">Trạng thái</th>
-            <th scope="col">Phản hồi</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let vaccinationHistory of vaccinationHistoryList, index as i">
-            <td scope="row">{{i + 1}}</td>
-            <td>{{vaccinationHistory.patient.name}}</td>
-            <td>{{vaccinationHistory.patient.dateOfBirth}}</td>
-            <td>{{vaccinationHistory.patient.gender}}</td>
-            <td>{{vaccinationHistory.patient.address}}</td>
-            <td style="width: 200px">{{vaccinationHistory.vaccination.vaccine.name}}</td>
-            <td>{{vaccinationHistory.vaccination.vaccine.vaccineType.name}}</td>
-            <td>{{vaccinationHistory.vaccination.date}}</td>
-            <td>{{vaccinationHistory.afterStatus}}</td>
-            <td class="text-center">
-              <div *ngIf="vaccinationHistory.afterStatus === null; else elseBlock ">
-                <span class="badge badge-danger">Chưa phản hồi<br> sau khi tiêm</span>
-              </div>
-              <ng-template #elseBlock>
-                <div>
-                  <span class="badge badge-primary" routerLink="">Đã phản hồi</span>
-                </div>
-              </ng-template>
-            </td>
-            <td class="text-center">
-              <div *ngIf="vaccinationHistory.afterStatus !== null ; else elseBlock1 ">
-                <button type="button" class="btn btn-success with-button"
-                        [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Thêm
-                  phản hồi
-                </button>
-              </div>
-              <ng-template #elseBlock1>
-                <div>
+      <div class="col-12" >
+          <h2 class="text-danger text-center" *ngIf="vaccinationHistoryList.length == 0">Không tìm thấy kết quả!</h2>
+          <table class="table table-hover table-bordered" *ngIf="vaccinationHistoryList.length > 0">
+            <thead>
+            <tr class="bg-table-header">
+              <th scope="col">Stt</th>
+<!--              <th scope="col">Họ và tên</th>-->
+<!--              <th scope="col">Ngày sinh</th>-->
+<!--              <th scope="col">Giới tính</th>-->
+<!--              <th scope="col">Địa chỉ</th>-->
+              <th scope="col">Tên vắc xin</th>
+              <th scope="col">Loại vắc xin</th>
+              <th scope="col">Ngày tiêm</th>
+              <th scope="col">Tình trạng sau khi tiêm</th>
+<!--              <th scope="col">Trạng thái</th>-->
+              <th scope="col">Phản hồi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let vaccinationHistory of vaccinationHistoryList, index as i">
+              <td scope="row">{{i + 1}}</td>
+<!--              <td>{{vaccinationHistory.patient.name}}</td>-->
+<!--              <td>{{vaccinationHistory.patient.dateOfBirth | date: "dd-MM-yyyy"}}</td>-->
+<!--              <td>{{vaccinationHistory.patient.gender}}</td>-->
+<!--              <td>{{vaccinationHistory.patient.address}}</td>-->
+              <td style="width: 200px">{{vaccinationHistory.vaccination.vaccine.name}}</td>
+              <td>{{vaccinationHistory.vaccination.vaccine.vaccineType.name}}</td>
+              <td>{{vaccinationHistory.vaccination.date |  date: "dd-MM-yyyy"}}</td>
+              <td>{{vaccinationHistory.afterStatus}}</td>
+<!--              <td class="text-center">-->
+<!--                <div *ngIf="vaccinationHistory.afterStatus === null; else elseBlock ">-->
+<!--                  <span class="badge badge-danger">Chưa phản hồi<br> sau khi tiêm</span>-->
+<!--                </div>-->
+<!--                <ng-template #elseBlock>-->
+<!--                  <div *ngIf="this.vaccinationHistory.afterStatus === '',else elseBlock1">-->
+<!--                    <span class="badge badge-danger">Chưa phản hồi<br> sau khi tiêm</span>-->
+<!--                  </div>-->
+<!--                  <ng-template #elseBlock1>-->
+<!--                    <span class="badge badge-primary" routerLink="">Đã phản hồi</span>-->
+<!--                  </ng-template>-->
+<!--                </ng-template>-->
+<!--              </td>-->
+              <td class="text-center">
+                <div *ngIf="vaccinationHistory.afterStatus === null ; else elseBlock2 ">
                   <button type="button" class="btn btn-info with-button"
                           [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Phản
                     hồi
                   </button>
                 </div>
-              </ng-template>
-            </td>
+                <ng-template #elseBlock2>
+                  <div *ngIf="this.vaccinationHistory.afterStatus === '',else elseBlock3 ">
+                    <button type="button" class="btn btn-info with-button"
+                            [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Phản
+                      hồi
+                    </button>
+                  </div>
+                  <ng-template #elseBlock3>
+<!--                    <button type="button" class="btn btn-success with-button"-->
+<!--                            [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Thêm phản hồi-->
+<!--                    </button>-->
+                  </ng-template>
+                </ng-template>
+              </td>
 
-          </tr>
-          </tbody>
-        </table>
+            </tr>
+            </tbody>
+          </table>
       </div>
     </div>
     <br>
     <div class="row">
       <div class="col-12">
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example" *ngIf="pageable.totalPages > 0">
           <ul class="pagination d-flex justify-content-md-end justify-content-center">
             <li class="page-item">
               <button class="page-link" [hidden]="page == 0" (click)="page = 0; getListVaccine()">Đầu</button>
