@@ -86,7 +86,7 @@ export class VaccinationHistoryService {
    * find by Id : create by LongBP
    */
   getByIdRegisteredRequired(id): Observable<IVaccinationHistoryRegisteredDTO> {
-    return this.http.get<IVaccinationHistoryRegisteredDTO>(this.url + '/public/registered-for-vaccination/view/' + id)
+    return this.http.get<IVaccinationHistoryRegisteredDTO>(this.url + '/public/registered-for-vaccination/view/' + id);
   }
 
 
@@ -95,5 +95,12 @@ export class VaccinationHistoryService {
    */
   getPatientId(accountId): Observable<number> {
     return this.http.get<number>(this.baseURL + '/gePatientVaccinationHistoryId/' + accountId , this.httpOptions);
+  }
+  /**
+   * TuNH
+   * sendMailForAdmin
+   */
+  sendMailFeedbackForAdmin(value: string, accountEmail: string): Observable<any> {
+    return this.http.post<any>(this.baseURL + '/sendMailFeedbackForAdmin?value='+ value + '&accountEmail=' + accountEmail, this.httpOptions);
   }
 }

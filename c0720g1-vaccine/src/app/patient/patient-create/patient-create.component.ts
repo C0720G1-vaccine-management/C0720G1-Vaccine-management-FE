@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {PatientService} from "../../service/patient.service";
 import {ToastrService} from "ngx-toastr";
 import {checkDateOfBirth} from "../../validator/check-date-of-birth";
+import {checkGuardian} from "../../validator/check-guardian";
 
 /**
  * NhiTTY
@@ -59,27 +60,24 @@ export class PatientCreateComponent implements OnInit {
         name: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(6), Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
         dateOfBirth: new FormControl('', [Validators.required, checkDateOfBirth]),
         gender: new FormControl('', [Validators.required]),
-        guardian: new FormControl('', [Validators.maxLength(40), Validators.minLength(6), Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
+        guardian: new FormControl('', [Validators.maxLength(40),Validators.minLength(6), Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
         phone: new FormControl('', [Validators.required, Validators.pattern("^(0|\\(\\+84\\))\\d{9}$")]),
         address: new FormControl('', [Validators.maxLength(200)]),
         email: new FormControl('', [Validators.required, Validators.pattern("^\\w{5,}.?\\w+(@\\w{3,8})(.\\w{3,8})+$")])
-      }
-    );
+      },{validators: checkGuardian}
+      );
   }
 
   create() {
     if (this.patientForm.invalid) {
-      alert('lỗi');
+      this.toastrService.error('Thêm mới thất bại!', 'Thêm mới')
     } else {
       this.patientService.create(this.patientForm.value).subscribe(data => {
         this.router.navigateByUrl('patient/list').then(data => {
-
+          this.toastrService.success('Thêm mới thành công!', 'Thêm mới')
         });
       });
     }
   }
 
-  message() {
-    this.toastrService.success('Thêm mới thành công!', 'Thêm mới')
-  }
 }
