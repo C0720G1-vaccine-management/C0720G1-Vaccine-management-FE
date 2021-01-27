@@ -18,7 +18,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'registered-required-vaccination/view/:id', component: ViewRegisteredRequiredVaccinationComponent,canActivate: [AuthGuard],
+    path: 'registered-required-vaccination/view/:id/:idHistory', component: ViewRegisteredRequiredVaccinationComponent,canActivate: [AuthGuard],
     data: {
       roles: ['ROLE_ADMIN']
     }
