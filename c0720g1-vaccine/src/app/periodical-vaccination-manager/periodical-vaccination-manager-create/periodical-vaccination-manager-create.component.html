@@ -37,6 +37,7 @@
                 <small class="text-danger"
                        *ngIf="formGroup.get('endTime').hasError(validation.type) && (formGroup.get('endTime').touched || formGroup.get('endTime').pristine)">
                   {{validation.message}}</small>
+                <br>
                 <small *ngIf="formGroup.errors?.timeValid" class="text-danger">
                   {{messageTime}}</small>
               </div>

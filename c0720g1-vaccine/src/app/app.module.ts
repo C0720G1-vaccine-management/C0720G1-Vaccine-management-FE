@@ -19,7 +19,7 @@ import {PeriodicalVaccinationModule} from "./periodical-vaccination/periodical-v
 import {RegisteredForVaccinationRoutingModule} from "./registered-for-vaccination/registered-for-vaccination-routing.module";
 import {RegisteredForVaccinationModule} from "./registered-for-vaccination/registered-for-vaccination.module";
 import {PeriodicalVaccinationManagerRoutingModule} from "./periodical-vaccination-manager/periodical-vaccination-manager-routing.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -47,7 +47,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     VaccineTransactionManagementModule,
     PeriodicalVaccinationManagerRoutingModule,
     PeriodicalVaccinationModule,
-    RegisteredForVaccinationModule
+    RegisteredForVaccinationModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
