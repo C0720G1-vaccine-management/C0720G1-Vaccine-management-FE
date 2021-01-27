@@ -36,9 +36,27 @@ export class AuthService {
     }, this.httpOptions);
   }
 
-  verify(code:string): Observable<any> {
-    console.log(code)
+  verify(code: string): Observable<any> {
     return this.http.post(AUTH_API + 'verify', {
+      code: code
+    }, this.httpOptions);
+  }
+
+  verifyPassword(code: string): Observable<any> {
+    return this.http.post(AUTH_API + 'verify-password', {
+      code: code
+    }, this.httpOptions);
+  }
+
+  resetPassword(username:string): Observable<any> {
+    return this.http.post(AUTH_API + 'reset-password', {
+      username: username,
+    }, this.httpOptions);
+  }
+
+  doResetPassword(password: string, code: string): Observable<any> {
+    return this.http.post(AUTH_API + 'do-reset-password', {
+      password: password,
       code: code
     }, this.httpOptions);
   }

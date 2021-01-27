@@ -5,6 +5,7 @@ import {IRole} from "../../entity/IRole";
 import {Subscription} from "rxjs";
 import {EmployeeService} from "../employee.service";
 import {AlertService} from "../alert.service";
+import {PositionService} from "../../service/position.service";
 
 @Component({
   selector: 'app-employee-list',
@@ -16,6 +17,7 @@ export class EmployeeListComponent implements OnInit {
   positionList: IPosition[];
   roleList: IRole[];
   private sub: Subscription;
+  p: any;
 
 
 
@@ -25,7 +27,8 @@ export class EmployeeListComponent implements OnInit {
 
   constructor(
     private employeeService : EmployeeService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private positionService: PositionService
 
   ) { }
 
@@ -34,6 +37,11 @@ export class EmployeeListComponent implements OnInit {
       this.employeeList = r;
       console.log(r);
       console.log(this.employeeList);
+    });
+    this.positionService.findAll().toPromise().then(r => {
+      this.positionList = r;
+      console.log(r);
+      console.log(this.positionList);
     });
   }
 

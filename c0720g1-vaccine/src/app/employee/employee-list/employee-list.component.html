@@ -6,23 +6,23 @@
 
 
         <div class="col-xl-3 col-md-3">
-          <label for="nameVaccine">Mã nhân viên:</label>
-          <input id="nameVaccine" (change)="idEmpSearch = $event.target.value" class="form-control" type="text" placeholder="Nhập mã NV">
+          <label>Mã nhân viên:</label>
+          <input id="myInput" (keyup.enter)="search()" (change)="idEmpSearch = $event.target.value" class="form-control" type="text" placeholder="Nhập mã NV">
         </div>
         <div class="col-xl-3 col-md-3">
           <label>Họ và tên:</label>
-          <input id="vaccineType" (change)="name = $event.target.value" class="form-control " type="text" placeholder="Nhập tên NV">
+          <input (keyup.enter)="search()" (change)="name = $event.target.value" class="form-control " type="text" placeholder="Nhập tên NV">
         </div>
         <div class="form-group col-sm-3 col-md-3 col-lg-3">
           <label>Chức vụ:</label>
-          <select (change)="positionSearch = $event.target.value" class="form-control">
-            <option>Chọn chức vụ</option>
+          <select (keyup.enter)="search()" (change)="positionSearch = $event.target.value" class="form-control">
+            <option value="">Chọn chức vụ</option>
             <option *ngFor="let position of positionList" [value]="position.positionId">{{position.name}}</option>
           </select>
         </div>
         <div class="col-xl-2 col-lg-2 width-search">
           <br>
-          <button (click)="search()" class="btn btn-success mt-xl-2" style="float: right; width: 120%">
+          <button id="myBtn" (click)="search()" class="btn btn-success mt-xl-2" style="float: right; width: 120%">
             <i class="fa fa-search"></i>
             Tìm kiếm
           </button>
@@ -38,25 +38,25 @@
         <i class="fa fa-plus"></i>
         Tạo mới nhân viên
       </a>
-      <h2 class="text-center">Danh sách sinh viên</h2>
+      <h2 class="text-center">Danh sách nhân viên</h2>
     </div>
 
   </div>
   <div class="row">
     <div class="col-12">
       <div id="list">
-
+        <h1 class="text-center text-danger" *ngIf="employeeList.length == 0">Không tìm thấy dữ liệu</h1>
         <table class="table table-hover table-striped table-bordered" style="font-size: 14px">
           <thead>
           <tr>
-            <th>STT</th>
+            <th style="text-align: right">STT</th>
             <th width="8%">Mã NV
             </th>
             <th width="12%">Họ và tên</th>
-            <th>Ngày sinh</th>
-            <th>CMND</th>
+            <th style="text-align: right">Ngày sinh</th>
+            <th style="text-align: right">CMND</th>
             <th width="12%">Địa chỉ</th>
-            <th width="13%">Số điện thoại</th>
+            <th width="13%" style="text-align: right">Số điện thoại</th>
             <th>Chức vụ</th>
             <th width="12%">Quyền truy cập</th>
             <th class="text-center">Chức năng</th>
@@ -64,14 +64,14 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let employee of employeeList, index as i">
-            <td>{{i+1}}</td>
+          <tr *ngFor="let employee of employeeList| paginate: { itemsPerPage: 5, currentPage: p }, index as i">
+            <td style="text-align: right">{{i+1}}</td>
             <td>{{getEmployeeCode(employee.employeeId, 3)}}</td>
             <td>{{employee.name}}</td>
-            <td>{{employee.dateOfBirth}}</td>
-            <td>{{employee.idCard}}</td>
+            <td style="text-align: right">{{employee.dateOfBirth}}</td>
+            <td style="text-align: right">{{employee.idCard}}</td>
             <td>{{employee.address}}</td>
-            <td>{{employee.phone}}</td>
+            <td style="text-align: right">{{employee.phone}}</td>
             <td>{{employee.position}}</td>
             <td>{{employee.account}}</td>
             <td class="text-center" width="11%">
@@ -82,30 +82,7 @@
           </tbody>
         </table>
 
-        <div>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination d-flex justify-content-md-end justify-content-center">
-              <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
-              <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
-              <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
-              <li class="page-item col-md-1 col-2  px-0">
-                <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
-                <div class="input-group">
-                  <input type="text" class="form-control text-right rounded-0" placeholder="2"
-                         aria-label="Username" aria-describedby="basic-addon1">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">/5</span>
-                  </div>
-                </div>
-              </li>
-              <li class="page-item">
-                <button class="btn btn-primary rounded-0">Đi</button>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
-              <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
-            </ul>
-          </nav>
-        </div>
+        <pagination-controls class="float-right" (pageChange)="p = $event"></pagination-controls>
 
         <!-- Modal -->
         <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"

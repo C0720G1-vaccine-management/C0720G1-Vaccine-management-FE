@@ -22,6 +22,11 @@
                class="text-danger">
           Tên không được là số hoặc ký tự đặc biệt!
         </small>
+        <small class="text-danger"
+               *ngIf="employeeFormEdit.get('name').hasError('maxlength') && employeeFormEdit.controls.name.touched"
+               class="text-danger">
+          Tên không được dài hơn 40 ký tự!
+        </small>
       </div>
     </div>
     <div class="form-row">
@@ -88,6 +93,11 @@
         <input type="text" class="form-control" formControlName="address">
         <small class="text-danger" *ngIf="employeeFormEdit.controls.address.errors?.required && employeeFormEdit.controls.address.touched">
           Không được để trống!
+        </small>
+        <small class="text-danger"
+               *ngIf="employeeFormEdit.get('address').hasError('maxlength') && employeeFormEdit.controls.address.touched"
+               class="text-danger">
+          Địa chỉ không được dài hơn 40 ký tự!
         </small>
       </div>
       <div class="form-group col-sm-6 col-md-6 col-lg-6">

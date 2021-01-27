@@ -10,13 +10,15 @@ import {PatientModule} from './patient/patient.module';
 import {VaccineModule} from "./vaccine/vaccine.module";
 import {SecurityModule} from "./security/security.module";
 import {VaccinePriceManagementModule} from './vaccine-price-management/vaccine-price-management.module';
-import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {VaccinationByRequestModule} from "./vaccination-by-request/vaccination-by-request.module";
 import {HttpClientModule} from "@angular/common/http";
+import {VaccineTransactionManagementModule} from "./vaccine-transaction-management/vaccine-transaction-management.module";
 import {PeriodicalVaccinationModule} from "./periodical-vaccination/periodical-vaccination.module";
-import {RegisteredForVaccinationRoutingModule} from "./registered-for-vaccination/registered-for-vaccination-routing.module";
 import {RegisteredForVaccinationModule} from "./registered-for-vaccination/registered-for-vaccination.module";
+import {FormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
+import {PeriodicalVaccinationManagerModule} from "./periodical-vaccination-manager/periodical-vaccination-manager.module";
 
 
 
@@ -27,7 +29,7 @@ import {RegisteredForVaccinationModule} from "./registered-for-vaccination/regis
     FooterComponent,
   ],
   imports: [
-
+    ReactiveFormsModule,
     EmployeeModule,
     BrowserModule,
     AppRoutingModule,
@@ -41,9 +43,12 @@ import {RegisteredForVaccinationModule} from "./registered-for-vaccination/regis
     SecurityModule,
     VaccinePriceManagementModule,
     VaccinationByRequestModule,
+    HttpClientModule,
+    VaccineTransactionManagementModule,
+    PeriodicalVaccinationManagerModule,
     PeriodicalVaccinationModule,
-    RegisteredForVaccinationModule
-
+    RegisteredForVaccinationModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

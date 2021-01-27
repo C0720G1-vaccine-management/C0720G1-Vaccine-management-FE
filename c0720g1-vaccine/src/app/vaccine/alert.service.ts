@@ -10,4 +10,8 @@ export class AlertService {
   showMessage(message){
     this.toast.success(message, "Thông báo:");
   }
+
+  showMessageErrors(message){
+    this.toast.error(message, "Thông báo:")
+  }
 }

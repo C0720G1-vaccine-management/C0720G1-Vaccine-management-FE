@@ -18,6 +18,7 @@
                 <input id="name" formControlName="name" class="form-control" type="text" placeholder="Nhập họ và tên bệnh nhân">
                 <small class="text-danger" *ngIf="patientForm.get('name').hasError('required') && patientForm.get('name').touched">Vui lòng nhập tên</small>
                 <small class="text-danger" *ngIf="patientForm.get('name').hasError('pattern') && patientForm.get('name').touched">Tên không đúng định dạng</small>
+                <small class="text-danger" *ngIf="patientForm.get('name').hasError('maxlength') && patientForm.get('name').touched">Họ và tên quá dài</small>
               </div>
             </div>
             <div class="row mb-3">
@@ -55,6 +56,7 @@
               <div class="col-8">
                 <input id="guardian" formControlName="guardian" class="form-control" type="text" placeholder="Nhập họ và tên người giám hộ">
                 <small class="text-danger" *ngIf="patientForm.get('guardian').hasError('required') && patientForm.get('guardian').touched">Vui lòng nhập tên người giám hộ</small>
+                <small class="text-danger" *ngIf="patientForm.get('guardian').hasError('maxlength') && patientForm.get('guardian').touched">Họ và tên người giám hộ quá dài</small>
                 <small class="text-danger" *ngIf="patientForm.get('guardian').hasError('pattern') && patientForm.get('guardian').touched">Tên người giám hộ không đúng định dạng</small>
               </div>
             </div>
@@ -65,7 +67,7 @@
               <div class="col-8">
                 <input id="address" class="form-control" formControlName="address" type="text" placeholder="Nhập địa chỉ">
                 <small class="text-danger" *ngIf="patientForm.get('address').hasError('required') && patientForm.get('address').touched">Vui lòng nhập địa chỉ</small>
-                <small class="text-danger" *ngIf="patientForm.get('address').hasError('maxLength') && patientForm.get('address').touched">Địa chỉ quá dài</small>
+                <small class="text-danger" *ngIf="patientForm.get('address').hasError('maxlength') && patientForm.get('address').touched">Địa chỉ quá dài</small>
               </div>
             </div>
             <div class="row mb-3">
@@ -90,6 +92,7 @@
                   Vui lòng nhập email</small>
                 <small class="text-danger" *ngIf="patientForm.get('email').hasError('email') && patientForm.get('email').touched">
                   Email không đúng định dạng</small>
+                <small class="text-danger" *ngIf="patientForm.get('email').hasError('maxlength') && patientForm.get('email').touched">Email quá dài</small>
               </div>
             </div>
           </div>
@@ -144,7 +147,7 @@
         <div class="d-flex mt-4 col-xl-2 col-lg-3 col-sm-4">
           <div>
             <button type="submit" class="btn btn-primary mr-3" [disabled]="!patientForm.touched || patientForm.invalid">Đăng ký</button>
-            <button routerLink="/periodical-vaccination/list" class="btn btn-dark">Hủy</button>
+            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modelId">Hủy</button>
           </div>
         </div>
 
@@ -152,4 +155,24 @@
     </form>
   </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Xác Nhận Hủy</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h3>Bạn có muốn hủy đăng ký tiêm chủng định kỳ không?</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+          <button type="button" routerLink="" class="btn btn-primary" data-dismiss="modal">Có</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

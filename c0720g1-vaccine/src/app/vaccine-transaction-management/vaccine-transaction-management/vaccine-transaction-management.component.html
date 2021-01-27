@@ -8,17 +8,17 @@
       </div>
       <div class="col-xl-2 col-md-3">
         <label>Tên Khách Hàng</label>
-        <input class="form-control" type="text" placeholder="Nhập Tên khách hàng">
+        <input class="form-control" type="text" [(ngModel)]="keyword2" placeholder="Nhập Tên khách hàng">
       </div>
       <div class="col-xl-2 col-md-3">
         <label >Loại vắc-xin</label>
-        <select class="form-control" name="">
+        <select [(ngModel)]="keyword3" class="form-control" name="">
           <option value=""></option>
         </select>
       </div>
       <div class="col-md-2 mt-2">
         <br>
-        <button class="btn btn-success"><i class="fa fa-search"> </i>Tìm kiếm</button>
+        <button class="btn btn-success" (click)="search()"><i class="fa fa-search"> </i>Tìm kiếm</button>
       </div>
     </div>
 
@@ -42,15 +42,15 @@
         <tbody>
         <tr *ngFor="let item of vaccineTransaction,index as i">
           <td>{{i+1}}</td>
-          <td>{{vaccineTransaction.vaccinationTransactionId}}</td>
-          <td>{{vaccineTransaction.vaccinationHistory.vaccination.vaccine.vaccineId}}</td>
-          <td>{{vaccineTransaction.vaccinationHistory.vaccination.vaccine.vaccineType.name}}</td>
-          <td style="text-align: right">{{vaccineTransaction.quantity}}</td>
-          <td>{{vaccineTransaction.vaccinationHistory.patient.patientId}}</td>
-          <td>{{vaccineTransaction.vaccinationHistory.patient.name}}</td>
-          <td style="text-align: center">{{vaccineTransaction.vaccinationHistory.vaccination.date}}</td>
-          <td style="text-align: right">{{vaccineTransaction.price}}</td>
-          <td style="text-align: right">{{vaccineTransaction.price}}</td>
+          <td>MGD-{{item.vaccinationTransactionId}}</td>
+          <td>MVC-{{item.vaccinationHistory.vaccination.vaccine.vaccineId}}</td>
+          <td>{{item.vaccinationHistory.vaccination.vaccine.vaccineType.name}}</td>
+          <td style="text-align: right">{{item.quantity}}</td>
+          <td>MBN-{{item.vaccinationHistory.patient.patientId}}</td>
+          <td>{{item.vaccinationHistory.patient.name}}</td>
+          <td style="text-align: center">{{item.vaccinationHistory.vaccination.date}}</td>
+          <td style="text-align: right" (change)="$event.target.value" >{{item.price}}</td>
+          <td style="text-align: right">{{item.price}}</td>
           <td style="text-align: center">
             <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
             <button class="btn btn-danger ml-2"><i class="fa fa-trash"></i></button>
@@ -62,24 +62,32 @@
     <div>
       <nav aria-label="Page navigation example">
         <ul class="pagination d-flex justify-content-md-end justify-content-center">
-          <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
-          <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+          <li class="page-item"><a class="page-link" [hidden]="page==0" (click)="page =0;getList()">Đầu</a></li>
+          <li class="page-item"><a class="page-link" [hidden]="page==0" (click)="page =page - 1;getList()">Trang sau</a>
+          </li>
           <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
           <li class="page-item col-md-1 col-2  px-0">
             <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
             <div class="input-group">
-              <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username" aria-describedby="basic-addon1">
+              <input #pageInput (change)="page= $event.target.value -1 " type="text"
+                     class="form-control text-right rounded-0" [placeholder]="page +1" aria-label="Username"
+                     aria-describedby="basic-addon1">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">/5</span>
+                <span class="input-group-text" id="basic-addon1">{{pageable.totalPages}}</span>
               </div>
             </div>
           </li>
           <li class="page-item">
             <button class="btn btn-primary rounded-0">Đi</button>
           </li>
-          <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
-          <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+          <li class="page-item"><a class="page-link" [hidden]="page >= pageable.totalPages - 1"
+                                   (click)="page= page +1; getList()">Trang kế</a>
+          </li>
+          <li class="page-item"><a class="page-link"
+                                   [hidden]="page >= pageable.totalPages - 1 &&page<pageable.totalPages"
+                                   (click)="page= pageable.totalPages -1; getList()">Cuối</a></li>
         </ul>
       </nav>
-    </div>    </div>
+    </div>
+  </div>
 </div>

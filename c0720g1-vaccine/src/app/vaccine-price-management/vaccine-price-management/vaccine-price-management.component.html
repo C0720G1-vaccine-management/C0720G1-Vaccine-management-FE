@@ -1,4 +1,3 @@
-
 <div class="content">
   <div class="container">
     <h1 class="text-center mt-4 mb-4">Trang Quản Lý Giá Vắc Xin</h1>
@@ -9,27 +8,28 @@
       <div class="col-lg-2 col-md-3">
       </div>
       <div class="col-lg-2 col-md-3">
-        <label>Mã Vắc Xin</label>
-        <input class="form-control" type="text" placeholder="Nhập mã vắc-xin">
+        <label for="vaccineId">Mã Vắc Xin</label>
+        <input class="form-control" id="vaccineId" [(ngModel)]="keyword1" type="text" placeholder="Nhập mã vắc-xin">
       </div>
       <div class="col-lg-2 col-md-3">
         <label>Loại vắc-xin</label>
-        <select  class="form-control" name="">
-          <option *ngFor="let vaccine of exports">{{vaccine.storage.vaccine.vaccineType.name}}</option>
+        <select class="form-control" name="" [(ngModel)]="keyword2">
+          <option value="">Mặc định</option>
+          <option *ngFor="let item of vaccineType">{{item.name}}</option>
         </select>
       </div>
       <div class="col-lg-2 col-md-3">
         <label>Nước sản xuất</label>
-        <select  class="form-control" name="">
-          <option *ngFor="let vaccine of exports">{{vaccine.storage.vaccine.origin}}</option>
+        <select class="form-control" name="" [(ngModel)]="keyword3">
+          <option value="">Mặc định</option>
+          <option *ngFor="let item of origin">{{item.origin}}</option>
         </select>
       </div>
       <div class="col-md-2 mt-2">
         <br>
-        <button class="btn btn-success"><i class="fa fa-search"> </i>Tìm kiếm</button>
+        <button class="btn btn-success" (click)="search()"><i class="fa fa-search"> </i>Tìm kiếm</button>
       </div>
     </div>
-
 
 
     <div class="" style="">
@@ -48,7 +48,7 @@
         </thead>
         <tbody *ngFor="let vaccine of exports ,index as i">
         <tr>
-          <td>{{i+1}}</td>
+          <td>{{i + 1}}</td>
           <td>MVC-{{vaccine.storage.vaccine.vaccineId}}</td>
           <td>{{vaccine.storage.vaccine.name}}</td>
           <td>{{vaccine.storage.vaccine.vaccineType.name}}</td>
@@ -56,7 +56,8 @@
           <td>{{vaccine.storage.vaccine.age}}</td>
           <td style="text-align: right">{{vaccine.price}}</td>
           <td style="text-align: center">
-            <button [routerLink]="['/vaccine-price-edit/'+vaccine.importAndExportId]" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+            <button [routerLink]="['/vaccine-price-edit/'+vaccine.importAndExportId]" class="btn btn-primary"><i
+              class="fa fa-edit"></i></button>
           </td>
         </tr>
         </tbody>
@@ -65,23 +66,30 @@
     <div>
       <nav aria-label="Page navigation example">
         <ul class="pagination d-flex justify-content-md-end justify-content-center">
-          <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
-          <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+          <li class="page-item"><a class="page-link" [hidden]="page==0" (click)="page =0;getList()">Đầu</a></li>
+          <li class="page-item"><a class="page-link" [hidden]="page==0" (click)="page =page - 1;getList()">Trang sau</a>
+          </li>
           <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
           <li class="page-item col-md-1 col-2  px-0">
             <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
             <div class="input-group">
-              <input type="text" class="form-control text-right rounded-0" placeholder="2" aria-label="Username" aria-describedby="basic-addon1">
+              <input #pageInput (change)="page= $event.target.value -1 " type="text"
+                     class="form-control text-right rounded-0" [placeholder]="page +1" aria-label="Username"
+                     aria-describedby="basic-addon1">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">/5</span>
+                <span class="input-group-text" id="basic-addon1">{{pageable.totalPages}}</span>
               </div>
             </div>
           </li>
           <li class="page-item">
             <button class="btn btn-primary rounded-0">Đi</button>
           </li>
-          <li class="page-item"><a class="page-link" href="#">Trang kế</a></li>
-          <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+          <li class="page-item"><a class="page-link" [hidden]="page >= pageable.totalPages - 1"
+                                   (click)="page= page +1; getList()">Trang kế</a>
+          </li>
+          <li class="page-item"><a class="page-link"
+                                   [hidden]="page >= pageable.totalPages - 1 &&page<pageable.totalPages"
+                                   (click)="page= pageable.totalPages -1; getList()">Cuối</a></li>
         </ul>
       </nav>
     </div>
