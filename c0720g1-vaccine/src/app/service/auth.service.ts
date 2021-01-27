@@ -36,7 +36,8 @@ export class AuthService {
     }, this.httpOptions);
   }
 
-  verify(code: string): Observable<any> {
+  verify(code:string): Observable<any> {
+    console.log(code);
     return this.http.post(AUTH_API + 'verify', {
       code: code
     }, this.httpOptions);

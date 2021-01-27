@@ -28,7 +28,7 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
       dateOfBirth: new FormControl('', [Validators.required, checkDateOfBirth]),
       gender: new FormControl('', [Validators.required, Validators.pattern('^(Nam|Nữ)$')]),
       guardian: new FormControl('', [Validators.required,Validators.maxLength(255), Validators.pattern('^[a-zA-ZàáạảãâầầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổơờớợởỡùúụủũưừứứựửữỳýỵỷỹỗđĐÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
-      phone: new FormControl('', [Validators.required, Validators.pattern('^(0|\\(\\+84\\))[1-9]{1}\\d{7}$')]),
+      phone: new FormControl('', [Validators.required, Validators.pattern('^(0|\\(\\+84\\))[1-9]{1}\\d{8}$')]),
       address: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       email: new FormControl('', [Validators.required, Validators.maxLength(255), Validators.email]),
       vaccinationId: new FormControl()
@@ -41,7 +41,9 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
       this.vaccinationService.getById(id).subscribe( (data: IPeriodicalVaccinationDTO) => {
         this.periodicalVaccination = data;
         console.log(data);
-        console.log(this.periodicalVaccination)
+        console.log(this.periodicalVaccination);
+        this.periodicalVaccination.duration = (this.periodicalVaccination.duration == null) ? 0 : this.periodicalVaccination.duration;
+        this.periodicalVaccination.times = (this.periodicalVaccination.times == null) ? 1 : this.periodicalVaccination.times;
       })
     })
   }
