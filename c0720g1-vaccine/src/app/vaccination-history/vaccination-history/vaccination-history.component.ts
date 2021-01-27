@@ -11,13 +11,13 @@ import {TokenStorageService} from "../../service/token-storage.service";
 })
 
 export class VaccinationHistoryComponent implements OnInit {
-  accountEmail = 'anhkhoa@gmail.com';
-  // accountEmail: string;
+  accountEmail: string;
   vaccinationHistoryList: IVaccinationHistory[];
   page = 0;
   pageable: any;
   vaccineName = '';
   vaccinationDate = '';
+  flag = false;
 
   constructor(
     public vaccinationHistoryService: VaccinationHistoryService,
@@ -26,7 +26,7 @@ export class VaccinationHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getAccountEmail();
+    this.getAccountEmail();
     this.getListVaccine();
   }
 
@@ -38,12 +38,17 @@ export class VaccinationHistoryComponent implements OnInit {
   }
 
   getListVaccine() {
-    console.log(this.accountEmail);
     this.vaccinationHistoryService.findAllVaccinationHistory(this.page, this.vaccineName, this.vaccinationDate, this.accountEmail).subscribe(data => {
         this.vaccinationHistoryList = data.content;
         this.pageable = data;
+        this.flag = true;
       }
     )
   }
 
+  resetSearch() {
+    this.vaccineName = '';
+    this.vaccinationDate = '';
+    this.ngOnInit();
+  }
 }

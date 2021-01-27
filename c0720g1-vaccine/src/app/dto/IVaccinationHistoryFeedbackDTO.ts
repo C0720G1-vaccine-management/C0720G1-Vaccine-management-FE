@@ -1,5 +1,5 @@
 export interface IVaccinationHistoryFeedbackDTO {
-  patientId: number;
+  patientId: string;
   patientName: string;
   patientGender: string;
   patientAge: string;

@@ -13,6 +13,7 @@ import {RoleService} from "../../service/role.service";
 import {IRole} from "../../entity/IRole";
 import {AlertService} from "../alert.service";
 import {birthdayValidator, checkDuplicateEmail} from "../validate";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-employee-edit',
@@ -36,7 +37,8 @@ export class EmployeeEditComponent implements OnInit {
     private roleService: RoleService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private alertService: AlertService
+    private alertService: AlertService,
+    public toastr: ToastrService
   ) {
     this.positionService.findAll().subscribe(data => {
       this.positionList = data;
@@ -70,11 +72,12 @@ export class EmployeeEditComponent implements OnInit {
     // });
     this.employeeFormEdit = this.formBuilder.group({
       employeeId: [''],
-      name: ['', [Validators.required, Validators.pattern('^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡù' +
-        'úụủũưừứựửữỳýỵỷỹđ]+(\\\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$')]],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở' +
+        'ỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$'),
+      Validators.maxLength(40)]],
       dateOfBirth: ['', [Validators.required, birthdayValidator()]],
       idCard: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
-      address: ['', [Validators.required]],
+      address: ['', [Validators.required, Validators.maxLength(40)]],
       phone: ['', [Validators.required, Validators.pattern('^(090|091|\\(84\\)\\+90|\\(84\\)\\+91)\\d{7}$')]],
       position: [''],
       account: [''],
@@ -92,6 +95,12 @@ export class EmployeeEditComponent implements OnInit {
 
   }
   editEmployee(){
+
+    if (this.employeeFormEdit.invalid) {
+      this.toastr.error('Vui lòng nhập đúng tất cả các trường', 'Cảnh báo:');
+      return;
+    }
+
     this.employeeService.editEmployee(this.employeeFormEdit.value).subscribe(
       () => {
         console.log(this.employeeFormEdit.value);

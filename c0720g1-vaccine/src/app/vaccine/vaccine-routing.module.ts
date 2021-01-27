@@ -4,11 +4,18 @@ import {RouterModule, Routes} from "@angular/router";
 import {VaccineListComponent} from "./vaccine-list/vaccine-list.component";
 import {VaccineCreateComponent} from "./vaccine-create/vaccine-create.component";
 import {ImportAndExportModule} from "../import-and-export/import-and-export.module";
+import {AuthGuard} from "../security/auth.guard";
 
 
 const routes:Routes=[
-  {path:'vaccine-list',component: VaccineListComponent},
-  {path:'vaccine-create',component: VaccineCreateComponent},
+  {path:'vaccine-list',component: VaccineListComponent,canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN']
+    }},
+  {path:'vaccine-create',component: VaccineCreateComponent,canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN']
+    }},
 ];
 @NgModule({
   declarations: [],

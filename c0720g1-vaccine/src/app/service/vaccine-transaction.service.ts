@@ -33,11 +33,24 @@ export class VaccineTransactionService {
   getListVaccineHistory() {
     return this.http.get<any>(this.API + 'vaccination-history-list')
   }
+
   // getNamePatient(){
   //   return this.http.get<any>(this.API + )
   // }
+  getVaccineTransaction(id) {
+    return this.http.get<any>(this.API + 'get-vaccine-transaction-id/' + id)
+  }
 
   search(searchCriteria: { keyword2: string; keyword3: string }) {
     return this.http.post<any>(this.API_SEARCH, searchCriteria)
+  }
+
+  editTransaction(id, price, quantity) {
+    return this.http.post<any>(this.API + 'vaccine-transaction-edit-by-id?id=' + id + '&price=' + price + '&quantity=' + quantity, this.httpOptions)
+
+  }
+
+  deleteById(id: number) {
+    return this.http.delete<any>(this.API + 'vaccine-transaction-delete/' + id)
   }
 }

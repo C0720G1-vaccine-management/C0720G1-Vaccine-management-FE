@@ -14,6 +14,7 @@ import {AuthService} from "../../service/auth.service";
 })
 export class LoginComponent implements OnInit {
   @Output() submitLogin = new EventEmitter<string>();
+  @Output() openModal = new EventEmitter<string>();
   formGroup: FormGroup;
   username: string;
   isLoggedIn = false;
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.openModal.emit(this.username);
     //  declare form group by Linh
     this.formGroup = this.formBuild.group({
         username: [''],

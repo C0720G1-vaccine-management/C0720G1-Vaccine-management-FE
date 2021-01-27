@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IImportAndExport} from '../../entity/IImportAndExport';
 import {ImportAndExportService} from '../../service/import-and-export.service';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-vaccine-price-management',
@@ -17,16 +18,26 @@ export class VaccinePriceManagementComponent implements OnInit {
   origin: any;
   page = 0;
   pageable: any;
+  check = "disable"
 
+  validate_message = {
+    'searchId': [
+      {type: 'pattern' , message: "Phải là số"}
+    ]
+  }
   constructor(
-    public exportService: ImportAndExportService
-  ) {
+    public exportService: ImportAndExportService,
+    private toastrService: ToastrService
+
+) {
   }
 
   ngOnInit(): void {
     this.getList()
   }
-
+  /**
+   * Made by Khanh lấy list export , list loại văc xin, list nước sản xuất
+   */
   getList() {
     this.exportService.getListExport(this.page).subscribe(data => {
       this.exports = data.content;
@@ -36,10 +47,13 @@ export class VaccinePriceManagementComponent implements OnInit {
       this.vaccineType = data
     })
     this.exportService.getListOrigin().subscribe(data => {
+      console.log(data)
       this.origin = data
     })
   }
-
+  /**
+   * Made by Khanh tìm kiếm
+   */
   search() {
     const searchCriteria = {
       keyword1: this.keyword1,
