@@ -22,7 +22,7 @@
               <input class="form-control" type="text" formControlName="name">
               <div class="text-danger" *ngFor="let validation of validation_messages.name">
                 <div class="error-message"
-                     *ngIf="employeeForm.get('name').hasError(validation.type) && (employeeForm.get('name').dirty || employeeForm.get('name').pristine)">
+                     *ngIf="employeeForm.get('name').hasError(validation.type) && (employeeForm.get('name').dirty || employeeForm.get('name').touched)">
                   {{validation.message}}</div>
               </div>
             </div>
@@ -35,7 +35,7 @@
               <input style="width: 170px;" class="form-control" type="date" formControlName="dateOfBirth">
               <div class="text-danger" *ngFor="let validation of validation_messages.dateOfBirth">
                 <div class="error-message"
-                     *ngIf="employeeForm.get('dateOfBirth').hasError(validation.type) && (employeeForm.get('dateOfBirth').dirty || employeeForm.get('dateOfBirth').pristine)">
+                     *ngIf="employeeForm.get('dateOfBirth').hasError(validation.type) && (employeeForm.get('dateOfBirth').dirty || employeeForm.get('dateOfBirth').touched)">
                   {{validation.message}}</div>
               </div>
             </div>
@@ -49,7 +49,7 @@
 
               <div class="text-danger" *ngFor="let validation of validation_messages.idCard">
                 <div class="error-message"
-                     *ngIf="employeeForm.get('idCard').hasError(validation.type) && (employeeForm.get('idCard').dirty || employeeForm.get('idCard').pristine)">
+                     *ngIf="employeeForm.get('idCard').hasError(validation.type) && (employeeForm.get('idCard').dirty || employeeForm.get('idCard').touched)">
                   {{validation.message}}</div>
               </div>
             </div>
@@ -66,7 +66,7 @@
               <input class="form-control" type="text" formControlName="address">
               <div class="text-danger" *ngFor="let validation of validation_messages.address">
                 <div class="error-message"
-                     *ngIf="employeeForm.get('address').hasError(validation.type) && (employeeForm.get('address').dirty || employeeForm.get('address').pristine)">
+                     *ngIf="employeeForm.get('address').hasError(validation.type) && (employeeForm.get('address').dirty || employeeForm.get('address').touched)">
                   {{validation.message}}</div>
               </div>
             </div>
@@ -79,7 +79,7 @@
               <input class="form-control" type="text" formControlName="phone">
               <div class="text-danger" *ngFor="let validation of validation_messages.phone">
                 <div class="error-message"
-                     *ngIf="employeeForm.get('phone').hasError(validation.type) && (employeeForm.get('phone').dirty || employeeForm.get('phone').pristine) || check">
+                     *ngIf="employeeForm.get('phone').hasError(validation.type) && (employeeForm.get('phone').dirty || employeeForm.get('phone').touched)">
                   {{validation.message}}</div>
               </div>
             </div>
@@ -94,7 +94,7 @@
               </select>
               <div class="text-danger" *ngFor="let validation of validation_messages.position">
                 <div class="error-message"
-                     *ngIf="employeeForm.get('position').hasError(validation.type) && (employeeForm.get('position').dirty || employeeForm.get('position').pristine)">
+                     *ngIf="employeeForm.get('position').hasError(validation.type) && (employeeForm.get('position').dirty || employeeForm.get('position').touched)">
                   {{validation.message}}</div>
               </div>
             </div>
@@ -109,7 +109,7 @@
               </select>
               <div class="text-danger" *ngFor="let validation of validation_messages.account">
                 <div class="error-message"
-                     *ngIf="employeeForm.get('account').hasError(validation.type) && (employeeForm.get('account').dirty || employeeForm.get('account').pristine)">
+                     *ngIf="employeeForm.get('account').hasError(validation.type) && (employeeForm.get('account').dirty || employeeForm.get('account').touched)">
                   {{validation.message}}</div>
               </div>
             </div>
