@@ -2,28 +2,22 @@
   <div>
     <h3 class="text-center mt-4 ">DANH SÁCH BỆNH NHÂN ĐĂNG ĐĂNG KÝ TIÊM CHỦNG THEO ĐỊNH KỲ CỦA TRUNG TÂM</h3>
     <div class="search row mb-4 mt-4 xl-12 ">
-      <div class="col-xl-6 mt-3">
-        <div class="row">
-          <div class="col-3">
-            Mã Lịch:
-          </div>
-          <div class="col-3">LTC-001</div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-3">
-            Ngày tiêm:
-          </div>
-          <div class="col-3">
-            12/02/2015
-          </div>
+      <div class="col-xl-2 mt-3">
+        <div class="search row d-flex justify-content-xl-end justify-content-center mb-4 text-center">
         </div>
       </div>
-      <div class="col-xl-6 mt-3">
+      <div class="col-xl-10 mt-3">
         <div class="search row d-flex justify-content-xl-end justify-content-center mb-4 text-center">
           <div class="col-xl-4 col-md-3">
+            <form [formGroup]="formGroup">
             <label>Họ Và Tên</label>
-            <input (change)="name = $event.target.value" class="form-control" type="text" placeholder="Họ Và Tên">
-
+            <input (change)="name = $event.target.value" class="form-control" type="text" placeholder="Họ Và Tên" formControlName="name">
+              <div class="text-danger" *ngFor="let validation of validation_messages.name">
+                <div class="error-message"
+                     *ngIf="formGroup.get('name').hasError(validation.type) && (formGroup.get('name').dirty)">
+                  {{validation.message}}</div>
+              </div>
+            </form>
           </div>
           <div class="col-xl-4 col-md-3">
             <label>Tình trạng</label>
@@ -34,8 +28,13 @@
             </select>
           </div>
           <div class="col-xl-auto col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
-            <button class="btn btn-success mt-2"  (click)="page = 0;searchPeriodicVaccination()"><i
+            <button class="btn btn-success mt-2" [disabled]="!formGroup.valid" (click)="page = 0;searchPeriodicVaccination()"><i
               class="fa fa-search"></i> Tìm kiếm
+            </button>
+          </div>
+          <div class="col-xl-auto col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
+            <button class="btn btn-warning mt-2"  (click)="page = 0;getListPeriodicVaccination()"><i
+              class="fa fa-undo"></i> Quay lại
             </button>
           </div>
         </div>
@@ -44,18 +43,20 @@
   </div>
 
 
-  <div>
+  <div class="table">
     <table class="table table-hover table-striped table-bordered">
       <thead style="background-color:rgb(158,207,251)">
       <tr>
         <th>STT</th>
         <th>Mã bệnh nhân</th>
         <th>Họ và tên</th>
-        <th>Ngày tháng năm sinh</th>
+        <th>Ngày sinh</th>
         <th>Giới tính</th>
         <th>Người giám hộ</th>
         <th>Số điện thoại</th>
         <th>Địa chỉ</th>
+        <th>Tên vaccine</th>
+        <th>Thời gian</th>
         <th>Tình trạng</th>
         <th>Trước khi khám</th>
       </tr>
@@ -65,14 +66,24 @@
         <td>{{i + 1}}</td>
         <td>BN-{{object.patient.patientId}}</td>
         <td>{{object.patient.name}}</td>
-        <td>{{object.patient.dateOfBirth}}</td>
+        <td>{{object.patient.dateOfBirth | date:"dd/MM/yyyy"}}</td>
         <td>{{object.patient.gender}}</td>
         <td>{{object.patient.guardian}}</td>
         <td>{{object.patient.phone}}</td>
         <td>{{object.patient.address}}</td>
-        <td>{{object.vaccination.status ? 'Đã tiêm' : 'Chưa tiêm' }}</td>
+        <td>{{object.vaccination.vaccine.name}}</td>
+        <td>{{object.vaccination.startTime | slice:0:5}} - {{object.vaccination.endTime| slice:0:5}}</td>
+        <td class="text-center">
+          <div *ngIf="object.vaccination.status === true then logged else notLogged"></div>
+          <ng-template #logged>
+            <span class="badge badge-primary">Đã tiêm</span>
+          </ng-template>
+          <ng-template #notLogged>
+            <span class="badge badge-danger">Chưa tiêm</span>
+          </ng-template>
+        </td>
         <td>
-          <button class="btn btn-primary">Kiểm Tra</button>
+          <button class="btn btn-primary" [disabled]="object.vaccination.status">Kiểm Tra</button>
         </td>
       </tr>
       </tbody>
