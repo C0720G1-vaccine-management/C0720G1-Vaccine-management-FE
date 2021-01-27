@@ -9,17 +9,29 @@ import {AuthGuard} from "../security/auth.guard";
 
 const routes: Routes = [
   {path: 'patient', redirectTo: 'patient/list', pathMatch: 'full'},
-  {path: 'patient/list', component: ListPatientComponent,canActivate: [AuthGuard],
+  {path: 'patient/list', component: ListPatientComponent
+    ,canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_USER','ROLE_ADMIN']
-    } },
-  {
-    path: 'patient/edit', children: [
+      roles: ['ROLE_ADMIN']
+    }
+    },
+  {path: 'patient/edit', children: [
       {path: ':id', component: EditPatientComponent}
-    ]
+    ],canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN']
+    }},
+  {path: 'patient/list/delete', component: DeletePatientComponent,canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN']
+    }},
+  {
+    path: 'patient/create', component: PatientCreateComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN']
+    }
   },
-  {path: 'patient/list/delete', component: DeletePatientComponent},
-  {path: 'patient/create', component: PatientCreateComponent}
 ];
 
 @NgModule({
