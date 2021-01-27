@@ -13,10 +13,10 @@ export function DateSearchValidator(control: AbstractControl): { [key: string]: 
 }
 /**TrungTQ Code: Hiện thông báo ngày nhập vào phải sau ngày hôm nay*/
 export function DateValidator(control: AbstractControl): { [key: string]: boolean } | null {
-      let  date = control.value;
-      let current = new Date();
-      if (new Date(date) < current) {
-        return {
+  let  date = control.value;
+  let current = new Date();
+  if (new Date(date) < current) {
+    return {
       dateValid: true
     };
   }

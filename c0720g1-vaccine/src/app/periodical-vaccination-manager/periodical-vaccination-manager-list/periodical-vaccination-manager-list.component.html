@@ -1,4 +1,4 @@
-<div class="container col-11">
+<div class="container col-10">
   <h1 class="text-center mt-4 mb-4">XEM LỊCH TIÊM CHỦNG ĐỊNH KỲ</h1>
   <form [formGroup]="formGroup"  >
     <div class="search row d-flex justify-content-end mb-4 text-center">
@@ -9,7 +9,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="start">Từ</span>
           </div>
-          <input formControlName="startDateInput" type="date" class="form-control" (change)="startDate = $event.target.value" aria-describedby="start">
+          <input formControlName="startDateInput" type="date" class="form-control" (change)="startDate = $event.target.value" aria-describedby="start" required>
         </div>
         <div class="error-place">
           <small *ngIf="formGroup.errors?.dateSearchValid" class="text-danger">Ngày bắt đầu nhỏ hơn ngày kết thúc</small>
@@ -21,7 +21,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="end">Đến</span>
           </div>
-          <input formControlName="endDateInput" type="date" class="form-control" (change)="endDate = $event.target.value" aria-describedby="end">
+          <input formControlName="endDateInput" type="date" class="form-control" (change)="endDate = $event.target.value" aria-describedby="end" required>
         </div>
         <div class="error-place">
           <small *ngIf="formGroup.errors?.dateSearchValid" class="text-danger">Ngày bắt đầu nhỏ hơn ngày kết thúc</small>
@@ -44,19 +44,18 @@
       </div>
       <div class="col-auto">
         <br>
-        <button type="submit" class="btn btn-success mt-xl-2 mr-2" [disabled]="formGroup.invalid" (click)="searchDateAndNameOrStatus(0, 1)">
+        <button type="reset" class="btn btn-success mt-xl-2 mr-2" [disabled]="formGroup.invalid" (click)="searchVaccinationManager(0, 1)">
           <i class="bi bi-search"></i> Tìm kiếm
         </button>
-        <button type="reset" class="btn btn-success mt-xl-2" (click)="getAllVaccinationManager(0,1)">
+        <button type="reset" class="btn btn-warning mt-xl-2" (click)="getAllVaccinationManager(0,1)">
           <i class="bi bi-backspace"></i>Quay lại danh sách
         </button>
       </div>
-
     </div>
   </form>
 </div>
 
-<div class="container col-11 mt-5 ">
+<div class="container col-10 mt-5 ">
   <div style="text-align: left">
     <a routerLink="/periodical-vaccination-manager/create">
       <button class="btn btn-success mt-2 mb-md-3"><i class="fa fa-plus"></i> Thêm mới</button>
@@ -81,13 +80,14 @@
     </thead>
     <tbody *ngIf="listVaccination.content.length > 0">
     <tr *ngFor="let vaccinationManager of listVaccination.content, index as i">
-      <td  >{{i + 1}}</td>
-      <td  > {{getCode(vaccinationManager.vaccinationId, 3)}}</td>
+      <td >{{i + 1}}</td>
+      <td > {{getCode(vaccinationManager.vaccinationId, 3)}}</td>
       <td >{{vaccinationManager.startTime | slice: 0: 5}} - {{vaccinationManager.endTime | slice: 0: 5}}</td>
       <td >{{vaccinationManager.date | date: 'dd/MM/yyyy'}}</td>
-      <td >{{vaccinationManager.location.name }}</td>
       <td ><a data-toggle="tooltip" data-placement="right"
-             title="{{vaccinationManager.vaccine.name }}">{{getShortNameVaccine(vaccinationManager.vaccine.name, 20) }}</a>
+              title="{{vaccinationManager.location.name }}">{{getShortName(vaccinationManager.location.name,15) }}</a></td>
+      <td ><a data-toggle="tooltip" data-placement="right"
+             title="{{vaccinationManager.vaccine.name }}">{{getShortName(vaccinationManager.vaccine.name, 15) }}</a>
       </td>
       <td >{{vaccinationManager.vaccine.vaccineType.name}}</td>
       <td >{{vaccinationManager.vaccine.age}}</td>
@@ -106,7 +106,6 @@
             <i class="fa fa-edit"></i>
           </button>
         </a>
-
         <a data-toggle="tooltip" data-placement="right"
            title="Cập nhập trạng thái lịch tiêm ngày {{vaccinationManager.date | date: 'dd/MM/yyyy'}}">
           <button type="button" class="btn btn-success mr-3" [disabled]="vaccinationManager.status"
@@ -134,10 +133,9 @@
         </a>
       </td>
     </tr>
+    <ng-template #noList>Không Có kết quả tìm kiếm</ng-template>
     </tbody>
   </table>
-
-
   <nav aria-label="Page navigation example">
     <ul class="pagination d-flex justify-content-md-end justify-content-center">
       <li class="page-item">

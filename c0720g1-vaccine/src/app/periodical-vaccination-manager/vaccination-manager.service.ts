@@ -18,7 +18,7 @@ export class VaccinationManagerService {
   };
   private apiVaccinationManagerUrl = 'http://localhost:8080/api/public/vaccination-manager';
   private apiLocationUrl = 'http://localhost:8080/api/public/vaccination-manager/locations';
-  private apiVaccineUrl = 'http://localhost:8080/api/public/vaccines';
+  private apiVaccineUrl = 'http://localhost:8080/api/public/vaccination-manager/vaccines';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -30,7 +30,7 @@ export class VaccinationManagerService {
       );
   }
 
-  searchNameAndStatus(startDate: any, endDate: any, name: any, status: any, pageable, type): Observable<any> {
+  searchDateAndNameOrStatus(startDate: any, endDate: any, name: any, status: any, pageable, type): Observable<any> {
     return this.httpClient.get<any>(this.apiVaccinationManagerUrl + '/search?startDate=' + startDate + '&endDate=' + endDate
       + '&name=' + name + '&status=' + status + '&pageable=' + pageable + '&type=' + type)
       .pipe(
