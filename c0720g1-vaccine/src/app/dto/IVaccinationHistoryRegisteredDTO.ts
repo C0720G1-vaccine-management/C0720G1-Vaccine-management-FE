@@ -4,6 +4,8 @@
 
 export interface IVaccinationHistoryRegisteredDTO {
 
+  vaccinationHistoryId : number;
+
   patientId : number;
 
   patientName : string;

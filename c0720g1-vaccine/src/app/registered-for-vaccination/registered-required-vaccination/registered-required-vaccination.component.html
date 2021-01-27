@@ -4,11 +4,11 @@
     <div class="search row d-flex justify-content-end mb-4 text-center">
       <div class="col-xl-2 col-md-3">
         <label>Họ và Tên</label>
-        <input (change)="name = $event.target.value" class="form-control" type="text" placeholder="Họ Và Tên">
+        <input (change)="name = $event.target.value" (keyup.enter)="page = 0;search()" class="form-control" type="text" placeholder="Họ Và Tên">
       </div>
       <div class="col-xl-2 col-md-3">
         <label>Tình trạng</label>
-        <select (change)="status = $event.target.value" class="form-control">
+        <select (change)="status = $event.target.value" (keyup.enter)="page = 0;search()" class="form-control">
           <option value="">Lựa chọn</option>
           <option value=false>Chưa tiêm</option>
           <option value=true>Đã tiêm</option>
@@ -61,7 +61,7 @@
             </ng-template>
           </td>
           <td class="text-center">
-            <button class="btn btn-success" [routerLink]="['view',vac.patient.patientId]">Kiểm tra</button>
+            <button class="btn btn-success" [routerLink]="['view',vac.patient.patientId, vac.vaccinationHistoryId]">Kiểm tra</button>
           </td>
         </tr>
       </table>
