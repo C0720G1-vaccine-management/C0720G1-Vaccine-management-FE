@@ -10,7 +10,7 @@ const routes: Routes = [
     path: 'registered-required-vaccination', component: RegisteredRequiredVaccinationComponent
   },
   {
-    path: 'registered-required-vaccination/view/:id', component: ViewRegisteredRequiredVaccinationComponent,
+    path: 'registered-required-vaccination/view/:id/:idHistory', component: ViewRegisteredRequiredVaccinationComponent,
   },
   {path: 'periodic-vaccination/list', component: CenterPeriodicVaccinationComponent},
 ]

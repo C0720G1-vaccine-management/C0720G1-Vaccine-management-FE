@@ -72,23 +72,29 @@ export class VaccinationHistoryService {
    * list : create by LongBP
    */
   getAllRegisteredRequired(page: number, name: string) {
-    return this.http.get<any>(this.url + '/public/registered-for-vaccination/list?name='+ name + '&page=' + page);
+    return this.http.get<any>(this.url + '/registered-for-vaccination/list?name='+ name + '&page=' + page);
   }
 
   /**
    * search and paging : create by LongBP
    */
   searchRegisteredRequired(page: number, name: string, status: string) {
-    return this.http.get<any>(this.url + '/public/registered-for-vaccination/search?name='+ name + '&status='+status + '&page=' + page);
+    return this.http.get<any>(this.url + '/registered-for-vaccination/search?name='+ name + '&status='+status + '&page=' + page);
   }
 
   /**
    * find by Id : create by LongBP
    */
-  getByIdRegisteredRequired(id): Observable<IVaccinationHistoryRegisteredDTO> {
-    return this.http.get<IVaccinationHistoryRegisteredDTO>(this.url + '/public/registered-for-vaccination/view/' + id)
+  getByIdRegisteredRequired(id): Observable<IVaccinationHistoryRegisteredDTO[]> {
+    return this.http.get<IVaccinationHistoryRegisteredDTO[]>(this.url + '/registered-for-vaccination/view/' + id)
   }
 
+  /**
+   * edit by Id : create by LongBP
+   */
+  editVaccinationHistory(preStatus, idNeedEdit): Observable<any> {
+    return this.http.get(this.url + '/registered-for-vaccination/edit?id=' + idNeedEdit + '&preStatus=' +preStatus);
+  }
 
   /**
    * TuNH
