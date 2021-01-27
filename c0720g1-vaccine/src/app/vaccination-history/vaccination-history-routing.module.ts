@@ -4,15 +4,22 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {VaccinationHistoryComponent} from "./vaccination-history/vaccination-history.component";
 import {VaccinationHistoryFeedbackComponent} from "./vaccination-history-feedback/vaccination-history-feedback.component";
+import {AuthGuard} from "../security/auth.guard";
 
 
 
 const routes: Routes = [
   {
-    path: 'vaccination-history', component: VaccinationHistoryComponent,
+    path: 'vaccination-history', component: VaccinationHistoryComponent,canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_USER','ROLE_ADMIN']
+    }
   },
   {
-    path: 'vaccination-history/feedback/:id', component: VaccinationHistoryFeedbackComponent,
+    path: 'vaccination-history/feedback/:id', component: VaccinationHistoryFeedbackComponent,canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_USER','ROLE_ADMIN']
+    }
   },
 
 ];
