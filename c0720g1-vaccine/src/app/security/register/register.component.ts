@@ -29,21 +29,24 @@ export class RegisterComponent implements OnInit {
     'username': [
       {type: 'required', message: 'Trường này không được để trống!'},
       {type: 'minlength', message: 'Tên đăng nhập nhiều hơn 6 ký tự'},
+      {type: 'maxlength', message: 'Tên đăng nhập ít hơn 32 ký tự'},
    ],
     'password':[
       {type: 'required',message: 'Trường này không được để trống!'},
-      {type: 'minlength', message: 'Tên đăng nhập nhiều hơn 8 ký tự'},
+      {type: 'minlength', message: 'Mật khẩu nhiều hơn 8 ký tự'},
+      {type: 'maxlength', message: 'Mật khẩu ít hơn 32 ký tự'},
     ],
     'email':[
-      {type: 'required',message: 'Trường này không được để trống!'}
+      {type: 'required',message: 'Trường này không được để trống!'},
+      {type:'pattern',message: 'Email sai định dạng' }
     ],
   };
   ngOnInit(): void {
     //  declare form group by Linh
     this.formGroup = this.formBuild.group({
-        username: ['',[Validators.required,Validators.minLength(6)]],
-        password: ['',[Validators.required,Validators.minLength(8)]],
-        email:['',[Validators.required]],
+        username: ['',[Validators.required,Validators.minLength(6),Validators.maxLength(32)]],
+        password: ['',[Validators.required,Validators.minLength(8),Validators.maxLength(32)]],
+        email:['',[Validators.required,Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]],
       }
     );
 

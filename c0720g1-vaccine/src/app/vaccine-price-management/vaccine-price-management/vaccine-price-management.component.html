@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" (click)="pageInput.value = ''">
   <div class="container">
     <h1 class="text-center mt-4 mb-4">Trang Quản Lý Giá Vắc Xin</h1>
 
@@ -9,7 +9,8 @@
       </div>
       <div class="col-lg-2 col-md-3">
         <label for="vaccineId">Mã Vắc Xin</label>
-        <input class="form-control" id="vaccineId" [(ngModel)]="keyword1" type="text" placeholder="Nhập mã vắc-xin">
+        <input name="vaccineId" class="form-control" id="vaccineId" [(ngModel)]="keyword1" type="number"
+               placeholder="Nhập mã vắc-xin">
       </div>
       <div class="col-lg-2 col-md-3">
         <label>Loại vắc-xin</label>
@@ -27,13 +28,14 @@
       </div>
       <div class="col-md-2 mt-2">
         <br>
-        <button class="btn btn-success" (click)="search()"><i class="fa fa-search"> </i>Tìm kiếm</button>
+        <button class="btn btn-success" (click)="search()" [disabled]="!keyword1"><i class="fa fa-search"> </i>Tìm kiếm</button>
       </div>
     </div>
 
 
     <div class="" style="">
-      <table style="" class="table table-hover table-striped table-bordered">
+      <h3 class="text-danger text-center" *ngIf="exports.length == 0">Không có kết quả tìm thấy</h3>
+      <table style="" class="table table-hover table-striped table-bordered" *ngIf="exports.length > 0">
         <thead>
         <tr class="text-center bg-table-header">
           <th>STT</th>
@@ -42,7 +44,7 @@
           <th>Loại vắc-xin</th>
           <th>Nước sản xuất</th>
           <th>Độ tuổi tiêm chủng</th>
-          <th>Giá (VND/ml)</th>
+          <th>Giá (VND/mũi)</th>
           <th>Tạo giá mới/Sửa</th>
         </tr>
         </thead>
@@ -77,7 +79,7 @@
                      class="form-control text-right rounded-0" [placeholder]="page +1" aria-label="Username"
                      aria-describedby="basic-addon1">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">{{pageable.totalPages}}</span>
+                <span class="input-group-text" id="basic-addon1">/{{pageable.totalPages}}</span>
               </div>
             </div>
           </li>

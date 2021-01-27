@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'patient/list', component: ListPatientComponent,canActivate: [AuthGuard],
     data: {
       roles: ['ROLE_USER','ROLE_ADMIN']
-    } },
+    }},
   {
     path: 'patient/edit', children: [
       {path: ':id', component: EditPatientComponent}
