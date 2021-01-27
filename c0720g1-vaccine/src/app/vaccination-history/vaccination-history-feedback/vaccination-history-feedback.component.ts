@@ -61,7 +61,7 @@ export class VaccinationHistoryFeedbackComponent implements OnInit {
       this.isSubmited = true;
       this.vaccinationHistoryService.updateFeedback(this.vaccinationHistoryId, this.formGroup.value).subscribe( data => {
         this.vaccinationHistoryService.sendMailFeedbackForAdmin(this.formGroup.value.afterStatus, this.accountEmail).subscribe(data =>{
-          this.router.navigateByUrl('vaccination-history').then(r => this.toast.success("Cảm ơn bạn đã gửi phản hồi đến chúng tôi!"));
+          this.router.navigateByUrl('/vaccination-history/' + this.vaccinationHistoryFeedback.patientId).then(r => this.toast.success("Cảm ơn bạn đã gửi phản hồi đến chúng tôi!"));
         });
       });
 

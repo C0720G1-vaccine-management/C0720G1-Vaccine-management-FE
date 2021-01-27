@@ -19,6 +19,7 @@ import {RegisteredForVaccinationModule} from "./registered-for-vaccination/regis
 import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import {PeriodicalVaccinationManagerModule} from "./periodical-vaccination-manager/periodical-vaccination-manager.module";
+import {ProfileModule} from "./profile/profile.module";
 
 
 
@@ -48,7 +49,8 @@ import {PeriodicalVaccinationManagerModule} from "./periodical-vaccination-manag
     PeriodicalVaccinationManagerModule,
     PeriodicalVaccinationModule,
     RegisteredForVaccinationModule,
-    FormsModule
+    FormsModule,
+    ProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]

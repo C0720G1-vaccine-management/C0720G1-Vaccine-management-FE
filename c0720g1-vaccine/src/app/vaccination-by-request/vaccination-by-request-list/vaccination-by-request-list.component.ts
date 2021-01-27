@@ -39,9 +39,7 @@ export class VaccinationByRequestListComponent implements OnInit {
     }
 
 
-
-
-    this.vaccineService.getListVaccine(this.page,this.name,this.vaccineTypename,this.origin, this.status).subscribe(data => {
+    this.vaccineService.getListVaccine(this.page,this.name.trim(),this.vaccineTypename.trim(),this.origin.trim(), this.status).subscribe(data => {
       console.log(data.length);
       this.vaccineList = data.content;
       this.pageable = data;
@@ -52,4 +50,13 @@ export class VaccinationByRequestListComponent implements OnInit {
     });
   }
 
+  resetSearch() {
+    this.name = '';
+    this.page = 0;
+    this.vaccineTypename = '';
+    this.origin = '';
+    this.status = '';
+
+    this.getListVaccine();
+  }
 }

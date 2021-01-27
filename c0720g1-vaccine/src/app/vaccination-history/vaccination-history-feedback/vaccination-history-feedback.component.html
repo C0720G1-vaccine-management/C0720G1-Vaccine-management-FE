@@ -61,7 +61,7 @@
           <div *ngIf="isSubmited then submited else notSubmited"></div>
           <ng-template #notSubmited>
             <button type="submit" class="btn btn-warning with-button">Phản hồi lại</button>
-            <button type="button" class="btn btn-secondary with-button" routerLink="/vaccination-history">Hủy</button>
+            <button type="button" class="btn btn-secondary with-button" [routerLink]="'/vaccination-history/'+ vaccinationHistoryFeedback.patientId">Hủy</button>
 
           </ng-template>
           <ng-template #submited>

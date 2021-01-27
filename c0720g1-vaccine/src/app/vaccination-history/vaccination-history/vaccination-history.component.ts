@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {VaccinationHistoryService} from "../../service/vaccination-history.service";
 import {IVaccinationHistory} from "../../entity/IVaccinationHistory";
 import {TokenStorageService} from "../../service/token-storage.service";
+import {ProfileService} from "../../service/profile.service";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -19,14 +21,18 @@ export class VaccinationHistoryComponent implements OnInit {
   vaccinationDate = '';
   flag = false;
 
+  patientId: string;
+
   constructor(
     public vaccinationHistoryService: VaccinationHistoryService,
-    public tokenStorageService: TokenStorageService
+    public tokenStorageService: TokenStorageService,
+    private profileService: ProfileService,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.getAccountEmail();
+    // this.getAccountEmail();
     this.getListVaccine();
   }
 
@@ -37,14 +43,26 @@ export class VaccinationHistoryComponent implements OnInit {
     }
   }
 
+  // getListVaccine() {
+  //   this.vaccinationHistoryService.findAllVaccinationHistory(this.page, this.vaccineName, this.vaccinationDate, this.accountEmail).subscribe(data => {
+  //       this.vaccinationHistoryList = data.content;
+  //       this.pageable = data;
+  //       this.flag = true;
+  //     }
+  //   )
+  // }
+
   getListVaccine() {
-    this.vaccinationHistoryService.findAllVaccinationHistory(this.page, this.vaccineName, this.vaccinationDate, this.accountEmail).subscribe(data => {
+    this.route.paramMap.subscribe(param => {
+      this.patientId = param.get('patientId');
+      this.profileService.getListVaccinationHistoryByPatient(this.page, this.vaccineName, this.vaccinationDate, this.patientId).subscribe(data => {
         this.vaccinationHistoryList = data.content;
         this.pageable = data;
         this.flag = true;
-      }
-    )
+      })
+    })
   }
+
 
   resetSearch() {
     this.vaccineName = '';
