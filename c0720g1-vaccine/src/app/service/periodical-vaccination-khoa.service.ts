@@ -46,4 +46,9 @@ export class PeriodicalVaccinationKhoaService {
   findCustomVaccination(searchData: ISearchAndPage): Observable<IPeriodicalVaccinationDTO[]> {
     return  this.httpClient.post<IPeriodicalVaccinationDTO[]>(this.apiServer+'get-custom-list', searchData)
   }
+
+  cancelRegister(code: string): Observable<any> {
+    console.log(code);
+    return this.httpClient.post(this.apiServer+'cancel', {code: code})
+  }
 }

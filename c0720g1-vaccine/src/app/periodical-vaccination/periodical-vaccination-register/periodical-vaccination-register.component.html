@@ -16,9 +16,15 @@
               </div>
               <div class="col-8">
                 <input id="name" formControlName="name" class="form-control" type="text" placeholder="Nhập họ và tên bệnh nhân">
-                <small class="text-danger" *ngIf="patientForm.get('name').hasError('required') && patientForm.get('name').touched">Vui lòng nhập tên</small>
-                <small class="text-danger" *ngIf="patientForm.get('name').hasError('pattern') && patientForm.get('name').touched">Tên không đúng định dạng</small>
-                <small class="text-danger" *ngIf="patientForm.get('name').hasError('maxlength') && patientForm.get('name').touched">Họ và tên quá dài</small>
+                <div *ngIf="patientForm.get('name').hasError('required') && patientForm.get('name').touched">
+                  <small class="text-danger" >Vui lòng nhập tên.</small>
+                </div>
+                <div *ngIf="patientForm.get('name').hasError('pattern') && patientForm.get('name').touched">
+                  <small class="text-danger" >Tên không đúng định dạng.</small>
+                </div>
+                <div *ngIf="patientForm.get('name').hasError('maxlength') && patientForm.get('name').touched">
+                  <small class="text-danger" >Họ và tên quá dài.</small>
+                </div>
               </div>
             </div>
             <div class="row mb-3">
@@ -28,14 +34,18 @@
               <div class="col-8 row">
                 <div class="col-4 align-bottom" >
                   <input name="gender" id="nam" formControlName="gender" type="radio" value="Nam">
-                  <label for="nam" class="content-checkbox">Nam</label>
+                  <label for="nam" class="content-checkbox ml-2">Nam</label>
                 </div>
                 <div class="col-4 align-bottom">
                   <input name="gender" id="nu" formControlName="gender" type="radio" value="Nữ">
-                  <label for="nu">Nữ</label>
+                  <label for="nu" class="content-checkbox ml-2">Nữ</label>
                 </div>
-                <small class="text-danger" *ngIf="patientForm.get('gender').hasError('required') && patientForm.get('gender').touched">Vui lòng chọn giới tính</small>
-                <small class="text-danger" *ngIf="patientForm.get('gender').hasError('pattern') && patientForm.get('gender').touched">Giới tính phải là nam hoặc nữ</small>
+                <div *ngIf="patientForm.get('gender').hasError('required') && patientForm.get('gender').touched">
+                  <small class="text-danger" >Vui lòng chọn giới tính.</small>
+                </div>
+                <div *ngIf="patientForm.get('gender').hasError('pattern') && patientForm.get('gender').touched">
+                  <small class="text-danger" >Giới tính phải là nam hoặc nữ.</small>
+                </div>
               </div>
             </div>
             <div class="row mb-3">
@@ -44,9 +54,15 @@
               </div>
               <div class="col-8">
                 <input id="dateOfBirth" formControlName="dateOfBirth" class="form-control" type="date">
-                <small class="text-danger" *ngIf="patientForm.get('dateOfBirth').hasError('required') && patientForm.get('dateOfBirth').touched">Vui lòng chọn ngày sinh</small>
-                <small class="text-danger" *ngIf="patientForm.get('dateOfBirth').hasError('pattern') && patientForm.get('dateOfBirth').touched">Ngày sinh không đúng định dạng</small>
-                <small class="text-danger" *ngIf="patientForm.get('dateOfBirth').hasError('checkAge') && patientForm.get('dateOfBirth').touched">Tuổi phải từ 3 tháng tuổi đến 100</small>
+                <div *ngIf="patientForm.get('dateOfBirth').hasError('required') && patientForm.get('dateOfBirth').touched">
+                  <small class="text-danger" >Vui lòng chọn ngày sinh.</small>
+                </div>
+                <div *ngIf="patientForm.get('dateOfBirth').hasError('pattern') && patientForm.get('dateOfBirth').touched">
+                  <small class="text-danger" >Ngày sinh không đúng định dạng.</small>
+                </div>
+                <div *ngIf="patientForm.get('dateOfBirth').hasError('checkAge') && patientForm.get('dateOfBirth').touched">
+                  <small class="text-danger" >Tuổi phải từ 3 tháng tuổi đến 100.</small>
+                </div>
               </div>
             </div>
             <div class="row mb-3">
@@ -55,9 +71,15 @@
               </div>
               <div class="col-8">
                 <input id="guardian" formControlName="guardian" class="form-control" type="text" placeholder="Nhập họ và tên người giám hộ">
-                <small class="text-danger" *ngIf="patientForm.get('guardian').hasError('required') && patientForm.get('guardian').touched">Vui lòng nhập tên người giám hộ</small>
-                <small class="text-danger" *ngIf="patientForm.get('guardian').hasError('maxlength') && patientForm.get('guardian').touched">Họ và tên người giám hộ quá dài</small>
-                <small class="text-danger" *ngIf="patientForm.get('guardian').hasError('pattern') && patientForm.get('guardian').touched">Tên người giám hộ không đúng định dạng</small>
+                <div *ngIf="patientForm.get('guardian').hasError('required') && patientForm.get('guardian').touched">
+                  <small class="text-danger">Vui lòng nhập tên người giám hộ.</small>
+                </div>
+                <div *ngIf="patientForm.get('guardian').hasError('maxlength') && patientForm.get('guardian').touched">
+                  <small class="text-danger">Họ và tên người giám hộ quá dài.</small>
+                </div>
+                <div *ngIf="patientForm.get('guardian').hasError('pattern') && patientForm.get('guardian').touched">
+                  <small class="text-danger">Tên người giám hộ không đúng định dạng.</small>
+                </div>
               </div>
             </div>
             <div class="row mb-3">
@@ -66,8 +88,12 @@
               </div>
               <div class="col-8">
                 <input id="address" class="form-control" formControlName="address" type="text" placeholder="Nhập địa chỉ">
-                <small class="text-danger" *ngIf="patientForm.get('address').hasError('required') && patientForm.get('address').touched">Vui lòng nhập địa chỉ</small>
-                <small class="text-danger" *ngIf="patientForm.get('address').hasError('maxlength') && patientForm.get('address').touched">Địa chỉ quá dài</small>
+                <div *ngIf="patientForm.get('address').hasError('required') && patientForm.get('address').touched">
+                  <small class="text-danger">Vui lòng nhập địa chỉ.</small>
+                </div>
+                <div *ngIf="patientForm.get('address').hasError('maxlength') && patientForm.get('address').touched">
+                  <small class="text-danger">Địa chỉ quá dài.</small>
+                </div>
               </div>
             </div>
             <div class="row mb-3">
@@ -76,9 +102,12 @@
               </div>
               <div class="col-8">
                 <input id="phoneNumber" formControlName="phone" class="form-control" type="text" placeholder="Nhập số điện thoại">
-                <small class="text-danger" *ngIf="patientForm.get('phone').hasError('required') && patientForm.get('phone').touched">Vui lòng nhập số điện thoại</small>
-                <small class="text-danger" *ngIf="patientForm.get('phone').hasError('pattern') && patientForm.get('phone').touched">
-                  Số điện thoại ko đúng (vd: 012345678 hoặc (+84)12345678)</small>
+                <div *ngIf="patientForm.get('phone').hasError('required') && patientForm.get('phone').touched">
+                  <small class="text-danger">Vui lòng nhập số điện thoại.</small>
+                </div>
+                <div *ngIf="patientForm.get('phone').hasError('pattern') && patientForm.get('phone').touched">
+                  <small class="text-danger">Số điện thoại ko đúng (vd: 0123456789 hoặc (+84)123456789).</small>
+                </div>
               </div>
             </div>
 
@@ -88,11 +117,16 @@
               </div>
               <div class="col-8">
                 <input id="email" class="form-control" formControlName="email" type="email" placeholder="Nhập email">
-                <small class="text-danger" *ngIf="patientForm.get('email').hasError('required') && patientForm.get('email').touched">
-                  Vui lòng nhập email</small>
-                <small class="text-danger" *ngIf="patientForm.get('email').hasError('email') && patientForm.get('email').touched">
-                  Email không đúng định dạng</small>
-                <small class="text-danger" *ngIf="patientForm.get('email').hasError('maxlength') && patientForm.get('email').touched">Email quá dài</small>
+                <div  *ngIf="patientForm.get('email').hasError('required') && patientForm.get('email').touched">
+                  <small class="text-danger">Vui lòng nhập email.</small>
+                </div>
+                <div  *ngIf="patientForm.get('email').hasError('email') && patientForm.get('email').touched">
+                  <small class="text-danger">
+                    Email không đúng định dạng.</small>
+                </div>
+                <div  *ngIf="patientForm.get('email').hasError('maxlength') && patientForm.get('email').touched">
+                  <small class="text-danger">Email quá dài.</small>
+                </div>
               </div>
             </div>
           </div>
@@ -140,6 +174,22 @@
               </div>
               <div class="col-8">
                 <input [value]="this.periodicalVaccination.location" class="form-control" type="text" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label class="col-form-label">Số lần tiêm</label>
+              </div>
+              <div class="col-8">
+                <input [value]="this.periodicalVaccination.times" class="form-control" type="text" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label class="col-form-label">Số ngày giữa hai lần tiêm</label>
+              </div>
+              <div class="col-8">
+                <input [value]="this.periodicalVaccination.duration + ' Ngày'" class="form-control" type="text" readonly>
               </div>
             </div>
           </div>
