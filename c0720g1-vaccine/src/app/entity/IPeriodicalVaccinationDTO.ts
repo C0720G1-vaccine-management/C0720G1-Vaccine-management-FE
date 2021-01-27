@@ -8,6 +8,8 @@ export interface IPeriodicalVaccinationDTO {
   description: string;
   age: string;
   location: string;
-  country: string
-  image: string
+  country: string;
+  image: string;
+  duration: number;
+  times: number;
 }

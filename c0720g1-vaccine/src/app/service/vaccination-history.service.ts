@@ -56,7 +56,7 @@ export class VaccinationHistoryService {
    * @param name
    * @param status
    */
-  searchPeriodicVaccination(page: number, name: string, status: boolean) {
+  searchPeriodicVaccination(page: number, name: string, status: string) {
     return this.http.get<any>(this.url + '/periodic-vaccination/search?name='+ name + '&status='+status + '&page=' + page);
   }
 
@@ -64,8 +64,8 @@ export class VaccinationHistoryService {
    * @param page
    * @param name
    */
-  getListPeriodicVaccination(page: number, name: string) {
-    return this.http.get<any>(this.url + '/periodic-vaccination/list?name='+ name + '&page=' + page);
+  getListPeriodicVaccination(page: number) {
+    return this.http.get<any>(this.url + '/periodic-vaccination/list?page=' + page);
   }
 
   /**
