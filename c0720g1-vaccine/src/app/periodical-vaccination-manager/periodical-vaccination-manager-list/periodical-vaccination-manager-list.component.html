@@ -1,18 +1,23 @@
-<div class="container col-10">
+<div class="container col-11">
   <h1 class="text-center mt-4 mb-4">XEM LỊCH TIÊM CHỦNG ĐỊNH KỲ</h1>
-  <form [formGroup]="formGroup"  >
+  <form [formGroup]="formGroup">
     <div class="search row d-flex justify-content-end mb-4 text-center">
 
       <div class="form-group col-auto">
-        <label>Ngày Tiêm:<span class="search">*</span></label>
+        <label>Ngày Tiêm:<span class="search"> *</span></label>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="start">Từ</span>
           </div>
-          <input formControlName="startDateInput" type="date" class="form-control" (change)="startDate = $event.target.value" aria-describedby="start" required>
+          <input formControlName="startDateInput" type="date" class="form-control"
+                 (change)="startDate = $event.target.value" aria-describedby="start" required>
         </div>
-        <div class="error-place">
-          <small *ngIf="formGroup.errors?.dateSearchValid" class="text-danger">Ngày bắt đầu nhỏ hơn ngày kết thúc</small>
+        <div class="error-place" *ngFor="let validation of validate_message.startDateInput">
+          <div><small class="text-danger"
+                      *ngIf="formGroup.get('startDateInput').hasError(validation.type) && (formGroup.get('startDateInput').touched)">
+            {{validation.message}}</small></div>
+          <div><small *ngIf="formGroup.errors?.dateSearchValid" class="text-danger">Ngày bắt đầu nhỏ hơn ngày kết
+            thúc</small></div>
         </div>
       </div>
       <div class="form-group col-auto">
@@ -21,18 +26,30 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="end">Đến</span>
           </div>
-          <input formControlName="endDateInput" type="date" class="form-control" (change)="endDate = $event.target.value" aria-describedby="end" required>
+          <input formControlName="endDateInput" type="date" class="form-control"
+                 (change)="endDate = $event.target.value" aria-describedby="end" required>
         </div>
-        <div class="error-place">
-          <small *ngIf="formGroup.errors?.dateSearchValid" class="text-danger">Ngày bắt đầu nhỏ hơn ngày kết thúc</small>
+        <div class="error-place" *ngFor="let validation of validate_message.endDateInput">
+          <div><small class="text-danger"
+                      *ngIf="formGroup.get('endDateInput').hasError(validation.type) && (formGroup.get('endDateInput').touched)">
+            {{validation.message}}</small></div>
+          <div><small *ngIf="formGroup.errors?.dateSearchValid" class="text-danger">Ngày bắt đầu nhỏ hơn ngày kết
+            thúc</small></div>
         </div>
       </div>
 
       <div class="form-group col-auto">
         <label>Tên vắc-xin</label>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Nhập tên vắc-xin" (change)="name = $event.target.value">
+          <input formControlName="nameInput" type="text" class="form-control" placeholder="Nhập tên vắc-xin"
+                 (change)="name = $event.target.value">
         </div>
+        <div class="error-place" *ngFor="let validation of validate_message.nameInput">
+          <small class="text-danger"
+                 *ngIf="formGroup.get('nameInput').hasError(validation.type) && (formGroup.get('nameInput').touched)">
+            {{validation.message}}</small>
+        </div>
+
       </div>
       <div class="form-group col-auto">
         <label>Trạng thái</label>
@@ -44,18 +61,19 @@
       </div>
       <div class="col-auto">
         <br>
-        <button type="reset" class="btn btn-success mt-xl-2 mr-2" [disabled]="formGroup.invalid" (click)="searchVaccinationManager(0, 1)">
-          <i class="bi bi-search"></i> Tìm kiếm
+        <button type="button" class="btn btn-success mt-xl-2 mr-2" [disabled]="formGroup.invalid"
+                (click)="searchVaccinationManager(0, 1)">
+          <i class="fa fa-search"></i> Tìm kiếm
         </button>
         <button type="reset" class="btn btn-warning mt-xl-2" (click)="getAllVaccinationManager(0,1)">
-          <i class="bi bi-backspace"></i>Quay lại danh sách
+          <i class="fa fa-undo"></i> Quay lại
         </button>
       </div>
     </div>
   </form>
 </div>
 
-<div class="container col-10 mt-5 ">
+<div class="container col-11 mt-5 ">
   <div style="text-align: left">
     <a routerLink="/periodical-vaccination-manager/create">
       <button class="btn btn-success mt-2 mb-md-3"><i class="fa fa-plus"></i> Thêm mới</button>
@@ -64,7 +82,7 @@
   <table class="table table-hover table-bordered">
     <thead>
     <tr class="table-primary" style="text-align: center">
-      <th>STT</th>
+      <th class="center-th">STT</th>
       <th>Mã Lịch Tiêm</th>
       <th>Thời Gian</th>
       <th>Ngày Tiêm</th>
@@ -74,31 +92,35 @@
       <th>Đối tượng được tiêm</th>
       <th>Trạng Thái</th>
       <th>Ghi Chú</th>
+      <th>Số mũi tiêm</th>
+      <th>Nhắc lại sau</th>
       <th>Chức năng</th>
-      <th>DS tiêm</th>
     </tr>
     </thead>
     <tbody *ngIf="listVaccination.content.length > 0">
     <tr *ngFor="let vaccinationManager of listVaccination.content, index as i">
-      <td >{{i + 1}}</td>
-      <td > {{getCode(vaccinationManager.vaccinationId, 3)}}</td>
-      <td >{{vaccinationManager.startTime | slice: 0: 5}} - {{vaccinationManager.endTime | slice: 0: 5}}</td>
-      <td >{{vaccinationManager.date | date: 'dd/MM/yyyy'}}</td>
-      <td ><a data-toggle="tooltip" data-placement="right"
-              title="{{vaccinationManager.location.name }}">{{getShortName(vaccinationManager.location.name,15) }}</a></td>
-      <td ><a data-toggle="tooltip" data-placement="right"
+      <td class="center-th">{{i + 1}}</td>
+      <td class="center-th"> {{getCode(vaccinationManager.vaccinationId, 3)}}</td>
+      <td>{{vaccinationManager.startTime | slice: 0: 5}} - {{vaccinationManager.endTime | slice: 0: 5}}</td>
+      <td>{{vaccinationManager.date | date: 'dd/MM/yyyy'}}</td>
+      <td><a data-toggle="tooltip" data-placement="right"
+             title="{{vaccinationManager.location.name }}">{{getShortName(vaccinationManager.location.name, 15) }}</a>
+      </td>
+      <td><a data-toggle="tooltip" data-placement="right"
              title="{{vaccinationManager.vaccine.name }}">{{getShortName(vaccinationManager.vaccine.name, 15) }}</a>
       </td>
-      <td >{{vaccinationManager.vaccine.vaccineType.name}}</td>
-      <td >{{vaccinationManager.vaccine.age}}</td>
-      <td  >
+      <td>{{vaccinationManager.vaccine.vaccineType.name}}</td>
+      <td>{{vaccinationManager.vaccine.age}}</td>
+      <td>
         <div *ngIf="vaccinationManager.status; else noStatus">
           Đã thực hiện.
         </div>
         <ng-template #noStatus>Chưa thực hiện</ng-template>
       </td>
-      <td >{{vaccinationManager.description | titlecase}}</td>
-      <td class="action">
+      <td>{{vaccinationManager.description | titlecase}}</td>
+      <td class="center-th">{{vaccinationManager.times}}</td>
+      <td class="center-th">{{vaccinationManager.duration}} {{str}}</td>
+      <td class="center-th">
         <a data-toggle="tooltip" data-placement="right"
            title="Cập nhập lịch tiêm ngày {{vaccinationManager.date | date: 'dd/MM/yyyy'}}">
           <button type="button" class="btn btn-warning mr-3" [disabled]="vaccinationManager.status"
@@ -124,16 +146,7 @@
           </button>
         </a>
       </td>
-      <td class="action">
-        <a data-toggle="tooltip" data-placement="right"
-           title="Danh sách ngày {{vaccinationManager.date | date: 'dd/MM/yyyy'}}">
-          <button class="btn btn-primary">
-            <i class="fa fa-list"></i>
-          </button>
-        </a>
-      </td>
     </tr>
-    <ng-template #noList>Không Có kết quả tìm kiếm</ng-template>
     </tbody>
   </table>
   <nav aria-label="Page navigation example">
@@ -256,7 +269,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="getMessageUpdate()">Hủy</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="updateVaccinationStatusManager()">Đồng ý
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="updateVaccinationStatusManager()">
+          Đồng ý
         </button>
       </div>
     </div>
