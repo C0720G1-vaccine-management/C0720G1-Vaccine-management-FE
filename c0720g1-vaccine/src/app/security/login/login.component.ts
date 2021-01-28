@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 import {ToastrService} from "ngx-toastr";
 import {HeaderComponent} from "../../component/header/header.component";
@@ -13,8 +13,6 @@ import {AuthService} from "../../service/auth.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @Output() submitLogin = new EventEmitter<string>();
-  @Output() openModal = new EventEmitter<string>();
   formGroup: FormGroup;
   username: string;
   isLoggedIn = false;
@@ -22,21 +20,24 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   token: string;
+  returnUrl: string;
+  @ViewChild(HeaderComponent) header: HeaderComponent;
 
   constructor(private formBuild: FormBuilder,
               private tokenStorageService: TokenStorageService,
               private authService: AuthService,
-              private router: Router,private header: HeaderComponent,
-              private toastr: ToastrService,) {
+              private router: Router,
+              private toastr: ToastrService,
+              private route: ActivatedRoute,) {
   }
 
   ngOnInit(): void {
-    this.openModal.emit(this.username);
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     //  declare form group by Linh
     this.formGroup = this.formBuild.group({
         username: [''],
         password: [''],
-        remember_me:['']
+        remember_me: ['']
       }
     );
     //  check status login or not by Linh
@@ -51,10 +52,10 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.formGroup.value).subscribe(
       data => {
-        if(this.formGroup.value.remember_me){
+        if (this.formGroup.value.remember_me) {
           this.tokenStorageService.saveTokenLocal(data.accessToken);
           this.tokenStorageService.saveUserLocal(data);
-        }else {
+        } else {
           this.tokenStorageService.saveTokenSession(data.accessToken);
           this.tokenStorageService.saveUserLocal(data);
         }
@@ -62,16 +63,16 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.username = this.tokenStorageService.getUser().username;
         this.roles = this.tokenStorageService.getUser().roles;
-        this.router.navigateByUrl("");
-        this.submitLogin.emit(this.username);
-        this.formGroup.reset()
+        this.formGroup.reset();
+        this.router.navigateByUrl(this.returnUrl);
+        this.header.ngOnInit();
       },
       err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
-        this.toastr.error("Sai tên đăng nhập hoặc mật khẩu hoặc tài khoản chưa được kích hoạt","Đăng nhập thất bại: ",{
+        this.toastr.error("Sai tên đăng nhập hoặc mật khẩu hoặc tài khoản chưa được kích hoạt", "Đăng nhập thất bại: ", {
           timeOut: 3000,
-          extendedTimeOut:1500
+          extendedTimeOut: 1500
         });
       }
     );
