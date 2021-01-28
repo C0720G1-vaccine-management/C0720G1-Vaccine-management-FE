@@ -4,11 +4,12 @@ import { PeriodicalVaccinationListComponent } from './periodical-vaccination-lis
 import {PeriodicalVaccinationRoutingModule} from './periodical-vaccination-routing.module';
 import { PeriodicalVaccinationRegisterComponent } from './periodical-vaccination-register/periodical-vaccination-register.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { CancelRegisterComponent } from './cancel-register/cancel-register.component';
 
 
 
 @NgModule({
-  declarations: [PeriodicalVaccinationListComponent, PeriodicalVaccinationRegisterComponent],
+  declarations: [PeriodicalVaccinationListComponent, PeriodicalVaccinationRegisterComponent, CancelRegisterComponent],
   imports: [
     CommonModule,
     PeriodicalVaccinationRoutingModule,

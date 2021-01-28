@@ -14,7 +14,6 @@ import {LoginComponent} from "../../security/login/login.component";
 })
 
 export class HeaderComponent implements OnInit {
-  @ViewChild('closebutton') closebutton;
   username: string;
   isLoggedIn = false;
   isLoginFailed = false;
@@ -29,11 +28,6 @@ export class HeaderComponent implements OnInit {
               private router: Router) {
   }
 
-  getUsername($event) {
-    this.username = $event;
-    this.closebutton.nativeElement.click();
-    this.ngOnInit();
-  };
 
   ngOnInit(): void {
     if (this.tokenStorageService.getToken()) {
@@ -50,5 +44,4 @@ export class HeaderComponent implements OnInit {
     this.tokenStorageService.signOut();
     this.ngOnInit();
   }
-
 }

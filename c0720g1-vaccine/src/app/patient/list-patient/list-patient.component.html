@@ -1,9 +1,7 @@
 <div class="content">
   <div class="container col-10">
     <h1 class="text-center mt-4 mb-4">Danh Sách Bệnh Nhân</h1>
-
     <div class="search row d-flex justify-content-xl-end justify-content-center mb-4 text-center">
-
       <div class="col-xl-2 col-md-3">
         <label for="vaccineType">Mã Bệnh Nhân</label>
         <input (change)="patientId = $event.target.value" id="vaccineType" class="form-control" type="text"
@@ -14,13 +12,10 @@
         <input (change)="name = $event.target.value" id="provider" class="form-control" type="text"
                placeholder="Họ Và Tên">
       </div>
-
       <div class="col-xl-2 col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
         <button (click)="searchPatient(0)" class="btn btn-success mt-2"><i class="fa fa-search"></i> Tìm kiếm</button>
       </div>
     </div>
-
-
     <div class="col-xl-2 col-12 px-0">
       <!--            <br>-->
       <button class="btn btn-success mt-2 mb-md-3" routerLink="/patient/create"><i class="fa fa-plus"></i> Thêm mới
@@ -29,8 +24,8 @@
     <div class="">
       <table class="table table-hover table-bordered ">
         <thead>
-        <tr class="bg-table-header">
-          <th>STT</th>
+        <tr class="table-primary">
+          <th class="center-stt">STT</th>
           <th>Mã Bệnh Nhân</th>
           <th>Họ Và Tên</th>
           <th>Ngày Sinh</th>
@@ -44,12 +39,10 @@
         </thead>
         <tbody *ngIf="listPatient.content.length > 0">
         <tr *ngFor="let element of listPatient.content,index as i  " >
-          <!--          <div *ngIf="element.deleteFlag == true">-->
-
-          <td>{{i + 1}}</td>
+          <td class="center-stt">{{i + 1}}</td>
           <td>{{getCode(element.patientId,3)}}</td>
           <td>{{element.name}}</td>
-          <td>{{element.dateOfBirth}}</td>
+          <td>{{element.dateOfBirth|date:'dd/MM/yyy'}}</td>
           <td>{{element.gender}}</td>
           <td>{{element.guardian}}</td>
           <td>{{element.phone}}</td>
@@ -58,20 +51,14 @@
           <td class="text-center">
             <button class="btn btn-success" [routerLink]="['/patient/edit', element.patientId]"><i
               class="fa fa-edit"></i></button>
-
-
             <button class="btn btn-danger ml-2" data-toggle="modal" data-target="#exampleModal"
                     (click)="deleteId = element.patientId; deleteName = element.name"><i class="fa fa-trash"></i>
             </button>
           </td>
-
         </tr>
-
         </tbody>
       </table>
     </div>
-
-
     <nav aria-label="Page navigation example">
       <ul class="pagination d-flex justify-content-md-end justify-content-center">
         <li class="page-item">
@@ -80,10 +67,9 @@
         <li class="page-item">
           <button class="page-link" [hidden]="listPatient.pageable.pageNumber == 0"
                   (click)="searchPatient(listPatient.pageable.pageNumber - 1)">Trang
-            sau
+            trước
           </button>
         </li>
-
         <li class="page-item col-md-1 col-2  px-0">
           <div class="input-group">
             <input #ok type="number" min="1" max="listPatient.totalPages"
@@ -109,8 +95,6 @@
       </ul>
     </nav>
   </div>
-
-
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -120,7 +104,6 @@
       </div>
     </div>
   </div>
-
   <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -140,6 +123,4 @@
       </div>
     </div>
   </div>
-
 </div>
-

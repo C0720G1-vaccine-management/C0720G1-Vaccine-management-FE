@@ -1,103 +1,93 @@
-<div class="container-fluid">
-  <div class="container">
-    <h1 class="text-center mt-4 mb-4">KIỂM TRA LÂM SÀNG<br>TƯ VẤN VÀ KÊ ĐƠN TRƯỚC KHI TIÊM</h1>
+<br>
+<h2 class="text-center">KIỂM TRA LÂM SÀNG, TƯ VẤN VÀ KÊ ĐƠN TRƯỚC KHI TIÊM</h2>
+<div class="row">
+  <div class="container col-5" style="margin-top: 50px">
+    <h3 class="text-center">Thông tin bệnh nhân</h3>
+    <table class="table borderless" style="margin-left: 100px">
+      <tbody>
+      <tr>
+        <td class="title-info-patient">ID:</td>
+        <td>BN-{{vaccinationHistoryRegisteredDTOS.patientId}}</td>
+      </tr>
+      <tr>
+        <td class="title-info-patient">Tên bệnh nhân:</td>
+        <td>{{vaccinationHistoryRegisteredDTOS.patientName}}</td>
+      </tr>
+      <tr>
+        <td class="title-info-patient">Giới tính:</td>
+        <td>{{vaccinationHistoryRegisteredDTOS.patientGender}}</td>
+      </tr>
+      <tr>
+        <td class="title-info-patient">Năm sinh:</td>
+        <td>{{vaccinationHistoryRegisteredDTOS.patientDob}}</td>
+      </tr>
+      <tr>
+        <td class="title-info-patient">Người giám hộ:</td>
+        <td>{{vaccinationHistoryRegisteredDTOS.patientGuardian}}</td>
+      </tr>
+      <tr>
+        <td class="title-info-patient">Địa chỉ:</td>
+        <td>{{vaccinationHistoryRegisteredDTOS.patientAddress}}</td>
+      </tr>
+      <tr>
+        <td class="title-info-patient">Số điện thoại:</td>
+        <td>{{vaccinationHistoryRegisteredDTOS.patientPhone}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <div class="row">
-      <div class="row col-5">
-        <h3 class="text-center">Thông tin bệnh nhân</h3>
-        <table class="table border-less">
-          <tbody>
-          <tr>
-            <td class="title-info-patient">ID:</td>
-            <td>{{infoPatient.patientId}}</td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Tên bệnh nhân:</td>
-            <td>{{infoPatient.patientName}}</td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Giới tính:</td>
-            <td>{{infoPatient.patientGender}}</td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Năm sinh:</td>
-            <td>{{infoPatient.patientDob}}</td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Người giám hộ:</td>
-            <td>{{infoPatient.patientGuardian}}</td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Địa chỉ:</td>
-            <td>{{infoPatient.patientAddress}}</td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Số điện thoại:</td>
-            <td>{{infoPatient.patientPhone}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="col-7 row">
-        <h3 class="text-center">Lịch sử tiêm chủng của bệnh nhân</h3>
-        <table class="table border-less">
-          <tbody>
-          <tr>
-            <td class="title-info-patient">Vắc xin đã tiêm:</td>
-            <td>
-              <div *ngIf="infoPatient.vaccinationHistoryStatus === true then logged else notLogged"></div>
-              <ng-template #logged>
-                <span>{{infoPatient.vaccineName}}</span>
-              </ng-template>
-              <ng-template #notLogged>
-                <span class="badge badge-danger">Chưa tiêm</span>
-              </ng-template>
-            </td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Thời gian tiêm:</td>
-            <td>{{infoPatient.endTime}}</td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Tình trạng trước khi tiêm:</td>
-            <td>{{infoPatient.preStatus}}</td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Phản ứng sau khi tiêm:</td>
-            <td>{{infoPatient.afterStatus}}</td>
-          </tr>
-
-          <tr>
-            <td class="title-info-patient">Loại Vaccine:</td>
-            <td>{{infoPatient.vaccineTypeName}}</td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Liều lượng:</td>
-            <td>{{infoPatient.dosage}}ml</td>
-          </tr>
-          <tr>
-            <td class="title-info-patient">Mũi tiêm: </td>
-            <td>
-              <div *ngIf="infoPatient.vaccinationHistoryStatus === true then block else elseBlock"></div>
-              <ng-template #block>
-                <span class="badge badge-primary">Thứ 2</span>
-              </ng-template>
-              <ng-template #elseBlock>
-                <span class="badge badge-primary">Đầu tiên</span>
-              </ng-template>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="container col-7" style="margin-top: 50px">
+    <h3 class="text-center">Lịch sử tiêm chủng của bệnh nhân</h3>
+    <div class="historyInjection" style="width: 750px; height: 200px; overflow-y: scroll;">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Vắc xin đã tiêm</th>
+          <th scope="col">Thời gian tiêm</th>
+          <th scope="col">Phản ứng sau khi tiêm</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let vac of infoPatient">
+          <div *ngIf="vac.vaccinationHistoryStatus === true then logged"></div>
+          <ng-template #logged>
+            <td>{{vac.vaccineTypeName}}</td>
+            <td>{{vac.endTime}}</td>
+            <td>{{vac.afterStatus}}</td>
+          </ng-template>
+        </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="text-center">
-      <button type="button" class="btn btn-primary">Xong/Cho tiêm</button>
-      <button type="button" class="btn btn-secondary" [routerLink]="['/registered-required-vaccination']">Huỷ</button>
+
+    <div style="margin-top: 30px">
+      <form action="">
+        <div class="form-group form-inline" style="margin-left: 5px">
+          <label for="statusPatientPreInject">Tình trạng bệnh nhân trước khi tiêm :</label>&nbsp;&nbsp;
+          <div>
+            <input (change)="preStatus = $event.target.value" type="text" id="statusPatientPreInject" class="form-control" size="50">
+          </div>
+        </div>
+
+        <div class="row" style="margin-left: 5px" >
+          <div class="form-group form-inline" style="padding-right: 5em">
+            <label for="vaccineType" style="padding-right: 1.4em">Loại vắc xin:</label>
+            <div><input [value]="vaccinationHistoryRegisteredDTOS.vaccineTypeName" type="text" id="vaccineType" class="form-control" size="19" readonly></div>
+          </div>
+          <div class="form-group form-inline" style="margin-left: 5px">
+            <label for="dosage" style="padding-right: 2em">Liều lượng (ml):</label>
+            <div>
+              <input [value]="vaccinationHistoryRegisteredDTOS.dosage" type="text" id="dosage" class="form-control" size="19" readonly>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-auto" style="text-align: center">
+          <button type="button" class="btn btn-primary" (click)="editVaccinationHistory()">Xong/Cho tiêm</button>
+          <button style="margin-left: 5px" type="button" class="btn btn-secondary" [routerLink]="['/registered-required-vaccination']">Huỷ</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
-
-
