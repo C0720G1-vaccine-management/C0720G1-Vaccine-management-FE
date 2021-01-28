@@ -21,6 +21,8 @@ export class VaccinationHistoryComponent implements OnInit {
   vaccinationDate = '';
   flag = false;
 
+  error : string;
+
   patientId: string;
 
   constructor(
@@ -59,6 +61,8 @@ export class VaccinationHistoryComponent implements OnInit {
         this.vaccinationHistoryList = data.content;
         this.pageable = data;
         this.flag = true;
+      }, error => {
+        this.error = 'Chưa có lịch sử tiêm';
       })
     })
   }

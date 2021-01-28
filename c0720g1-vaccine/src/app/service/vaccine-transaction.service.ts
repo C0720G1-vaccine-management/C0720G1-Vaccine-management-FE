@@ -34,9 +34,10 @@ export class VaccineTransactionService {
     return this.http.get<any>(this.API + 'vaccination-history-list')
   }
 
-  // getNamePatient(){
-  //   return this.http.get<any>(this.API + )
-  // }
+  getNamePatient(id) {
+    return this.http.get<any>(this.API + 'vaccine-history-patient/' + id)
+  }
+
   getVaccineTransaction(id) {
     return this.http.get<any>(this.API + 'get-vaccine-transaction-id/' + id)
   }

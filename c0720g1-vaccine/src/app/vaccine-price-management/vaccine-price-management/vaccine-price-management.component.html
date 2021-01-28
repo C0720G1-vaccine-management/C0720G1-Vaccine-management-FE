@@ -8,11 +8,6 @@
       <div class="col-lg-2 col-md-3">
       </div>
       <div class="col-lg-2 col-md-3">
-        <label for="vaccineId">Mã Vắc Xin</label>
-        <input name="vaccineId" class="form-control" id="vaccineId" [(ngModel)]="keyword1" type="number"
-               placeholder="Nhập mã vắc-xin">
-      </div>
-      <div class="col-lg-2 col-md-3">
         <label>Loại vắc-xin</label>
         <select class="form-control" name="" [(ngModel)]="keyword2">
           <option value="">Mặc định</option>
@@ -28,7 +23,7 @@
       </div>
       <div class="col-md-2 mt-2">
         <br>
-        <button class="btn btn-success" (click)="search()" [disabled]="!keyword1"><i class="fa fa-search"> </i>Tìm kiếm</button>
+        <button class="btn btn-success" (click)="search()"><i class="fa fa-search"> </i>Tìm kiếm</button>
       </div>
     </div>
 
@@ -37,7 +32,7 @@
       <h3 class="text-danger text-center" *ngIf="exports.length == 0">Không có kết quả tìm thấy</h3>
       <table style="" class="table table-hover table-striped table-bordered" *ngIf="exports.length > 0">
         <thead>
-        <tr class="text-center bg-table-header">
+        <tr class="text-center bg-table-header" style="background-color:   rgb(158,207,251) !important;">
           <th>STT</th>
           <th>Mã vắc-xin</th>
           <th>Tên vắc-xin</th>
@@ -75,7 +70,7 @@
           <li class="page-item col-md-1 col-2  px-0">
             <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
             <div class="input-group">
-              <input #pageInput (change)="page= $event.target.value -1 " type="text"
+              <input #pageInput (change)="page = $event.target.value - 1" type="text"
                      class="form-control text-right rounded-0" [placeholder]="page +1" aria-label="Username"
                      aria-describedby="basic-addon1">
               <div class="input-group-prepend">

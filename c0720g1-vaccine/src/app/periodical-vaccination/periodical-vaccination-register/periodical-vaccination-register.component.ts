@@ -18,6 +18,7 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
   periodicalVaccination: IPeriodicalVaccinationDTO;
   patientForm: FormGroup;
   errorMessage: string;
+  isSubmited: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private vaccinationService : PeriodicalVaccinationKhoaService,
@@ -49,9 +50,11 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
   }
 
   submitVaccinationRegister() {
+    this.isSubmited = true;
     this.patientForm.value.vaccinationId = this.periodicalVaccination.vaccinationId;
     console.log(this.patientForm.value);
     this.vaccinationService.saveRegister(this.patientForm.value).subscribe( (response) => {
+      // this.isSubmited = true;
     },() => {
       this.showMessage.showMessageRegisterError();
     }, () => {

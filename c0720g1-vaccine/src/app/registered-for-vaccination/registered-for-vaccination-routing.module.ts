@@ -5,7 +5,7 @@ import {CenterPeriodicVaccinationComponent} from "./center-periodic-vaccination/
 import {RegisteredRequiredVaccinationComponent} from "./registered-required-vaccination/registered-required-vaccination.component";
 import {ViewRegisteredRequiredVaccinationComponent} from "./view-registered-required-vaccination/view-registered-required-vaccination.component";
 
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {AuthGuard} from "../security/auth.guard";
 
@@ -14,27 +14,28 @@ const routes: Routes = [
   {
     path: 'registered-required-vaccination', component: RegisteredRequiredVaccinationComponent,canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN']
+      roles: ['ROLE_ADMIN','ROLE_USER']
     }
   },
   {
     path: 'registered-required-vaccination/view/:id/:idHistory', component: ViewRegisteredRequiredVaccinationComponent,canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN']
+      roles: ['ROLE_ADMIN','ROLE_USER']
     }
   },
   {path: 'periodic-vaccination/list', component: CenterPeriodicVaccinationComponent,canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN']
+      roles: ['ROLE_ADMIN','ROLE_USER']
     }},
-]
+];
 
 @NgModule({
   declarations: [CenterPeriodicVaccinationComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
   exports: [RouterModule]
 })

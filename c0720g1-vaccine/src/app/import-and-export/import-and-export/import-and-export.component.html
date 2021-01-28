@@ -34,7 +34,7 @@
 
       <div class="col-md-6 mt-3">
         <p>Ngày Nhập:</p>
-        <input type="text" class="form-control" placeholder="Ngày Nhập" aria-label="Ngày Nhập" value="2020/25/1"
+        <input type="text" class="form-control" placeholder="Ngày Nhập" aria-label="Ngày Nhập" [value]="dayReceive"
                disabled>
       </div>
 
@@ -82,7 +82,7 @@
 
       <div class="col-md-3" style="margin-top: 20px;margin-left: 880px">
         <button [disabled]="formExportVaccine.invalid" type="button" class="btn btn-warning mr-4 " data-toggle="modal"
-                data-target="#exampleModal">Xuất Kho
+                data-target="#exampleModal2">Xuất Kho
         </button>
         <button type="button" class="btn btn-secondary mr-3" routerLink="/vaccine-list">Huỷ</button>
 
@@ -99,7 +99,7 @@
   <!-- footer -->
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

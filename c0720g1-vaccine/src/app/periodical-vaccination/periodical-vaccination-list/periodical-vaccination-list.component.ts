@@ -54,6 +54,7 @@ export class PeriodicalVaccinationListComponent implements OnInit {
     });
     this.vaccinationService.findCustomVaccination(this.searchData).subscribe( (data: IPeriodicalVaccinationDTO[]) => {
       this.registrableVaccinationList = data;
+      console.log(data)
     })
   }
 

@@ -4,6 +4,7 @@ import {PatientService} from "../../service/patient.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {checkDateOfBirth} from "../../validator/checkDateOfBirth";
+import {checkGuardian} from "../../validator/checkGuardian";
 
 
 @Component({
@@ -27,21 +28,19 @@ export class EditPatientComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       patientId:[''],
-      name: new FormControl('', [Validators.required,Validators.maxLength(255),Validators.minLength(6),Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
+      name: new FormControl('', [Validators.required,Validators.maxLength(255),Validators.minLength(5),Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
       dateOfBirth: new FormControl('',[Validators.required,checkDateOfBirth ]),
       gender: new FormControl('',[Validators.required]),
       guardian: new FormControl('',[Validators.maxLength(40),Validators.minLength(5),Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
       phone: new FormControl('',[Validators.required,Validators.pattern("^(0|\\(\\+84\\))\\d{9}$")]),
       address: new FormControl('',[Validators.maxLength(200)]),
       email: new FormControl('',[Validators.required,Validators.pattern("^\\w{5,}.?\\w+(@\\w{3,8})(.\\w{3,8})+$")])
-    });
+    }, {validators : checkGuardian});
     this.patientService.getPatientById(this.route.snapshot.paramMap.get('id')).subscribe(data => {
       console.log(this.formGroup.patchValue(data));
       console.log(data);
     });
-
   }
-
   editPatient() {
     console.log( this.formGroup.value.patientId);
     this.patientService.editPatient(this.formGroup.value, this.formGroup.value.patientId).subscribe(data =>{

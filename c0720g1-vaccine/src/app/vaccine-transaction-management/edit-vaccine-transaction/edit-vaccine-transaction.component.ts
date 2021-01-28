@@ -19,11 +19,11 @@ export class EditVaccineTransactionComponent implements OnInit {
   validate_message = {
     'price': [
       {type: 'required', message: "Trường này không đc để trống"},
-      {type: 'pattern', message: "Phải là số"}
+      {type: 'pattern', message: "Trường này phải là số"}
     ],
     'quantity': [
       {type: 'required', message: "Trường này không đc để trống"},
-      {type: 'pattern', message: "Phải là số"}
+      {type: 'pattern', message: "Trường này phải là số"}
     ]
   }
 

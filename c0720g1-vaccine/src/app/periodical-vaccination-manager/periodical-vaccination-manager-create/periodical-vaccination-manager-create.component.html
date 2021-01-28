@@ -18,7 +18,7 @@
               <div class="error-place" *ngFor="let validation of validate_message.startTime">
                 <div>
                   <small class="text-danger"
-                         *ngIf="formGroup.get('startTime').hasError(validation.type) && (formGroup.get('startTime').touched || formGroup.get('startTime').pristine)">
+                         *ngIf="formGroup.get('startTime').hasError(validation.type) && (formGroup.get('startTime').touched )">
                     {{validation.message}}</small>
                 </div>
                 <div><small *ngIf="formGroup.errors?.timeValid" class="text-danger">
@@ -37,7 +37,7 @@
               </div>
               <div class="error-place" *ngFor="let validation of validate_message.endTime">
                 <div><small class="text-danger"
-                            *ngIf="formGroup.get('endTime').hasError(validation.type) && (formGroup.get('endTime').touched || formGroup.get('endTime').pristine)">
+                            *ngIf="formGroup.get('endTime').hasError(validation.type) && (formGroup.get('endTime').touched )">
                   {{validation.message}}</small></div>
                 <div><small *ngIf="formGroup.errors?.timeValid" class="text-danger">
                   {{messageTime}}</small></div>
@@ -62,7 +62,7 @@
               <input type="number" class="form-control" formControlName="times" required>
               <div class="error-place" *ngFor="let validation of validate_message.times">
                 <small class="text-danger"
-                       *ngIf="formGroup.get('times').hasError(validation.type) && (formGroup.get('times').touched || formGroup.get('times').pristine)">
+                       *ngIf="formGroup.get('times').hasError(validation.type) && (formGroup.get('times').touched )">
                   {{validation.message}}</small>
               </div>
               <div><small *ngIf="formGroup.errors?.timeDurationOne" class="text-danger">
@@ -77,7 +77,7 @@
               <input type="number" class="form-control" formControlName="duration" required>
               <div class="error-place" *ngFor="let validation of validate_message.duration">
                 <small class="text-danger"
-                       *ngIf="formGroup.get('duration').hasError(validation.type) && (formGroup.get('duration').touched || formGroup.get('duration').pristine)">
+                       *ngIf="formGroup.get('duration').hasError(validation.type) && (formGroup.get('duration').touched )">
                   {{validation.message}}</small>
               </div>
               <div><small *ngIf="formGroup.errors?.timeDurationOne" class="text-danger">
@@ -94,7 +94,7 @@
               <input type="text" class="form-control" formControlName="description" required>
               <div class="error-place" *ngFor="let validation of validate_message.description">
                 <small class="text-danger"
-                       *ngIf="formGroup.get('description').hasError(validation.type) && (formGroup.get('description').touched || formGroup.get('description').pristine)">
+                       *ngIf="formGroup.get('description').hasError(validation.type) && (formGroup.get('description').touched )">
                   {{validation.message}}</small>
               </div>
             </div>
@@ -109,7 +109,7 @@
               </select>
               <div class="error-place" *ngFor="let validation of validate_message.locationId">
                 <small class="text-danger"
-                       *ngIf="formGroup.get('locationId').hasError(validation.type) && (formGroup.get('locationId').touched || formGroup.get('locationId').pristine)">
+                       *ngIf="formGroup.get('locationId').hasError(validation.type) && (formGroup.get('locationId').touched )">
                   {{validation.message}}</small>
               </div>
             </div>
@@ -124,7 +124,7 @@
               </select>
               <div class="error-place" *ngFor="let validation of validate_message.vaccineId">
                 <small class="text-danger"
-                       *ngIf="formGroup.get('vaccineId').hasError(validation.type) && (formGroup.get('vaccineId').touched || formGroup.get('vaccineId').pristine)">
+                       *ngIf="formGroup.get('vaccineId').hasError(validation.type) && (formGroup.get('vaccineId').touched )">
                   {{validation.message}}</small>
               </div>
             </div>

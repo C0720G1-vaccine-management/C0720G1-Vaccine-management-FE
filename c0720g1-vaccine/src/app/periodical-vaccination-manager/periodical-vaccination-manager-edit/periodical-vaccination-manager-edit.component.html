@@ -18,7 +18,7 @@
               <div class="error-place" *ngFor="let validation of validate_message.startTime">
                 <div>
                   <small class="text-danger"
-                         *ngIf="formGroup.get('startTime').hasError(validation.type) && (formGroup.get('startTime').touched || formGroup.get('startTime').pristine)">
+                         *ngIf="formGroup.get('startTime').hasError(validation.type) && (formGroup.get('startTime').touched )">
                     {{validation.message}}</small>
                 </div>
                 <div><small *ngIf="formGroup.errors?.timeValid" class="text-danger">

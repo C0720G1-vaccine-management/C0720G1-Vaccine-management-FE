@@ -41,7 +41,7 @@ export class VaccineCreateComponent implements OnInit {
     origin: [
       {type: 'required', message: 'Vui lòng nhập nước sản xuất'},
       {type: 'pattern', message: 'Vui lòng nhập nước sản xuất đúng'},
-      {type: 'minlength', message: 'Vui lòng nhập tên có ít nhất 4 kí tự'},
+      {type: 'minlength', message: 'Vui lòng nhập tên có ít nhất 2 kí tự'},
     ],
     provider: [
       {type: 'required', message: 'Vui lòng nhập nhà cung cấp'},
@@ -74,19 +74,16 @@ export class VaccineCreateComponent implements OnInit {
   ngOnInit(): void {
     this.formCreateVaccine = new FormGroup({
       nameVaccine: new FormControl('', [Validators.required,
-        Validators.minLength(4),
-        Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
+        Validators.minLength(4)]),
       typeVaccine: new FormControl('', [Validators.required,
-        Validators.minLength(4),
-        Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
+        Validators.minLength(4)]),
       dayReceive: new FormControl('', [Validators.required]),
       licenseCode: new FormControl('', [Validators.required, Validators.min(1)]),
       origin: new FormControl('', [Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(1),
         Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
       provider: new FormControl('', [Validators.required,
-        Validators.minLength(4),
-        Validators.pattern("^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$")]),
+        Validators.minLength(4)]),
       unitPrice: new FormControl('', [Validators.required,
         Validators.min(0)]),
       dosage: new FormControl('', [Validators.required,

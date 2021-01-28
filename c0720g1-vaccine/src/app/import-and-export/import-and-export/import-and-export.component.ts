@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ImportAndExportService} from "../../service/import-and-export.service";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-import-and-export',
@@ -19,13 +20,16 @@ export class ImportAndExportComponent implements OnInit {
   public licenseCode;
   public origin;
   public expired;
+  public dayReceive;
   public formExportVaccine: FormGroup;
   idVaccine: number;
 
   constructor(
     private importAndExportService: ImportAndExportService,
     public formBuilder: FormBuilder,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private router: Router,
+    public toastr: ToastrService
   ) { }
 
   validation_messages = {
@@ -54,6 +58,7 @@ export class ImportAndExportComponent implements OnInit {
       this.licenseCode = this.vaccine.licenseCode;
       this.origin = this.vaccine.origin;
       this.expired = this.vaccine.expired;
+      this.dayReceive = this.vaccine.dayReceive;
 
       console.log(this.vaccine);
     })
@@ -62,9 +67,10 @@ export class ImportAndExportComponent implements OnInit {
 
   export(value): void {
     console.log(value);
-    this.importAndExportService.exportVaccine(1, value).subscribe(data => {
+    this.importAndExportService.exportVaccine(this.idVaccine, value/2).subscribe(data => {
+      this.router.navigateByUrl('vaccine-list');
+      this.toastr.success("Xuất kho thành công","Thông báo: ")
     })
-
   }
 
   onSubmit() {
