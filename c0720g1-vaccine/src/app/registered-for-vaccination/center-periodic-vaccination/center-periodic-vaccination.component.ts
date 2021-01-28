@@ -25,14 +25,18 @@ export class CenterPeriodicVaccinationComponent implements OnInit {
       this.vaccinationHistoryList = data.content;
       this.pageable = data;
       console.log(data);
-    }, error => console.log(error));
+    }, error =>
+      this.vaccinationHistoryList = []
+    );
   }
   searchPeriodicVaccination(){
     this.vaccinationHistoryService.searchPeriodicVaccination(this.page,this.name,this.status).subscribe(data => {
       this.vaccinationHistoryList = data.content;
       this.pageable = data;
       console.log(data);
-    }, error => console.log(error));
+    }, error =>
+    this.vaccinationHistoryList = []
+    );
   }
   validation_messages = {
     name: [

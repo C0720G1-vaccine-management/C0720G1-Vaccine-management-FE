@@ -11,7 +11,7 @@
               <div class="error-place">
                 <div *ngFor="let validation of validation_messages.username">
                   <small class="text-danger"
-                         *ngIf="formGroup.get('username').hasError(validation.type) && (formGroup.get('username').touched || formGroup.get('username').pristine)">
+                         *ngIf="formGroup.get('username').hasError(validation.type) && formGroup.get('username').touched ">
                     {{validation.message}}</small>
                 </div>
               </div>
@@ -22,7 +22,7 @@
               <div class="error-place">
                 <div  *ngFor="let validation of validation_messages.password">
                   <small class="text-danger"
-                         *ngIf="formGroup.get('password').hasError(validation.type) && (formGroup.get('password').touched || formGroup.get('password').pristine)">
+                         *ngIf="formGroup.get('password').hasError(validation.type) && formGroup.get('password').touched">
                     {{validation.message}}</small>
                 </div>
               </div>
@@ -33,7 +33,7 @@
               <div class="error-place">
                 <div  *ngFor="let validation of validation_messages.email">
                   <small class="text-danger"
-                         *ngIf="formGroup.get('email').hasError(validation.type) && (formGroup.get('email').touched || formGroup.get('email').pristine)">
+                         *ngIf="formGroup.get('email').hasError(validation.type) && formGroup.get('email').touched">
                     {{validation.message}}</small>
                 </div>
               </div>

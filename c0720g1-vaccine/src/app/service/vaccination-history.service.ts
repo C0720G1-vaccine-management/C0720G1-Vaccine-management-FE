@@ -71,15 +71,15 @@ export class VaccinationHistoryService {
   /**
    * list : create by LongBP
    */
-  getAllRegisteredRequired(page: number, name: string) {
-    return this.http.get<any>(this.url + '/registered-for-vaccination/list?name='+ name + '&page=' + page);
+  getAllRegisteredRequired(page: number, id: number, name: string) {
+    return this.http.get<any>(this.url + '/registered-for-vaccination/list?name='+ name + '&id=' + id + '&page=' + page);
   }
 
   /**
    * search and paging : create by LongBP
    */
-  searchRegisteredRequired(page: number, name: string, status: string) {
-    return this.http.get<any>(this.url + '/registered-for-vaccination/search?name='+ name + '&status='+status + '&page=' + page);
+  searchRegisteredRequired(page: number,id: number, name: string, status: string) {
+    return this.http.get<any>(this.url + '/registered-for-vaccination/search?name='+ name + '&id='+id + '&status='+status + '&page=' + page);
   }
 
   /**

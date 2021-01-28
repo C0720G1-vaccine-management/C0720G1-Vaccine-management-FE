@@ -11,7 +11,6 @@ import {ToastrService} from "ngx-toastr";
 export class VaccinePriceManagementComponent implements OnInit {
   public exports: IImportAndExport[];
   public vaccineId: number
-  keyword1: any;
   keyword2 = '';
   keyword3 = '';
   vaccineType: any;
@@ -20,11 +19,7 @@ export class VaccinePriceManagementComponent implements OnInit {
   pageable: any;
   check = "disable"
 
-  validate_message = {
-    'searchId': [
-      {type: 'pattern' , message: "Phải là số"}
-    ]
-  }
+
   constructor(
     public exportService: ImportAndExportService,
     private toastrService: ToastrService
@@ -56,7 +51,6 @@ export class VaccinePriceManagementComponent implements OnInit {
    */
   search() {
     const searchCriteria = {
-      keyword1: this.keyword1,
       keyword2: this.keyword2,
       keyword3: this.keyword3,
     }

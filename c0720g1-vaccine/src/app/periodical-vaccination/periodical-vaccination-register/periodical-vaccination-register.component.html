@@ -195,8 +195,22 @@
           </div>
         </div>
         <div class="d-flex mt-4 col-xl-2 col-lg-3 col-sm-4">
-          <div>
-            <button type="submit" class="btn btn-primary mr-3" [disabled]="!patientForm.touched || patientForm.invalid">Đăng ký</button>
+<!--          <div *ngIf="isSubmited then submited else notSubmited"></div>-->
+<!--          <ng-template #notSubmited>-->
+<!--            <button class="btn btn-primary mr-3" [disabled]="!patientForm.touched || patientForm.invalid" type="submit">Đăng ký</button>-->
+<!--            <button class="btn btn-dark" type="button" routerLink="" data-toggle="modal" data-target="#modelId">Huỷ</button>-->
+<!--          </ng-template>-->
+<!--          <ng-template #submited>-->
+<!--            <button class="btn btn-primary mr-3" type="button" disabled>-->
+<!--              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
+<!--              Loading...-->
+<!--            </button>-->
+<!--          </ng-template>-->
+          <div >
+            <button *ngIf="!isSubmited" type="submit" class="btn btn-primary mr-3" [disabled]="!patientForm.touched || patientForm.invalid">Đăng ký</button>
+            <button *ngIf="isSubmited" class="btn btn-primary mr-3" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          </button>
             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modelId">Hủy</button>
           </div>
         </div>

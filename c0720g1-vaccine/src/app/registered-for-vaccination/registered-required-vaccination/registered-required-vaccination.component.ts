@@ -25,7 +25,7 @@ export class RegisteredRequiredVaccinationComponent implements OnInit {
   }
 
   getAll(){
-    this.vaccinationHistoryService.getAllRegisteredRequired(this.page,this.name).subscribe(data => {
+    this.vaccinationHistoryService.getAllRegisteredRequired(this.page,2,this.name,).subscribe(data => {
       this.vaccinationHistoryList = data.content;
       this.pageable = data;
       console.log(data);
@@ -33,7 +33,7 @@ export class RegisteredRequiredVaccinationComponent implements OnInit {
   }
 
   search(){
-    this.vaccinationHistoryService.searchRegisteredRequired(this.page,this.name,this.status).subscribe(data => {
+    this.vaccinationHistoryService.searchRegisteredRequired(this.page,2,this.name,this.status,).subscribe(data => {
       this.vaccinationHistoryList = data.content;
       this.pageable = data;
       console.log(data);

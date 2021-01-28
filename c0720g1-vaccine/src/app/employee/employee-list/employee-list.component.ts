@@ -66,7 +66,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   search() {
-    this.employeeService.searchEmployeeByName(this.name, this.idEmpSearch, this.positionSearch).toPromise().then(data => {
+    this.employeeService.searchEmployeeByName(this.name.trim(), this.idEmpSearch.trim(), this.positionSearch).toPromise().then(data => {
       this.employeeList = data;
     });
   }

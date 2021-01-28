@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: '', component: PeriodicalVaccinationListComponent},
   {path: 'periodical-vaccination/register/:id', component: PeriodicalVaccinationRegisterComponent,canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_USER']
+      roles: ['ROLE_USER','ROLE_ADMIN']
     }},
   {path: 'cancel-register', component: CancelRegisterComponent}
 ];

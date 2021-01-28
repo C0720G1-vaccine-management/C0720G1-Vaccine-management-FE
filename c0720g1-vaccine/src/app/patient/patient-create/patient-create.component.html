@@ -14,7 +14,7 @@
           </label>
           <div class="col-sm-6">
             <input type="text" class="form-control" id="exampleInputName" formControlName="name"
-                   placeholder="họ và tên">
+                   placeholder="Họ và tên">
             <div class="text-danger" *ngFor="let validation of validation_messages.name">
               <div class="error-message"
                    *ngIf="patientForm.get('name').hasError(validation.type) && (patientForm.get('name').dirty || patientForm.get('name').touched)">

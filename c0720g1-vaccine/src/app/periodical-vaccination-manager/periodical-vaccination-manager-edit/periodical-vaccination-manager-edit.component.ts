@@ -93,7 +93,7 @@ export class PeriodicalVaccinationManagerEditComponent implements OnInit {
         startTime: [this.vaccinations.startTime, [Validators.required]],
         endTime: [this.vaccinations.endTime, [Validators.required]],
         description: [this.vaccinations.description, [Validators.required, Validators.maxLength(50), Validators.minLength(5)]],
-        duration: [this.vaccinations.duration, [Validators.required, Validators.min(1), Validators.max(1500)]],
+        duration: [this.vaccinations.duration, [Validators.required, Validators.min(0), Validators.max(1500)]],
         times: [this.vaccinations.times, [Validators.required, Validators.min(1), Validators.max(9)]]
       }, {validators: ValidatorFormGroup});
       this.defaultValue = true;

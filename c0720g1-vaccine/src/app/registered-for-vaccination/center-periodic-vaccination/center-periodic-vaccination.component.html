@@ -1,6 +1,6 @@
 <div class="container" (click)="pageInput.value = ''">
   <div>
-    <h3 class="text-center mt-4 ">DANH SÁCH BỆNH NHÂN ĐĂNG ĐĂNG KÝ TIÊM CHỦNG THEO ĐỊNH KỲ CỦA TRUNG TÂM</h3>
+    <h3 class="text-center mt-4 ">DANH SÁCH BỆNH NHÂN ĐĂNG KÝ TIÊM CHỦNG THEO ĐỊNH KỲ CỦA TRUNG TÂM</h3>
     <div class="search row mb-4 mt-4 xl-12 ">
       <div class="col-xl-2 mt-3">
         <div class="search row d-flex justify-content-xl-end justify-content-center mb-4 text-center">
@@ -11,7 +11,7 @@
           <div class="col-xl-4 col-md-3">
             <form [formGroup]="formGroup">
             <label>Họ Và Tên</label>
-            <input (change)="name = $event.target.value" class="form-control" type="text" placeholder="Họ Và Tên" formControlName="name">
+            <input (keydown.enter)="page = 0;searchPeriodicVaccination()"  [(ngModel)]="name" class="form-control" type="text" placeholder="Họ Và Tên" formControlName="name">
               <div class="text-danger" *ngFor="let validation of validation_messages.name">
                 <div class="error-message"
                      *ngIf="formGroup.get('name').hasError(validation.type) && (formGroup.get('name').dirty)">
@@ -21,7 +21,7 @@
           </div>
           <div class="col-xl-4 col-md-3">
             <label>Tình trạng</label>
-            <select (change)="status = $event.target.value" class="form-control">
+            <select (keydown.enter)="page = 0;searchPeriodicVaccination()" [(ngModel)]="status" class="form-control">
               <option value="">Chọn Tình Trạng</option>
               <option value=false>Chưa tiêm</option>
               <option value=true>Đã tiêm</option>
@@ -41,9 +41,8 @@
       </div>
     </div>
   </div>
-
-
-  <div class="table">
+  <h2 class="text-center" *ngIf="vaccinationHistoryList.length === 0" style="color: red">Không có dữ liệu để hiển thị ! Vui lòng quay lại sau!!!</h2>
+  <div class="table" *ngIf="vaccinationHistoryList.length > 0">
     <table class="table table-hover table-striped table-bordered">
       <thead style="background-color:rgb(158,207,251)">
       <tr>
@@ -83,7 +82,7 @@
           </ng-template>
         </td>
         <td>
-          <button class="btn btn-primary" [disabled]="object.vaccination.status">Kiểm Tra</button>
+          <button class="btn btn-primary" [routerLink]="['/registered-required-vaccination/view',object.patient.patientId, object.vaccinationHistoryId]" [disabled]="object.vaccination.status">Kiểm Tra</button>
         </td>
       </tr>
       </tbody>
