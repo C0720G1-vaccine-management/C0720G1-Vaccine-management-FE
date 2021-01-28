@@ -64,9 +64,8 @@ export class EmployeeListComponent implements OnInit {
         this.alertService.showAlertSuccess('Xóa nhân viên thành công!');
       });
   }
-
   search() {
-    this.employeeService.searchEmployeeByName(this.name, this.idEmpSearch, this.positionSearch).toPromise().then(data => {
+    this.employeeService.searchEmployeeByName(this.name.trim(), this.idEmpSearch.trim(), this.positionSearch).toPromise().then(data => {
       this.employeeList = data;
     });
   }
