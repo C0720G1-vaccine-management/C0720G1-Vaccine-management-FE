@@ -7,7 +7,7 @@
         <div class="col-sm">
           <input type="hidden" formControlName="vaccinationId">
           <div class="form-group row mb-4">
-            <label class="col-sm-3 col-form-label">Thời gian<span>*</span>:</label>
+            <label class="col-sm-3 col-form-label">Thời gian : <span>*</span></label>
             <div class="col-sm-9">
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -16,11 +16,13 @@
                 <input formControlName="startTime" type="time" class="form-control" required>
               </div>
               <div class="error-place" *ngFor="let validation of validate_message.startTime">
-                <small class="text-danger"
-                       *ngIf="formGroup.get('startTime').hasError(validation.type) && (formGroup.get('startTime').touched || formGroup.get('startTime').pristine)">
-                  {{validation.message}}</small>
-                <small *ngIf="formGroup.errors?.timeValid" class="text-danger">
-                  {{messageTime}}</small>
+                <div>
+                  <small class="text-danger"
+                         *ngIf="formGroup.get('startTime').hasError(validation.type) && (formGroup.get('startTime').touched || formGroup.get('startTime').pristine)">
+                    {{validation.message}}</small>
+                </div>
+                <div><small *ngIf="formGroup.errors?.timeValid" class="text-danger">
+                  {{messageTime}}</small></div>
               </div>
             </div>
           </div>
@@ -34,17 +36,16 @@
                 <input formControlName="endTime" type="time" class="form-control" required>
               </div>
               <div class="error-place" *ngFor="let validation of validate_message.endTime">
-                <small class="text-danger"
-                       *ngIf="formGroup.get('endTime').hasError(validation.type) && (formGroup.get('endTime').touched || formGroup.get('endTime').pristine)">
-                  {{validation.message}}</small>
-                <br>
-                <small *ngIf="formGroup.errors?.timeValid" class="text-danger">
-                  {{messageTime}}</small>
+                <div><small class="text-danger"
+                            *ngIf="formGroup.get('endTime').hasError(validation.type) && (formGroup.get('endTime').touched || formGroup.get('endTime').pristine)">
+                  {{validation.message}}</small></div>
+                <div><small *ngIf="formGroup.errors?.timeValid" class="text-danger">
+                  {{messageTime}}</small></div>
               </div>
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-sm-3 col-form-label">Ngày tiêm<span>*</span>:</label>
+            <label class="col-sm-3 col-form-label">Ngày tiêm : <span>*</span></label>
             <div class="col-sm-9">
               <input formControlName="date" type="date" class="form-control" required>
               <div class="error-place" *ngFor="let validation of validate_message.date">
@@ -56,7 +57,39 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-sm-3 col-form-label">Ghi chú<span>*</span>:</label>
+            <label class="col-sm-3 col-form-label">Số mũi tiêm : <span>*</span></label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" formControlName="times" required>
+              <div class="error-place" *ngFor="let validation of validate_message.times">
+                <small class="text-danger"
+                       *ngIf="formGroup.get('times').hasError(validation.type) && (formGroup.get('times').touched || formGroup.get('times').pristine)">
+                  {{validation.message}}</small>
+              </div>
+              <div><small *ngIf="formGroup.errors?.timeDurationOne" class="text-danger">
+                {{timeDurationOne}}</small></div>
+              <div><small *ngIf="formGroup.errors?.timeDurationTwo" class="text-danger">
+                {{timeDurationTwo}}</small></div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Khoảng cách giữa 2 lần : <span>*</span></label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" formControlName="duration" required>
+              <div class="error-place" *ngFor="let validation of validate_message.duration">
+                <small class="text-danger"
+                       *ngIf="formGroup.get('duration').hasError(validation.type) && (formGroup.get('duration').touched || formGroup.get('duration').pristine)">
+                  {{validation.message}}</small>
+              </div>
+              <div><small *ngIf="formGroup.errors?.timeDurationOne" class="text-danger">
+                {{timeDurationOne}}</small></div>
+              <div><small *ngIf="formGroup.errors?.timeDurationTwo" class="text-danger">
+                {{timeDurationTwo}}</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-group row mb-4">
+            <label class="col-sm-3 col-form-label">Ghi chú : <span>*</span></label>
             <div class="col-sm-9">
               <input type="text" class="form-control" formControlName="description" required>
               <div class="error-place" *ngFor="let validation of validate_message.description">
@@ -66,10 +99,8 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm">
           <div class="form-group row mb-4">
-            <label class="col-sm-3 col-form-label">Địa điểm<span>*</span>:</label>
+            <label class="col-sm-3 col-form-label">Địa điểm : <span>*</span></label>
             <div class="col-sm-9">
               <select formControlName="locationId" class="form-control" required>
                 <option *ngFor="let location of locationList" [value]="location.locationId">
@@ -84,7 +115,7 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-sm-3 col-form-label">Tên Vắc-xin<span>*</span>:</label>
+            <label class="col-sm-3 col-form-label">Tên Vắc-xin : <span>*</span></label>
             <div class="col-sm-9">
               <select formControlName="vaccineId" class="form-control" (click)="getValue($event.target.value)">
                 <option *ngFor="let vaccine of vaccineList" [value]="vaccine.vaccineId">
@@ -99,7 +130,7 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-sm-3 col-form-label">Loại Vắc-xin<span>*</span>:</label>
+            <label class="col-sm-3 col-form-label">Loại Vắc-xin : <span>*</span></label>
             <div class="col-sm-9">
               <input class="form-control" *ngIf="valueNameVaccine; else noValueNameVaccine" [value]="valueNameVaccine"
                      disabled>
@@ -109,7 +140,7 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-sm-3 col-form-label">Độ tuổi tiêm<span>*</span>:</label>
+            <label class="col-sm-3 col-form-label">Độ tuổi tiêm : <span>*</span></label>
             <div class="col-sm-9">
               <input class="form-control" disabled *ngIf="valueAge; else noValueAge" [value]="valueAge">
               <ng-template #noValueAge>
@@ -118,16 +149,17 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-sm-3 col-form-label">Trạng thái<span>*</span>:</label>
+            <label class="col-sm-3 col-form-label">Trạng thái : <span>*</span></label>
             <div class="col-sm-9">
               <input type="text" class="form-control" [value]="statusString" disabled>
             </div>
           </div>
+
         </div>
       </div>
       <div class="row">
         <div class="col-sm" style="text-align: right">
-          <button type="submit" class="btn btn-success" (click)="showMessageSuccess()" [disabled]="formGroup.invalid">Tạo mới
+          <button type="submit" class="btn btn-success" [disabled]="formGroup.invalid">Tạo mới
             lịch tiêm
           </button>
         </div>
