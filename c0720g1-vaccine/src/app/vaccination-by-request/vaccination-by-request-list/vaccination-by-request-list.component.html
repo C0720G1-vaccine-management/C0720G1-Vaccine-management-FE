@@ -9,34 +9,40 @@
       <!--            </div>-->
       <div class="col-xl-2 col-md-3">
         <label for="nameVaccine">Tên vắc-xin</label>
-        <input (change)="name = $event.target.value"  id="nameVaccine" class="form-control" type="text" placeholder="Nhập tên vắc-xin">
+        <input (keydown.enter)="page = 0; getListVaccine()" [(ngModel)]="name"  id="nameVaccine" class="form-control" type="text" placeholder="Nhập tên vắc-xin">
       </div>
       <div class="col-xl-2 col-md-3">
         <label for="vaccineType">Loại vắc-xin</label>
-        <input (change)="vaccineTypename = $event.target.value" id="vaccineType" class="form-control" type="text" placeholder="Nhập loại vắc-xin">
+        <input (keydown.enter)="page = 0; getListVaccine()" [(ngModel)]="vaccineTypename" id="vaccineType" class="form-control" type="text" placeholder="Nhập loại vắc-xin">
       </div>
       <div class="col-xl-2 col-md-3">
         <label for="provider">Nhà sản xuất</label>
-        <input (change)="origin = $event.target.value" id="provider" class="form-control" type="text" placeholder="Nhập nhà sản xuất">
+        <input (keydown.enter)="page = 0; getListVaccine()" [(ngModel)]="origin" id="provider" class="form-control" type="text" placeholder="Nhập nhà sản xuất">
 
       </div>
       <div class="col-xl-2 col-md-3">
         <label for="status">Tình trạng vắc-xin</label>
-        <select (change)="status = $event.target.value" id="status" class="form-control" name="">
+        <select (keydown.enter)="page = 0; getListVaccine()" [(ngModel)]="status" id="status" class="form-control" name="">
           <option value="">Lựa chọn...</option>
           <option value="true" >Còn</option>
           <option value="false" >Hết</option>
         </select>
       </div>
+      <div>
+        <br>
+        <button class="btn btn-warning ml-5 mt-2"  (click)="resetSearch()">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
       <div class="col-xl-2 col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
-        <button (click)="page = 0; getListVaccine()" class="btn btn-success mt-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+        <button (click)="page = 0; getListVaccine()"  class="btn btn-success mt-2"><i class="fa fa-search"></i> Tìm kiếm</button>
       </div>
     </div>
 
     <div class="">
       <table class="table table-hover table-bordered ">
         <thead>
-        <tr>
+        <tr style="background-color:   rgb(158,207,251) !important;">
           <th>STT</th>
           <th>Tên vắc-xin</th>
           <th>Loại vắc-xin</th>

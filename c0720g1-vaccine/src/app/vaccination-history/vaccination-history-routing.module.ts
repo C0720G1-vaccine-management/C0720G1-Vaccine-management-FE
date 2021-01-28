@@ -10,7 +10,7 @@ import {AuthGuard} from "../security/auth.guard";
 
 const routes: Routes = [
   {
-    path: 'vaccination-history', component: VaccinationHistoryComponent,canActivate: [AuthGuard],
+    path: 'vaccination-history/:patientId', component: VaccinationHistoryComponent,canActivate: [AuthGuard],
     data: {
       roles: ['ROLE_USER','ROLE_ADMIN']
     }
