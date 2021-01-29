@@ -11,6 +11,6 @@ export interface IVaccinationHistory {
   vaccination: IVaccination;
   patient: IPatient;
   vaccinationTransaction: IVaccinationTransaction;
-
-
+  startTime: string;
+  endTime: string
 }
