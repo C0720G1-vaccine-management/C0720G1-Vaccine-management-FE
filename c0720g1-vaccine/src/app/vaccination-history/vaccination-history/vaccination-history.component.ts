@@ -13,7 +13,6 @@ import {ActivatedRoute} from "@angular/router";
 })
 
 export class VaccinationHistoryComponent implements OnInit {
-  accountEmail: string;
   vaccinationHistoryList: IVaccinationHistory[];
   page = 0;
   pageable: any;
@@ -34,30 +33,13 @@ export class VaccinationHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getAccountEmail();
     this.getListVaccine();
   }
-
-  getAccountEmail() {
-    if (this.tokenStorageService.getToken()) {
-      const user = this.tokenStorageService.getUser();
-      this.accountEmail = this.tokenStorageService.getUser().email;
-    }
-  }
-
-  // getListVaccine() {
-  //   this.vaccinationHistoryService.findAllVaccinationHistory(this.page, this.vaccineName, this.vaccinationDate, this.accountEmail).subscribe(data => {
-  //       this.vaccinationHistoryList = data.content;
-  //       this.pageable = data;
-  //       this.flag = true;
-  //     }
-  //   )
-  // }
 
   getListVaccine() {
     this.route.paramMap.subscribe(param => {
       this.patientId = param.get('patientId');
-      this.profileService.getListVaccinationHistoryByPatient(this.page, this.vaccineName, this.vaccinationDate, this.patientId).subscribe(data => {
+      this.vaccinationHistoryService.findAllVaccinationHistory(this.page, this.vaccineName, this.vaccinationDate, this.patientId).subscribe(data => {
         this.vaccinationHistoryList = data.content;
         this.pageable = data;
         this.flag = true;

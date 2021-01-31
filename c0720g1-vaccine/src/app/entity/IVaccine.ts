@@ -18,4 +18,6 @@ export interface IVaccine {
   vaccineType: IVaccineType;
   vaccinationList: IVaccination[];
   storageList: IStorage[];
+  times: number;
+  duration: number;
 }
