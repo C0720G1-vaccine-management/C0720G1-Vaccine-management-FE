@@ -1,10 +1,29 @@
-<!--NhiTTY-->
+
 <div>
-  <h2 class="text-center mt-4 mb-4">Tạo mới khách hàng(bệnh nhân)</h2>
+  <h2 class="text-center mt-4 mb-4">Đăng ký</h2>
   <div style="margin-left: 18%" class="container row g-3" id="createPatient">
     <div class="col-2"></div>
     <div class="col-8">
-      <form [formGroup]="patientForm" (ngSubmit)="create()">
+      <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+
+        <div class="mb-3 row">
+          <label for="exampleInputName" class="col-sm-3 col-form-label">
+            <div class="ml-4">
+              Mã sổ tiêm chủng<span
+              class="*">*</span>
+            </div>
+          </label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" formControlName="book_id"
+                   placeholder="Mã sổ tiêm chủng">
+            <div class="text-danger" *ngFor="let validation of validation_messages.book_id">
+              <div class="error-message"
+                   *ngIf="patientForm.get('book_id').hasError(validation.type) && (patientForm.get('book_id').dirty || patientForm.get('book_id').touched)">
+                {{validation.message}}</div>
+            </div>
+          </div>
+        </div>
+
         <div class="mb-3 row">
           <label for="exampleInputName" class="col-sm-3 col-form-label">
             <div class="ml-4">
@@ -140,13 +159,39 @@
             </div>
           </div>
 
+
+        </div>
+        <div class="mb-3 row">
+          <label for="exampleInputEmail" class="col-sm-3 col-form-label">
+            <div class="ml-4">
+             Mật khẩu<span class="*">*</span>
+            </div>
+          </label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="" formControlName="password" placeholder="Mật khẩu">
+            <div class="text-danger" *ngFor="let validation of validation_messages.password">
+              <div class="error-message"
+                   *ngIf="patientForm.get('password').hasError(validation.type) && (patientForm.get('password').dirty || patientForm.get('password').touched)">
+                {{validation.message}}</div>
+            </div>
+          </div>
+
+
         </div>
 
         <div class="d-flex justify-content-end" style="margin-right: 26%">
-          <button type="submit" class="btn btn-primary icon">Lưu
-          </button>
-          <button style="margin-left: 10px" type="button" class="btn btn-dark icon" routerLink="/patient/list">Hủy
-          </button>
+          <div *ngIf="isSubmited then submited else notSubmited"></div>
+          <ng-template #notSubmited>
+            <button type="submit" class="btn btn-primary icon">Lưu</button>
+            <button style="margin-left: 10px" type="button" class="btn btn-dark icon" routerLink="">Hủy</button>
+          </ng-template>
+          <ng-template #submited>
+            <button type="submit" class="btn btn-primary icon" disabled>Lưu
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Loading...
+            </button>
+          </ng-template>
+
         </div>
       </form>
     </div>

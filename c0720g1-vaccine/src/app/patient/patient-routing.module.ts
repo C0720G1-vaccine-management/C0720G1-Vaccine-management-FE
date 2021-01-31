@@ -26,11 +26,7 @@ const routes: Routes = [
       roles: ['ROLE_ADMIN']
     }},
   {
-    path: 'patient/create', component: PatientCreateComponent,
-    canActivate: [AuthGuard],
-    data: {
-      roles: ['ROLE_ADMIN']
-    }
+    path: 'register', component: PatientCreateComponent
   },
 ];
 
