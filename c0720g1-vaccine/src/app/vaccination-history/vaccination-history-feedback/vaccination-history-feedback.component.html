@@ -42,12 +42,6 @@
               <p>Tình trạng sau khi tiêm(Sốt cao,sốt nhẹ,dị ứng,...)</p>
               <textarea formControlName="afterStatus" class="form-control" rows="4" id="comment">
             </textarea>
-<!--              <div class="error-place" *ngFor="let validation of validation_messages.afterStatus">-->
-<!--                <small class="text-danger"-->
-<!--                       *ngIf="formGroup.get('afterStatus').hasError(validation.type) && (formGroup.get('afterStatus').touched || formGroup.get('afterStatus').pristine)">-->
-<!--                  {{validation.message}}</small>-->
-<!--                -->
-<!--              </div>-->
               <div class="text-danger" *ngFor="let validation of validation_messages.afterStatus">
                 <small class="error-message"
                      *ngIf="formGroup.get('afterStatus').hasError(validation.type) && (formGroup.get('afterStatus').dirty || formGroup.get('afterStatus').touched)">

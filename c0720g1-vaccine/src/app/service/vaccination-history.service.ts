@@ -47,9 +47,10 @@ export class VaccinationHistoryService {
   /**
    * TuNH
    */
-  findAllVaccinationHistory(page: number ,vaccineName: string, vaccinationDate: string, accountEmail: string): Observable<any> {
-    return this.http.get<any>(this.baseURL + '/vaccination-history/?page=' + page + '&vaccineName=' + vaccineName + '&vaccinationDate='+ vaccinationDate + "&accountEmail="+ accountEmail, this.httpOptions);
+  findAllVaccinationHistory(page: number, vaccineName: string, vaccinationDate: string, patientId: string): Observable<any> {
+    return this.http.get<any>(this.baseURL + '/vaccination-history/?page=' + page + '&vaccineName=' + vaccineName + '&vaccinationDate='+ vaccinationDate + "&patientId="+ patientId, this.httpOptions);
   }
+
 
   /** LuyenNT code
    * @param page
@@ -109,4 +110,6 @@ export class VaccinationHistoryService {
   sendMailFeedbackForAdmin(value: string, accountEmail: string): Observable<any> {
     return this.http.post<any>(this.baseURL + '/sendMailFeedbackForAdmin?value='+ value + '&accountEmail=' + accountEmail, this.httpOptions);
   }
+
+
 }

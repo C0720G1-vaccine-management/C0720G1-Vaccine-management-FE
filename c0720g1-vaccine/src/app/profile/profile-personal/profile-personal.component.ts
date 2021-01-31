@@ -30,8 +30,6 @@ export class ProfilePersonalComponent implements OnInit {
       console.log(user);
     }
   }
-
-
   getListPatient() {
     this.getAccountEmail();
     this.profileService.getAllPatientByEmai(this.email).subscribe(data => {

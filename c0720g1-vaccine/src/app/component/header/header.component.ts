@@ -3,6 +3,7 @@ import {TokenStorageService} from "../../service/token-storage.service";
 import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
 import {LoginComponent} from "../../security/login/login.component";
+import {AccountService} from "../../service/account.service";
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,8 @@ import {LoginComponent} from "../../security/login/login.component";
 
 export class HeaderComponent implements OnInit {
   username: string;
+  usernameAccount: string;
+  idPatient: number;
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -25,7 +28,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(private tokenStorageService: TokenStorageService,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private accountService : AccountService) {
   }
 
 
@@ -38,10 +42,18 @@ export class HeaderComponent implements OnInit {
     } else {
       this.isLoggedIn = false;
     }
+    this.getUsernameAccount();
   }
 
   logOut() {
     this.tokenStorageService.signOut();
     this.ngOnInit();
   }
+
+  getUsernameAccount(){
+    if (this.tokenStorageService.getToken()) {
+      this.idPatient = this.tokenStorageService.getUser().patient.patientId;
+    }
+  }
+
 }
