@@ -62,7 +62,7 @@
             <div *ngIf="isLoggedIn then logged else notLogged"></div>
             <ng-template #logged>
               <li><a href="" class="dropdown-item" (click)="logOut()">Đăng xuất</a></li>
-              <li><a href="" class="dropdown-item" routerLink="/profile">Hồ sơ tiêm chủng</a></li>
+              <li><a href="" class="dropdown-item" routerLink="/vaccination-history/{{idPatient}}">Hồ sơ tiêm chủng</a></li>
             </ng-template>
             <ng-template #notLogged>
               <li><a class="dropdown-item" routerLink="register">Đăng ký</a></li>
