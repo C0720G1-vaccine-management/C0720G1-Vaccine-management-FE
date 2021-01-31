@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PeriodicalVaccinationKhoaService} from "../../service/periodical-vaccination-khoa.service";
 import {IPeriodicalVaccinationDTO} from "../../entity/IPeriodicalVaccinationDTO";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 export class ISearchAndPage {
   vaccineName: string;
@@ -39,12 +40,19 @@ export class PeriodicalVaccinationListComponent implements OnInit {
   time: string = "";
   timeListString: string[] = [];
   registrableVaccinationList: IPeriodicalVaccinationDTO[] ;
-  constructor(private vaccinationService : PeriodicalVaccinationKhoaService,) {
+  selectedYear: string;
+  selectedMonth: string;
+  selectedDay: string;
+  patient: object;
+
+  constructor(private vaccinationService : PeriodicalVaccinationKhoaService,
+              public tokenStorageService: TokenStorageService) {
     this.getAgeList();
     this.getTimeList();
   }
 
   ngOnInit(): void {
+    this.getPatient();
     this.searchPeriodicalVaccination();
   }
 
@@ -75,7 +83,6 @@ export class PeriodicalVaccinationListComponent implements OnInit {
   }
 
   search() {
-
     this.searchData.currentPage = 1;
     this.getAgeList();
     this.getTimeList();
@@ -129,5 +136,12 @@ export class PeriodicalVaccinationListComponent implements OnInit {
     this.time = $event;
     this.searchData.startTime = this.time.substring(0,8);
     this.searchData.endTime = this.time.substring(11);
+  }
+
+  getPatient() {
+    if (this.tokenStorageService.getToken()) {
+      const user = this.tokenStorageService.getUser();
+      this.patient = this.tokenStorageService.getUser().patient;
+    }
   }
 }
