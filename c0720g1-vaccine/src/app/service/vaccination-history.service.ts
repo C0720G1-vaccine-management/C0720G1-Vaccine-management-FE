@@ -112,4 +112,7 @@ export class VaccinationHistoryService {
   }
 
 
+  getAllVaccinationByDate(value: any): Observable<any> {
+    return this.http.get<any>(this.url + '/get-total-vaccination-in-date?date='+value);
+  }
 }
