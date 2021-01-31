@@ -10,7 +10,7 @@ export class ShowMessage {
   }
 
   showMessageCreateSuccessfully() {
-    this.toastr.success('Thêm mới thành công', 'Thêm mới');
+    this.toastr.success('Đăng ký thành công', 'Đăng ký');
   }
 
 
