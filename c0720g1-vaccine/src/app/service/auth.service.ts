@@ -30,9 +30,15 @@ export class AuthService {
 
   register(obj): Observable<any> {
     return this.http.post(AUTH_API + 'signup', {
-      username: obj.username,
+      bookId:obj.book_id,
+      name:obj.name,
+      gender:obj.gender,
+      dateOfBirth:obj.dateOfBirth,
+      guardian:obj.guardian,
+      address:obj.address,
+      phone:obj.phone,
+      email: obj.email,
       password: obj.password,
-      email: obj.email
     }, this.httpOptions);
   }
 
