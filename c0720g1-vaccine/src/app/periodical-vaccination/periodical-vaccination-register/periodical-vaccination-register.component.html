@@ -1,7 +1,8 @@
 <div class="content">
   <div class="container">
     <h1 class="text-center mt-4 mb-4">Đăng ký tiêm phòng định kỳ theo lịch của trung tâm</h1>
-    <H2 class="text-danger text-center" *ngIf="errorMessage">{{errorMessage}}</H2>
+    <H2 class="text-danger text-center" *ngIf="quantityMessage">{{quantityMessage}}</H2>
+    <H2 class="text-danger text-center" *ngIf="alreadyRegister">Bạn đã từng đăng ký tiêm loại vắc xin này</H2>
     <br><br>
     <hr>
     <form [formGroup]="patientForm" (ngSubmit)="submitVaccinationRegister()" novalidate>
@@ -15,7 +16,7 @@
                 <label class="col-form-label">Mã sổ tiêm chủng: </label>
               </div>
               <div class="col-8">
-                <input [value]='this.currentPatient.patientId' class="form-control" type="text" readonly>
+                <input [value]='currentPatient.patientId' class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3 ">
@@ -23,7 +24,7 @@
                 <label class="col-form-label">Họ và tên: </label>
               </div>
               <div class="col-8">
-                <input [value]='this.currentPatient.name' class="form-control" type="text" readonly>
+                <input [value]='currentPatient.name' class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3 ">
@@ -31,7 +32,7 @@
                 <label class="col-form-label">Giới tính: </label>
               </div>
               <div class="col-8">
-                <input [value]='this.currentPatient.gender' class="form-control" type="text" readonly>
+                <input [value]='currentPatient.gender' class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3 ">
@@ -39,7 +40,7 @@
                 <label class="col-form-label">Ngày sinh: </label>
               </div>
               <div class="col-8">
-                <input [value]='this.currentPatient.dateOfBirth | date: "dd/MM/yyyy"' class="form-control" type="text" readonly>
+                <input [value]='currentPatient.dateOfBirth | date: "dd/MM/yyyy"' class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3 ">
@@ -47,7 +48,7 @@
                 <label class="col-form-label">Người giám hộ: </label>
               </div>
               <div class="col-8">
-                <input [value]='this.currentPatient.guardian' class="form-control" type="text" readonly>
+                <input [value]='currentPatient.guardian' class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3 ">
@@ -55,7 +56,7 @@
                 <label class="col-form-label">Địa chỉ: </label>
               </div>
               <div class="col-8">
-                <input [value]='this.currentPatient.address' class="form-control" type="text" readonly>
+                <input [value]='currentPatient.address' class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3 ">
@@ -63,7 +64,7 @@
                 <label class="col-form-label">Số điện thoại: </label>
               </div>
               <div class="col-8">
-                <input [value]='this.currentPatient.phone' class="form-control" type="text" readonly>
+                <input [value]='currentPatient.phone' class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3 ">
@@ -71,7 +72,7 @@
                 <label class="col-form-label">Email: </label>
               </div>
               <div class="col-8">
-                <input [value]='this.currentPatient.email' class="form-control" type="text" readonly>
+                <input [value]='currentPatient.email' class="form-control" type="text" readonly>
               </div>
             </div>
 
@@ -201,7 +202,7 @@
                 <label class="col-form-label">Tên vắc xin</label>
               </div>
               <div class="col-8">
-                <input [value]='this.periodicalVaccination.vaccineName' class="form-control" type="text" readonly>
+                <input [value]='periodicalVaccination.vaccineName' class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3">
@@ -209,7 +210,7 @@
                 <label class="col-form-label">Loại vắc-xin</label>
               </div>
               <div class="col-8">
-                <input [value]='this.periodicalVaccination.vaccineTypeName' class="form-control" type="text" readonly>
+                <input [value]='periodicalVaccination.vaccineTypeName' class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3">
@@ -217,7 +218,7 @@
                 <label class="col-form-label">Nước sản xuất</label>
               </div>
               <div class="col-8">
-                <input [value]='this.periodicalVaccination.country' class="form-control" type="text" readonly>
+                <input [value]='periodicalVaccination.country' class="form-control" type="text" readonly>
               </div>
             </div>
 
@@ -226,7 +227,7 @@
                 <label class="col-form-label">Thời gian tiêm</label>
               </div>
               <div class="col-8">
-                <input [value]="[this.periodicalVaccination.startTime + ' - ' + this.periodicalVaccination.endTime + ' ngày ' + this.periodicalVaccination.date]" class="form-control" type="text" readonly>
+                <input [value]="[periodicalVaccination.startTime + ' - ' + periodicalVaccination.endTime + ' ngày ' + periodicalVaccination.date]" class="form-control" type="text" readonly>
               </div>
             </div>
 <!--            <div class="row mb-3">-->
@@ -242,7 +243,7 @@
                 <label class="col-form-label">Số lần tiêm</label>
               </div>
               <div class="col-8">
-                <input [value]="this.periodicalVaccination.times" class="form-control" type="text" readonly>
+                <input [value]="periodicalVaccination.times" class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3">
@@ -250,7 +251,7 @@
                 <label class="col-form-label">Lộ trình</label>
               </div>
               <div class="col-8">
-                <input [value]="this.periodicalVaccination.duration + ' Ngày'" class="form-control" type="text" readonly>
+                <input [value]="periodicalVaccination.duration + ' Ngày'" class="form-control" type="text" readonly>
               </div>
             </div>
             <div class="row mb-3 ">
@@ -266,6 +267,9 @@
                 </select>
                 <div  *ngIf="patientForm.get('time').hasError('required') && patientForm.get('time').touched">
                   <small class="text-danger">Vui lòng chọn giờ tiêm.</small>
+                </div>
+                <div  *ngIf="timeMessage">
+                  <small class="text-danger">{{timeMessage}}</small>
                 </div>
               </div>
             </div>
@@ -284,7 +288,7 @@
 <!--            </button>-->
 <!--          </ng-template>-->
           <div >
-            <button *ngIf="!isSubmitted" type="submit" class="btn btn-primary mr-3" [disabled]="!patientForm.touched || patientForm.invalid">Đăng ký</button>
+            <button *ngIf="!isSubmitted" type="submit" class="btn btn-primary mr-3" [disabled]="(!patientForm.touched || patientForm.invalid) || !validRegister || alreadyRegister">Đăng ký</button>
             <button *ngIf="isSubmitted" class="btn btn-primary mr-3" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                           </button>
