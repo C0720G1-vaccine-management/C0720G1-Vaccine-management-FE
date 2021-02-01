@@ -74,19 +74,6 @@
                 <input [value]='this.currentPatient.email' class="form-control" type="text" readonly>
               </div>
             </div>
-             <div class="row mb-3 ">
-              <div class="col-4">
-                <label class="col-form-label">Khung giờ tiêm: </label>
-              </div>
-              <div class="col-8">
-                <select id="vaccinationTime" class="form-control" name="" [ngModel]="timeFrame" (change)="selectTime($event.target.value)">
-                  <option value="">Lựa chọn...</option>
-                  <option *ngFor="let timeStamp of timeListString" [value]="timeStamp">
-                    {{timeStamp}}
-                  </option>
-                </select>
-              </div>
-            </div>
 
 <!--              <div class="col-8">-->
 <!--                <input id="name" formControlName="name" class="form-control" type="text" placeholder="Nhập họ và tên bệnh nhân">-->
@@ -260,10 +247,26 @@
             </div>
             <div class="row mb-3">
               <div class="col-4">
-                <label class="col-form-label">Số ngày giữa hai lần tiêm</label>
+                <label class="col-form-label">Lộ trình</label>
               </div>
               <div class="col-8">
                 <input [value]="this.periodicalVaccination.duration + ' Ngày'" class="form-control" type="text" readonly>
+              </div>
+            </div>
+            <div class="row mb-3 ">
+              <div class="col-4">
+                <label class="col-form-label">Khung giờ tiêm: <span class="text-danger">*</span> </label>
+              </div>
+              <div class="col-8">
+                <select id="vaccinationTime" class="form-control" formControlName="time" [ngModel]="timeFrame" (change)="selectTime($event.target.value)">
+                  <option value="">Lựa chọn...</option>
+                  <option *ngFor="let timeStamp of timeListString" [value]="timeStamp">
+                    {{timeStamp}}
+                  </option>
+                </select>
+                <div  *ngIf="patientForm.get('time').hasError('required') && patientForm.get('time').touched">
+                  <small class="text-danger">Vui lòng chọn giờ tiêm.</small>
+                </div>
               </div>
             </div>
           </div>

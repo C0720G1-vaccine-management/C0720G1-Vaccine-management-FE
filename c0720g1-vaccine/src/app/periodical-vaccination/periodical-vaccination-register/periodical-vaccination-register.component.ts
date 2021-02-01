@@ -21,7 +21,7 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
   patientForm: FormGroup;
   errorMessage: string;
   isSubmitted: boolean;
-  currentPatient: object;
+  currentPatient: any;
   timeListString: Array<string> = ['08:00:00 - 09:30:00', '09:30:00 - 11:00:00', '13:30:00 - 15:00:00', '15:00:00 - 16:30:00'];
   timeFrame: string;
 
@@ -80,7 +80,10 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
   selectTime(value: any) {
       this.patientForm.value.startTime = value.substring(0,8);
       this.patientForm.value.endTime = value.substring(11);
-      // this.patientForm.value.vaccinationId = this.periodicalVaccination.vaccinationId;
-      // this.patientForm.value.patientId = this.currentPatient.patientId;
+      this.patientForm.value.vaccinationId = this.periodicalVaccination.vaccinationId;
+      this.patientForm.value.patientId = this.currentPatient.patientId;
+      this.vaccinationService.checkAvailableRegister(this.patientForm.value).subscribe( (data: any) => {
+        console.log(data)
+      });
   }
 }
