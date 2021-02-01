@@ -38,9 +38,9 @@
       </div>
       <div class="col-auto">
         <label for="description">Mô tả</label>
-        <select id="description" class="form-control" name="">
+        <select id="description" class="form-control" name="" [(ngModel)]="searchData.description" (keydown.enter)="search()">
           <option value="">Lựa chọn...</option>
-          <option value="Miễn phí">Miễn phí</option>
+          <option value="Miễn Phí">Miễn phí</option>
           <option value="Có phí">Có phí</option>
         </select>
       </div>
