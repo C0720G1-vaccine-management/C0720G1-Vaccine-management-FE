@@ -93,6 +93,8 @@ export class VaccineCreateComponent implements OnInit {
       expired: new FormControl('', [Validators.required]),
       maintenance: new FormControl('', [Validators.required]),
       age: new FormControl('', [Validators.required]),
+      times: new FormControl('', [Validators.required]),
+      duration: new FormControl('', [Validators.required])
     });
   }
 

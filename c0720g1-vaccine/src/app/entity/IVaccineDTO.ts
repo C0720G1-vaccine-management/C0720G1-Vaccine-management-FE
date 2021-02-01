@@ -11,4 +11,6 @@ export interface IVaccineDTO {
   maintenance: string;
   age: string;
   quantity: number;
+  times: number;
+  duration: number;
 }
