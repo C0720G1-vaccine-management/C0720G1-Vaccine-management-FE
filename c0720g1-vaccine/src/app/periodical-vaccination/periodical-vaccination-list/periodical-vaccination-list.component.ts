@@ -9,6 +9,7 @@ export class ISearchAndPage {
   endTime: string;
   date: string;
   age: string;
+  description: string;
   currentPage: number;
   maxPage: number;
 
@@ -21,6 +22,7 @@ export class ISearchAndPage {
     this.age = '';
     this.currentPage = 1;
     this.maxPage = 0;
+    this.description = ''
   }
 }
 
@@ -57,6 +59,17 @@ export class PeriodicalVaccinationListComponent implements OnInit {
   }
 
   searchPeriodicalVaccination() {
+    this.searchData.date='';
+    if(this.selectedYear != null && this.selectedYear != '') {
+      this.searchData.date += this.changeNumberFormat(this.selectedYear, 4)
+    }
+    if(this.selectedMonth != null && this.selectedMonth != '') {
+      this.searchData.date += '-' + this.changeNumberFormat(this.selectedMonth, 2)
+    }
+    if(this.selectedDay != null && this.selectedDay != '') {
+      this.searchData.date += '-' + this.changeNumberFormat(this.selectedDay,2)
+    }
+    console.log(this.searchData);
     this.vaccinationService.findTotalPage(this.searchData).subscribe((data: number) => {
       this.searchData.maxPage = data;
     });
@@ -129,6 +142,10 @@ export class PeriodicalVaccinationListComponent implements OnInit {
     this.searchData.currentPage = 1;
     this.searchData.maxPage = 0;
     this.time = '';
+    this.selectedDay = '';
+    this.selectedMonth = '';
+    this.selectedYear = '';
+    this.searchData.description = '';
     this.ngOnInit()
   }
 
@@ -140,8 +157,15 @@ export class PeriodicalVaccinationListComponent implements OnInit {
 
   getPatient() {
     if (this.tokenStorageService.getToken()) {
-      const user = this.tokenStorageService.getUser();
       this.patient = this.tokenStorageService.getUser().patient;
     }
+  }
+  changeNumberFormat(num: string, formatNum: number): string {
+    let outPut: string = '';
+    for (let i = 0; i < formatNum - num.toString().length; i++ ) {
+      outPut = '0' + outPut
+    }
+    outPut = outPut + num;
+    return outPut;
   }
 }
