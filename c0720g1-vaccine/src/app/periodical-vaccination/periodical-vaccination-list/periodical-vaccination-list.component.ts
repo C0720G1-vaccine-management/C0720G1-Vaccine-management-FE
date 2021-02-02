@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PeriodicalVaccinationKhoaService} from "../../service/periodical-vaccination-khoa.service";
 import {IPeriodicalVaccinationDTO} from "../../entity/IPeriodicalVaccinationDTO";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 export class ISearchAndPage {
   vaccineName: string;
@@ -8,6 +9,7 @@ export class ISearchAndPage {
   endTime: string;
   date: string;
   age: string;
+  description: string;
   currentPage: number;
   maxPage: number;
 
@@ -20,6 +22,7 @@ export class ISearchAndPage {
     this.age = '';
     this.currentPage = 1;
     this.maxPage = 0;
+    this.description = ''
   }
 }
 
@@ -39,16 +42,34 @@ export class PeriodicalVaccinationListComponent implements OnInit {
   time: string = "";
   timeListString: string[] = [];
   registrableVaccinationList: IPeriodicalVaccinationDTO[] ;
-  constructor(private vaccinationService : PeriodicalVaccinationKhoaService,) {
+  selectedYear: string;
+  selectedMonth: string;
+  selectedDay: string;
+  patient: object;
+
+  constructor(private vaccinationService : PeriodicalVaccinationKhoaService,
+              public tokenStorageService: TokenStorageService) {
     this.getAgeList();
     this.getTimeList();
   }
 
   ngOnInit(): void {
+    this.getPatient();
     this.searchPeriodicalVaccination();
   }
 
   searchPeriodicalVaccination() {
+    this.searchData.date='';
+    if(this.selectedYear != null && this.selectedYear != '') {
+      this.searchData.date += this.changeNumberFormat(this.selectedYear, 4)
+    }
+    if(this.selectedMonth != null && this.selectedMonth != '') {
+      this.searchData.date += '-' + this.changeNumberFormat(this.selectedMonth, 2)
+    }
+    if(this.selectedDay != null && this.selectedDay != '') {
+      this.searchData.date += '-' + this.changeNumberFormat(this.selectedDay,2)
+    }
+    console.log(this.searchData);
     this.vaccinationService.findTotalPage(this.searchData).subscribe((data: number) => {
       this.searchData.maxPage = data;
     });
@@ -75,7 +96,6 @@ export class PeriodicalVaccinationListComponent implements OnInit {
   }
 
   search() {
-
     this.searchData.currentPage = 1;
     this.getAgeList();
     this.getTimeList();
@@ -122,6 +142,10 @@ export class PeriodicalVaccinationListComponent implements OnInit {
     this.searchData.currentPage = 1;
     this.searchData.maxPage = 0;
     this.time = '';
+    this.selectedDay = '';
+    this.selectedMonth = '';
+    this.selectedYear = '';
+    this.searchData.description = '';
     this.ngOnInit()
   }
 
@@ -129,5 +153,19 @@ export class PeriodicalVaccinationListComponent implements OnInit {
     this.time = $event;
     this.searchData.startTime = this.time.substring(0,8);
     this.searchData.endTime = this.time.substring(11);
+  }
+
+  getPatient() {
+    if (this.tokenStorageService.getToken()) {
+      this.patient = this.tokenStorageService.getUser().patient;
+    }
+  }
+  changeNumberFormat(num: string, formatNum: number): string {
+    let outPut: string = '';
+    for (let i = 0; i < formatNum - num.toString().length; i++ ) {
+      outPut = '0' + outPut
+    }
+    outPut = outPut + num;
+    return outPut;
   }
 }

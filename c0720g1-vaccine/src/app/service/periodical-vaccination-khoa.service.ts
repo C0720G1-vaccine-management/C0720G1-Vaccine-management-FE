@@ -51,4 +51,13 @@ export class PeriodicalVaccinationKhoaService {
     console.log(code);
     return this.httpClient.post(this.apiServer+'cancel', {code: code})
   }
+
+  checkAvailableRegister(value: any): Observable<any> {
+    console.log(value);
+    return this.httpClient.post<any>(this.apiServer+ 'check-register', value)
+  }
+
+  checkPastVaccinationHistory(periodicalVaccination: IPeriodicalVaccinationDTO) {
+    return this.httpClient.post<any>(this.apiServer+'check-history', periodicalVaccination)
+  }
 }

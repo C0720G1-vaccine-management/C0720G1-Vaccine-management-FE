@@ -67,9 +67,12 @@ export class ImportAndExportComponent implements OnInit {
 
   export(value): void {
     console.log(value);
-    this.importAndExportService.exportVaccine(this.idVaccine, value/2).subscribe(data => {
+    this.importAndExportService.exportVaccine(this.idVaccine, value).subscribe(data => {
       this.router.navigateByUrl('vaccine-list');
       this.toastr.success("Xuất kho thành công","Thông báo: ")
+    }, error => {
+      this.router.navigateByUrl('vaccine-list');
+      this.toastr.error("Số Lượng Xuất Lớn Hơn Số Lượng Trong Kho")
     })
   }
 

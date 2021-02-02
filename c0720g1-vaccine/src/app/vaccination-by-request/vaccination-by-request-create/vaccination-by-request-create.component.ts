@@ -6,6 +6,8 @@ import {PatientService} from "../../service/patient.service";
 import {checkDateOfBirth} from "../../validator/check-date-of-birth";
 import {checkDateVaccination} from "../../validator/check-date-vaccination";
 import {ShowMessage} from "../../common/show-message";
+import {VaccinationHistoryService} from "../../service/vaccination-history.service";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 @Component({
   selector: 'app-vaccination-by-request-create',
@@ -22,9 +24,19 @@ export class VaccinationByRequestCreateComponent implements OnInit {
 
   public check = false;
 
-  public checkEmailDuplicate = false;
+  public checkLoad = false;
 
-  public checkPhoneDuplicate = false;
+  public checkdate = false;
+
+  public patient: any;
+
+  public checkTime1 = false;
+  public checkTime2 = false;
+  public checkTime3 = false;
+  public checkTime4 = false;
+
+  public timeVaccination = '';
+
 
 
   constructor(private vaccineService: VaccineService,
@@ -32,22 +44,20 @@ export class VaccinationByRequestCreateComponent implements OnInit {
               private fb: FormBuilder,
               private patientService: PatientService,
               private router: Router,
-              private showMessage: ShowMessage) {
+              private showMessage: ShowMessage,
+              private vaccinationHistoryService: VaccinationHistoryService,
+              private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {
+    this.getAccountEmail();
     this.getVaccine();
 
     this.formRegister = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]],
-      gender: ['', [Validators.required]],
-      dateOfBirth: ['', [Validators.required, checkDateOfBirth]],
-      guardian: [''],
-      address: [''],
-      phone: ['', [Validators.required, Validators.pattern('^(090|091|094|\\(\\+84\\)90|\\(\\+84\\)91)\\d{7}$')]],
-      email: ['', [Validators.required, Validators.pattern('^\\w{5,}.?\\w+(@\\w{3,8})(.\\w{3,8})+$')]],
       dateVaccination: ['', [Validators.required, checkDateVaccination]],
-      vaccineId: [this.vaccineId]
+      timeVaccination: ['', [Validators.required]],
+      vaccineId: [this.vaccineId],
+      patientId: [this.patient.patientId]
     });
 
   }
@@ -71,29 +81,36 @@ export class VaccinationByRequestCreateComponent implements OnInit {
     }
 
     this.patientService.registerVaccination(this.formRegister.value).subscribe(data => {
-
-      console.log(data);
-      if (data != null) {
-        for (let i of data) {
-          if (i.field === 'email') {
-            this.checkEmailDuplicate = true;
-          }
-          if (i.field === 'phone') {
-            this.checkPhoneDuplicate = true;
-          }
-        }
-      }
-
-
-      if (!this.checkPhoneDuplicate && !this.checkEmailDuplicate) {
-        this.router.navigateByUrl('vaccination-by-request/list');
-        this.showMessage.showMessageCreateSuccessfully();
-      } else {
-        this.showMessage.showMessageCreateError();
-      }
+      this.router.navigateByUrl('/vaccination-by-request/list');
+      this.showMessage.showMessageCreateSuccessfully();
 
     }, error => {
-      console.log(error);
+      this.showMessage.showMessageCreateError();
     });
   }
+
+  checkDate(value: any) {
+    this.vaccinationHistoryService.getAllVaccinationByDate(value).subscribe(data => {
+      this.timeVaccination = '';
+      if (data !== null) {
+        this.checkdate = data[0] > 2;
+
+        this.checkTime1 = data[1] > 2;
+        this.checkTime2 = data[2] > 2;
+        this.checkTime3 = data[3] > 2;
+        this.checkTime4 = data[4] > 2;
+      }
+
+    })
+  }
+
+  getAccountEmail() {
+    if (this.tokenStorageService.getToken()) {
+      const user = this.tokenStorageService.getUser();
+      this.patient = user.patient;
+      this.checkLoad = true;
+      console.log(user);
+    }
+  }
+
 }

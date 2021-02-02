@@ -43,6 +43,7 @@
               <th scope="col">Tên vắc xin</th>
               <th scope="col">Loại vắc xin</th>
               <th scope="col">Ngày tiêm</th>
+              <th scope="col">Trạng thái</th>
               <th scope="col">Tình trạng sau khi tiêm</th>
               <th scope="col">Phản hồi</th>
             </tr>
@@ -54,18 +55,19 @@
               <td style="width: 200px">{{vaccinationHistory.vaccination.vaccine.name}}</td>
               <td>{{vaccinationHistory.vaccination.vaccine.vaccineType.name}}</td>
               <td>{{vaccinationHistory.vaccination.date |  date: "dd-MM-yyyy"}}</td>
+              <td> <span [class]="vaccinationHistory.status ? 'badge badge-danger' : 'badge badge-primary'">{{vaccinationHistory.status ? 'Đã tiêm' : 'Chưa tiêm'}}</span></td>
               <td>{{vaccinationHistory.afterStatus}}</td>
 
               <td class="text-center">
                 <div *ngIf="vaccinationHistory.afterStatus === null ; else elseBlock2 ">
-                  <button type="button" class="btn btn-info with-button"
+                  <button type="button" class="btn btn-info with-button" [disabled]="!vaccinationHistory.status"
                           [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Phản
                     hồi
                   </button>
                 </div>
                 <ng-template #elseBlock2>
                   <div *ngIf="this.vaccinationHistory.afterStatus === '' ">
-                    <button type="button" class="btn btn-info with-button"
+                    <button type="button" class="btn btn-info with-button" [disabled]="!vaccinationHistory.status"
                             [routerLink]="['/vaccination-history/feedback', vaccinationHistory.vaccinationHistoryId]">Phản
                       hồi
                     </button>

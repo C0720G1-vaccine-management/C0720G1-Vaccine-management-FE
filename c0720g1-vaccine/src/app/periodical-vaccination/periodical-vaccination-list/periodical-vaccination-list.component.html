@@ -4,9 +4,18 @@
 
     <div class="search row d-flex justify-content-end mb-4 text-center">
       <div class="col-auto">
-        <label for="vaccinationDate">Ngày tiêm</label>
-        <input id="vaccinationDate" class="form-control" type="date" placeholder="Nhập ngày tiêm" [(ngModel)]="searchData.date" (keydown.enter)="search()">
+        <label for="vaccinationYear">Năm tiêm</label>
+        <input id="vaccinationYear" class="form-control" type="number" placeholder="Nhập năm cần tìm" [(ngModel)]="selectedYear" (keydown.enter)="search()">
       </div>
+      <div class="col-auto" *ngIf="selectedYear">
+        <label for="vaccinationMonth">Tháng tiêm</label>
+        <input id="vaccinationMonth" class="form-control" type="number" [min]="1" [max]="12"  placeholder="Nhập tháng cần tìm" [(ngModel)]="selectedMonth" (keydown.enter)="search()">
+      </div>
+      <div class="col-auto" *ngIf="selectedMonth && selectedYear">
+        <label for="vaccinationDay">Ngày tiêm</label>
+        <input id="vaccinationDay" class="form-control" type="number" [min]="1" [max]="31"  placeholder="Nhập tháng cần tìm" [(ngModel)]="selectedDay" (keydown.enter)="search()">
+      </div>
+
       <div class="col-auto">
         <label for="vaccinationTime">Giờ tiêm</label>
         <select id="vaccinationTime" class="form-control" name="" [ngModel]="time" (keydown.enter)="search()" (change)="selectTime($event.target.value)">
@@ -21,10 +30,18 @@
         <input id="vaccineName" class="form-control" type="text" placeholder="Nhập tên Vắc xin" [(ngModel)]="searchData.vaccineName" (keydown.enter)="search()">
       </div>
       <div class="col-auto">
-        <label for="status">Đối tượng tiêm</label>
-        <select id="status" class="form-control" name="" [(ngModel)]="searchData.age" (keydown.enter)="search()">
+        <label for="object">Đối tượng tiêm</label>
+        <select id="object" class="form-control" name="" [(ngModel)]="searchData.age" (keydown.enter)="search()">
           <option value="">Lựa chọn...</option>
           <option *ngFor="let age of ageList" [value]="age" [selected]="searchData.age === age">{{age}}</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <label for="description">Mô tả</label>
+        <select id="description" class="form-control" name="" [(ngModel)]="searchData.description" (keydown.enter)="search()">
+          <option value="">Lựa chọn...</option>
+          <option value="Miễn Phí">Miễn phí</option>
+          <option value="Có phí">Có phí</option>
         </select>
       </div>
       <div class="col-auto">
@@ -41,10 +58,10 @@
       <div class="card border-primary mb-3" style="max-width: 18rem; min-width: 14rem" *ngFor="let vaccination of registrableVaccinationList">
         <img class="card-img-top" [src]="vaccination.image" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">{{vaccination.vaccineName}}</h5>
+          <h5 class="card-title" data-toggle="tooltip" data-placement="top" [title]="vaccination.vaccineName">{{(vaccination.vaccineName.length > 25)? (vaccination.vaccineName | slice: 0: 20)+'...': (vaccination.vaccineName)}}</h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{vaccination.location}}</li>
+          <li class="list-group-item">{{vaccination.description}}</li>
         </ul>
         <div class="card-body">
           <p class="card-text">{{vaccination.startTime}} - {{vaccination.endTime}}</p>

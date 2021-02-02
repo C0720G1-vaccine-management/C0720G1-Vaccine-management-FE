@@ -1,9 +1,9 @@
 export interface ICreateDTO {
   nameVaccine: string;
   typeVaccine: string;
-  dateRecieve: string;
+  dayReceive: string;
   licenseCode: string;
-  orrigin: string;
+  origin: string;
   provider: string;
   unitPrice: number;
   dosage: number;
@@ -11,4 +11,6 @@ export interface ICreateDTO {
   expired: string;
   maintenance: string
   age: string
+  times: number
+  duration: number
 }

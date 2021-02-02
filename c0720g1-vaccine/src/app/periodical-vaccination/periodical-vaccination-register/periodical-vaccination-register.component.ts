@@ -6,6 +6,8 @@ import {IPeriodicalVaccinationDTO} from "../../entity/IPeriodicalVaccinationDTO"
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ShowMessage} from "../../common/show-message";
 import {checkDateOfBirth} from "../../validator/check-date-of-birth";
+import {IPatient} from "../../entity/IPatient";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 @Component({
   selector: 'app-periodical-vaccination-register',
@@ -17,40 +19,44 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
   sub: Subscription;
   periodicalVaccination: IPeriodicalVaccinationDTO;
   patientForm: FormGroup;
-  errorMessage: string;
-  isSubmited: boolean;
+  isSubmitted: boolean;
+  currentPatient: any;
+  timeListString: Array<string> = ['08:00:00 - 09:30:00', '09:30:00 - 11:00:00', '13:30:00 - 15:00:00', '15:00:00 - 16:30:00'];
+  timeFrame: string;
+  timeMessage: string;
+  quantityMessage: string;
+  validRegister: boolean = false;
+  registerInfo: any;
+  alreadyRegister: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private vaccinationService : PeriodicalVaccinationKhoaService,
               private router: Router,
-              private showMessage: ShowMessage) {
+              private showMessage: ShowMessage,
+              public tokenStorageService: TokenStorageService) {
     this.patientForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(255), Validators.pattern('^[a-zA-ZàáạảãâầầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổơờớợởỡùúụủũưừứứựửữỳýỵỷỹỗđĐÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
-      dateOfBirth: new FormControl('', [Validators.required, checkDateOfBirth]),
-      gender: new FormControl('', [Validators.required, Validators.pattern('^(Nam|Nữ)$')]),
-      guardian: new FormControl('', [Validators.required,Validators.maxLength(255), Validators.pattern('^[a-zA-ZàáạảãâầầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổơờớợởỡùúụủũưừứứựửữỳýỵỷỹỗđĐÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
-      phone: new FormControl('', [Validators.required, Validators.pattern('^(0|\\(\\+84\\))[1-9]{1}\\d{8}$')]),
-      address: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      email: new FormControl('', [Validators.required, Validators.maxLength(255), Validators.email]),
-      vaccinationId: new FormControl()
+      time: new FormControl('', [Validators.required]),
+      vaccinationId: new FormControl(),
+      patientId: new FormControl(),
+      startTime: new FormControl(),
+      endTime: new FormControl(),
     });
   }
 
   ngOnInit(): void {
+    this.getPatient();
     this.sub = this.activatedRoute.paramMap.subscribe((paraMap: ParamMap) => {
       const id = paraMap.get('id');
       this.vaccinationService.getById(id).subscribe( (data: IPeriodicalVaccinationDTO) => {
         this.periodicalVaccination = data;
-        console.log(data);
-        console.log(this.periodicalVaccination);
         this.periodicalVaccination.duration = (this.periodicalVaccination.duration == null) ? 0 : this.periodicalVaccination.duration;
         this.periodicalVaccination.times = (this.periodicalVaccination.times == null) ? 1 : this.periodicalVaccination.times;
       })
-    })
+    },)
   }
 
   submitVaccinationRegister() {
-    this.isSubmited = true;
+    this.isSubmitted = true;
     this.patientForm.value.vaccinationId = this.periodicalVaccination.vaccinationId;
     console.log(this.patientForm.value);
     this.vaccinationService.saveRegister(this.patientForm.value).subscribe( (response) => {
@@ -61,5 +67,25 @@ export class PeriodicalVaccinationRegisterComponent implements OnInit {
       this.showMessage.showMessageRegisterSuccessfully();
       this.router.navigateByUrl('')
     });
+  }
+  getPatient() {
+    this.currentPatient =  this.tokenStorageService.getUser().patient;
+    console.log(this.currentPatient);
+  }
+  selectTime(value: any) {
+      this.patientForm.value.startTime = value.substring(0,8);
+      this.patientForm.value.endTime = value.substring(11);
+      this.patientForm.value.vaccinationId = this.periodicalVaccination.vaccinationId;
+      this.patientForm.value.patientId = this.currentPatient.patientId;
+      console.log(this.patientForm.value);
+      this.vaccinationService.checkAvailableRegister(this.patientForm.value).subscribe( (data: any) => {
+        console.log(data);
+        this.timeMessage = (data.timeIsValid) ? "": "Khung giờ này đã đầy";
+        this.quantityMessage = (data.quantityIsValid) ? "": "Loại vắc xin này đã được đăng ký tiêm hết, mong quý khách thông cảm";
+        this.alreadyRegister = data.alreadyRegister;
+        if(this.timeMessage == "" && this.quantityMessage == "" && !this.alreadyRegister){
+          this.validRegister = true;
+        }
+      }, () => {}, () => {});
   }
 }
