@@ -44,6 +44,7 @@
               <th scope="col">Loại vắc xin</th>
               <th scope="col">Ngày tiêm</th>
               <th scope="col">Trạng thái</th>
+              <th scope="col">Mũi tiêm</th>
               <th scope="col">Tình trạng sau khi tiêm</th>
               <th scope="col">Phản hồi</th>
             </tr>
@@ -56,6 +57,7 @@
               <td>{{vaccinationHistory.vaccination.vaccine.vaccineType.name}}</td>
               <td>{{vaccinationHistory.vaccination.date |  date: "dd-MM-yyyy"}}</td>
               <td> <span [class]="vaccinationHistory.status ? 'badge badge-danger' : 'badge badge-primary'">{{vaccinationHistory.status ? 'Đã tiêm' : 'Chưa tiêm'}}</span></td>
+              <td>{{vaccinationHistory.vaccinationTimes}}</td>
               <td>{{vaccinationHistory.afterStatus}}</td>
 
               <td class="text-center">

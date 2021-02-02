@@ -36,6 +36,7 @@
           <th style="width: 200px">Địa chỉ</th>
           <th style="width: 200px">Tên Vaccine</th>
           <th style="width: 130px">Mô tả</th>
+          <th style="width: 130px">Mũi tiêm số</th>
           <th style="width: 130px">Ngày tiêm</th>
           <th style="width: 130px">Tình trạng</th>
           <th style="width: 230px">Kiểm tra trước khi khám</th>
@@ -52,6 +53,7 @@
           <td>{{vac.patient.address}}</td>
           <td>{{vac.vaccination.vaccine.name}}</td>
           <td>{{vac.vaccination.description}}</td>
+          <td>{{vac.vaccinationTimes}}</td>
           <td>{{vac.vaccination.date}}</td>
           <td class="text-center">
             <div *ngIf="vac.status === true then logged else notLogged"></div>

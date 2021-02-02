@@ -36,7 +36,7 @@ export class VaccinationByRequestCreateComponent implements OnInit {
   public checkTime4 = false;
 
   public timeVaccination = '';
-
+  isSubmitted: boolean;
 
 
   constructor(private vaccineService: VaccineService,
@@ -79,13 +79,14 @@ export class VaccinationByRequestCreateComponent implements OnInit {
       this.showMessage.showMessageCreateError();
       return;
     }
-
+    this.isSubmitted = true;
     this.patientService.registerVaccination(this.formRegister.value).subscribe(data => {
       this.router.navigateByUrl('/vaccination-by-request/list');
       this.showMessage.showMessageCreateSuccessfully();
 
     }, error => {
       this.showMessage.showMessageCreateError();
+      this.isSubmitted = false;
     });
   }
 
@@ -93,12 +94,12 @@ export class VaccinationByRequestCreateComponent implements OnInit {
     this.vaccinationHistoryService.getAllVaccinationByDate(value).subscribe(data => {
       this.timeVaccination = '';
       if (data !== null) {
-        this.checkdate = data[0] > 2;
+        this.checkdate = data[0] >= 8;
 
-        this.checkTime1 = data[1] > 2;
-        this.checkTime2 = data[2] > 2;
-        this.checkTime3 = data[3] > 2;
-        this.checkTime4 = data[4] > 2;
+        this.checkTime1 = data[1] >= 2;
+        this.checkTime2 = data[2] >= 2;
+        this.checkTime3 = data[3] >= 2;
+        this.checkTime4 = data[4] >= 2;
       }
 
     })
