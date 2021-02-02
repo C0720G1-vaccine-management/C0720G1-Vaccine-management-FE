@@ -118,8 +118,8 @@
         <ng-template #noStatus>Chưa thực hiện</ng-template>
       </td>
       <td>{{vaccinationManager.description | titlecase}}</td>
-      <td class="center-th">{{vaccinationManager.times}}</td>
-      <td class="center-th">{{vaccinationManager.duration}} {{str}}</td>
+      <td class="center-th">{{vaccinationManager.vaccine.times}}</td>
+      <td class="center-th">{{vaccinationManager.vaccine.duration}} {{str}}</td>
       <td class="center-th">
         <a data-toggle="tooltip" data-placement="right"
            title="Cập nhập lịch tiêm ngày {{vaccinationManager.date | date: 'dd/MM/yyyy'}}">
