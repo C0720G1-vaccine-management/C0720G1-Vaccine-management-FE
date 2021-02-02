@@ -34,4 +34,6 @@ export interface IVaccinationHistoryRegisteredDTO {
 
   afterStatus : string;
 
+  vaccinationTimes : number;
+
 }

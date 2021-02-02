@@ -288,7 +288,8 @@
 <!--            </button>-->
 <!--          </ng-template>-->
           <div >
-            <button *ngIf="!isSubmitted" type="submit" class="btn btn-primary mr-3" [disabled]="(!patientForm.touched || patientForm.invalid) || !validRegister || alreadyRegister">Đăng ký</button>
+            <button *ngIf="!isSubmitted && !((!patientForm.touched || patientForm.invalid) || !validRegister || alreadyRegister) " type="submit" class="btn btn-primary mr-3">Đăng ký</button>
+            <button *ngIf="!isSubmitted && (!patientForm.touched || patientForm.invalid) || !validRegister || alreadyRegister" type="submit" class="btn btn-danger mr-3" disabled >Đăng ký</button>
             <button *ngIf="isSubmitted" class="btn btn-primary mr-3" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                           </button>

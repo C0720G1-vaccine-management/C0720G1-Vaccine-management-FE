@@ -82,6 +82,12 @@
             </div>
           </div>
         </div>
+        <div class="row" style="margin-left: 5px" >
+          <div class="form-group form-inline" style="padding-right: 5em">
+            <label for="vaccineType" style="padding-right: 1.4em">Mũi tiêm:</label>
+            <div><input [value]="vaccinationHistoryRegisteredDTOS.vaccinationTimes" type="text" id="vaccinationTimes" class="form-control" size="19" readonly></div>
+          </div>
+        </div>
 
         <div class="col-auto" style="text-align: center">
           <button type="button" class="btn btn-primary" (click)="editVaccinationHistory()">Xong/Cho tiêm</button>
