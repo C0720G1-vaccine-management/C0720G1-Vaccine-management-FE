@@ -20,17 +20,17 @@ export function ValidatorFormGroup(control: AbstractControl): { [key: string]: b
 
   /**TrungTQ Code: Số mũi tiêm gần với thực tế*/
 
-  let times = control.get('times');
-  let duration = control.get('duration');
-  if (times.value == 1 && duration.value != 0){
-    return {
-      timeDurationOne: true
-    }
-  } else if (times.value >= 2 && duration.value == 0 ){
-      return {
-        timeDurationTwo: true
-      }
-  }
+  // let times = control.get('times');
+  // let duration = control.get('duration');
+  // if (times.value == 1 && duration.value != 0){
+  //   return {
+  //     timeDurationOne: true
+  //   }
+  // } else if (times.value >= 2 && duration.value == 0 ){
+  //     return {
+  //       timeDurationTwo: true
+  //     }
+  // }
 
 
   return null;

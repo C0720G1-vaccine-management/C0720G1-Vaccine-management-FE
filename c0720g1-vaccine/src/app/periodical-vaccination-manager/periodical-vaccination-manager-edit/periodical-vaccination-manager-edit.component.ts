@@ -23,6 +23,8 @@ export class PeriodicalVaccinationManagerEditComponent implements OnInit {
 
   valueAge: string;
   valueNameVaccine: string;
+  valueTimes: number;
+  valueDuration: number;
   messageError: string;
 
   formGroup: FormGroup;
@@ -48,26 +50,14 @@ export class PeriodicalVaccinationManagerEditComponent implements OnInit {
     'vaccineId': [
       {type: 'required', message: 'Trường này không được để trống!'}
     ],
-    'locationId': [
-      {type: 'required', message: 'Trường này không được để trống!'}
-    ],
+    // 'locationId': [
+    //   {type: 'required', message: 'Trường này không được để trống!'}
+    // ],
     'description': [
       {type: 'required', message: 'Ghi chú không được để trống!'},
       {type: 'maxlength', message: 'Không nhập ghi chú quá dài!'},
       {type: 'mminlength', message: 'Không nhập ghi chú quá ngắn!'},
       {type: 'pattern', message: 'Trong ghi chú không kết thúc bằng dấu cách'},
-    ],
-    'duration': [
-      {type: 'required', message: 'Khoảng cách giữa 2 lần tiêm chủng không được để trống!'},
-      {type: 'min', message: 'Khoảng cách giữa 2 lần tiêm chủng ít nhất 0 ngày!'},
-      {type: 'max', message: 'Khoảng cách giữa 2 lần tiêm chủng không quá 4 năm!'},
-      {type: 'pattern', message: 'Số liệu khoảng cách giữa 2 lần tiêm chủng không quá ký tự!'}
-    ],
-    'times': [
-      {type: 'required', message: 'Số mũi tiêm chủng không được để trống!'},
-      {type: 'pattern', message: 'Số mũi tiêm bạn phải nhập số!'},
-      {type: 'min', message: 'Số mũi tiêm it nhất là 1 mũi!'},
-      {type: 'max', message: 'Số mũi tiêm nhiều nhất là 9 mũi!'},
     ]
   };
 
@@ -89,12 +79,10 @@ export class PeriodicalVaccinationManagerEditComponent implements OnInit {
         vaccinationId: [this.vaccinations.vaccinationId],
         date: [this.vaccinations.date, [Validators.required, DateValidator]],
         vaccineId: [this.vaccinations.vaccine.vaccineId, [Validators.required]],
-        locationId: [this.vaccinations.location.locationId, [Validators.required]],
+        // locationId: [this.vaccinations.location.locationId, [Validators.required]],
         startTime: [this.vaccinations.startTime, [Validators.required]],
         endTime: [this.vaccinations.endTime, [Validators.required]],
         description: [this.vaccinations.description, [Validators.required, Validators.maxLength(50), Validators.minLength(5)]],
-        duration: [this.vaccinations.duration, [Validators.required, Validators.min(0), Validators.max(1500)]],
-        times: [this.vaccinations.times, [Validators.required, Validators.min(1), Validators.max(9)]]
       }, {validators: ValidatorFormGroup});
       this.defaultValue = true;
     });
@@ -106,6 +94,8 @@ export class PeriodicalVaccinationManagerEditComponent implements OnInit {
       if (this.vaccineList[i].vaccineId == parseInt(vaccineId)) {
         this.valueAge = this.vaccineList[i].age;
         this.valueNameVaccine = this.vaccineList[i].vaccineType.name;
+        this.valueTimes = this.vaccineList[i].times;
+        this.valueDuration =this.vaccineList[i].duration;
       }
     }
   }

@@ -11,8 +11,8 @@ export interface IVaccination {
   status: boolean;
   description: string;
   deleteFlag: boolean;
-  times: number;
-  duration: number;
+  // times: number;
+  // duration: number;
 
   vaccine: IVaccine;
   vaccinationHistoryList: IVaccinationHistory[];
